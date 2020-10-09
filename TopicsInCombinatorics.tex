@@ -1,0 +1,148 @@
+\documentclass[]{article}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{pagecolor}
+\usepackage[margin=1.2in]{geometry}
+
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\definecolor{thmcolour}{rgb}{0,1,1}
+\definecolor{defcolour}{rgb}{1,0,1}
+\definecolor{textcolour}{rgb}{1,1,1}
+\definecolor{backgroundcolour}{rgb}{0,0,0}
+
+\pagecolor{backgroundcolour}
+\color{textcolour}
+
+\newtheoremstyle{custhm}
+{
+	%space above
+	1em
+}{
+	%space below
+	1em
+}{
+	%body font
+	\color{thmcolour}
+}{
+	%indent amount
+	1em
+}{
+	%head font
+	\bfseries\large\color{thmcolour}
+}{
+	%head punct
+}{
+	%after head space
+	0em
+}{
+	%head spec
+	
+	\if\relax\detokenize{#3}\relax \thmname{#1}\thmnumber{ #2}:
+	%stuff
+	\else \thmname{#3}\thmnumber{ #2}:
+	%stuff
+	
+	\fi
+}
+
+\theoremstyle{custhm}
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{definition}
+\newtheorem{defin}[theorem]{Definition}
+\theoremstyle{custhm}
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+
+%\reversemarginpar{to describe which lecture it is}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\suminf}{\sum_{n=0}^{\infty}}
+\newcommand{\suminfa}[1]{\sum_{#1=0}^{\infty}}
+\newcommand{\ev}{\E X}
+
+\newcommand{\lef}{\left(}
+\newcommand{\res}{\right)}
+\renewcommand{\P}{\mathbb{P}}
+
+%opening
+\title{Topics In Combinatorics}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\marginpar{Lecture 1}
+
+\section{Averaging Arguments}
+
+If you've got a random variable that takes real variables, then with positive probability it will be at least as big as its average, and similarly at least as small:
+
+\begin{theorem}
+	Let $X$ be a random variable. Then $\P[X\ge \E X] > 0$.
+\end{theorem}
+
+When $X$ is discrete, this result is almost trivial, but in the general (continuous) case it isn't \textit{quite} as trivial.
+
+\begin{proof}
+	Suppose that $\P[X\ge \E X] = 0$. The tempting idea here is to say that then $X$ is always strictly less than the average, so when you take the average it's still strictly less than the average - we need to be careful about making this work:
+	
+	Define $P_n = \P[\E X - \frac{1}{n} < X \le \E X - \frac{1}{n+1}]$ - with $P_0$ denoting $-\infty$ on the left.
+	
+	It is then the case that $\sum_{n=0}^{\infty}P_n = 1$, so $\exists n: P_n > 0$. But then\[ \E X\le \sum_{n=0}^{\infty}P_n\lef\E X - \frac{1}{n+1}\res = \E X - \suminf \frac{P_n}{n+1} < \E X \quad\bot \]
+	
+	Similarly with the other case.
+\end{proof}
+
+We won't use this case much, but it's fun to see!
+
+The really surprising thing is that this extremely basic fact is also extremely useful. The way we use it (in the discrete case) is to simply deduce that such an event is possible.
+
+\textbf{Question.} How many edges does an icosahedron have?
+
+Perhaps this seems a little tedious - but there is a trick we can use.
+
+We know the icosahedron has 20 faces, and that these faces are triangles. We then reason that each face has three edges, and each edge is part of two faces. That is to say, $2E = 3F$, so $E = 3F/2 = 30$.
+
+The idea here is that both $2E$ and $3F$ are counting something, namely edge-face pairs.
+
+Consider another example - let $G$ be a bipartite graph, with vertex sets $X$ and $Y$. Let's suppose that we have the regularity conditions:
+\begin{itemize}
+	\item $(\forall x\in X)d(x) = d_1$
+	\item $(\forall y\in Y)d(y) = d_2$
+\end{itemize}
+
+Then counting the edges from the perspectives of $X$ and $Y$, we have that $|E(G)| = d_1|X| = d_2|Y|$. This is simply an abstraction of the above result.
+
+Moreover, if we instead have
+\begin{itemize}
+	\item $(\forall x\in X)d(x) \le d_1$
+	\item $(\forall y\in Y)d(y) \ge d_2$
+\end{itemize}
+
+Then $d_2|Y| \le |E(G)| \le d_1|X|$, so $|Y| \le d_1|X|/d_2$. We can apply this in many ways, such as:
+
+Let $[n] := \{1,2,\cdots,n\}$, and $[n]^{(r)}$ be the collection of subsets of $[n]$ or size $r$.
+
+Let $\mathcal{A} \subset [n]^{(r)}$
+
+
+\end{document}

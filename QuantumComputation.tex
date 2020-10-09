@@ -1,0 +1,184 @@
+\documentclass[]{article}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{pagecolor}
+\usepackage[margin=1.2in]{geometry}
+
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+\definecolor{thmcolour}{rgb}{0,1,1}
+\definecolor{defcolour}{rgb}{1,0,1}
+\definecolor{textcolour}{rgb}{1,1,1}
+\definecolor{backgroundcolour}{rgb}{0,0,0}
+
+\pagecolor{backgroundcolour}
+\color{textcolour}
+
+\newtheoremstyle{custhm}
+{
+	%space above
+	1em
+}{
+	%space below
+	1em
+}{
+	%body font
+	\color{thmcolour}
+}{
+	%indent amount
+	-0.5em
+}{
+	%head font
+	\bfseries\large\color{thmcolour}
+}{
+	%head punct
+}{
+	%after head space
+	0em
+}{
+	%head spec
+	
+	\if\relax\detokenize{#3}\relax \thmname{#1}\thmnumber{ #2}:
+	%stuff
+	\else \thmname{#3}\thmnumber{ #2}:
+	%stuff
+	
+	\fi
+}
+
+\newtheoremstyle{remark}
+{
+%space above
+}{
+%space below
+}{
+% body font
+}{
+%indent amount
+-0.6em
+}{
+%head font
+\bfseries
+}{
+%head punct
+}{
+%after head space
+0em
+}{
+%head spec
+\if\relax\detokenize{#3}\relax \thmname{#1}:
+\else \thmname{#3}:
+\fi
+}
+
+\theoremstyle{custhm}
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{definition}
+\newtheorem{defin}[theorem]{Definition}
+\theoremstyle{custhm}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{remark*}{Remark}
+
+
+%\reversemarginpar{to describe which lecture it is}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lef}{\left(}
+\newcommand{\res}{\right)}
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\poly}{\textrm{poly}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\U}{\mathcal{U}}
+%opening
+\title{Quantum Computation}
+\author{Lectures by Richard Jozsa}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\clearpage
+\section{Review of Shor's Algorithm}
+
+This result is powered by the \textbf{quantum period finding algorithm}, and will lead us to the \textbf{hidden subgroup problem} (henceforce HSP).
+
+\subsection{Factoring Problem}
+
+Given an integer $N$, with $n = O(\log N)$ digits, we want to find a non-trivial factor in time complexity $O(\textrm{poly}(n))$.
+
+The important concept here is that of \textbf{polynomial time complexity}: any computation has an input, from which we obtain an input \textit{size} $n$. Then by polynomial time complexity, we mean that the number of steps/gates (either classical or quantum) grows only polynomially with $n$ (\textit{i.e.} is $O(\textrm{poly}(n))$).
+
+When we refer to \textbf{efficient} computation, we are always referring to polynomial time complexity.
+
+The best known \textit{classical} factoring algorithm has complexity $\e^{O\lef n^{\frac{1}{3}}(\log n)^{\frac{2}{3}}\res}$. However, the best known quantum algorithm (due to Shor) runs in $O(n^3)$, a considerable improvement.
+
+\subsection{Quantum Factoring Algorithm Summary}
+
+First, we convert factoring into period determination:
+
+Given $N$, choose $a<N$ with $(a,N) = 1$ and consider $f:\Z \ra \Z_N,\ x\mapsto a^x \mod N$. Euler's Theorem tells us that $f$ is periodic, and the period $r$ is the order of $a$ modulo $N$, \ie the least $m > 1$ such that $a^m \equiv 1 \mod N$ - this exists if and only if $a,N$ are coprime. Through knowledge of $r$ we are able to compute a factor of $N$.
+
+While the process of determining $r$ is \textit{mathematically} very simple, it is in fact as difficult to compute from a classical perspective as factoring $N$ itself. Instead we use the \textbf{Quantum algorithm for periodicity determination}.
+
+\textbf{\underline{The task}:} Given an oracle/black box for $f:\Z_M \ra \Z_N$ with promises:
+\begin{itemize}
+	\item $f$ is periodic, with (unknown) period $r\in \Z_M$, \ie f(x+r) = f(x) for all $x\in \Z_M$.
+	\item $f$ is $1-1$ in each period, \ie $f(x_1)\ne f(x_2)$ for any $0\le x_1 < x_2 < r$.
+\end{itemize}
+
+We want to find $r$ in time $O(\poly(m)),\ m = \log M$ (with any prescribed success probability $1-\eps,\ \eps > 0$).
+
+\begin{remark*}
+	Queries to the oracle count as 1 step. In the quantum context we assume the oracle is a unitary gate $\U_f$ on $\U_M\otimes \U_N$, where $\U_M$ is the state space with dimension $M$, basis $\{ \bra{i} \}_{i\in\Z_M}$. $U_f$ acts on basis states as
+	\[
+	U_f\underbrace{\bra{i}}_{\textrm{\tiny input}}\underbrace{\bra{j}}_{\textrm{\tiny output}} = \bra{i}\bra{j+f(i)},\qquad i\in\Z_M,\ j\in\Z_M
+	\]
+	
+	The \textbf{Query complexity} of an algorithm is the number of times the oracle is queried, which is also required to be $O(\poly(m))$.
+\end{remark*}
+
+To solve the periodicity problem classically, it can be shown that it is both necessary and sufficient to query the oracle $O(\sqrt{N})$ times, so there is no polynomial algorithm. However, there \textit{is} a quantum algorithm.
+
+\subsection{Quantum Algorithm for Periodicity Determination}
+
+For further details \textit{c.f.} Part II notes pp.60-64.
+
+Write $A = M/r = \#$periods. We work in the state space $\U_M\otimes\U_N$ with basis $\{\bra{i}\bra{k}:\ i\in\Z_M,\ k\in\Z_N\}$.
+
+\underline{\textbf{Step 1}}: obtain the state \[ \frac{1}{\sqrt{M}} \sum_{i=0}^{M-1}\bra{i}\bra{0}\]
+
+\underline{\textbf{Step 2}}: apply $U_f$ to obtain \[\frac{1}{\sqrt{M}}\sum_{i=0}^{M-1}\bra{i}\bra{f(i)}\]
+
+\underline{\textbf{Step 3}}: measure the output register, obtaining result $y$. By the \textbf{Born rule}, the input register collapses to all those $i$ such that $f(i) = y$, \ie $i = x_0,\ x_0+r,\cdots,\ x_0+(A-1)r$ where $0\le x_0 < r$ in the first period has $f(x_0) = y$.
+
+We discard the output reigister to obtain \[\bra{\textrm{per}} = \frac{1}{\sqrt{A}}\sum_{j=0}^{A-1}\bra{x_0+jr}\]
+
+Note that each $0\le x_0 < r$ occurs with probability $1/r$.
+
+If we naively measure $\bra{\textrm{per}}$, the Born rule implies we get $x_0 + jr$ with $j = 0,\cdots,A-1$ chosen uniformly with probability $1/A$, \ie a random element of a random period; this is a uniformly random integer in $\Z_M$. This is useless to us. Instead...
+
+\underline{\textbf{Step 4}}: apply \textbf{Quantum Fourier Transform} (QFT).
+\end{document}
