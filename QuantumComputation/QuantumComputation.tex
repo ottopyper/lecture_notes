@@ -85,9 +85,27 @@
 \fi
 }
 
+\newtheoremstyle{cusdef}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{defcolour}
+}{%indent amount
+-0.5em
+}{%head font
+\bfseries\large\color{defcolour}\underline
+}{%head punct
+}{%after head space
+0em
+}{%head spec
+\thmname{#3}:
+}
+
 \theoremstyle{custhm}
 \newtheorem{theorem}{Theorem}[section]
-\theoremstyle{definition}
+\theoremstyle{cusdef}
 \newtheorem{defin}[theorem]{Definition}
 \theoremstyle{custhm}
 \newtheorem{lemma}[theorem]{Lemma}
