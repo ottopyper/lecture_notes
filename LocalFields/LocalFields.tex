@@ -1,0 +1,321 @@
+\documentclass[]{article}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{pagecolor}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{enumerate}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+\definecolor{thmcolour}{rgb}{0,1,1}
+\definecolor{defcolour}{rgb}{1,0,1}
+\definecolor{textcolour}{rgb}{1,1,1}
+\definecolor{backgroundcolour}{rgb}{0,0,0}
+
+\pagecolor{backgroundcolour}
+\color{textcolour}
+
+\newtheoremstyle{custhm}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{thmcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{thmcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\thmname{#1}
+\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{ (#3)}\fi
+}
+
+\newtheoremstyle{remark}
+{%space above
+}{%space below
+}{% body font
+}{%indent amount
+-0.6em
+}{%head font
+\bfseries
+}{%head punct
+}{%after head space
+0em
+}{%head spec
+\if\relax\detokenize{#3}\relax \thmname{#1}:
+\else \thmname{#3}:
+\fi
+}
+
+\newtheoremstyle{cusdef}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{defcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{defcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+
+%if numbered, include number
+%if named, include name
+
+\thmname{#1}
+\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{ (#3)}\fi
+}
+
+\theoremstyle{custhm}
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{cusdef}
+\newtheorem{defin}[theorem]{Definition}
+\theoremstyle{custhm}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{custhm}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{custhm}
+\newtheorem*{theorem*}{Theorem}
+
+\theoremstyle{cusdef}
+\newtheorem*{defin*}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark*}{Remark}
+
+
+%\marginpar{to describe which lecture it is}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lef}{\left(}
+\newcommand{\res}{\right)}
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\suminf}{\sum_{n=0}^{\infty}}
+\newcommand{\suminfa}[1]{\sum_{#1=0}^{\infty}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\undf}[1]{\textit{\textbf{#1}}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\it}[1]{\textit{#1}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\proves}{\vdash}
+\newcommand{\lra}{\leftrightarrow}
+
+\renewcommand{\lnot}{\neg}
+\newcommand{\false}{\bot}
+\newcommand{\true}{\top}
+
+\title{Local Fields}
+\author{Lectures by Rong Zhou}
+\date{}
+
+\begin{document}
+
+\maketitle
+\clearpage
+\tableofcontents
+\clearpage
+
+\section{Basic Theory}
+
+A motivating question for an algebraic number theorist is `how can we find solutions to Diophantine equations?' \ie $f(x_1,\dots,x_r)\in \Z[x_1,\dots,d_r],\ f = 0$.
+
+In general, this is very difficult (\it{e.g.} Fermat's Last Theorem). However, a more approachable problem might be to solve $f(x_1,\dots,x_r)\equiv 0 \mod p$. From here, we might be able to gain insight into solving $f(x_1,\dots,x_r)\equiv 0\mod p^n$ for each $n\in\N$.
+
+Local fields gives us a way to package all of this information together.
+
+\subsection{Absolute Values}
+
+\begin{defin}[Absolute Value]
+	Let $K$ be a field. An \undf{absolute value} on $K$ is a function $|\cdot|:K\ra\R_{\ge0}$ such that:
+	\begin{enumerate}[(i)]
+		\item $|x| = 0$ iff $x= 0$
+		\item $|xy| = |x||y|$ for all $x,y\in K$
+		\item $|x+y| \le |x| + |y|$ for all $x,y\in K$ - this is known as the \undf{triangle inequality}.
+	\end{enumerate}
+
+We say $(K,|\cdot|)$ is a \undf{valued field}.
+\end{defin}
+
+\undf{Examples}:
+\begin{itemize}
+	\item $K = \R$ or $\C$ with $|\cdot|$ the usual absolute value. We write $|\cdot|_{\infty}$ for this absolute value
+	\item $K$ is any field. The \undf{trivial absolute value} on $K$ is defined by \[|x| = \left\{\begin{array}{cc}0&\ \ \textrm{ if }x = 0\\ 1&\ \ \textrm{ if }x\ne 0\end{array}\right.
+	\]
+	We will ignore this case in this course as it is of no interest to us. However, the \it{most} interesting example is:
+	\item $K = \Q$, $p$ prime. For $0\ne x\in \Q$, write $x = p^n\frac{a}{b}$, where $a,b\in\Z$, $(a,p) = 1$ and $(b,p) = 1$.
+	
+	The \undf{$p$-adic absolute value} is defined to be
+	\[
+	|x|_p = \left\{\begin{array}{cc}0 &\ \ x = 0\\ p^{-n}&\ \ x = p^n\frac{a}{b}\end{array}    \right.
+	\]
+	
+	The intuition behind this is that if you consider, say, just the integers, then the $p$-adic value of $m$ will be very small if $m$ is highly divisible by $p$. That is to say it encodes information about how divisible $m$ is by $p$.
+	
+	We check the axioms to be sure this is indeed an absolute value. (i) is clear.
+	
+	Write $y = p^m\frac{c}{d}$.
+	
+	Then (ii): $|xy|_p = \left|p^{m+n}\frac{ac}{bd}\right|_p = p^{-m-n} = |x|_p|y|_p$.
+	
+	For (iii): wlog. $m\ge n$. Then 
+	\begin{align*}
+	|x+y|_p &= \left|p^n\left(\frac{ad+p^{m-n}bc}{bd}\right)\right|_p\\
+	&= |p^n|_p\left|\frac{ad+p^{m-n}bc}{bd}\right|_p
+	\end{align*}
+
+	In this second term, the denominator is not divisible by $p$, so the absolute value of the term on the rate is $\le 1$. Hence
+	\begin{align*}
+		|x+y|_p \le p^{-n} = \max(|x|_p,|y|_p)
+	\end{align*}
+
+	We remark that the above is known as the \undf{ultrametric inequality}, which is stronger than the triangle inequality.
+\end{itemize}
+
+An absolute value on $K$ induces a metric on $K$ by $d(x,y) = |x-y|$, and thus induces a topology on $K$.
+
+\undf{Exercise}: prove that $+,\cdot$ are continuous with respect to this topology.
+
+\begin{defin}[Equivalent Absolute Values]
+Let $|\cdot|,|\cdot|'$ be absolute values on a field $K$. We say $|\cdot|,|\cdot|'$ are \undf{equivalent} if they induce the same topology.
+\end{defin}
+
+We will see that if two absolute values are equivalent, then they determine each other and give us the same theory. Accordingly, equivalence of absolute values is indeed an equivalence relation; such an equivalence class is called a \undf{place}.
+
+\begin{prop}
+	Let $|\cdot|,\ |\cdot|'$ be non-trivial absolute values on $K$. Then the following are equivalent:
+	\begin{enumerate}[(i)]
+		\item $|\cdot|$, $\cdot|'$ are equivalent
+		\item $|x| < 1$ iff $|x|' < 1$ for all $x \in K$
+		\item $\exists c\in\R_{>0}$ such that $|x|^c = |x|'$ for all $x\in K$
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+$(i)\implies (ii)$:
+\begin{align*}
+|x| < 1 &\iff x^n \ra 0\ \textrm{w.r.t. }|\cdot|\\
+&\iff x^n \ra 0\ \textrm{w.r.t. }|\cdot|'\\
+&\iff |x|' < 1
+\end{align*}
+
+$(ii)\implies (iii)$: Let $a\in K^{\times}$ such that $|a| < 1$ (this exsts since $|\cdot|$ is non-trivial). We need to show that
+\begin{align*}
+	\forall x\in K^\times:\ \frac{\log|x|}{\log|a|} = \frac{\log|x|'}{\log|a|'}
+\end{align*}
+
+We proceed by contradiction. Assume that $\log|x|/\log|a| < \log|x|'/\log|a|'$. Choose $m,n\in\Z$ such that $\log|x|/\log|a| < m/n < \log|x|'/\log|a|'$.
+
+then we have that $n\log|x| < m\log|a|$, but also that $n\log|x|' > m\log|a|'$. Hence $|x^n/a^m| < 1$ and $|x^n/a^m|' > 1\  \bot$.
+
+Similarly for the case with the inequality reversed.
+
+$(iii)\implies (i)$ is in fact clear, because if (iii) holds then any open ball with respect to one topology will also be an open ball in the other topology. Hence the topology generated by these absolute values is the same.
+\end{proof}
+
+So it suffices to work only with equivalence classes of absolute values. In this course, we are mainly interested in the following types of absolute values:
+
+\begin{defin}[Non-Archimedean AV]
+	An absolute value on $K$ is said to be \undf{non-archimedean} if it satisfies the ultrametric inequality $|x+y|\le \max(|x|,|y|)$.
+	
+	If $|\cdot|$ is not non-archimedean, then it is archimedean.
+\end{defin}
+
+For example:
+\begin{itemize}
+	\item $|\cdot|_{\infty}$ on $\R$ is archimedean
+	\item $|\cdot|_p$ is a non-archimedean absolute value on $\Q$
+\end{itemize}
+
+It turns out that non-archimedean absolute values give rise to some rather interesting properties:
+
+\begin{lemma}[All triangles are isosceles]
+Let $(K,|\cdot|)$ be a non-archimedean valued field, and let $x,y\in K$. If $|x| < |y|$, then $|x-y| = |y|$
+\end{lemma}
+\begin{proof}
+\textbf{Fact}: $|1| = |-1| = 1$, and $|-y| = |y|$. These results are left as an exercise.
+
+Observe that $|x-y| \le \max(|x|,|y|) = |y|$, and moreover $|y|\le \max(|x|,|x-y|)$, so by assumption $|y|\le |x-y|$. Hence we have equality.
+\end{proof}
+
+While this property is unusual and might appear to make some things more difficult to reason about, there are in fact some properties of this topology that make our lives easier - for example, convergence.
+
+\begin{prop}
+	Let $(K,|\cdot|)$ be non-archimedean and $(x_n)_{n=1}^{\infty}$ a sequence in $K$. If $|x_n - x_{n+1}|\ra 0$, then $(x_n)_{n=1}^{\infty}$ is Cauchy.
+	
+	In particular, if $K$ is in addition complete, then $(x_n)_{n=1}^{\infty}$ converges.
+\end{prop}
+\begin{proof}
+	For $\eps > 0$, choose $N$ such that $|x_n - x_{n+1}| < \eps$ for all $n > N$. Then for $N < n < m$:
+	\begin{align*}
+		|x_n - x_m| &= |(x_n-x_{n+1}) + (x_{n+1}-x_{n+2})+\dots+(x_{m-1}-x_m)|\\
+		&<\eps
+	\end{align*}
+So $(x_n)_{n=1}^{\infty}$ is Cauchy.
+\end{proof}
+
+\textbf{Example}: $p = 5$, construct sequence $(x_n)_{n=1}^{\infty}$ such that:
+\begin{enumerate}[(i)]
+	\item $x_n^2 + 1 \equiv 0 \mod 5^n$
+	\item $x_n \equiv x_{n+1} \mod 5^n$
+\end{enumerate}
+as follows.
+
+Take $x_1 = 2$. Suppose we have constructed $x_n$. Let $x_n^2 + 1 = a\cdot5^n$ and set $x_{n+1} = x_n + b\cdot5^n$. Then
+\begin{align*}
+	x_{n+1}^2 + 1 &= x_n^2 + 2b\cdot5^n + b^2\cdot5^{2n} + 1\\
+	&=a5^n + 2b5^n + b^25^{2n}
+\end{align*}
+We remark that the final term is already $\equiv 0 \mod 5^{n+1}$ as $n > 1$, hence we need only choose $b$ such that $a + 2b \equiv 0\mod 5$, which is always possible since $2$ is a unit $\mod 5$. Then $x_{n+1}^2 + 1 \equiv 0 \mod 5^{n+1}$ as desired.
+
+So we have constructed a sequence satisfying these two properties. The second property tells us that the 5-adic values of the differences between successive terms tends to zero as $n\ra\infty$. Hence $(x_n)_{n=1}^{\infty}$ is Cauchy. Does the limit exist?
+
+Suppose $x_n\ra \ell\in\Q$. Then $x_n^\ra\ell^2$. But (i) tells us that $x_n^2\ra-1$, so $\ell^2 = -1\ \bot$.
+
+Thus $(\Q,|\cdot|_5)$ is \it{not} complete.
+
+\begin{defin}[$p$-adic numbers $\Q_p$]
+The \undf{$p$-adic numbers $\Q_p$} is the completion of $\Q$ with respect to $|\cdot|_p$.
+\end{defin}
+
+This gives us analogy with $\R$; $\R$ is the completion of $\Q$ under $|\cdot|_{\infty}$, whereas $\Q_p$ is the completion under $|\cdot|_p$.
+
+The $p$-adic numbers are the prototypical example of a local field. They also have a field structure (\it{c.f.} sheet 1), and as we have seen are strictly larger than the rationals. The completion for the reals is much more geometric, whereas the completion for the $p$-adics contains more interesting \it{arithmetic} information.
+\end{document}

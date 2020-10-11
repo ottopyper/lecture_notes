@@ -1,0 +1,3 @@
+\babel@toc {english}{}
+\contentsline {section}{\numberline {1}Basic Theory}{3}%
+\contentsline {subsection}{\numberline {1.1}Absolute Values}{3}%
