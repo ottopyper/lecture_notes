@@ -55,7 +55,7 @@
 }{%space below
 }{% body font
 }{%indent amount
--0.6em
+-0em
 }{%head font
 \bfseries
 }{%head punct
@@ -99,6 +99,8 @@
 \newtheorem{defin}[theorem]{Definition}
 \theoremstyle{custhm}
 \newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{custhm}
+\newtheorem{cor}[theorem]{Corollary}
 
 \theoremstyle{custhm}
 \newtheorem{prop}[theorem]{Proposition}
@@ -137,6 +139,11 @@
 \renewcommand{\phi}{\varphi}
 \newcommand{\proves}{\vdash}
 \newcommand{\lra}{\leftrightarrow}
+\renewcommand{\value}{|\cdot|}
+\newcommand{\val}[1]{\left|#1\right|}
+\newcommand{\valk}{(K,|\cdot|)}
+\renewcommand{\bar}{\overline}
+\renewcommand{\O}{\mathcal{O}}
 
 \renewcommand{\lnot}{\neg}
 \newcommand{\false}{\bot}
@@ -153,6 +160,7 @@
 \tableofcontents
 \clearpage
 
+\marginpar{Lecture 1}
 \section{Basic Theory}
 
 A motivating question for an algebraic number theorist is `how can we find solutions to Diophantine equations?' \ie $f(x_1,\dots,x_r)\in \Z[x_1,\dots,d_r],\ f = 0$.
@@ -300,10 +308,10 @@ as follows.
 
 Take $x_1 = 2$. Suppose we have constructed $x_n$. Let $x_n^2 + 1 = a\cdot5^n$ and set $x_{n+1} = x_n + b\cdot5^n$. Then
 \begin{align*}
-	x_{n+1}^2 + 1 &= x_n^2 + 2b\cdot5^n + b^2\cdot5^{2n} + 1\\
-	&=a5^n + 2b5^n + b^25^{2n}
+	x_{n+1}^2 + 1 &= x_n^2 + 2b\cdot5^nx_n + b^2\cdot5^{2n} + 1\\
+	&=a5^n + 2b5^nx_n + b^25^{2n}
 \end{align*}
-We remark that the final term is already $\equiv 0 \mod 5^{n+1}$ as $n > 1$, hence we need only choose $b$ such that $a + 2b \equiv 0\mod 5$, which is always possible since $2$ is a unit $\mod 5$. Then $x_{n+1}^2 + 1 \equiv 0 \mod 5^{n+1}$ as desired.
+We remark that the final term is already $\equiv 0 \mod 5^{n+1}$ as $n > 1$, hence we need only choose $b$ such that $a + 2bx_n \equiv 0\mod 5$, which is always possible since both $2$ and $x_n$ are units $\mod 5$. Then $x_{n+1}^2 + 1 \equiv 0 \mod 5^{n+1}$ as desired.
 
 So we have constructed a sequence satisfying these two properties. The second property tells us that the 5-adic values of the differences between successive terms tends to zero as $n\ra\infty$. Hence $(x_n)_{n=1}^{\infty}$ is Cauchy. Does the limit exist?
 
@@ -318,4 +326,211 @@ The \undf{$p$-adic numbers $\Q_p$} is the completion of $\Q$ with respect to $|\
 This gives us analogy with $\R$; $\R$ is the completion of $\Q$ under $|\cdot|_{\infty}$, whereas $\Q_p$ is the completion under $|\cdot|_p$.
 
 The $p$-adic numbers are the prototypical example of a local field. They also have a field structure (\it{c.f.} sheet 1), and as we have seen are strictly larger than the rationals. The completion for the reals is much more geometric, whereas the completion for the $p$-adics contains more interesting \it{arithmetic} information.
+
+\marginpar{Lecture 2}
+Let $\valk$ be a non-archimedean valued field.
+
+For $x\in K$ and $r\in \R_{>0}$, define the \undf{open/closed balls}:
+\begin{align*}
+	B(x,r) &= \{y\in K: \val{x-y} < r\}\\
+	\bar{B}(x,r)&=\{y\in K:|x-y|\le r\}
+\end{align*}
+
+\begin{lemma}
+	Let $\valk$ be non-archimedean.
+	\begin{enumerate}[(i)]
+		\item If $z\in B(x,r)$, then $B(z,r) = B(x,r)$. In other words, open balls don't have centres.
+		\item If $z\in \bar{B}(x,r)$, then $\bar{B}(z,r) = \bar{B}(x,r)$ - ditto for closed balls.
+		\item $B(x,r)$ is closed
+		\item $\bar{B}(x,r)$ is open
+	\end{enumerate}
+\end{lemma}
+These statements are unusual from someone who has an archimedean perspective, since they are obviously not true in \it{e.g.} the reals. This suggests that we will make heavy use of the ultrametric inequality in the proof.
+\begin{proof}
+(i) Let $y\in B(x,r)$. Then
+\begin{align*}
+	\val{x-y} < r\implies \val{z-y} &= \val{(z-x) + (x-y)}\\
+	&\le \max(|z-x|,|x-y|)\\
+	&< r
+\end{align*}
+Thus $B(x,r)\subset B(z,r)$, and the reverse inclusion follows by symmetry.
+
+(ii) Follows in the same way as (i), just with $\le$ instead of $<$.
+
+(iii) We show that for any point not in the ball, there exists a ball around it that does not intersect with $B(x,r)$.
+
+Let $y\not\in B(x,r)$. If $z\in B(x,r)\cap B(y,r)$, then $B(x,r) = B(z,r) = B(y,r)$. But then $y\in B(x,r)\ \bot$. Hence $B(x,r)\cap B(y,r) = \emptyset$, and so $B(y,r)$ is the ball we desire.
+
+(iv) again follows similarly. We show that every point inside $\cap{B}(x,r)$, there is an open neighbourhood contained within that contains it.
+
+If $z\in \bar{B}(x,r)$, then $B(z,r) \subset \bar{B}(z,r) = \bar{B}(x,r)$.
+\end{proof}
+
+\section{Valuation Rings}
+
+\begin{defin}[Valuation]
+	Let $K$ be a field. A \undf{valuation} on $K$ is a function $v:K^\times \ra \R$ such that:
+	\begin{enumerate}[(i)]
+		\item $v(xy) = v(x) + v(y)$
+		\item $v(x+y) \le \min(v(x),v(y))$
+	\end{enumerate}
+\end{defin}
+What's the point of this definition? Well, this valuation actually determines a non-archimedean absolute value.
+
+Fix $0 < \alpha < 1$. If $v$ is a valuation on $K$, then
+\begin{align*}
+	|x| = \left\{ \begin{array}{cc}\alpha^{v(x)}\quad &x\ne 0\\ 0\quad&x=0\end{array}\right.
+\end{align*}
+determines a non-archimedean absolute value.
+
+Conversely, a non-archimedean absolute value determines a valuation $v(x) = \log_\alpha|x|$.
+
+So these determine each other; what is the point of a valuation then? Well, it turns out that thinking about valuations is in some cases a little bit more useful. We will use the concept of a valuation to define something called a discrete valuation, and this will make our lives easier. Moreover, the concept of a valuation is more amenable to generalisation than an absolute value.
+
+We can in fact define a more general version of a valuation, whereby we replace the reals in the definition with a totally ordered group. Using this we can define geometric objects called \undf{adic spaces}. These are super useful nowadays due to some recent work from Peter Schultzer. He invented \undf{perfectoid spaces}, but this is getting a little beyond the course now.
+
+\begin{remark*}[Remarks]
+\begin{itemize}
+	\item We ignore the trivial valuation $v(x) = 0$ for all $x\in K^\times$. This corresponds with the trivial absolute value in the above way.
+	\item We say $v_1,\ v_2$ are \undf{equivalent} if $\exists c \in \R_{>0}$ such that $v_1(x) = cv_2(x)\ \forall x \in K^\times$. This notion of equivalence of course corresponds with the notion of equivalence of absolute values - so again we can reduce to considering just equivalence classes of valuations.
+\end{itemize}
+\end{remark*}
+\begin{remark*}[Examples]
+	\begin{itemize}
+		\item Let $K = \Q$, $v_p(x) = -\log_p|x|_p$ is the $p$-adic valuation. This is obtained in the above way by taking $\alpha = 1/p$. So the valuation of $x$ is just the power of $p$ appearing in its prime factorisation.
+		\item Let $k$ be a field, and define $K = k(t) = \textrm{Frac}(k[t])$ its rational function field. We can then define a valuation $v\left(t^nf(t)/g(t)\right) = n$, where $f,g\in k[t]$, $f(0),g(0)\ne 0$ (note that we can always write any rational function in this way). This is known as the \undf{$t$-adic valuation}
+		
+		There is an important analogy here with $K$ and the rational numbers. $\Q$ and $K$ are the prototypical examples of a \undf{global field}. A lot of modern number theory in fact leverages this analogy to derive results about $\Q$ by studying $K$.
+		
+		\item $K = k((t)) = \textrm{Frac}(k[[t]]) = \{ \sum_{i=n}^{\infty}a_it^i : a_i \in k, n\in \Z \}$ is the field of formal Laurent series over $k$. We then have the valuation $v\left(\sum_{i}a_it^i\right) = \min\{i:a_i\ne 0\}$. This is also known as the $t$-adic valuation on $k$.
+		
+		The reason for this is that example three is in fact the completion of example two under the topology induced in two.
+	\end{itemize}
+\end{remark*}
+
+\begin{defin}[Valuation Ring]
+	Let $\valk$ be a non-archimedean valued field. The \undf{valuation ring} of $K$ is defined to be
+\begin{align*}
+	\O_K &= \{x\in K: |x|\le 1\}\\
+	(&= \bar{B}(0,1))\\
+	 (&=  x\in K^\times:v(x)\ge 0 \cup\{0\})
+	\end{align*}
+\end{defin}
+\begin{prop} Let $\valk$ be as usual.
+\begin{enumerate}[(i)]
+	\item $\O_K$ is an open subring of $K$ - this is a very special, non-archimedean property.
+	\item The subsets $\{x\in K : |x| \le r\}$ and $\{x \in K : |x| < r\}$ for $\le 1$ are open ideals in $\O_K$
+	\item $\O_K^\times = \{x\in K: |x| = 1\}$
+\end{enumerate}
+\end{prop}
+\begin{proof}
+Last lecture, we say $|1| = 1$, so $1\in \O_K$, and $|0| = 0$ so $0\in \O_K$. Moreover, $|-1| = |1|\implies |-x| = |x|$, so if $x\in \O_K$ then $-x \in \O_K$.
+
+If $x,y\in \O_K$, then $|x+y|\le \max(|x|,|y|)\le 1$, which implies $x+y\in \O_K$ also.
+
+If $x,y\in \O_K$, then $|xy| = |x||y|\le 1$, so again $xy\in \O_K$.
+
+Thus $\O_K$ is a ring. Then since $\O_K = \bar{B}(0,1)$, it is open.
+
+(ii) Is very similar to (i) (exercise).
+
+(iii) Note that $|x||x^{-1}| = |xx^{-1}| = 1$. Thus $|x| = 1 \iff |x^{-1}| = 1\iff x,x^{-1} \in \O_K \iff x \in \O_k^\times$
+\end{proof}
+
+The point here is that there some very nice algebraic structure going on here.
+
+\begin{remark*}[Notation]
+\begin{itemize}
+	\item $m\coloneqq \{x\in \O_K : |x| < 1\}$ - this is a maximal ideal of $\O_K$
+	\item $k\coloneqq \O_K/m$ is the \undf{residue field}
+\end{itemize}
+\end{remark*}
+\begin{cor}
+$\O_K$ is a local ring with a unique maximal ideal, and this ideal is $m$.
+\end{cor}
+Recall that a ring with a maximal ideal is a local ring iff everything outside the maximal ideal is a unit. From Prop 2.3 we see that if an element of $\O_K$ doesn't lie in the maximal ideal $m$, then it has to have absolute value $1$, and is hence a unit.
+
+\begin{remark*}[Examples]
+We exhibit some example of valuation rings:
+\begin{itemize}
+	\item $K = k((t))$. Then $\O_K = k[[t]]$, $m = (t)$. The residue field is just $k$.
+	\item $K = \Q$ with $|\cdot|_p$. Then $\O_K = \Z_{(p)}$, $m = p\Z_{(p)}$, $k = \mathbb{F}_p$
+\end{itemize}
+\end{remark*}
+
+We have arrived at an important definition:
+
+\begin{defin}[Discrete Valuation]
+Let $v:K^\times \ra\R$ be a valuation. If $v(K^\times)\simeq \Z$, we say $v$ is a \undf{discrete valuation}, and $K$ is said to be a discretely valued field. An element $\pi \in \O_K$ is a \undf{uniformizer} if $v(\pi) > 0$ and $v(\pi)$ generates $v(K^\times)$ - \ie an element with minimal positive valuation. These of course only exist when the valuation is discrete.
+\end{defin}
+\begin{remark*}[Examples]
+In this course we are mainly going to be focused on the cases when the valuation is discrete - such fields turn out to have some very nice properties. The valuations we have met so far indeed happen to be discrete.
+\begin{itemize}
+	\item $K = \Q$, the $p$-adic valuation
+	\item $K = k(t)$, the $t$-adic valuation
+\end{itemize}
+\end{remark*}
+\begin{remark*}
+	If $v$ is a discrete valuation, we can replace it with an equivalent one such that $v(K^\times) = \Z\subset \R$. Such $v$ are called \undf{normalized valuations}. For such a valuation with normalizer $\pi$, we will then have $v(\pi) = 1$.
+\end{remark*}
+
+\begin{lemma}
+	Let $v$ be a valuation on $K$. TFAE:
+	\begin{enumerate}[(i)]
+		\item $v$ is discrete
+		\item $\O_K$ is a PID
+		\item $\O_K$ is Noetherian
+		\item $m$ is principal
+	\end{enumerate}
+\end{lemma}
+(ii) is the strongest condition, clearly implying (iii) and (iv). However, the equivalence of all the statements is quite cool, because it tells us that if our valuation is discrete then $\O_K$ satisfies some very nice properties.
+
+\begin{proof}
+(i)$\implies$ (ii) We need to show every non-zero ideal is principal. Let $I\subset \O_K$ be a non-zero ideal. Let $x\in I$ scuh that $v(d) = \min \{v(a):a\in I\}$ which exists since $v$ is discrete.  Then $x\o_K = \{a\in \O_K : v(a)\ge v(x)\}\subset I$, and hence $x\O_K = I$ by the definition of $x$. If we have some $y\in I\backslash x\O_K$, then $v(y) < v(x)$.
+
+(ii)$\implies$(iii) is clear, since all PIDs are finitely generated (by one element).
+
+(iii)$\implies$ (iv): Write $m = x_1\O_K + \dots+x_n\O_K$, and wlog. $v(x_1)\le v(x_2)\le \dots \le v(x_n)$. Then by a similar argument to (i)$\implies$(ii) we have that $m = x_1\O_K$.
+
+(iv)$\implies$(i): Let $m = \pi\O_K$ for some $\pi \in \O_K$ and let $c = v(\pi)$. Then if $v(x) > 0$, $x\in m$ and hence $v(x)\ge c$. Thus $v(K^\times)\cap(0,c) = \emptyset$. Since $v(K^\times)$ is a subgroup of $(\R,+)$, this can only happen if $v(K^\times) = c\Z$.
+\end{proof}
+\begin{lemma}
+	Let $v$ be a discrete valuation on $K$ and $\pi \in \O_K$ a uniformizer. $\forall x \in K^\times$, $\exists n\in \Z$ and $\exists u\in \O_K^\times$ such that $x = \pi^n u$. In particular, $K = \O_K[1/x]$, for any $x\in m$ and hence $k = \textrm{Frac}(\O_K)$.
+\end{lemma}
+This says that the arithmetic of the field is determined by the arithmetic of the valuation field.
+\begin{proof}
+For $x \in K^\times$, let $n$ be s.t. $v(x) = v(\pi^n) = nv(\pi)$. Then $v(x\pi^{-n}) = 0$, so $u = x\pi^{-n}\in \O_K^\times$.
+
+Then if you invert any element of the maximal ideal, you also have to invert the uniformizer.
+\end{proof}
+\begin{defin}[Discrete Valuation Ring]
+A rgint $R$ is called a \undf{discrete valuation ring} (DVR) if it is a PID with exactly one non-zero prime ideal (that is necessarily maximal).
+\end{defin}
+Note that while this name contains the term `valuation', despite its definition lacking any explicit reference. This is now cleared up:
+
+\begin{lemma}\ 
+\begin{enumerate}[(i)]
+	\item Let $v$ be a discrete valuation on $K$. Then $\O_K$ is a DVR.
+	\item Let $R$ be a DVR. Then there exists a valuation $v$ on $K\coloneqq \textrm{Frac}(R)$ such that $R = \O_K$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(i) $\O_K$ is a PID by Lemma 2.6.
+
+Let $0\ne I \subset \O_K$ be an ideal, so $I = (x)$. If we write $x = \pi^nu$ for $\pi$ a uniformizer, then $(x)$ is prime iff $n = 1$, and so $I = (\pi) = m$. This is because if $n > 1$ we can break up $x$ into a product of two elements, each containing a power of the uniformizer. So $(x)$ is the product of two ideals and is not prime. So we must have $n = 1$, and this is clearly sufficient.
+
+(ii)Let $R$ be a DVR with maximal ideal $m$. Then $m = (\pi)$ for some $\pi \in R$. By unique factorisation of PIDs, we may write any $x\in R\backslash \{0\}$ uniquely as $\pi^n u$, with $n\ge 0$ and $u\in R^\times$. Then any $y\in K^\times$ can be written uniquely as $\pi^mu$, $u\in R^\times$, $m\in \Z$.
+
+We then define $v(\pi^mu) = m$; it is easy to check that this is a well-defined valuation and $\O_K = R$.
+\end{proof}
+
+\begin{remark*}[Examples]
+We revisit our previous examples.
+\begin{itemize}
+	\item $\Z_{(p)}$ is a DVR, which is the valuation ring of $|\cdot|_p$ on $\Q$.
+	\item $k[[t]]$, the ring of formal power series is a DVR, the valuation ring for the $t$-adic absolute value on $k((t))$.
+	\item We also have a \it{non}-example. Let $K = k(t)$ be the rational function field, and define $K' = K(t^{1/2},t^{1/4},t^{1/8},\dots)$. It can be shown that the $t$-adic valuation in fact extends to this larger field, and then that $v(t^{1/2^n}) = 1/2^n$, so the valuation cannot be discrete. The idea here is that we've found an infinite sequence of elements with positive valuation tending to zero.
+\end{itemize}
+\end{remark*}
+
 \end{document}
