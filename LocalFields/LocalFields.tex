@@ -20,10 +20,10 @@
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
 \DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
 
-\definecolor{thmcolour}{rgb}{0,1,1}
-\definecolor{defcolour}{rgb}{1,0,1}
-\definecolor{textcolour}{rgb}{1,1,1}
-\definecolor{backgroundcolour}{rgb}{0,0,0}
+\definecolor{thmcolour}{rgb}{0,0,0}
+\definecolor{defcolour}{rgb}{0,0,0}
+\definecolor{textcolour}{rgb}{0,0,0}
+\definecolor{backgroundcolour}{rgb}{1,1,1}
 
 \pagecolor{backgroundcolour}
 \color{textcolour}
@@ -372,7 +372,7 @@ If $z\in \bar{B}(x,r)$, then $B(z,r) \subset \bar{B}(z,r) = \bar{B}(x,r)$.
 	Let $K$ be a field. A \undf{valuation} on $K$ is a function $v:K^\times \ra \R$ such that:
 	\begin{enumerate}[(i)]
 		\item $v(xy) = v(x) + v(y)$
-		\item $v(x+y) \le \min(v(x),v(y))$
+		\item $v(x+y) \ge \min(v(x),v(y))$
 	\end{enumerate}
 \end{defin}
 What's the point of this definition? Well, this valuation actually determines a non-archimedean absolute value.

@@ -9,77 +9,144 @@
 \usepackage{xcolor}
 \usepackage{pagecolor}
 \usepackage[margin=1.2in]{geometry}
-
+\usepackage{enumerate}
 
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 
-\definecolor{thmcolour}{rgb}{0,1,1}
-\definecolor{defcolour}{rgb}{1,0,1}
-\definecolor{textcolour}{rgb}{1,1,1}
-\definecolor{backgroundcolour}{rgb}{0,0,0}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+\definecolor{thmcolour}{rgb}{0,0,0}
+\definecolor{defcolour}{rgb}{0,0,0}
+\definecolor{textcolour}{rgb}{0,0,0}
+\definecolor{backgroundcolour}{rgb}{1,1,1}
 
 \pagecolor{backgroundcolour}
 \color{textcolour}
 
 \newtheoremstyle{custhm}
-{
-	%space above
-	1em
-}{
-	%space below
-	1em
-}{
-	%body font
-	\color{thmcolour}
-}{
-	%indent amount
-	1em
-}{
-	%head font
-	\bfseries\large\color{thmcolour}
-}{
-	%head punct
-}{
-	%after head space
-	0em
-}{
-	%head spec
-	
-	\if\relax\detokenize{#3}\relax \thmname{#1}\thmnumber{ #2}:
-	%stuff
-	\else \thmname{#3}\thmnumber{ #2}:
-	%stuff
-	
-	\fi
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{thmcolour}\itshape
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{thmcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\thmname{#1}\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{ (#3)}\fi
+}
+
+\newtheoremstyle{remark}
+{%space above
+}{%space below
+}{% body font
+}{%indent amount
+-0em
+}{%head font
+\bfseries
+}{%head punct
+}{%after head space
+0em
+}{%head spec
+\if\relax\detokenize{#3}\relax \thmname{#1}:
+\else \thmname{#3}:
+\fi
+}
+
+\newtheoremstyle{cusdef}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{defcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{defcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+%if numbered, include number
+%if named, include name
+\thmname{#1}
+\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{ (#3)}\fi
 }
 
 \theoremstyle{custhm}
 \newtheorem{theorem}{Theorem}[section]
-\theoremstyle{definition}
+\theoremstyle{cusdef}
 \newtheorem{defin}[theorem]{Definition}
 \theoremstyle{custhm}
 \newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{custhm}
+\newtheorem{cor}[theorem]{Corollary}
+
+\theoremstyle{custhm}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{custhm}
+\newtheorem*{theorem*}{Theorem}
+
+\theoremstyle{cusdef}
+\newtheorem*{defin*}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark*}{Remark}
 
 
-
-%\reversemarginpar{to describe which lecture it is}
+%\marginpar{to describe which lecture it is}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
 \newcommand{\e}{\mathrm{e}}
 \newcommand{\ra}{\rightarrow}
+\newcommand{\lef}{\left(}
+\newcommand{\res}{\right)}
+\newcommand{\ie}{\textit{i.e. }}
+\newcommand{\eps}{\varepsilon}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\suminf}{\sum_{n=0}^{\infty}}
 \newcommand{\suminfa}[1]{\sum_{#1=0}^{\infty}}
-\newcommand{\ev}{\E X}
-
-\newcommand{\lef}{\left(}
-\newcommand{\res}{\right)}
 \renewcommand{\P}{\mathbb{P}}
+\newcommand{\undf}[1]{\textit{\textbf{#1}}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\it}[1]{\textit{#1}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\proves}{\vdash}
+\newcommand{\lra}{\leftrightarrow}
+\renewcommand{\value}{|\cdot|}
+\newcommand{\val}[1]{\left|#1\right|}
+\newcommand{\valk}{(K,|\cdot|)}
+\renewcommand{\bar}{\overline}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\A}{\mathcal{A}}
+
+\renewcommand{\lnot}{\neg}
+\newcommand{\false}{\bot}
+\newcommand{\true}{\top}
+
 
 %opening
 \title{Topics In Combinatorics}
@@ -142,7 +209,166 @@ Then $d_2|Y| \le |E(G)| \le d_1|X|$, so $|Y| \le d_1|X|/d_2$. We can apply this 
 
 Let $[n] := \{1,2,\cdots,n\}$, and $[n]^{(r)}$ be the collection of subsets of $[n]$ or size $r$.
 
-Let $\mathcal{A} \subset [n]^{(r)}$
+Let $\mathcal{A} \subset [n]^{(r)}$ (this is an \it{$r$-uniform hypergraph}), and let $s > r$. The \undf{$s$-upper shadow} of $\mathcal{A}$ is
+\[
+\partial^s\mathcal{A} = \{B\in[n]^{(s)}: \exists A\in \mathcal{A} \textrm{ s.t. } A\subset B\}
+\]
+Then join $A\in \mathcal{A}$ to $B\in \mathcal{B} = \partial^s\mathcal{A}$ iff $A\subset B$. We then have:
+\begin{align*}
+	d(A) &= {n-r \choose s-r}\quad \forall A\in \mathcal{A}\\
+	d(B) &\le {s \choose r}\quad \forall B\in \mathcal{B}
+\end{align*}
+Then $\mathcal{A} {n-r \choose s-r} = E \le {s \choose r}|\mathcal{B}|$. Hence $|\mathcal{B}| \le |\mathcal{A}|{n-r \choose s-r}/{s \choose r} = |\mathcal{A}| {n \choose s}/{n \choose r}$.
 
+We remark that this is not the tightest known bound - for an improvement see \it{Kruskal-Katona}.
 
+We have a few more results on graphs.
+
+Recall that a \undf{tree} is a connected, acyclic graph. A basic fact about trees on $n$ vertices is that they have $n-1$ edges. We will see why this is true now.
+
+Firstly, we note that every tree has a vertex of degree one (a \it{leaf}); if not, then we start at a vertex $v_1$, find a neighbour $v_2$, then a neighbour of $v_2$ that is $v_3$, and keep going until we run out of new vertices. Then we must return to a previous $v_i$, forming a cycle.
+
+Then to see that every tree has $n-1$ edges, we consider a tree on $n$ vertices and remove a leaf. This cannot disconnect the graph and cannot create a cycle, so we are left with a tree of degree $n-1$, which by induction has $n-2$ edges. Thus the original tree has $n-1$ edges.
+
+\begin{theorem*}[Euler's Formula]
+If $G$ is a connected planar graph with $V$ vertices, $E$ edges and $F$ faces, then $V - E + F = 2$.
+\end{theorem*}
+Note that a $\it{face}$ of a graph is just a component of the complement of the drawing of the graph in the plane. We prove this through a slightly unusual induction.
+
+\begin{proof}
+Base case: $G$ is a tree. Then we have $V-1$ edges, and $G$ is acyclic so we have only one face. Hence $V - E + F = V - (V-1) + 1 = 2$.
+
+If $G$ is not a tree, then $G$ contains a cycle. We then remove an edge from a cycle. The graph remains connected, $V$ stays the same, $E$ decreases by 1, and $F$ decreases by 1 since we have joined two components of the plane. Hence we obtain smaller $G'$ with $V' - E' + F' = V - E + F$. Continue until we are left with a tree.
+\end{proof}
+
+\begin{remark*}[Corollary]
+$E \le 3V - 6$. This is since each edge is in $\le 2$ faces, and each face contains $\ge 3 $ edges. So $2E \ge 3F$, and hence $2 = V - E + F \le V  - E/3$. Hence $E \le 3V - 6$.
+\end{remark*}
+
+\marginpar{Lecture 2}
+
+\section{Intersecting Families}
+
+Suppose we have some $\A\subset \mathcal{P}[n]$ with $A,B\in \A\implies A\cap B \ne \emptyset$. How big can $\A$ be?
+
+Note that if $A\in \A$ then $A^{c}\not\in \A$, hence $|\A|\le 2^{n-1}$. Moreover, we can take $\A = \{A:1\in A\}$, so then $|\A| = 2^{n-1}$ and equality is achieved. So the problem looks pretty solved, but we can also ask what happens in the equality case - if we have an intersecting family of size $2^{n-1}$, must it be of the above form? The answer is no:
+
+If $n$ is odd, we can take $\A = \{A\subset [n]:|A| > n/2\}$. Then for each $A\in [n]$, either $A\in \A$ or $A^c \in \A$, so $|\A| = 2^{n-1}$ and $\A$ is not of the above form.
+
+If instead $n$ is even, we can take all sets of size $ > n/2$, and from the sets of size $n/2$ take exactly one from each complementary pair $(A,A^c)$. This gives us exactly half of $\mathcal{P}[n]$, and it is still an intersecting family since the only way we could have an empty intersection among the size $n/2$ sets would be with a complementary pair.
+
+Another example is $\A = \{A\subset [n] : |A\cap\{1,2,3\}|\ge 2\}$. Since any two pairs of size 2 subsets of $\{1,2,3\}$ intersect non-trivially, this is indeed an intersecting family. Moreover if $A\not\in\A$ then $A$ intersects $\{1,2,3\}$ at most once, so its complement does so at least twice and $A^c\in\A$ so this is indeed half of all the sets.
+
+More generally, we could take some intersecting family that we want, in $\mathcal{P}[m]\subset[n]$, and extend all subsets in that family to get a maximal family that has half of the sets.
+
+Hopefully it is now clear that this is no unique way in which $\A$ can be an intersecting family.
+
+What if instead all sets have size $k$?
+
+Let $\A\subset [n]^{(k)}$ be an intersecting family. How big can $\A$ be?
+
+Boring case: when $k > n/2$, then any two sets intersect, so we can take all ${n \choose k}$ of them.
+
+Mildly interesting case: if $k = n/2$, then since we can't pick any two from an intersecting pair we can only choose at most half of them - but as we have seen this is sufficient to create an intersecting family, so we can have $\frac{1}{2}{n\choose k}$.
+
+Interesting case: what if $k < n/2$. First we will find a \it{lower} bound, then an upper bound.
+
+If we take all sets containing $x$, then $|\A| = {n-1\choose k-1}$ - so this is certainly attainable.
+
+\begin{theorem*}[Erdos-Ko-Rado Theorem]
+IF $k < n/2$ and $\A$ is an intersecting family of $k$-subsets of $[n]$, then $|\A| \le {n-1\choose k-1}$.
+
+Moreover, if $|\A| = {n-1 \choose k-1}$, then $\exists x$ such that $\A = \{A\in [n]^{(k)}:x\in A\}$.
+\end{theorem*}
+
+The proof given here is not the original one, but is a much simpler one due to Katona.
+
+\begin{proof}
+Let $\A$ be an intersecting family of $k$-sets in $[n]$. Pick a random $k$-set as follows.
+
+First, choose a random cyclic order $x_1,\dots,x_n$ of $\{1,\dots,n\}$ - this is a permutation whereby the indices are given modulo $n$, \ie$x_1 < x_2 < \dots < x_n < x_1$.
+
+We then define an interval or arc in this order to be a collection of elements that are next to each other. Pick a random interval of length $k$ in this cyclic order.
+
+The probability that this interval lies in $\A$ is simply $|\A|/{n\choose k}$, since the $k$-sets chosen in this way are uniformly distributed.
+
+\reversemarginpar{BUT} How many intervals can be in $\A$? Consider one such interval $x_1|x_2|x_3|\dots|x_k \in \A$. Then any other interval in $\A$ must start before $x_1$ and end inside the interval, or start after $x_k$ and end inside the interval. However, given a particular starting line as drawn above, we cannot have both the interval going left from it and going right from it as this pair is not intersecting. Since all the possible intersecting intervals arise in this way, we can have at most $k-1$ additional intervals, \ie the number of dividing lines. So including the original interval we have in total $\le k$ of these intervals.
+
+Moreover, for the equality case, if we want all possible intervals we have to have, for each dividing line, either the interval ending on the left or starting on the right. In fact, if we have one going left from a given dividing line, then we can't have one going right from the next line, since $n > 2k$ (the intervals can't meet round the back).
+
+So we have intervals to the right up to a certain point, and then left from that point onwards: $|\ra|\ra\dots |\ra x \leftarrow |\leftarrow|\dots\leftarrow |$. And we see that all the intervals contain the shown $x$ where directions switch. This is what we want for this specific cyclic order, but we are not yet done.
+
+So we can only have $k$ intervals in any given cyclic order, and there are only $n$ cyclic intervals of length $k$.
+
+Note that we initially calculated the probability by first choosing a random cyclic order, and then choosing a random interval from it. If we do this the other way round, then given a cyclic order the probability we end up in the set is $\le k /n$, but the cyclic orders are uniform across the $k$-sets.
+
+So, given a set $A = \{x_1,\dots,x_k\}$, we have $\P(A\in \A) = \sum_{\sigma}\P(A\in \A|\sigma)\P(\sigma)$, where the sum is over all possible cyclic orders containing $x_1<x_2<\dots < x_k$. But for any $\sigma$, $\P(A\in \A|\sigma) \le k/n$ and hence $\P(A\in\A)\le k/n$.
+
+Thus $|\A| \le \frac{k}{n}{n\choose k} = {n-1\choose k-1}$.
+
+For the uniqueness part, we remark that for every cyclic ordering of $[n]$, the intervals must be of the form all containing a single fixed element. Suppose we look at a cyclic ordering and have an interval in $\A$, say $x_1\dots x_k$, and another interval $x_0 < x_1 < \dots < x_{k-1}$ that is \it{not} in $\A$. Then the inflection point in the first interval must be $x_k$, and we contain all intervals beginning after $x_1$ and passing through $x_k$.
+
+So if we take an arbitrary cyclic order, and choose $x_1 < x_2 < \dots < x_{2k-1}$ such that all the intervals of length $k$ within $\A$ are contained in $[x_1,x_{2k-1}]$ and we take $x_0 < x_1$, then $[x_0,x_{k-1}]\not\in\A$, but $[x_j,x_{j+k-1}]\in\A$ for each $j = 1,\dots,k$.
+
+Now what we want to prove is that if we have any set containing $x_k$, then it must be in $\A$, \ie claim $B = \{y_1,\dots,y_{k-1},x_k\}\in\A$.
+
+wlog $y_1,\dots,y_r\in\{x_1,\dots,x_{k-1}\}$ and $y_{r+1},\dots,y_{k-1}\not\in\{x_1,\dots,x_{k-1}\}$. We construct a new cyclic order starting with $x_0$ as above: $x_0 < z_1 < z_2 < \dots < z_s < y_1 < \dots < y_r < x_{k} < y_{r+1}<\dots <y_{k-1}<\dots$, where the elements $z_i$ are precisely the elements $\{x_1,\dots,x_{k-1}\}\backslash \{y_1,\dots,y_r\}$.
+
+Then in this new order the interval $[u,x_k]$ is the same interval as what we had before that did not belong to $x_k$, but $[z_1\dots x_k]$ is simply a reordering of $[x_1,x_k]$ as before, so we have the same situation as before; two adjacent intervals, one not in $\A$ and one in $\A$. Hence all of the $k$-intervals containing $x_k$ in this order are in $\A$ - and this includes the interval $[y_1,\dots,y_r,x_k,y_{r+1},\dots,y_{k-1}]$. Hence the arbitrary $B\supset \{x_k\}$ is in $\A$.
+\end{proof}
+
+We now consider a different constraint on a set system - no set in the system is contained within any other; these are sometimes called \it{antichains}.
+
+Before that though, we discuss the discrete cube.
+
+We can think about the discrete cube in different ways; \it{e.g.} as $\mathcal{P}X$ where $|X| = n$, or $\{0,1\}^n$.
+
+For the case $n = 3$, this is of course the standard 3D cube we are all familiar with. We can label the vertices of the cube with binary sequences of length 3, or with subsets of $\{1,2,3\}$, in layers (by drawing the cube appropriately) such that each layer correspond to the possible sizes of sets.
+
+If we have $\A \subset \mathcal{P}[n]$, we define $\A_k = \{A\in\A:|A| = k\}$ to be the \it{$k^{\textrm{th}}$ layer} of $\A$.
+
+\begin{theorem*}[Sperner's Theorem]
+Let $\A \subset \mathcal{P}[n]$. If we have $A,B\in\A\implies A\not\subsetneq B$ (\textrm{i.e.} not a proper subset), then
+\[
+|\A| \le \binom{n}{\lfloor n/2 \rfloor}
+\]
+\end{theorem*}
+This proof has a remarkably short and simple proof, though it omits some further information about this situation.
+\begin{proof}
+Pick a random maximal chain $\mathcal{C} = \{\emptyset, \{x_1\},\{x_1,x_2\},\dots,\{x_1,\dots,x_n\}\}$. How many elements of $\A$ do we expect this chain to contain?
+
+One answer is that we of course can have at most one, since for any pair in the chain one contains the other.
+
+Let $Asubset [n]$ with $|A| = k$ and consider the probabilty that $A$ belongs to this chain. Then if it belongs to the chain $\mathcal{C}$, then it is the unique set of size $k$ within it. But the chains containing any $k$-set are distributed uniformly, so $\P[A\in\mathcal{C}] = 1/{n\choose k}$.
+
+So the expected number of elements of $\A$ in $\mathcal{C}$ by linearity of expectation is
+\[
+\sum_{A\in\A}\frac{1}{{n\choose |A|}} = \sum_{k=0}^{n} \frac{|\A_k|}{{n\choose k}}
+\]
+As we noted before, this cannot exceed 1, hence
+\begin{align*}
+	\sum_{k=0}^{n} \frac{|\A_k|}{\binom{n}{k}}&\le 1\\
+	\therefore \sum_{k=0}^{n}|\A_k| = |\A| &\le \binom{n}{\lfloor n/2\rfloor}
+\end{align*}
+
+We will deal with the equality case as well. If $n$ is even, then when we multiplied through by $\binom{n}{n/2}$ we must have maintained equality, and so $|\A_k| = 0$ for $k \ne n/2$. Hence $\A \subset [n]^{(n/2)}$.
+
+Similarly if $n$ is odd, then setting $m = (n-1)/2$ we have
+\[
+\A\subset [n]^{(m)} \cup[n]^{(m+1)}
+\]
+We will show that we must simply have $\A = \A_m$ or $\A_{m+1}$.
+
+We must have $\A_{m+1}\cap\partial \A_m = \emptyset$, so if $|\A_{m+1}| + |\A_m| = \binom{n}{m} = \binom{n}{m+1}$ then $|\partial^{m+1}\A_m|\le |\A_m|$. Each $A\in \A_m$ is contained in $m+1$ sets in $[n]^{(m+1)}$ and hence in $\partial \A_m$. Each $B\in \partial A_m$ contains at most $m+1$ sets in $\A_m$, so $|\partial \A_m| \ge |\A_m|$ by our earlier double counting argument, with equality if and only if every set in $\partial \A_m$ contains $m+1$ sets in $\A_m$.
+
+So if $A \in \A_m$, then adding any element and removing another gives another set in $\A_m$. Using this process we can turn any $m$-set into any other, hence either $\A_m = \emptyset$ or $\A_m = [n]^{(m)}$.
+\end{proof}
+
+\begin{remark*}
+The inequality
+\[
+\sum_{k=0}^{n} \frac{|\A_k|}{\binom{n}{k}} \le 1
+\]
+is known as the LYM inequality, after Lubell, Yamamoto and Meshalkin, since it was discovered independently by these three people.
+\end{remark*}
 \end{document}

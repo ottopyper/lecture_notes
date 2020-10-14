@@ -1,0 +1,244 @@
+\documentclass[]{article}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{pagecolor}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{enumerate}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+\definecolor{thmcolour}{rgb}{0,0,0}
+\definecolor{defcolour}{rgb}{0,0,0}
+\definecolor{textcolour}{rgb}{0,0,0}
+\definecolor{backgroundcolour}{rgb}{1,1,1}
+
+\pagecolor{backgroundcolour}
+\color{textcolour}
+
+\newtheoremstyle{custhm}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{thmcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{thmcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\thmname{#1}
+\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{ (#3)}\fi
+}
+
+\newtheoremstyle{remark}
+{%space above
+}{%space below
+}{% body font
+}{%indent amount
+-0em
+}{%head font
+\bfseries
+}{%head punct
+}{%after head space
+0em
+}{%head spec
+\if\relax\detokenize{#3}\relax \thmname{#1}:
+\else \thmname{#3}:
+\fi
+}
+
+\newtheoremstyle{cusdef}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{defcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{defcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+
+%if numbered, include number
+%if named, include name
+
+\thmname{#1}
+\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{ (#3)}\fi
+}
+
+\theoremstyle{custhm}
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{cusdef}
+\newtheorem{defin}[theorem]{Definition}
+\theoremstyle{custhm}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{custhm}
+\newtheorem{cor}[theorem]{Corollary}
+
+\theoremstyle{custhm}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{custhm}
+\newtheorem*{theorem*}{Theorem}
+
+\theoremstyle{cusdef}
+\newtheorem*{defin*}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark*}{Remark}
+
+
+%\marginpar{to describe which lecture it is}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lef}{\left(}
+\newcommand{\res}{\right)}
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\suminf}{\sum_{n=0}^{\infty}}
+\newcommand{\suminfa}[1]{\sum_{#1=0}^{\infty}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\undf}[1]{\textit{\textbf{#1}}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\it}[1]{\textit{#1}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\proves}{\vdash}
+\newcommand{\lra}{\leftrightarrow}
+\renewcommand{\value}{|\cdot|}
+\newcommand{\val}[1]{\left|#1\right|}
+\newcommand{\valk}{(K,|\cdot|)}
+\renewcommand{\bar}{\overline}
+\renewcommand{\O}{\mathcal{O}}
+
+\renewcommand{\lnot}{\neg}
+\newcommand{\false}{\bot}
+\newcommand{\true}{\top}
+
+\title{Local Fields: Sheet 1}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+
+\maketitle
+\clearpage
+
+\textbf{1}. (a) We show firstly that the addition and multiplication operations are well defined. Let $(a_n)\sim (x_n)$ and $(b_n)\sim (y_n)$. Then $(a_n)+(b_n) = (a_n+b_n)\sim (x_n+y_n)$ since $a_n-x_n+b_n-y_n \ra 0$. Similarly, $(a_n-x_n)\cdot b_n + x_n(b_n-y_n)\ra 0$, so $a_nb_n-x_ny_n\ra 0$ and $(x_ny_n)\sim(a_nb_n)$.
+
+The equivalence class $[(1)_{n=1}^{\infty}]$ is then clearly a multiplicative identity, $[(0)]$ the additive identity, and for non-zero $[(x_n)]$ only finitely many $x_i = 0$, so wlog we choose representatives with no zero terms. $[(x_n^{-1})]$ is then a multiplicative inverse, and since $a_n^{-1}x_n^{-1}(x_n - a_n)\ra 0$ (else one of $a_n$, $x_n$ vanishes in the limit, so $\sim [(0)]\ \bot$) we have that $(a_n^{-1})\sim(x_n^{-1})$. Likewise for additive inverses. Distributive properties follow similarly.
+
+(b) The reverse triangle inequality says that $||x_m| - |x_n||\le |x_m - x_n|$, and $(x_m)$ is Cauchy so the right hand side vanishes for $m,n\ra\infty$. Hence $|x_m|$ is Cauchy also, and since it has a real sequence it thus converges to some limit.
+
+We can then define $|(x_n)| = \lim_{n\ra\infty}|x_n|$. This is an absolute value since $|(x_n)| = 0 \iff \lim |x_n| = 0 \iff x_n\ra 0$ since $|\cdot|$ is an absolute value on $K$. But the last condition is equivalent to $(x_n)\sim (0)$.
+
+$|(x_n)(y_n)| = |(x_ny_n)| = \lim|x_ny_n| = \lim|x_n||y_n| = \lim|x_n|\lim|y_n| = |(x_n)||(y_n)|$ as $|x_n|,|y_n|$ are real sequences.
+
+The triangle inequality also holds: $|(x_n)+(y_n)| = \lim |x_n + y_n|\le \lim (|x_n| + |y_n|) = |(x_n)| + |(y_n)|$.
+
+(c) The discretely valued case is fairly trivial, but we can do both in general. Let $y \in \R\backslash v(K^\times)$, and suppose that $(v(x_n))_{n=1}^{\infty}$ converges to $y$. We show that $(x_n)$ cannot be Cauchy.
+
+\it{currently some significant confusion over the definition of a valuation/valued field - our definition of valuation appears to always be non-archimedean, so need this be the case for $|\cdot|$ on $K$? Also a potential typo with the direction of the inequality...}
+
+We first remark that for $a,b\in K$, if $v(a) > v(b)$ then $v(b)\ge \min(v(b-a),v(a))\implies v(a)>v(b)\ge v(b-a)$, and similarly if $v(b) > v(a)$ then $v(a) \ge v(a-b) = v(b-a)$. Hence $v(a-b) \le \min(v(a),v(b))$ for $a\ne b$.
+
+Now note that $v(x_n)$ is not eventually constant, else we have $v(x_N) = y$ for large enough $N$. So we can find infinitely many $m_i > n_i$, with $n_i\ra \infty$, such that $v(x_{m_i} - x_{n_i}) \le \min(v(x_{m_i}),v(y_{n_i})) \le y + \eps_i \le y + 1$ for large enough $i$. But then $|x_{m_i} - x_{n_i}| \ge \alpha^{y+1} > 0$ for infinitely many $i$. Hence $(x_n)$ is not Cauchy.
+
+\it{I think this works, but I can't claim to have a good intuition for why...}
+
+\textbf{2}. Write $x = \prod_{i=0}^{k}p_i^{e_i}$ with $e_i\in \Z$, $p_0 = -1$. Then for $i>0$, $|x|_{p_i} = p_i^{-e_i}$, and for $\alpha\not\in \{\infty,p_1,p_2,\dots,p_k\}$ we have $|x|_{\alpha} = 1$. Thus
+\begin{align*}
+	\prod_{\alpha}|x|_{\alpha} &= |x|_{\infty}\prod_{i=1}^{k}|x|_{p_i}\\
+	&=\left(\prod_{i=1}^{k}p_i^{e_i}\right)\left(\prod_{i=1}^{k}p_i^{-e_i}\right)\\
+	&= 1
+\end{align*}
+
+\textbf{3}. Let $S_n = \sum_{i=0}^{n}(-c)^i$. Then $(1+c)S_n = 1+(-c)^{n+1}$, so $(1+c)S_n - 1 = (-c)^{n+1}\ra 0$ since $|c|_p < 1$. Hence $\lim S_n = 1 - c + c^2 - c^3 + \dots = (1+c)^{-1}$.
+
+As above we have $|(1+c)S_n - 1|_p = |c|^{n+1}$, so we might desire that $|c| = 5^{-1}$ and $n \ge 9$, such that $4a = (1+c)S_n = 1 + (-c)^{n+1}$ has a solution. This requires that $n$ is even and $c \equiv 1\mod 4$, so we take $c = 5$ and $n = 10$. Then $a = (1-5^{11})/4$ will suffice.
+
+\it{not my solution that follows, but probably the inteded one:}
+
+We can say $4^{-1} = -1 - 5 - 5^2-\dots$< so let $a = -1-5-\dots-5^9$, and write $-1/4 = a + x$ with $|x|_{5} = 5^{-10}$. Then $|4a-1|_5 = |4x|_5 = 5^{-10}$.
+
+\textbf{4}. (a) $v_a((t-a)^mf_1/g_1\cdot (t-a)^nf_2/g_2) = v_a((t-a)^{m+n}f_1f_2/g_1g_2) = m + n$ since $a$ is not a root of any $f_i$ or $g_i$. For the (equivalent) of the ultrametric inequality, wlog $m\ge n$. Then
+\begin{align*}
+	v_a\left((t-a)^m\frac{f_1}{g_1} + (t-a)^n\frac{f_2}{g_2}\right) &= v_a\left((t-a)^n\left[(t-a)^{m-n}\frac{f_1}{g_1} + \frac{f_2}{g_2}\right]\right)\\
+	&=n + v_a\left(\frac{g_1f_2+f_1g_2(t-a)^{m-n}}{g_1g_2}\right)
+\end{align*}
+Now the denominator does not have $a$ as a root, so $v_a(\cdot)\ge 0$, so done.
+
+$v_\infty(f_1/g_1 \cdot f_2/g_2) =v_\infty(f_1f_2/g_1g_2) = \deg g_1 + \deg g_2 - \deg f_1 - \deg f_2$. Again, similarly to the above:
+\begin{align*}
+v_\infty\left(\frac{f_1}{g_1}+\frac{f_2}{g_2}\right) &= v_\infty \left(\frac{f_1g_2 + g_1f_2}{g_1g_2}\right)\\
+&\ge \deg g_1 + \deg g_2 - \max(\deg f_1g_2,\deg g_1f_2)\\
+&=\min(\deg g_1 - \deg f_1, \deg g_2 - \deg f_2)
+\end{align*}
+
+(b) The existence of multiplicative inverses are the only non-trivial part of showing $k((t))$ is a field. Suppose we have $f(t) = \sum_{i=n}^{\infty}a_it^i$, with $a_n\ne 0$. Then $t^{-n}a_n^{-1}f(t) = 1 + g(t)$, where $g(t) = \sum_{i=1}^{\infty}b_it^i$ with $b_i = a_{i+n}/a_n$. We invert this in the expected way:
+\begin{align*}
+	(1+g)^{-1} &= 1 - g + g^2 - \dots\\
+	&= \sum_{j=0}^{\infty}c_jt^j
+\end{align*}
+for some appropriately complicated $c_j$. The important thing to note is that each $c_j$ is a well-defined, finite sum of combinations of $b_i: i \le j$, since $g^m$ contributes no terms when $m > j$. This definition genuinely is the inverse of $1+g$; $(1+g)(1-g+g^2-\cdots+(-g)^m)=1+(-g)^{m+1}$, so given $m > 0$, the coefficient of $t^m$ in $(1+g)(1-g+g^2-\dots)$, which is the same as the coefficient of $t^m$ in $1+(-g)^{m+1}$, is zero, hence the formal Laurent series for $(1+g)(1-g+g^2-\dots)$ is simply $1$.
+
+We then have that $a_nt^nf^{-1} = \sum_{j=0}^{\infty}c_jt^{j}$, so $f^{-1}=\sum_{j=0}^{\infty}c_ja_n^{-1}t^{j-n} = \sum_{i=-n}^{\infty}c_{i+n}a_n^{-1}t^i\in k((t))$. So $k((t))$ is a field.
+
+Moreover, this contains $k(t)$ in the sense that there is a field homomorphism $k(t)\xhookrightarrow{} k((t))$ given by $f/g\mapsto fg^{-1}$, where $f,g\in k[t]\subset k((t))$. This preserves the slightly different definitions of the $t$-adic valuation in these fields, since if $f(0),g(0)\ne 0$ then $f(0)g(0)^{-1}$ is both defined and non-zero, so the Laurent series for $fg^{-1}$ begins with the $t^0$ term.
+
+(c) Let $C$ be the set of all Cauchy sequences in $k(t)$, and define $K = C/\sim$ as in 1. It is now convenient to view $k(t)$ as a subfield of $k((t))$ in the above way.
+
+Suppose that $(f_n)$ is Cauchy, and define $(f_n^m)$ to be the sequence in $k$ of the coefficient of $t^m$ in $f_n$. Claim $(f_n^m)$ is eventually constant for each $m\in \Z$: suppose not. Then we find an increasing sequence of $n_i\in \N$ such that $f_{n_{i+1}}^m\ne f_{n_i}^m$. Then for all $i$, $v(f_{n_{i+1}} - f_{n_i})\le m$, which cannot be the case since $(f_n)$ is Cauchy.
+
+Moreover, these coefficients must be the same for $(f_n)\sim (g_n)$, otherwise $v(f_n-g_n)$ is bounded. We also note that for all $m\in\Z$ there exists an $N\in\N$ such that $n\ge N$ implies $f_n$ and $f_N$ agree on all coefficients of terms $t^a:a\le m$, and since $f_N\in k((t))$ this means that there is a least $m\in\Z$ such that $\lim f_n^m \ne 0$.
+
+This allows us to identify equivalence classes $[(f_n)]$ with elements $\sum_{i=m}^{\infty}(\lim f_n^i)t^i$ of $k((t))$. All that remains to be shown is that this identification (henceforth $\phi$) is a surjective field homomorphism.
+
+We first show surjectivity. Given $f = \sum_{i=n}^{\infty}a_it^i$, the sequence $f_m = \sum_{i=n}^{m}a_it^i$ is clearly Cauchy with $\phi([(f_n)]) = f$.
+
+$\phi$ preserves addition, since $\phi((f_n)+(g_n)) = \phi((f_n+g_n)) = \sum_{i=-\infty}^{\infty}(\lim(f_n^i+g_n^i))t^i = \sum_{i=-\infty}^{\infty}(\lim f_n^i)t^i +\sum_{i=-\infty}^{\infty}(\lim g_n^i)t^i = \phi((f_n)) + \phi((g_n))$.
+
+To see that $\phi$ preserves multiplication, write $f =\phi((f_n))$, $g = \phi((g_n))$ and  consider only the coefficient of $t^m$ in $\phi((f_n)\cdot(g_n)), m\in\Z$. Choose $N\in\N$ such that for all $n\ge N$, both $(f_n),(g_n)$ are constant in all coefficients $\ell \le m - \min(v(f),v(g))$, \it{i.e.} constant in all coefficients that determine the coefficient of $t^m$ in the product. Then for all $M\ge N$, the products $f_Mg_M$ and $fg=\phi((f_n))\phi((g_n))$ agree on the coefficient of $t^m$, which must then be constant for all such $M$. Hence $\phi((f_n)(g_n))$ and $fg$ agree on all coefficients $t^m:m\in\Z$, and so they are equal.
+
+Hence $\phi$ is a field isomorphism, and so $k((t))$ is indeed the completion of $k(t)$ under $v_0$.
+
+5. (a) We first show that $\Z[1/p]$ is dense in $\Q$; let $x = p^na/b$. $b\not\equiv 0\mod p$, so $\exists c\in\Z$ such that $x = p^nac/(bc)$ with $bc\equiv 1\mod p$. Write $bc = 1 + m$, with $|m|_p < 1$. We can then expand $1/(bc)$ as in 3. to obtain $x = p^nac(1-m+m^2-\dots)$. The sequence $x_k = p^nac(1-m+\dots +(-m)^k)\in\Z[1/p]$ then converges to $x$.
+
+So $\Z[1/p]$ is dense in $\Q$, which is in turn dense in $\Q_p$. So the closure of $\Z[1/p]$ contains $\Q$ and is closed, hence it contains the closure of $\Q$, which is $\Q_p$. So the closure of $\Z[1/p]$ is $\Q_p$, and thus $\Z[1/p]$ is dense in $\Q_p$.
+
+(b)
+\end{document}

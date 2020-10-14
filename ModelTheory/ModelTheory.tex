@@ -9,8 +9,8 @@
 \usepackage{xcolor}
 \usepackage{pagecolor}
 \usepackage[margin=1.2in]{geometry}
-
-
+\usepackage{enumerate}
+\usepackage{enumitem}
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -20,69 +20,63 @@
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
 \DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
 
-\definecolor{thmcolour}{rgb}{0,1,1}
-\definecolor{defcolour}{rgb}{1,0,1}
-\definecolor{textcolour}{rgb}{1,1,1}
-\definecolor{backgroundcolour}{rgb}{0,0,0}
+\definecolor{thmcolour}{rgb}{0,0,0}
+\definecolor{defcolour}{rgb}{0,0,0}
+\definecolor{textcolour}{rgb}{0,0,0}
+\definecolor{backgroundcolour}{rgb}{1,1,1}
 
 \pagecolor{backgroundcolour}
 \color{textcolour}
 
 \newtheoremstyle{custhm}
-{
-	%space above
-	1em
-}{
-	%space below
-	1em
-}{
-	%body font
-	\color{thmcolour}
-}{
-	%indent amount
-	-0.5em
-}{
-	%head font
-	\bfseries\large\color{thmcolour}
-}{
-	%head punct
-}{
-	%after head space
-	0em
-}{
-	%head spec
-	
-	\if\relax\detokenize{#3}\relax \thmname{#1}\thmnumber{ #2}:
-	%stuff
-	\else \thmname{#3}\thmnumber{ #2}:
-	%stuff
-	
-	\fi
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{thmcolour}\itshape
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{thmcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\thmname{#1}\if\relax\detokenize{#2}\relax:\else\thmnumber{ #2}:\fi\if\relax\detokenize{#3}\relax\else\thmnote{ (#3)}\fi
+}
+
+\newtheoremstyle{ex}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{thmcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{thmcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\thmname{#1}\if\relax\detokenize{#2}\relax:\else\thmnumber{ #2}:\fi\if\relax\detokenize{#3}\relax\else\thmnote{(#3)}\fi
 }
 
 \newtheoremstyle{remark}
-{
-%space above
-}{
-%space below
-}{
-% body font
-}{
-%indent amount
--0.6em
-}{
-%head font
+{%space above
+}{%space below
+}{% body font
+}{%indent amount
+-0em
+}{%head font
 \bfseries
-}{
-%head punct
-}{
-%after head space
-0em
-}{
-%head spec
-\if\relax\detokenize{#3}\relax \thmname{#1}:
-\else \thmname{#3}:
-\fi
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\if\relax\detokenize{#3}\relax\thmname{#1}:\else\thmname{#3}:\fi
 }
 
 \newtheoremstyle{cusdef}
@@ -95,14 +89,14 @@
 }{%indent amount
 -0em
 }{%head font
-\bfseries\large\color{defcolour}
+\bfseries\color{defcolour}
 }{%head punct
 }{%after head space
-0em
+1em
 }{%head spec
-\if\relax\detokenize{#2}\relax\underline{\thmname{#3}}:
-\else\underline{\thmname{#3}\thmnumber{ #2}}:
-\fi
+%if numbered, include number
+%if named, include name
+\thmname{#1}\if\relax\detokenize{#2}\relax:\else\thmnumber{ #2}:\fi\if\relax\detokenize{#3}\relax\else\thmnote{ (#3)}\fi
 }
 
 \theoremstyle{custhm}
@@ -111,6 +105,17 @@
 \newtheorem{defin}[theorem]{Definition}
 \theoremstyle{custhm}
 \newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{custhm}
+\newtheorem{cor}[theorem]{Corollary}
+
+\theoremstyle{custhm}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{ex}
+\newtheorem{ex}[theorem]{Example}
+
+\theoremstyle{custhm}
+\newtheorem*{theorem*}{Theorem}
 
 \theoremstyle{cusdef}
 \newtheorem*{defin*}{Definition}
@@ -121,10 +126,11 @@
 
 %\marginpar{to describe which lecture it is}
 
-\newcommand{\N}{\mathbb{N}}
+\newcommand{\Na}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
 \newcommand{\e}{\mathrm{e}}
 \newcommand{\ra}{\rightarrow}
 \newcommand{\lef}{\left(}
@@ -135,30 +141,40 @@
 \newcommand{\suminf}{\sum_{n=0}^{\infty}}
 \newcommand{\suminfa}[1]{\sum_{#1=0}^{\infty}}
 \renewcommand{\P}{\mathbb{P}}
-\newcommand{\undf}[1]{\underline{\textbf{#1}}}
+\newcommand{\undf}[1]{\textit{\textbf{#1}}}
 \renewcommand{\L}{\mathcal{L}}
 \renewcommand{\it}[1]{\textit{#1}}
 \newcommand{\M}{\mathcal{M}}
 \renewcommand{\phi}{\varphi}
 \newcommand{\proves}{\vdash}
 \newcommand{\lra}{\leftrightarrow}
+\renewcommand{\value}{|\cdot|}
+\newcommand{\val}[1]{\left|#1\right|}
+\newcommand{\valk}{(K,|\cdot|)}
+\renewcommand{\bar}{\overline}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\Th}{\textrm{Th}}
 
 \renewcommand{\lnot}{\neg}
 \newcommand{\false}{\bot}
 \newcommand{\true}{\top}
+\newcommand{\n}{\mathcal{N}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\ac}[1]{\mathcal{#1}}
 
 \title{Model Theory}
 \author{Lectures by Gabriel Conant}
 \date{}
 
 \begin{document}
+	
+	\maketitle
+	\clearpage
+	\tableofcontents
+	\clearpage
 
-\maketitle
-\clearpage
-\tableofcontents
-\clearpage
-
-\section{Review of First Order Logic}
+\marginpar{Lecture 1}
+\section*{Review of First Order Logic}
 
 A \undf{language} is a set $\L$ of function symbols, relation symbols, and constant symbols. Additionally, each function/relation symbol has an assigned \it{arity} $n\ge 1$.
 
@@ -255,5 +271,238 @@ Similarly, $\exists x(x=x)$ (``The Axiom of Non-Triviality'') is always satisfie
 \undf{Recall}: $T$ is \undf{consistent} if it does not prove a contradiction (\it{e.g.} $(\phi\land\lnot\phi))$
 
 A consequence of \undf{G{\"o}del's Completeness Theorem} is that a theory is satisfiable iff it is consistent. This is a very important theorem, though we will mostly be focussing on the model theoretic aspect (satisfiability).
+
+\marginpar{Lecture 2}
+
+We now consider a fixed language $\L$.
+
+An $\L$-theory $T$ is \undf{finitely satisfiable} if every finite subset of $T$ is satisfiable. This leads us to one of the most important theorems for getting Model Theory off the ground:
+
+\begin{theorem*}[Compactness Theorem]
+An $\L$-theory $T$ satisfiable iff it is finitely satisfiable
+\end{theorem*}
+
+Another important theorem of Model Theory is the following.
+
+\begin{theorem*}[Downward Lowenheim-Skolem Theorem]
+	Any satisfiable $\L$-theory has a model of cardinality at most $|\L|+\aleph_0$
+\end{theorem*}
+
+The proofs of the above are non-examinable; see Part II notes for details.
+
+\begin{theorem*}[(Upward) Lowenheim-Skolem  Theorem]
+Suppose $T$ is an $\L$-theory with infinite models. Then $T$ has a model of cardinality $\kappa$ for any $\kappa \ge |\L|+\aleph_0$
+\end{theorem*}
+
+We note that by the `cardinality' of a structure we mean the cardinality of its universe.
+
+\begin{proof}
+What we need to do here is build a model of this theory, but do it such that it's not just a model of the theory but that it also has some extra properties of our choosing. This is a common technique in model theory.
+
+We want more elements, so we add more symbols to our language and more sentences claiming various properties about these symbols.
+
+Let $\L^\ast = \L \cup \{c_i : i < \kappa\}$ where each $c_i$ is a new constant symbol.
+
+Then let $T^\ast = T\cup \{c_i\ne c_j: i\ne j\}$. Suppose $\Sigma \subset T^\ast$ is finite. Then $\Sigma \subset T\cup\{c_i\ne c_j:i,j\in I\}$ for some finite set $I$.
+
+Let $\M\models T$ be an infinite $\L$-structure. Expand $\M$ to an $\L^{\ast}$ structure $\M^\ast$ by interpreting $c_i^{\M^\ast}$ as distinct elements for $i\in I$, and interpreting $c_i^{\M^\ast}$ for $i\not\in I$ arbitrarily. Note that this is `physically' the same structure, all we have changed is its interpretation.
+
+Then $M^{\ast}\models\Sigma$, so $T$ is finitely satisfiable. Hence by the Compactness Theorem $T^\ast$ is satisfiable. Then by DLST, $T^\ast$ has a model $\mathcal{N}^\ast$ of cardinality at most $|\L^\ast|+\aleph_0 = \kappa$. Moreover, every model has cardinality \it{at least} $\kappa$, so $\mathcal{N}^\ast$ indeed has cardinality $\kappa$.
+
+Then let $\mathcal{N}$ be the reduct of $\mathcal{N}^\ast$ to $\L$ (same universe, different interpretation). Then $\mathcal{N}\models T$ and $|N| = \kappa$.
+\end{proof}
+
+\section{Complete Theories}
+
+\begin{defin}[Semantic Entailment]
+Let $T$ be an $\L$-theory and $\phi$ an $\L$-sentence. Then $T\models \phi$ (`$T$ \undf{models} $\phi$, `$T$ \undf{implies} $\phi$') if any model of $T$ is also a model of $\phi$.
+\end{defin}
+
+\begin{ex}\ 
+\begin{enumerate}[label=\arabic*)]
+\item $\{\phi,\psi\}\models \phi\land\psi$
+\item If $T$ is consistent then $T\models \exists x(x=x)$ (also if it's not consistent). So $\emptyset \models \exists x(x=x)$ since we assume all models are non-empty.
+\item Let $T$ be the theory of groups in the language of groups $\L = \{\ast,e\}$.
+
+Then $T\models \forall x\forall y\forall z\left((x\ast y = e\land x\ast z = e)\ra y=z\right)$, since in any group inverses are unique.
+\end{enumerate}
+\end{ex}
+
+\begin{defin}[Complete Theory]
+An $\L$-theory $T$ si \undf{complete} if, for any $\L$-sentence $\phi$, we have $T\models\phi$ or $T\models \neg\phi$.
+\end{defin}
+
+\begin{ex}\ 
+\begin{enumerate}[label=\arabic*)]
+\item The theory of groups is not complete. Consider $\forall x\forall y (x\ast y = y \ast x)$ - this asserts that the group is abelian. Since there are some groups with this property and some without it, then neither $T\models \phi$ nor $T\models \neg\phi$.
+\item ZFC is not complete (if it is consistent); consider the Continuum Hypothesis.
+\end{enumerate}
+\end{ex}
+
+\begin{defin}[Theory of a structure]
+	Let $\M$ be an $\L$-structure. The \undf{theory of $\M$} is
+	\begin{align*}
+	\textrm{Th}(\M) = \textrm{Th}_\L(\M) \coloneqq \{\phi : \phi \textrm{ is an $\L$-sentence and }\M \models \phi\}
+	\end{align*}
+\end{defin}
+Note that $\Th(\M)$ is complete, since for every $\phi$ either $\phi \in \Th(\M)$ or $M\models \not \phi$. However, this makes $\Th(\M)$ complicated as a set; every sentence or its negation is in the set, including many that are pointless or redundant. We want to look for complete theories that have a much more efficient presentation.
+
+\begin{defin}[Elementarily Equivalent]
+Two $\L$-structures $\M$ and $\N$ are \undf{elementarily equivalent}, written $\M\equiv \mathcal{N}$ if $\Th(\M) = \Th(\mathcal(N))$.
+\end{defin}
+Note that $\equiv$ is an equivalence relation on $\L$-structures. To emphasise that this only a discussion of $\L$-structures for a specific language $\L$, we may sometimes write $\equiv_\L$.
+
+\begin{remark*}[Exercise] (Sheet 1 Question 2) Let $T$ be an $\L$-theory. TFAE
+\begin{enumerate}[label=\roman*)]
+\item $T$ is complete
+\item For an $\L$-sentence $\phi$, if $T\not\models \phi$ then $T\models \neg \phi$. We remark that for a model $\M$, $\M\not\models \phi\implies \M\models \neg \phi$, but this is \it{not} the case for \it{theories} in general.
+\item Any two models of $T$ are elementarily equivalent.
+\end{enumerate}
+\end{remark*}
+\begin{ex} Let $\L = \emptyset$ and $T = \{ \phi_n:n\ge 2 \}$ where $\phi_n$ is
+	\[
+	\exists x_1\dots\exists x_n \bigwedge_{i\ne j} x_i\ne x_j
+	\]
+	$T$ is then the \undf{theory of infinite sets}; its models are all of the infinite $\L$-structures. So, as $\L$-structures, $\N\equiv \Z\equiv \Q\equiv \R\equiv \C\equiv \mathcal{P}(\C) \equiv $ any infinite set.
+\end{ex}
+
+\begin{theorem}[Vaught's Test]
+Let $T$ be an $\L$-theory such that
+\begin{enumerate}[label=\alph*)]
+\item $T$ has no finite models
+\item $\exists \kappa \ge |\L| +\aleph_0$ such that any two models of $T$ of cardinality $\kappa$ are elementarily equivalent
+\end{enumerate}
+Then $T$ is complete.
+\end{theorem}
+\begin{proof}
+Suppose $T$ is not complete. Then there is a sentence $\phi$ such that $T\cup\{\neg\phi\}$ is satisfiable, and $T\cup \{\phi\}$ is satisfiable.
+
+By (a), these theories have infinite models. By Lowenheim-Skolem, these theories have models of size $\kappa$. But these are both models of $T$ and hence are elementarily equivalent $\bot$ by (b).
+\end{proof}
+
+\marginpar{Lecture 3}
+
+Showing that two structures are elementarily equivalent is often difficult to do directly, so we need to find other ways around it.
+
+\section{Homomorphisms}
+
+Let $\L$ be a language.
+
+\begin{defin}[$\L$-Homomorphism]
+Let $\M$ and $\mathcal{N}$ be $\L$-structures. A function $h:M\ra N$ is an \undf{$\L$-homomorphism} if
+\begin{enumerate}[label=\roman*)]
+	\item for any $n$-ary function symbol $f$ and $a_1,\dots,a_n\in M$
+	\[
+	h(f^\M(a_1,\dots,a_N)) = f^\N(h(a_1),h(a_2),\dots,h(a_n))
+	\]
+	\item for any $n$-ary relation symbol $R$ and $a_1,\dots,a_n\in M$
+	\[
+	(a_1,\dots,a_n)\in R^\M \iff (h(a_1),\dots,h(a_n))\in R^\N
+	\]
+	\item for any constant symbol $c$, $h(c^\M) = c^\N$.
+\end{enumerate}
+
+We write $h:\M\ra\N$ for $\L$-homomorphisms $h$.
+
+If $h$ is also injective, then $h$ is an \undf{$\L$-embedding}. If $h$ is also bijective, then $h$ is an \undf{$\L$-isomorphism}.
+\end{defin}
+
+\begin{theorem}[]
+Suppose $h:\M\ra\n$ is an $\L$-isomorphism. Then for any $\L$-formula $\phi(x_1,\dots,x_n)$ and $a_1,\dots,a_n\in M$, we have
+\[
+\M\models\phi(a_1,\dots,a_n)\iff \n\models \phi(h(a_1),\dots,h(a_n))
+\]
+\end{theorem}
+\begin{proof}
+Often in situations like this, we will need to induct on the complexity of the formula, with the base case simply being the terms, and then atomic formulae, then all formulae.
+
+\underline{Claim}: For any $\L$-term $t(x_1,\dots,x_n)$ and $a_1,\dots,a_n\in M$
+\[
+h(t^\M(a_1,\dots,a_n)) = t^\n(h(a_1),\dots,h(a_n))
+\]
+Proof of claim: induction on terms. If $t$ is a constant symbol $c$, then $h(t^\M) = h(c^\M) = h(c^\n) = t^\N$ since $h$ preserves functions (and thus constant symbols).
+
+If $t$ is a variable $x_1$, then $h(t^\M(a_1)) = h(a_1) = t^\n(h(a_1))$ since variables are interpreted as the identity function.
+
+Let $f$ be an $m$-ary function symbol. Assume the result for terms $t_1,\dots,t_m$ whose free variables are among $x_1,\dots,x_n$. Let $t$ be $f(t_1,\dots,t_m)$. Given $a_1,\dots,a_n\in M$:
+\begin{align*}
+h(t^\M(\overline{a}) &= h(f^\M(t_1^\M(\overline{a}),\dots,t_m^\M(\overline{a})))\\
+&=f^\n(h(t_1^\M(\overline{a})),\dots,h(t_m^\M(\overline{a})))\\
+&=f^\n(t_1^\n(h(\overline{a})),\dots,t_m^\n(h(\overline{a})))\\
+&=t^\n(h(\overline{a}))
+\end{align*}
+So the claim is proven. Now we prove the theorem by induction on $\phi$.
+
+\underline{Base case}: $\phi$ is atomic.
+\begin{enumerate}[label=\arabic*)]
+	\item $\phi$ is $t_1 = t_2$:
+	\begin{align*} M\models \phi(\overline{a}) &\iff t_1^\M(\bar{a}) = t_2^\M(\bar{a})\\
+		 &\iff h(t_1^\M(\bar{a})) = h(t_2^\M(\bar{a}))\textrm{ ($h$ injective)}\\
+		 &\iff t_1^\n(h(\bar{a})) = t_2^\n(h(\bar{a}))\textrm{ (by claim)}\\
+		 &\iff \N\models\phi(h(\bar{a}))
+	\end{align*}
+	\item $\phi$ is $R(t_1,\dots,t_n)$ (Exercise).
+\end{enumerate}
+\underline{Induction Step}: Assume the result for $\phi$ and $\psi$.
+
+Exercise: check $\phi\land\psi$ and $\neg\phi$.
+
+We will do $\forall x_n \phi(x_1,\dots,x_n)$, with free variables $x_1,\dots,x_{n-1}$. Fix $a_1,\dots,a_{n-1}\in M$.
+\begin{align*}
+M\models \forall x_n \phi(a_1,\dots,a_{n-1},x_n) &\iff \textrm{ for all }b\in M,\ \M\models \phi(a_1,\dots,a_{n-1},b)\\
+&\iff \textrm{ for all }b\in M,\ \n\models \phi(h(a_1),\dots,h(a_{n-1}),h(b))\textrm{ (induction)}\\
+&\iff \textrm{ for all }c\in N,\ \n\models \phi(h(a_ 1),\dots,h(a_{n-1}),c)\textrm{ ($h$ surjective)}\\
+&\iff \N\models\forall x_n \phi(h(a_1),\dots,h(a_{n-1}),x_n)
+\end{align*}
+And so we are done. In particular, $\L$-isomorphisms preserve all formulae.
+\end{proof}
+
+\begin{remark*}[Notation]
+We write $\M \cong \n$ if there is an $\L$-isomorphism $h:\M\ra\n$.
+\end{remark*}
+
+\begin{cor}
+If $\M\cong \N$ then $\M \equiv \N$.
+\end{cor}
+
+Note that, as we can see, $\cong$ is stronger than $\equiv$; $\cong$ says that two structures are more or less the same, whereas $\equiv$ only makes an assertion about first order statements satisfied by the models.
+
+\begin{cor}
+$h:\M\ra\N$ is an $\L$-embedding iff for any quantifier-free the conclusion of Theorem 2.2 holds for all quantifier-free formulas $\phi(x_1,\dots,x_n)$. That is to say, $\L$-embeddings preserve all quantifier-free formulas.
+\end{cor}
+\begin{proof}
+$(\implies)$ is done by the proof of 2.2; we only used the surjectivity of $h$ for the quantifier step.
+For $(\impliedby)$, see Sheet 1, Question 6.
+\end{proof}
+
+An embedding is precisely characterised by preserving quantifier-free formulae. This motivates the question, what about maps that preserve all formulas? We know that isomorphisms will do, but is that all of them? The answer is in fact no, in general.
+
+\begin{defin}[Elementary $L$-Embedding]
+$h:\M\ra\N$ is an \undf{elementary $\L$-embedding} if for any $L$-formula $\phi(\bar{x})$ and $\bar{a}$ from $M$, $\M\models \phi(\bar{a})$ iff $\N\models \phi(h(\bar{a}))$.
+\end{defin}
+
+Note that isomorphisms are elementary embeddings, but elementary embeddings need not be isomorphisms.
+
+\begin{defin}[Elementary Substructure]
+Let $\M$ and $\N$ be $\L$-structures with $M\subset N$. Let $h:M \xhookrightarrow{} N$ be the inclusion map. Then $\M$ is a \undf{substructure} of $\N$ (respectively, \undf{elementary substructure}), written $\M\subset \N$ (respectively $\M\preceq\N$) if $h$ is an $\L$-embedding (respectively, elementary embedding).
+
+Similarly, $\N$ is an \undf{extension} of $\M$ (respectively, \undf{elementary extension}).
+\end{defin}	
+
+\begin{remark*}[Note]
+If $\M\preceq\N$ then $M\subset N$ and $\M\equiv \N$.
+\end{remark*}
+\begin{ex}
+Let $\M = (2\Z, <)$ and $\N = (\Z, <)$.
+
+Then $\M \subset \N$ and $\M \equiv \N$, but $\M\not\preceq\N$, for instance $\M\models \neg\exists x(0 < x < 2)$, but this is of course untrue for $\N$.
+
+So the inclusion map might be an embedding, but it is not necessarily elementary.
+\end{ex}
+
+
+
+
+
 
 \end{document}

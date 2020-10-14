@@ -9,7 +9,7 @@
 \usepackage{xcolor}
 \usepackage{pagecolor}
 \usepackage[margin=1.2in]{geometry}
-
+\usepackage{enumerate}
 
 
 \usepackage[utf8]{inputenc}
@@ -20,87 +20,74 @@
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
 \DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
 
-\definecolor{thmcolour}{rgb}{0,1,1}
-\definecolor{defcolour}{rgb}{1,0,1}
-\definecolor{textcolour}{rgb}{1,1,1}
-\definecolor{backgroundcolour}{rgb}{0,0,0}
+\definecolor{thmcolour}{rgb}{0,0,0}
+\definecolor{defcolour}{rgb}{0,0,0}
+\definecolor{textcolour}{rgb}{0,0,0}
+\definecolor{backgroundcolour}{rgb}{1,1,1}
 
 \pagecolor{backgroundcolour}
 \color{textcolour}
 
 \newtheoremstyle{custhm}
-{
-	%space above
+{%space above
 	1em
-}{
-	%space below
+}{%space below
 	1em
-}{
-	%body font
-	\color{thmcolour}
-}{
-	%indent amount
-	-0.5em
-}{
-	%head font
-	\bfseries\large\color{thmcolour}
-}{
-	%head punct
-}{
-	%after head space
-	0em
-}{
-	%head spec
-	
-	\if\relax\detokenize{#3}\relax \thmname{#1}\thmnumber{ #2}:
-	%stuff
-	\else \thmname{#3}\thmnumber{ #2}:
-	%stuff
-	
-	\fi
+}{%body font
+	\color{thmcolour}\itshape
+}{%indent amount
+	-0em
+}{%head font
+	\bfseries\color{thmcolour}
+}{%head punct
+}{%after head space
+	1em
+}{%head spec
+\thmname{#1}\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{(#3)}\fi
 }
 
 \newtheoremstyle{remark}
-{
-%space above
-}{
-%space below
-}{
-% body font
-}{
-%indent amount
--0.6em
-}{
-%head font
-\bfseries
-}{
-%head punct
-}{
-%after head space
-0em
-}{
-%head spec
-\if\relax\detokenize{#3}\relax \thmname{#1}:
-\else \thmname{#3}:
-\fi
+{%space above
+}{%space below
+}{% body font
+}{%indent amount
+	-0em
+}{%head font
+	\bfseries
+}{%head punct
+}{%after head space
+	0em
+}{%head spec
+	\if\relax\detokenize{#3}\relax \thmname{#1}:
+	\else \thmname{#3}:
+	\fi
 }
 
 \newtheoremstyle{cusdef}
 {%space above
-1em
+	1em
 }{%space below
-1em
+	1em
 }{%body font
-\color{defcolour}
+	\color{defcolour}
 }{%indent amount
--0.5em
+	-0em
 }{%head font
-\bfseries\large\color{defcolour}\underline
+	\bfseries\color{defcolour}
 }{%head punct
 }{%after head space
-0em
+	1em
 }{%head spec
-\thmname{#3}:
+	%if numbered, include number
+	%if named, include name
+	\thmname{#1}
+	\if\relax\detokenize{#2}\relax:
+	\else\thmnumber{ #2}:\fi
+	\if\relax\detokenize{#3}\relax
+	\else\thmnote{ (#3)}\fi
 }
 
 \theoremstyle{custhm}
@@ -109,25 +96,62 @@
 \newtheorem{defin}[theorem]{Definition}
 \theoremstyle{custhm}
 \newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{custhm}
+\newtheorem{cor}[theorem]{Corollary}
+
+\theoremstyle{custhm}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{custhm}
+\newtheorem*{theorem*}{Theorem}
+
+\theoremstyle{cusdef}
+\newtheorem*{defin*}{Definition}
 
 \theoremstyle{remark}
 \newtheorem*{remark*}{Remark}
 
 
-%\reversemarginpar{to describe which lecture it is}
+%\marginpar{to describe which lecture it is}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
 \newcommand{\e}{\mathrm{e}}
 \newcommand{\ra}{\rightarrow}
 \newcommand{\lef}{\left(}
 \newcommand{\res}{\right)}
-\newcommand{\ie}{\textit{i.e.}}
-\newcommand{\poly}{\textrm{poly}}
+\newcommand{\ie}{\textit{i.e. }}
 \newcommand{\eps}{\varepsilon}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\suminf}{\sum_{n=0}^{\infty}}
+\newcommand{\suminfa}[1]{\sum_{#1=0}^{\infty}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\undf}[1]{\textit{\textbf{#1}}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\it}[1]{\textit{#1}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\proves}{\vdash}
+\newcommand{\lra}{\leftrightarrow}
+\renewcommand{\value}{|\cdot|}
+\newcommand{\val}[1]{\left|#1\right|}
+\newcommand{\valk}{(K,|\cdot|)}
+\renewcommand{\bar}{\overline}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\A}{\mathcal{A}}
+
+\newcommand{\poly}{\textrm{poly}}
 \newcommand{\U}{\mathcal{U}}
+\newcommand{\QFT}{\textrm{QFT}}
+\newcommand{\per}{\ket{\textrm{per}}}
+
+
+\renewcommand{\lnot}{\neg}
+\newcommand{\false}{\bot}
+\newcommand{\true}{\top}
 %opening
 \title{Quantum Computation}
 \author{Lectures by Richard Jozsa}
@@ -139,6 +163,7 @@
 
 \tableofcontents
 \clearpage
+\marginpar{Lecture 1}
 \section{Review of Shor's Algorithm}
 
 This result is powered by the \textbf{quantum period finding algorithm}, and will lead us to the \textbf{hidden subgroup problem} (henceforce HSP).
@@ -170,9 +195,9 @@ While the process of determining $r$ is \textit{mathematically} very simple, it 
 We want to find $r$ in time $O(\poly(m)),\ m = \log M$ (with any prescribed success probability $1-\eps,\ \eps > 0$).
 
 \begin{remark*}
-	Queries to the oracle count as 1 step. In the quantum context we assume the oracle is a unitary gate $\U_f$ on $\U_M\otimes \U_N$, where $\U_M$ is the state space with dimension $M$, basis $\{ \bra{i} \}_{i\in\Z_M}$. $U_f$ acts on basis states as
+	Queries to the oracle count as 1 step. In the quantum context we assume the oracle is a unitary gate $\U_f$ on $\U_M\otimes \U_N$, where $\U_M$ is the state space with dimension $M$, basis $\{ \ket{i} \}_{i\in\Z_M}$. $U_f$ acts on basis states as
 	\[
-	U_f\underbrace{\bra{i}}_{\textrm{\tiny input}}\underbrace{\bra{j}}_{\textrm{\tiny output}} = \bra{i}\bra{j+f(i)},\qquad i\in\Z_M,\ j\in\Z_M
+	U_f\underbrace{\ket{i}}_{\textrm{\tiny input}}\underbrace{\ket{j}}_{\textrm{\tiny output}} = \ket{i}\ket{j+f(i)},\qquad i\in\Z_M,\ j\in\Z_M
 	\]
 	
 	The \textbf{Query complexity} of an algorithm is the number of times the oracle is queried, which is also required to be $O(\poly(m))$.
@@ -184,19 +209,96 @@ To solve the periodicity problem classically, it can be shown that it is both ne
 
 For further details \textit{c.f.} Part II notes pp.60-64.
 
-Write $A = M/r = \#$periods. We work in the state space $\U_M\otimes\U_N$ with basis $\{\bra{i}\bra{k}:\ i\in\Z_M,\ k\in\Z_N\}$.
+Write $A = M/r = \#$periods. We work in the state space $\U_M\otimes\U_N$ with basis $\{\ket{i}\ket{k}:\ i\in\Z_M,\ k\in\Z_N\}$.
 
-\underline{\textbf{Step 1}}: obtain the state \[ \frac{1}{\sqrt{M}} \sum_{i=0}^{M-1}\bra{i}\bra{0}\]
+\underline{\textbf{Step 1}}: obtain the state \[ \frac{1}{\sqrt{M}} \sum_{i=0}^{M-1}\ket{i}\ket{0}\]
 
-\underline{\textbf{Step 2}}: apply $U_f$ to obtain \[\frac{1}{\sqrt{M}}\sum_{i=0}^{M-1}\bra{i}\bra{f(i)}\]
+\underline{\textbf{Step 2}}: apply $U_f$ to obtain \[\frac{1}{\sqrt{M}}\sum_{i=0}^{M-1}\ket{i}\ket{f(i)}\]
 
 \underline{\textbf{Step 3}}: measure the output register, obtaining result $y$. By the \textbf{Born rule}, the input register collapses to all those $i$ such that $f(i) = y$, \ie $i = x_0,\ x_0+r,\cdots,\ x_0+(A-1)r$ where $0\le x_0 < r$ in the first period has $f(x_0) = y$.
 
-We discard the output reigister to obtain \[\bra{\textrm{per}} = \frac{1}{\sqrt{A}}\sum_{j=0}^{A-1}\bra{x_0+jr}\]
+We discard the output reigister to obtain \[\ket{\textrm{per}} = \frac{1}{\sqrt{A}}\sum_{j=0}^{A-1}\ket{x_0+jr}\]
 
 Note that each $0\le x_0 < r$ occurs with probability $1/r$.
 
-If we naively measure $\bra{\textrm{per}}$, the Born rule implies we get $x_0 + jr$ with $j = 0,\cdots,A-1$ chosen uniformly with probability $1/A$, \ie a random element of a random period; this is a uniformly random integer in $\Z_M$. This is useless to us. Instead...
+If we naively measure $\ket{\textrm{per}}$, the Born rule implies we get $x_0 + jr$ with $j = 0,\cdots,A-1$ chosen uniformly with probability $1/A$, \ie a random element of a random period; this is a uniformly random integer in $\Z_M$. This is useless to us. Instead...
 
 \underline{\textbf{Step 4}}: apply \textbf{Quantum Fourier Transform} (QFT).
+\marginpar{Lecture 2}
+Recall that
+\[
+\textrm{QFT}\ket{x} = \frac{1}{\sqrt{M}} \sum_{y=0}^{M-1} \omega^{xy} \ket{y}
+\]
+\begin{remark*}[Fact]
+QFT modulo $M$ is unitary, and can be implemented in $O(m^2)$ time, $m = \log M$. See Part II QIC notes for circuit details of implementation.
+\end{remark*}
+
+Then
+\begin{align*}
+	\QFT\ket{\textrm{per}} &= \frac{1}{\sqrt{MA}}\sum_{j=0}^{A-1} \left(\sum_{j=0}^{M-1}\omega^{(x_0+jr)y}\ket{y}\right)\\
+	&=\frac{1}{\sqrt{MA}}\sum_{y=0}^{M-1}\omega^{x_0y}\left[\sum_{j=0}^{A-1}\omega^{jry}\right]\ket{y}
+\end{align*}
+Note that $[\cdots]$ is a geometric series, with ratio $\omega^{ry} = \e^{2\pi iry/M} = \left(\e^{e\pi i/A}\right)^y$. So the sum equals zero unless $y$ is a multiple of $A = M/r$, in which case it every term in the sum is 1 so the sum equals $A$. So the non-multiples of $A$ get sifted out by QFT.
+
+Hence, we have
+\begin{align*}
+\QFT\ket{\textrm{per}} = \sqrt{\frac{A}{M}}\sum_{k=0}^{r-1}\omega^{x_0kM/r}\ket{k\frac{M}{r}}
+\end{align*}
+Then measuring $\QFT\ket{\textrm{per}}$ we get a value $c = k_0 M/r$, with $0\le k_0\le r-1$ chosen uniformly at random. Thus we have $k_0/r = c/M$, where the values $c,M$ are known and $k_0$ has been chosen at random; we want $r$. Note that if we are fortunate enough to have $(k_0,r) = 1$, then we can (efficiently) cancel $c/M$ down to its lowest terms, and read off $r$ as the denominator. But in general this will not be the case:
+
+\begin{theorem*}[Coprimality Theorem]
+The number of positive integers $<r$ that are coprime to $r$ grows as $O\left(r/\log\log r\right)$ for large $r$.
+\end{theorem*}
+Hence the above $\P(k_0 \textrm{ coprime to }r = O\left(1/\log\log r\right)$. So if we do it enough times, we will almost surely be successful:
+	
+\begin{remark*}[Probability Lemma]
+If a single trial has success probability $p$, then we repeat $k$ times, and for any $0 < 1 - \eps < 1$, we have that
+\begin{align*}
+	\textrm{if }&\quad k= -\frac{\log \eps}{p}\\
+	\textrm{then }&\quad\P(\ge 1 \textrm{ success in }k \textrm{ trials}) > 1 - \eps
+\end{align*}
+\end{remark*}
+So after finding $c$, cancel $c/M$ down to its lowest terms $a/b$ (classically, in polynomial time using Euclid's algorithm). We get $r$ as denominator $b$ if $(k_0,r) = 1$, which happens with probability $O(1/\log\log r)$, otherwise $c,M$ have more common factors, so $b < r$.
+
+We don't know immediately whether that has happened or not, but we can check the $b$ value by making two more queries to the oracle, $f(0)$ and $f(b)$; these are equal iff $b = r$.
+
+So if we repeat this $K = O(\log\log r)$ times, then we will obtain $r$ with any high probability we desire - and this runs in polynomial time.
+
+\undf{Origin and utility of QFT here}
+
+Write $R = \{0,r,2r,\dots,(A-1)r\}\subset \Z_M$, and
+\begin{align*}
+\ket{R} &= \frac{1}{\sqrt{A}}\sum_{k=0}^{A-1}\ket{kr}\\
+\per = \ket{x_0+R} = \frac{1}{\sqrt{A}}\sum_{k=0}^{A-1}\ket{x_0+kr}
+\end{align*}
+The problem is that the $\ket{x_0+kr}$ terms are distributed randomly.
+
+For each $x_0\in\Z_M$, consider the map $k\mapsto k+x_0$ on $\Z_M$; this is the 1-1 reversible map ``shift by $x_0$''.
+
+This gives rise to a linear map $U(x_0)$ on $\U_M$, and $U(x_0):\ket{k}\ra\ket{k+x_0}$ is unitary, and $\ket{x_0+R} = U(x_0)\ket{R}$.
+
+Since $(\Z_M,+)$ is an \it{abelian} group, these shift operators all commute, \it{i.e.} $U(x_0)U(x_1) = U(x_0+x_1) = U(x_1)U(x_0)$. So they have an orthonormal basis of common eigenvectors $\{\ket{\chi_k}\}_{k\in\Z_M}$, called the \it{shift-invariant} states. Note that they are not left entirely unchanged by the $U(x_0)$ operators, but they are shifted only by a constant phase factor, \textrm{i.e.} $U(x_0)\ket{\chi_k} = \omega(x_0,k)\ket{\chi_k}$ for all $x_0,k\in\Z_M$, and $|\omega(x_0,k)| = 1$.
+
+Now consider $\ket{R}$ written in the $\chi$-basis
+\begin{align*}
+\ket{R} = \sum_{k=0}^{M-1}a_k\ket{\chi_k}
+\end{align*}
+where the amplitudes $a_k$ depend only on $r$, and not on $x_0$ (obviously). Then $\per = U(x_0)\ket{R} = \sum a_k\omega(x_0,k)\ket{\chi_k}$, and measurement in the $\chi$-basis has $\P(k) = |a_k\omega(x_0,k)|^2 = |a_k|^2$, independent of $x_0$, depending only on $r$. So we want to measure in this basis, but aren't allowed to do that (computationally) since the basis is too complicated.
+
+So we introduce QFT as the unitary mapping that rotates the $\chi_k$-basis onto the standard basis $\ket{k}$, and follow this up by a standard basis measurement.
+
+But what does this mapping look like, and where does it come from? We need the explicit form of the shift-invariant eigenstates:
+\begin{align*}
+	\ket{\chi_k} &= \frac{1}{\sqrt{M}}\sum_{\ell = 0}^{M-1}\e^{-2\pi ik\ell/M}\ket{\ell}\\
+	\implies \U(x_0)\ket{\chi_k} &= \frac{1}{\sqrt{M}}\sum_{\ell = 0}^{M-1}\e^{-2\pi ik\ell/M}\ket{\ell + x_0}\\
+	&= \frac{1}{\sqrt{M}}\sum_{\tilde{\ell} = 0}^{M-1}\e^{-2\pi i k(\tilde{\ell} - x_0)}\ket{\tilde{\ell}}\\
+	&= \e^{2\pi i kx_0/M}\ket{\chi_k}
+\end{align*}
+So $\omega(x_0,k) = \e^{2\pi i k x_0/M}$.
+
+The matrix of $\QFT^{-1}$ (mapping $\ket{k}$ to $\ket{\chi_k}$) has components of $\ket{\chi_k}$ as the $k^{\textrm{th}}$ column, so $[\QFT^{-1}]_{\ell k} = \frac{1}{\sqrt{M}}\e^{-2\pi i\ell k/M}$. Since QFT is unitary, to find the inverse we need only take the conjugate transpose.
+
+Hence $[QFT]_{k\ell} = \frac{1}{\sqrt{M}}\e^{2\pi ik\ell/M}$, as previously defined.
+
+This notion of QFT in fact occurs very naturally in group theory as the \it{discrete Fourier transform}. The fact that this QFT is unitary means that all the group theoretic results it relies on slot in perfectly, allowing us to make as much use of this want in a way that we are not able classically.
 \end{document}
