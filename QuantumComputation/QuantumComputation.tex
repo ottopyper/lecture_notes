@@ -10,7 +10,7 @@
 \usepackage{pagecolor}
 \usepackage[margin=1.2in]{geometry}
 \usepackage{enumerate}
-
+\usepackage{enumitem}
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -43,27 +43,21 @@
 }{%after head space
 	1em
 }{%head spec
-\thmname{#1}\if\relax\detokenize{#2}\relax:
-\else\thmnumber{ #2}:\fi
-\if\relax\detokenize{#3}\relax
-\else\thmnote{(#3)}\fi
+\thmname{#1}\if\relax\detokenize{#2}\relax: \else\thmnumber{ #2}: \fi\if\relax\detokenize{#3}\relax\else\thmnote{(#3)}\fi
 }
 
 \newtheoremstyle{remark}
 {%space above
 }{%space below
 }{% body font
-}{%indent amount
-	-0em
+}{%indent amount	-0em
 }{%head font
-	\bfseries
+\bfseries
 }{%head punct
 }{%after head space
-	0em
+0em
 }{%head spec
-	\if\relax\detokenize{#3}\relax \thmname{#1}:
-	\else \thmname{#3}:
-	\fi
+\if\relax\detokenize{#3}\relax\thmname{#1}: \else\thmname{#3}: \fi
 }
 
 \newtheoremstyle{cusdef}
@@ -300,5 +294,82 @@ The matrix of $\QFT^{-1}$ (mapping $\ket{k}$ to $\ket{\chi_k}$) has components o
 
 Hence $[QFT]_{k\ell} = \frac{1}{\sqrt{M}}\e^{2\pi ik\ell/M}$, as previously defined.
 
-This notion of QFT in fact occurs very naturally in group theory as the \it{discrete Fourier transform}. The fact that this QFT is unitary means that all the group theoretic results it relies on slot in perfectly, allowing us to make as much use of this want in a way that we are not able classically.
+This notion of QFT in fact occurs very naturally in group theory as the \it{discrete Fourier transform}. The fact that this QFT is unitary means that all the group theoretic results it relies on slot in perfectly, allowing us to make as much use of this as we want in a way that we are not able classically.
+
+\marginpar{Lecture 3}
+
+The following algorithm was inspired by a desire to generalise the successful technique of Shor's celebrated algorithm.
+
+\section{The Hidden Subgroup Problem (HSP)}
+
+Let $G$ be a finite group, of size $|G|$.
+
+We are given an oracle $f : G\ra X$ (where $X$ is some set), and a promise that there is a subgroup $K < G$ such that
+\begin{itemize}
+	\item $f$ is constant on (left) cosets of $K$ in $G$
+	\item $f$ is distinct on distinct cosets.
+\end{itemize}
+\begin{remark*}[Problem]
+Determine the ``hidden subgroup'' $K$.
+
+For instance, this might entail outputting a set of generators, or we might be happy enough with just sampling uniformly from the elements of $K$.
+
+$\ast$ we want to solve this in time $O(\poly\log|G|)$, with any constant probability $1 - \eps$.
+\end{remark*}
+\begin{remark*}[Examples of problems that can be seen as HSPs]\ 
+\begin{enumerate}[label = (\alph*)]
+	\item \underline{Periodicity}. $f:\Z_M \ra X$ periodic, period $r$, bijective within periods.
+	
+	Then let $G = \Z_M$, $K = \{0,r,2r,\dots\} < G$, and the cosets are $x_0 + K = \{x_0,x_0+r,x_0+2r\dots\}$. It is then clear that $f$ is constant/distinct on the cosets in the desired way.
+	
+	\item \underline{Discrete Logarithms}: this was also solved by Shor in his original paper.
+	
+	Take $p$ prime, and consider $\Z_p^\ast$ the group of units modulo $p$ = $\{1,2,\dots,p-1\}$. We say that $g\in \Z_p^\ast$ is a \it{generator}, or a \it{primitive root modulo} $p$, if the powers of $g$ generate all of $\Z_p^\ast$.
+	
+	\underline{Fact}: generators always exist, \it{i.e.} $\Z_p^\ast$ is always cyclic. For instance, $2,3$ both generate $\Z_5^\ast$ - though $1,4$ do not.
+	
+	So any $x\in \Z^\ast_p$ can be written as $x = g^y$ for $y \in \Z_{p-1}$. We thus write $y = \log_g x$ for the \undf{discrete logarithm} of $x$, to base $g$.
+	
+	The discrete log problem is then: given a generator $g$ and $x\in \Z^\ast p$, compute $y = \log_g x$. This is very difficult classically, and it underpins public key cryptography.
+	
+	To express this as a hidden subgroup problem, consider $f:\Z_{p-1}\times\Z_{p-1}\ra\Z_p^\ast$ by $f(a,b) = g^ax^{-b} = g^{a-yb} \mod p$. Then (\it{check}) $f(a_1,b_1) = f(a_2,b_2)$ iff $(a_2,b_2) = (a_1,b_1)+\lambda (y,1),\ \lambda \in \Z_{p-1}$.
+	
+	So we let $G = \Z_{p-1}\times\Z_{p-1}$, and $K = \{\lambda(y,1):\lambda \in \Z_{p-1}\} < G$. Then $f$ is constant/distinct as appropriate on the cosets of $K$, and the generator $(y,1)$ of $K$ gives $y = \log_g x$.
+	
+	\item \underline{Graph Problems}.
+	
+	Consider a graph $A = (V,E)$, $|V| = n$. We stipulate that these are undirected, that there is at most one edge between any pair of vertices, and that the vertices are labelled by $[n] = \{1,2,\dots,n\}$. We also might be interested in the adjacency matrix $M_A$, the $n\times n$ matrix given by $[M_A]_{ij} = \mathbb{I}[\{i,j\}\in E]$, which is always symmetric for an undirected graph.
+	
+	The group that will be of interest to us is $P_n \coloneqq$ the permutation group of $[n]$. So $|P_n| = n! \sim \sqrt{2\pi n}(n/e)^n$ has $|P_n|\sim O(n\log n) < O(n^2)$, which is polynomial in the number of vertices. This is what we want for the running time of a graph algorithm.
+	
+	The subgroup of interest is $\textrm{Aut}(A)$, the \undf{automorphism group} of $A < P_n$ the set of permutations $\pi \in P_n$ such that for all $i,j$, $\{i,j\}\in E$ iff $\{\pi(i),\pi(j)\}\in E$. What this means is that after permuting the labels of the graph, we are left with the same labelled graph.
+	
+	An associated HSP (non-abelian $G$):
+	
+	Take $G = P_n$, and $X = $ the set of all labelled graphs on $n$ vertices (equivalent to the set of all symmetric $n\times n$ 0/1-matrices).
+	
+	For any $A\in X$, we consider $f_A : G\ra X$, with $f_A(\pi) = \pi(A)$, \it{i.e.} the graph $A$ with its vertex labels permuted by $\pi$. A little bit of thought shows that $K = \textrm{Aut}(A)$ is the hidden subgroup for this problem; $f_A$ is constant on the automorphisms of $A$, for instance.
+	
+	An important application of this is that if we can sample uniformly from $K$, then we can solve the \undf{Graph Isomorphism Problem} (GI), which has received a lot of attention in complexity theory in recent years.
+	
+	Two labelled graphs $A,B$ each on $n$ vertices are \undf{isomorphic} if there is a bijective map (permutation) on the labels $\pi :[n]\ra[n]$ such that for all $i,j\in [n]$, $\{i,j\}\in A$ iff $\{\pi(i),\pi(j)\}\in B$. In other words, $A$,$B$ are the same underlying graph (\it{i.e.} ignoring their labels they are indistinguishable). We write $A\cong B$.
+	
+	The GI Problem is then: given graphs $A$ and $B$, determine whether or not they are isomorphic. This has many useful applications; \it{e.g.} if you can see some proteins and their structure, you may want to be able to tell which proteins are actually the same.
+	
+	This can again be expressed as a non-abelian HSP, \it{c.f.} Sheet 1.
+	
+	There is no known polynomial time classical algorithm, and in fact there is no known polynomial time quantum algorithm either. The problem is in NP, but is \it{not} believed to be NP-complete. A problem is NP if it is, roughly speaking, difficult to solve but easy to validate that you have the right answer once you've solved it. A problem is NP-complete if you can rephrase any other NP problem as this one, and then solve it that way - so solving an NP-complete problem solves all NP problems; it is the hardest problem in NP.
+	
+	We currently do not believe that even quantum algorithms are able to solve NP-complete problems efficiently, so it is in some sense hopeless to try and work on these problems even from a quantum perspective. However, they can do NP-incomplete problems, so factoring and GI \it{etc}... are good candidates to attempt.
+	
+	Laslo Babai (2017) found a \it{quasi}-polynomial time \it{classical} algorithm for GI; it has runtime $n^{O((\log n)^2)}$. This is slower than polynomial time, but faster than exponential time. We have the following hierarchy:
+	
+	\begin{align*}
+		\poly (n) < n^{O((\log n)^2)} < \textrm{exp}\\
+		2^{O(\log n)} < 2^O((\log n)^3) < 2^{O(n)}
+	\end{align*}
+So in terms of exponents, these are linear/polynomial/exponential in $\log n$.
+	
+\end{enumerate}
+\end{remark*}
 \end{document}

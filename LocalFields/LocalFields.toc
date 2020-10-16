@@ -2,3 +2,6 @@
 \contentsline {section}{\numberline {1}Basic Theory}{3}%
 \contentsline {subsection}{\numberline {1.1}Absolute Values}{3}%
 \contentsline {section}{\numberline {2}Valuation Rings}{7}%
+\contentsline {section}{\numberline {3}The $p$-adic numbers}{10}%
+\contentsline {section}{\numberline {4}Complete Valued Fields}{13}%
+\contentsline {subsection}{\numberline {4.1}Hensel's Lemma}{13}%

@@ -83,11 +83,7 @@
 }{%head spec
 %if numbered, include number
 %if named, include name
-\thmname{#1}
-\if\relax\detokenize{#2}\relax:
-\else\thmnumber{ #2}:\fi
-\if\relax\detokenize{#3}\relax
-\else\thmnote{ (#3)}\fi
+\thmname{#1}\if\relax\detokenize{#2}\relax:\else\thmnumber{ #2}:\fi\if\relax\detokenize{#3}\relax\else\thmnote{ (#3)}\fi
 }
 
 \theoremstyle{custhm}
@@ -371,4 +367,161 @@ The inequality
 \]
 is known as the LYM inequality, after Lubell, Yamamoto and Meshalkin, since it was discovered independently by these three people.
 \end{remark*}
+
+\marginpar{Lecture 3}
+
+\section{Szemeredi-Trotter Theorem}
+
+To describe this theorem, we first define an \undf{incidence}: if we have some points and lines in the plane, an incidence is simply a point on a line.
+
+The proof we will give is a cuter one that is due to Szekely.
+
+\begin{defin*}[Crossing Number]
+The crossing number of a graph is the smallest number of crossings (pairs of crossing edges) you can have when you draw the graph in the plane.
+
+If $G$ is planar then its crossing number is of course zero.
+\end{defin*}
+
+Recall that a planar graph with $n$ vertices has at most $3n-6$ edges (for $n\ge 3$ - this breaks down for $n = 2$ in the obvious way).
+
+We can say a bit about crossing numbers just using the above fact; if we have a graph $G$ with $e(G) = m > 3n-6$ then $G$ has a crossing. So we could find a crossing, and remove an edge from the pair. Then either there are no more crossings, or $m - 1 > 3n-6$ and $G$ has at least two crossings.
+
+This simple argument gives us that $G$ has at least $m - 3n + 6$ crossings. The important bit to remember is that it is $\ge m - 3n$. However, we can say a whole lot more than that using an averaging argument.
+
+Now let $G$ be a graph with $m$ edges and $n$ vertices (we will have $m >> n$). Suppose we pick a random induced subgraph $H$ of $G$ by picking each vertex independently with probability $p$, and suppose $G$ has $t$ crossings. Then the expected number of vertices of $H$ is $pn$, the expected number of edges is $p^2 m$, and the expected number of crossings we count by considering how edge pairs survive; this requires all four vertices involved to be chosen, which happens with probability $p^4$. Hence we expect $H$ to have $p^4t$.
+
+It then follows that $p^4t \ge p^2m - 3pn$ (by expectation), otherwise there exists a graph where LHS - RHS < 0, which is not possible. Then choose $p$ to be $6n/m$ (for which we require $m\ge 6n$), so that $p^4t \ge 3pn$, and thus $t \ge 3n/p^3 = 3nm^3/216n^3 = m^3/72n^2$.
+
+Hence if $m \ge 6n$ then $\#$ crossings $\ge m^3/72n^2$.
+
+This is much better; if we have $m = O(n^2)$, then we have a lower bound of the form $O(n^4)$.
+
+This crossing number inequality is precisely the ingredient that we need in order to prove the Szemeredi-Trotter Theoerem. Before that though, we need to turn a system of lines and points in the plane into a graph. The simple way in which we do this is to say that if we have two points that are joined by a line segment, then we regard that line segment as an edge. We note that it does not need to be planar.
+
+Let the lines be $L_1,\dots,L_m$, and the points $x_1,\dots,x_n$. Define $r_i>0 = \#$ of points in line $L_i$. The $\#$ of incidences is then $\sum_{i=1}^{m}r_i = I$, the $\#$ of edges is $\sum_{i=1}^{m}(r_i - 1) = I - m$, since we do not use the parts of the line that stretch away to infinity. The $\#$ of vertices is $n$.
+
+If $I - m \ge 6n$, then the crossing number inequality tells us that $\#$ crossings $\ge (I-m)^3/72n^2$. Moreover, we have the trivial upper bound that the number of crossings is at most the number of pairs of lines, hence $\#$ crossings $\le \binom{m}{2}\le m^2/2$. Hence
+\begin{align*}
+\frac{(I-m)^3}{72n^2} &\le \frac{m^2}{2}\\
+\therefore I &\le (36m^2n^2)^{1/3} + m
+\end{align*}
+In particular, $I \le C\max\{m,n,m^{2/3}n^{2/3}\}$ for some constant $C$. So we have
+
+\begin{theorem}[Szemeredi-Trotter Theorem]
+	\[
+	I\le C\max\{m,n,m^{2/3}n^{2/3}\}
+	\]
+\end{theorem}
+
+There are a lot of occasions when working on a combinatorics problem that we require some kind of bounds on the parameters involved. We will now cover some fairly ubiquitous bounds that we will find very helpful.
+
+The first bound we take a look at is a bound on $n!$. The main trick here is to consider
+\[
+\log n! = \log 1 + \log 2 + \dots + \log n
+\]
+which we bound by sandwiching it between a pair of integrals. In particular, since $\log x$ is concave we have
+\[
+\log n! \le \int_{1}^{n+1}\log x\ \textrm{d}x = [x\log x - x]_{1}^{n+1}
+\]
+Hence
+\begin{align*}
+\log n! &\le (n+1)\log(n+1) - n\\
+\implies n! &\le (n+1)^{n+1}\e^{-n}= n\cdot n^n\cdot\left(1+\frac{1}{n}\right)^{n+1}\e^{-n}\\
+&\le (n+1)n^n\e^{-n} = (n+1)\left(\frac{n}{e}\right)^n
+\end{align*}
+Similarly, if we take the limit to $n$ instead of $n+1$, we have
+\begin{align*}
+\log n! &\ge \int_{1}^{n}\log x\ \textrm{d}x = [x\log x - x]_{1}^{n} = n\log n - n + 1\\
+\therefore n! &\ge n^n\e^{-n}\cdot \e \ge \left(\frac{n}{e}\right)^n 
+\end{align*}
+The takeaway here is that $(n/e)^n$ is often a good approximation for $n!$ - but not always. Consider
+\[
+\binom{n}{\frac{n}{2}}  = \frac {n!}{\left(\frac{n}{2}\right)!\left(\frac{n}{2}\right)!}\le 2^n
+\]
+and this isn't very good. But we can do better:
+\begin{align*}
+2^{-n}\binom{n}{n/2} &= \frac{1\cdot 2\cdots n}{2\cdot 4\cdots n\cdot 2\cdot 4\cdots n} = \frac{1\cdot3\cdots (n-1)}{2\cdot 4\cdots n}\\
+\implies [\ \cdot\ ]^2 &= \left(\frac{1}{2}\right)^2\left(\frac{3}{4}\right)^2\cdots\left(\frac{n-1}{n}\right)^2\\
+&\le \left(\frac{1}{2}\cdot\frac{2}{3}\right)\left(\frac{3}{4}\cdot\frac{5}{6}\right)\cdots\left(\frac{n-1}{n}\cdot\frac{n}{n+1}\right)\\
+&\le \frac{1}{n+1}
+\end{align*}
+But also,
+\begin{align*}
+\left(\frac{1}{2}\right)^2\left(\frac{3}{4}\right)^2\cdots\left(\frac{n-1}{n}\right)^2 &\ge \left(\frac{1}{2}\cdot\frac{1}{2}\right)\left(\frac{2}{3}\cdot\frac{3}{4}\right)\cdots\left(\frac{n-2}{n-1}\cdot\frac{n-1}{n}\right)\\
+&= \frac{1}{2n}
+\end{align*}
+Putting this all together, we have thus proved that
+\[
+\frac{1}{\sqrt{2n}} \le 2^{-n}\binom{n}{\frac{n}{2}} \le \frac{1}{\sqrt{n}}
+\]
+This isn't particularly surprising, if we consider an r.v. $X = X_1+\dots + X_n$, with $X_i = \pm 1$ with probability $1/2$. Then
+\[
+2^{-n}\binom{n}{n/2} = \P[X = 0]
+\]
+and the standard deviation of $X$ is $\sqrt{n}$, so the distribution is clustered about $0$ (roughly normally) contained mostly within a range $\sqrt{n}$, and the middle `slice' of this is one of the discrete values. This isn't rigorous, but it is just a sanity check.
+
+Another very simple estimate is
+\begin{align*}
+\binom{n}{m}&\le n^m
+\end{align*}
+This is almost embarrassingly simple, but it is often very helpful. We can also improve the bound using our earlier work, to conclude
+\[
+\binom{n}{m} \le \left(\frac{\e n}{m}\right)^m
+\]
+However, even the above bound stops being useful when $m \approx n/2$... we'll deal with this in a second. For now, consider
+\begin{align*}
+\frac{\binom{n}{k-1}}{\binom{n}{k}} = \frac{k}{n-k+1}\le \frac{k}{n-k}
+\end{align*}
+We can use this. Let $\theta > 0$ and assume everything that needs to be an integer is. Then
+\begin{align*}
+\binom{n}{\left(\frac{1}{2} - \theta\right)n} \le \left(\frac{\frac{1}{2} - \frac{\theta}{2}}{\frac{1}{2}+\frac{\theta}{2}}\right)^{\frac{\theta n}{2}}\binom{n}{\left(\frac{1}{2} - \frac{\theta}{2}\right)n}
+\end{align*}
+This looks like a complicated mess, but we get there simply by `walking' up the $\theta n/2$ binomial coefficients between the two shown, picking up the upper bound on the ratio each time. Moreover, notice that
+\begin{align*}
+\left(\frac{1-\theta}{1+\theta}\right)^{\frac{\theta n}{2}} \le (1-\theta)^{\frac{\theta n}{2}} \le \e^{-\frac{\theta^2 n}{2}}
+\end{align*}
+(in general, $(1-x)^t \le \e^{-tx}$). Hence
+\begin{align*}
+\binom{n}{\left(\frac{1}{2}-\theta\right)n} \le \e^{-\theta^2 n/2}\cdot 2^{-n}
+\end{align*}
+We obtain a similar bound using a sum of independent random variables. Let $X_1\dots,X_n$ be independent taking values in $[-1,1]$, all of mean zero, and take $X = \sum X_i$. We consider $\P[X\ge \eps n]$, for some $\eps > 0$. We will take \undf{exponential moments}, and then use \undf{Markov's Inequality}. Consider
+\begin{align*}
+\E \e^{\lambda X} &= \E \e^{\lambda \sum X_i}\\
+&=\E \prod \e^{\lambda X_i} = \prod \E\e^{\lambda X_i}
+\end{align*}
+We can commute $\prod$ and $\E$ by the independence of the $X_i$. We have that
+\begin{align*}
+\E \e^{\lambda X_i} &= \E\left[1 + \lambda X_i + \frac{\lambda^2X_i^2}{2} + \frac{\lambda^3X_i^3}{3!}+\cdots\right]\\
+&\le 1 + \frac{\lambda^2}{2!} + \frac{\lambda^3}{3!}+\cdots\\
+&\le 1 + \lambda^2 \le \e^{\lambda^2}\textrm{ for when }\lambda \le 1
+\end{align*}
+Hence $\E \e^{\lambda X} \le \e^{n\lambda^2}$. Thus
+\begin{align*}
+\P[X\ge \eps n] = \P[\e^{\lambda X}\ge \e^{\lambda \eps n}] \le \e^{n\lambda^2 - \lambda \eps n}
+\end{align*}
+by Markov.
+
+We are now free to choose $0 < \lambda < 1$; pick $\lambda = \eps/2$, minimising the RHS, to get $\e^{-\eps^2 n/4}$. We also note that by looking at $-X$ instead of $X$, we have
+\begin{align*}
+\P[X\le -\eps n] \le \e^{-\eps^2n/4}
+\end{align*}
+We now consider the following
+\begin{align*}
+2^{-n}\left(\binom{n}{0} +\binom{n}{1}+\cdots+\binom{n}{\left(\frac{1}{2}-\theta\right)n}\right) = \P[X \le -2\theta n]
+\end{align*}
+which holds because, if the $X_i$ were only to take values $0$ or $1$ with probability 1/2, the LHS is the probability that their sum  is not larger than $(1/2 - \theta)n$ by conditioning over the acceptable outcomes. Transforming to let the $X_i$ take values $\{-1,1\}$ then gives the desired equality. Then, by the above, we have:
+\begin{align*}
+2^{-n}\left(\binom{n}{0} +\binom{n}{1}+\cdots+\binom{n}{\left(\frac{1}{2}-\theta\right)n}\right) \le \e^{-\theta^2 n}
+\end{align*}
+A final remark is that it is useful to have a better bound in some cases:
+\[
+\binom{n}{\alpha n} \sim 2^{H(\alpha)n}
+\]
+where
+\[
+H(\alpha) = \alpha \log \frac{1}{\alpha} + (1-\alpha)\log \frac{1}{1-\alpha}
+\]
+is the \undf{entropy function}.
+
+
 \end{document}
