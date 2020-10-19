@@ -34,7 +34,7 @@
 }{%space below
 1em
 }{%body font
-\color{thmcolour}\itshape
+\color{thmcolour}\em
 }{%indent amount
 -0em
 }{%head font
@@ -161,6 +161,8 @@
 \newcommand{\n}{\mathcal{N}}
 \newcommand{\N}{\mathcal{N}}
 \newcommand{\ac}[1]{\mathcal{#1}}
+\newcommand{\acf}{\textrm{ACF}}
+\newcommand{\F}{\mathbb{F}}
 
 \title{Model Theory}
 \author{Lectures by Gabriel Conant}
@@ -174,7 +176,7 @@
 	\clearpage
 
 \marginpar{Lecture 1}
-\section*{Review of First Order Logic}
+\section{Review of First Order Logic}
 
 A \undf{language} is a set $\L$ of function symbols, relation symbols, and constant symbols. Additionally, each function/relation symbol has an assigned \it{arity} $n\ge 1$.
 
@@ -502,7 +504,7 @@ So the inclusion map might be an embedding, but it is not necessarily elementary
 
 \marginpar{Lecture 4}
 
-\subsection{Categoricity}
+\section{Categoricity}
 
 \underline{Q}: Suppose $\M\equiv\N$. Then is it true that $\M \cong \N$?
 
@@ -596,12 +598,114 @@ Given a structure $\M$ and a non-empty set $A\subset M$, the \undf{substructure 
 \end{defin}
 
 \begin{defin}[Chain of $\L$-structures]
-Let $\alpha$ be a limit ordinal. A collection $(\M_i){i<\alpha}$ of $\L$-structures is a \undf{chain} if $\M_i \subset \M_{i+1}$ for all $i < \alpha$, and if $\beta < \alpha$ is a limit then $\M_i \subset \M_\beta$ for all $i < \beta$.
+Let $\alpha$ be a limit ordinal. A collection $(\M_i)_{i<\alpha}$ of $\L$-structures is a \undf{chain} if $\M_i \subset \M_{j}$ for all $i < j$.
 
 If in fact the condition above is strengthened to $\preceq$, then we say it is an \undf{elementary chain}.
 
 If $(M_i)_{i<\alpha}$ is a chain then we have a well-defined structure $\bigcup_{i < \alpha}\M_i$.
 \end{defin}
 
+\section{Algebraically Closed Fields}
 
+\begin{remark*}[Recall]
+$(K,+,\cdot,0,1)$ is a \undf{field} if $(K,+,0)$ and $(K\backslash\{0\},\cdot,1)$ are abelian groups and $\forall x\forall y\forall z((x\cdot(y+z) = x\cdot y + x\cdot z))$.
+
+$K$ is \undf{algebraically closed} if every non-constant polynomial over $K$ has a root in $K$.
+\end{remark*}
+Let $\L = \{+,\cdot,0,1\}$, the language of fields.
+
+\begin{defin}[ACF]
+The first order $\L$-theory axiomatising algebraically closed fields is known as \undf{ACF} - all the above statements can be given as first order $\L$-sentences.
+
+In particular, this contains the field axioms and for every $d\ge 1$ the claim that every degree $d$ polynomial has a root:
+\begin{align*}
+\forall v_0\forall v_1\dots\forall v_{d-1}\exists x(x^d + v_{d-1}x^{d-1}+\dots+v_1x+v_0 = 0)
+\end{align*}
+We take this statement for every $d$, {\it i.e.} we have infinitely many.
+\end{defin}
+\begin{remark*}
+ACF is not complete, since it does not specify characteristic - hence different models are distinguishable by a first order property.
+\end{remark*}
+\begin{defin}[$\textrm{ACF}_0,\ \textrm{ACF}_p$]
+For $n\ge 1$, let $\chi_n$ be the $\L$-sentence
+\begin{align*}
+	\underbrace{1+1+\dots+1}_{n} = 0
+\end{align*}
+We then have the theory of algebraically closed fields of characteristic zero, \undf{ACF$_0$}:
+\begin{align*}
+\acf_0 = \acf\cup\{\neg\chi_n:n\ge1\}
+\end{align*}
+For a prime $p$, we have $\acf_p = \acf\cup\{\chi_p\}$
+\end{defin}
+
+\begin{theorem}
+$\acf_0$, $\acf_p$ are $\kappa$-categorical for all $\kappa > \aleph_0$.
+\end{theorem}
+\begin{proof}
+The \undf{transcendence degree} of $K\models\acf$ is the cardinality of the largest algebraically independent susbet of $K$.
+
+For example, trdeg$(\bar{Q}) = 0$, trdeg$(\overline{\Q(\pi)}) = 1$, trdeg$(\C) = 2^{\aleph_0}$, trdeg$(\overline{\Q(x_i)}_{i<\kappa})=\kappa$
+
+\begin{remark*}[Facts]\ 
+\begin{enumerate}[label=(\arabic*)]
+	\item Suppose $K,L\models\acf$. Then $K\cong L$ iff trdeg$(K)$ = trdeg$(L)$, char$(K)$ = char$(L)$, and $|K| = |L|$
+	\item If $K\models \acf$ and $\kappa = $trdeg$(K)$, then $|K| = \aleph_0 + \kappa$
+\end{enumerate}
+\end{remark*}
+\underline{Conclusion}: If $K,L\models \acf_0$ (or $\acf_p$) are uncountable and $|K| = |L|$, then $K\cong L$.
+\end{proof}
+\begin{cor}
+$\acf_0$ and $\acf_p$ are complete.
+\end{cor}
+\begin{proof}
+Vaught's Test.
+\end{proof}
+\begin{remark*}
+$\acf_0$, $\acf_p$ are not $\aleph_0$-categorical.
+
+The countable models are precisely the countable $\acf_p$s of trdeg $n$ for $n\in \N\cup\{\aleph_0\}$.
+\end{remark*}
+
+\begin{defin}[Polynomial Map]
+Let $K$ be a field. A function $\Phi: K^m\ra K^n$ is a \undf{polynomial map} if
+\begin{align*}
+\Phi = \big(p_1(x_1,\dots,x_m),p_2(x_1,\dots,x_m),\dots,p_n(x_1,\dots,x_m)\big)
+\end{align*}
+where $p_i \in K[\bar{x}]$ for each $i$.
+\end{defin}
+\begin{theorem}[Ax-Grothendieck]
+Let $K\models \acf$ and suppose $\Phi:K^n\ra K^n$ is an injective polynomial map. Then $\Phi$ is surjective.
+\end{theorem}
+\begin{proof}
+First, suppose that $K = \bar{\mathbb{F}}_p$ for some prime $p$. Recall that $\bar{\mathbb{F}}_p = \bigcup_k \mathbb{F}_{p^k}$. Fix $m$ such that all coefficients in $\Phi$ come from $\mathbb{F}_{p^m}$. Note that $\bar{\mathbb{F}}_p = \bigcup_k \mathbb{F}_{p^{km}}$.
+
+Then for any $k\ge 1$, $\Phi$ induces an injective polynomial map from $\mathbb{F}_{p^{km}}^n \ra \mathbb{F}_{p^{km}}^n$m , which therefore is surjective since the sets we are dealing with are finite.
+\begin{align*}
+\Phi\left(\bar{\mathbb{F}}_p^n\right) &= \Phi\left(\bigcup_k\mathbb{F}_{p^{km}}^n\right)\\
+&= \bigcup_k\Phi\left(\mathbb{F}_{p^{km}}^n\right) = \bigcup_k\mathbb{F}_{p^{km}}^n\\
+&=\bar{\mathbb{F}}_p^n
+\end{align*}
+Now, given $n,d\ge 1$, let $\psi_{n,d}$ be the $\L$-sentence which says:
+
+``Every injective polynomial map with $n$ coordinates, each of which is a polynomial in $n$ variables and degree $\le d$, is surjective.''
+
+Exercise: show that this is first order.
+\end{proof}
+
+We've shown $\bar{\F}_p \models \psi_{n,d}$ for all primes $p$ and $n,d$.
+
+So for any prime $p$, $\acf_p\models\psi_{n,d}$ for all $n,d$ since $\acf_p$ is complete.
+
+Now consider $\acf_0$. For contradiction, suppose that there exists soem $n,d$ such that $\acf_0\not\models\psi_{n,d}$. Then $\acf_0\models\neg\psi_{n,d}$ since $\acf_0$ is complete. By Compactness, there is a finite set $\Sigma\subset \acf_0$ such that $\sigma \models \neg \psi_{n,d}$. So $\Sigma\subset \acf\cup\{\neg\chi_1,\dots,\neg\chi_m\}$ for some $m$. Choose a prime $p > m$. Then $\acf_p\models \Sigma$.
+
+So $\acf_p\models \neg\psi_{n,d}$, which is a contradiction.
+\begin{theorem*}[Lefschetz Principle]
+Let $\phi$ be an $\L$-sentence. TFAE
+\begin{enumerate}[label=(\arabic*)]
+	\item $\acf_0\models \phi$ {\it i.e.} $\phi$ is true in every $K\models \acf$
+	\item $\acf_0\cup\{\phi\}$ is consistent, {\it i.e.} $\phi$ is true in some $K\models \acf_0$
+	\item There is some $n > 0$ such that $\acf_p\models\phi$ for all $p > n$ {\it i.e.} $\phi$ is true in every $K\models \acf$ of sufficiently large characteristic
+	\item For all $n > 0$ there exists $p > n$ such that $\acf_p\cup\{\phi\}$ is consistent, {\it i.e.} $\phi$ is true in some $K\models \acf$ of arbitrarily large characteristic.
+\end{enumerate}
+\end{theorem*}
 \end{document}
