@@ -1,0 +1,330 @@
+\documentclass[]{article}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{pagecolor}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{enumerate}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+\definecolor{thmcolour}{rgb}{0,0,0}
+\definecolor{defcolour}{rgb}{0,0,0}
+\definecolor{textcolour}{rgb}{0,0,0}
+\definecolor{backgroundcolour}{rgb}{1,1,1}
+
+\pagecolor{backgroundcolour}
+\color{textcolour}
+
+\newtheoremstyle{custhm}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{thmcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{thmcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\thmname{#1}
+\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{ (#3)}\fi
+}
+
+\newtheoremstyle{remark}
+{%space above
+}{%space below
+}{% body font
+}{%indent amount
+-0em
+}{%head font
+\bfseries
+}{%head punct
+}{%after head space
+0em
+}{%head spec
+\if\relax\detokenize{#3}\relax \thmname{#1}:
+\else \thmname{#3}:
+\fi
+}
+
+\newtheoremstyle{cusdef}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{defcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{defcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+
+%if numbered, include number
+%if named, include name
+
+\thmname{#1}
+\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{ (#3)}\fi
+}
+
+\theoremstyle{custhm}
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{cusdef}
+\newtheorem{defin}[theorem]{Definition}
+\theoremstyle{custhm}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{custhm}
+\newtheorem{cor}[theorem]{Corollary}
+
+\theoremstyle{custhm}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{custhm}
+\newtheorem*{theorem*}{Theorem}
+
+\theoremstyle{cusdef}
+\newtheorem*{defin*}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark*}{Remark}
+
+
+%\marginpar{to describe which lecture it is}
+
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lef}{\left(}
+\newcommand{\res}{\right)}
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\suminf}{\sum_{n=0}^{\infty}}
+\newcommand{\suminfa}[1]{\sum_{#1=0}^{\infty}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\undf}[1]{\textit{\textbf{#1}}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\it}[1]{\textit{#1}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\proves}{\vdash}
+\newcommand{\lra}{\leftrightarrow}
+\renewcommand{\value}{|\cdot|}
+\newcommand{\val}[1]{\left|#1\right|}
+\newcommand{\valk}{(K,|\cdot|)}
+\renewcommand{\bar}{\overline}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\A}{\mathcal{A}}
+
+\renewcommand{\lnot}{\neg}
+\newcommand{\false}{\bot}
+\newcommand{\true}{\top}
+
+\title{Model Theory: Sheet 1}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+
+\maketitle
+\clearpage
+
+\textbf{1}. Let $\phi_n$ be the $\L$-sentence
+\[
+\exists x_1\dots\exists x_n \bigwedge_{i\ne j}\neg(x_i=x_j)
+\]
+Then let $T' = T\cup\{\phi_n:n\in\N\}$. $T$ has arbitrarily large finite models, so $T'$ is finitely satisfiable. Hence $T'$ has a model, which must both be infinite and a model of $T$.\qed
+
+\textbf{2}. (ii) is equivalent to the claim that either $T\models \phi$ or $T\models\neg\phi$, which is the definition of completeness as in (i).
+
+(i)$\implies$(iii): Let $\M,\mathcal{N}$ be models of $T$, and $\phi$ and $\L$-sentence. By definition, $T\models\phi$ implies $\M\models\phi$ and $\N\models \phi$. Otherwise, $T\models\neg\phi$ and so do $\M,\N$, so $\M\equiv\N$.
+
+(iii)$\implies$(i): Suppose $T$ not complete. Then there exists a sentence $\phi$ such that both $T\cup\{\phi\}$ and $T\cup\{\neg\phi\}$ are consistent, and thus have models. But any two models are elementarily equivalent, and no model can satisfy both $\phi$ and $\neg\phi$.\qed
+
+\textbf{3}. Let $\M,\N$ be two infinite sets of cardinality $\kappa$. Then there exist bijections $f:M\ra\kappa$, $g:N\ra\kappa$, so we define $h:M\ra N$ by $h = g^{-1}\circ f$. Owing to the lack of function symbols, relation symbols or constant symbols in $\L$, h is in fact a homomorphism $h:\M\ra\N$, and since it is bijective it is also an isomorphism. So $\M\equiv \N$, and the theory of infinite sets is $\kappa$-categorical for any infinite $\kappa$.
+
+The theory of infinite sets has no finite models, so by Vaught's Test it is complete.\qed
+
+\textbf{4}. (note: heavily AC dependent) We have $\L$ the language of groups: $\L = \{+,0\}$ (chosen thusly as our groups are going to be abelian).
+
+Let $\phi_n$ denote the $\L$-sentence $\forall x (x=0\lor nx\neq 0)$, and $\psi_m$ the sentence $\forall x\exists y(x=my)$. Our theory of nontrivial torsion-free divisible abelian groups is then
+\begin{align*}
+T &= \{\forall x\exists y (x+y = y+x = 0)\}\\
+&\cup\{\forall x(x+0=0+x=x)\}\\
+&\cup\{\forall x\forall y\forall z ((x+y)+z = x + (y+z))\}\\
+&\cup\{ \forall x\forall y (x+y = y+x) \}\\
+&\cup\{\phi_n:n\in\mathbb{N}\}\\
+&\cup\{\psi_n:n\in\mathbb{N}\}
+\end{align*}
+
+This theory is complete because it is $\kappa$-categorical for all $\kappa \ge \aleph_1$; we need only use $\kappa = \aleph_1$.
+
+First, note that the divisibility property is unique, \it{i.e.} for $x\in G$ and $n > 0$, there is a unique $y\in G$ such that $x = ny$. Indeed, if $ny = nz$, then $n(y-z) = 0$ and since $G$ is torsion-free we must have $y-z = 0$, so $y = z$. In particular, given any $x\in G$ and $n > 0$ we can express the unique such element as $x/n$.
+
+We can then add elements in the natural way: $x/n + y/n = (x+y)/n$, $m(x/n) = (mx)/n$, and so $x/n+y/m = (mx+ny)/(mn)$.
+
+Denote by $\langle X\rangle$ the torsion-free divisible abelian group generated by $X$, \it{i.e.}
+\begin{align*}
+\langle X\rangle = \left\lbrace \frac{a_1x_1+\dots+a_kx_k}{n}: a_i\in\Z,k,n\in \mathbb{N},\ n>0,x_i\in X\right\rbrace
+\end{align*}
+Let $G$ be a model for $T$ as above, of cardinality $\kappa$ - this exists by Lowenheim-Skolem, noting that $T$ is satisfiable since $(\Q,+)$ is a model.
+
+Let $(P,<)$ be the partial order defined on $\mathcal{P}G$ by $X \le Y$ iff $\langle X\rangle \le \langle Y \rangle$ as groups.
+
+Let $\mathcal{C} = \{C_i:i\in I\}$ be a chain in $P$. Claim that $C = \bigcup_{i\in I}C_i$ is an upper bound for $\mathcal{C}$. Indeed, it is clear that $\langle C_i\rangle \le \langle C\rangle$ for each $i\in I$, so this result is immediate.
+
+So by Zorn's Lemma, $P$ has a maximal element $S$. Then we must have $\langle S\rangle = G$, else we have some $x\in G\backslash \langle S\rangle$, so $\langle S\cup\{x\}\rangle$ is a strictly larger subgroup.
+
+We then need to use AC again to obtain an independent $S'\subset S$ with $\langle S' \rangle = \langle S\rangle$, \it{i.e.} for all $x\in S'$, $x\not\in \langle S'\backslash\{x\}\rangle$. Informally, this amounts to going through $S$ and removing unnecessary elements until all remaining elements are necessary. We lose nothing each time we throw away an unnecessary element.
+
+Finally, and this was the whole point, we must have $|S'| = \kappa$. If $S'$ were countable, then so would be $G$, as we would be able to identify $\langle S'\rangle$ with finite rational sequences, the set of which is countable. We of course cannot have $|S'| > \kappa$ either.
+
+Thus for any $G$ with $|G| = \kappa$, we have $G = \langle S_G \rangle$ for some independent $S_G \subset G$ with $|S_G| = \kappa$. So for any two $G,H$, any bijection $f:S_G\ra S_H$ induces a group isomorphism $\bar{f}:G\ra H$ in the natural way (\it{e.g.} if $S_G = \{x_i: i<\kappa\}$ and $S_H = \{y_i: i<\kappa\}$, we have a group isomorphism $G\ra H$ by `change any $x$ to a $y$'). Thus $G\cong H$.
+
+So $T$ is $\kappa$-categorical for $\kappa = \aleph_1$, and indeed for any $\kappa \ge \aleph_1$ by a very similar proof (a minor tweak about cardinality is needed at the end).
+
+Hence $T$ is complete.\qed
+
+\textbf{5}. The phrasing of the question is highly suggestive; we want to reframe subsets of $V$ as theories, and $k$-colourings as models.
+
+Let $\L = \{e,c\}$ where $e,c$ are both binary relation symbols, and let $T$ assert that $e$ is an edge relation and $c$ an equivalence relation: $\forall x \neg e(x,x)$, $\forall x \forall y (e(x,y)\iff e(y,x))$, $c$ the usual equivalence relation axioms (symmetry, reflexivity, transitivity).
+
+Also include axioms that assert $c$ is a colouring, \it{i.e.} $\forall x\forall y (e(x,y)\implies \neg c(x,y))$.
+
+Moreover, we require that $c$ is a $k$-colouring: $\forall x_1\dots\forall x_{k+1}\bigvee_{i\ne j}c(x_i,x_j)$ - \it{i.e.} there are at most $k$ equivalence classes of $c$.
+
+We denote this whole theory as $T$. Its models are precisely $k$-colourable graphs equipped with a $k$-colouring.
+
+Now onto the specific case of a graph $(V,E)$. Let its vertex set be written $V = \{v_i: i\in I\}$. We augment our language to $\L^\ast = \L \cup \{v_i: i\in I\}$, and augment our theory to $T^\ast = T\cup \{ v_i\ne v_j :i\ne j \}\cup\{e(v_i,v_j):v_iv_j\in E\}$.
+
+By assumption, every finite subset of $T^\ast$ is satisfied by some finite subgraph of $(V,E)$, so by the compactness theorem $T^\ast$ has a model $(V',E',C')$ with $V\subset V'$, $E\subset E'$ and $C'$ a $k$-colouring of $(V',E')$. Thus we may exhibit a $k$-colouring of $(V,E)$ by simply restricting $C'$. Hence $(V,E)$ is $k$-colourable.\qed
+
+\textbf{6}. $\implies$ was done in lectures.
+
+For $\impliedby$, we need to show that $h:\M\xhookrightarrow{}\N$ is an $\L$-embedding.
+
+Firstly, let $\phi(x_1,\dots,x_n)$ be $R(x_1,\dots,x_n)$ for $R$ an $n$-ary relation symbol in $\L$. Then for any $a_i\in M$, $\M\models \phi(a_1,\dots,a_n)$ states $(a_1,\dots,a_n)\in R^\M$, so by assumption we have $(a_1,\dots,a_n)\in R^M\iff (a_1,\dots,a_n)\in R^\M$, so $h$ preserves relations.
+
+Next, let $c$ be a constant symbol in $\L$, and let $\phi(x)$ be the $L$-formula $(x=c)$. We then have $\M\models \phi(c^\M)$, and so $\N\models\phi(c^\M)$, hence $c^\M = c^\N$.
+
+For a general $n$-ary function symbol $f\in \L$, we may adopt a similar approach. Let $\phi(x_1,\dots,x_n,y)$ be the statement $f(x_1,\dots,x_n) = y$. Then we have, for $a_1,\dots,a_n,b\in M$:
+\begin{align*}
+f^\M(a_1,\dots,a_n) = b &\iff \M \models \phi(a_1,\dots,a_n,b)\\
+&\iff \N \models \phi(a_1,\dots,a_n,b)\\
+& \iff f^\N(a_1,\dots,a_n) = b
+\end{align*}
+From which we conclude $f^\M(a_1,\dots,a_n) = f^\N(a_1,\dots,a_n)$, hence $h$ is indeed an embedding.\qed
+
+\textbf{7}. We probably haven't covered this exactly yet, but I'm assuming the substructure \it{generated by} $A$ is the smallest substructure $\M \subset \N$ such that $A\subset M$ - the notion of \it{smallest} is well defined since if $\M,\M'$ are substructures then so is $\M\cap\M'$.
+
+In particular, we need only show that there exists some substructure of $\N$ satisfying the given property.
+
+The outline of the argument is to find a set $A^\ast \subset N$ closed under all function symbols in $\L$, with relations induced by $\N$. Then this is a substructure containing $A$.
+
+Define $A_0 = A\cup\{c^\N:c\in\L\textrm{ is constant}\}$. Then given $A_n$, define $A_{n+1} = A_n \cup \{ f^\N(a_1\dots,a_{\alpha(f)}): f\in \L \textrm{ a function symbol, }a_i\in A_n \}$.
+
+We then define $A^\ast = \bigcup_{n=0}^{\infty}A_n$. Then $A^\ast$ is closed under all functions $f^\N$, since for $a_1,\dots,a_k\in A^\ast$ we must have $a_1,\dots,a_k\in A_m$ for some $m$, hence $f^\N(a_1,\dots,a_m)\in A_{m+1}\subset A^\ast$. Hence restricting $R^\N$ to $A^{\alpha(R)}$ gives an $\L$-structure $\mathcal{B}$ with $A\subset B$.
+
+We now show that $\mathcal{B}$ satisfies the desired property; we do this by induction. For the base case, consider $b\in A_0$. Then either $b$ is a constant (so done), or $b = x^\N(a_i)=x^\mathcal{B}(a_i)$ for some $a_i\in A$, $x$ a variable.
+
+Now suppose $b\in A_{n}$. Then $b = f^\N(x_1,\dots,x_k) = f^\mathcal{B}(x_1,\dots,x_k)$, with $x_i\in A_{n-1}$. Hence by induction, $b = f^\mathcal{B}(t_1^\mathcal{B}(a_1^1,a_2^1,\dots,a_{n_1}^1),\dots) = t^\mathcal{B}(a_1,\dots,a_m)$ for an $\L$-term $t$ and some $a_i\in A$.
+
+Then since $A\subset B$, this result also holds for $\langle A\rangle \subset \mathcal{B}$ (these structures should be the same, but that isn't technically important).\qed
+
+\textbf{8}. (a) The universe of $\N$ is given by $N = \bigcup_{i < \alpha} M_i$. For each function symbol $f\in \L$, we interpret $f^\N = \bigcup_{i < \alpha}f^{\M_i}$ (as set-theoretic functions), and similarly $R^{\N} = \bigcup_{i < \alpha}R^{\M_i}$. Equivalently, for $x_j \in N$ we can define $f^{\N}(x_1,\dots,x_n) = f^{\M_i}(x_1,\dots,x_n)$ for some sufficiently large $i$; this is well-defined since such an $i$ must exist, and all such $\M_i$ agree on the value $f^{\M_i}(x_1,\dots,x_n)$. Similarly for the relation symbols $R$.
+
+So $\N$ is a well-defined $\L$-structure. From the above it is also clear that $\M_i\subset \N$, by definition of $\M_i$; $f^{\M_i}(x_1,\dots,x_n)\eqqcolon f^\N(x_1,\dots,x_n)$, and similarly for the relation symbols.
+
+(b) Since $\M_i\subset \N$, we have that $\M_i$ and $\N$ agree on all quantifier-free formulae as in Q6. So we need only show this holds for quantified formulae.
+
+Suppose that for all $i$ and $a_1,\dots,a_n\in \M_i$, $\M_i$ and $\N$ agree on $\phi(a_1,\dots,a_n)$. Consider the formula $\psi$ given by $\forall x_n \phi(x_1,\dots,x_n)$, and suppose that $\M_i \models \psi(a_1,\dots,a_{n-1})$. Then for every $b\in M_i$, we have $\M_i\models \phi(a_1,\dots,a_{n-1},b)$. Let $d\in \N$. Then $d\in M_j$ for some $j$, and since $\M_i\preceq \M_j$ we have $\M_j \models \phi(a_1,\dots,a_{n-1},d)$. By induction on $\phi$, $\M_j\models \phi(a_1,\dots,a_{n-1},d) \iff \N \models \phi(a_1,\dots,a_{n-1},d)$. Hence for all $d\in \N$, $\N\models \phi(a_1,\dots,a_{n-1},d)$. Therefore $\N\models \psi(a_1,\dots,a_{n-1})$.
+
+Thus $\M_i \preceq \N$ for all $i < \alpha$.\qed
+
+\textbf{9}. Here is the plan:
+\begin{enumerate}
+	\item define a theory $T$
+	\item augment language to $\L^\ast$
+	\item augment theory
+	\item use DLS to get model
+	\item find an elementary substructure
+	\item show it's isomorphic to a substructure of $\M$ that contains $A$
+\end{enumerate}
+
+We take $T =$ Th$(\M)$, and let $\mathcal{B}$ be the substructure generated by $A$. We then augment our language to $\L^\ast = \L\cup B$, and augment our theory to $T^\ast$ by adding in:
+\begin{itemize}
+	\item $\{t(a_1,\dots,a_n)=t^\M(a_1,\dots,a_n): t \textrm{ an }\L\textrm{-term}, a_i\in B\}$
+	\item $\{R(a_1,\dots,a_m):R^\M(a_1,\dots,a_m),a_i\in B\}$
+	\item $\{b\ne c:b\ne c\in B\}$
+\end{itemize}
+
+So any model for $T^\ast$ is a model for Th$(\M)$, and contains a substructure isomorphic to $\mathcal{B}$. $T^\ast$ is clearly satisfied by $\M$, with interpretations $a^\M = a$ for $a\in B$.
+
+Hence by DLS there exists a model $\N^\ast$ for $T^\ast$ with $|N| \le |\L^\ast| + \aleph_0$. We have $|\L^\ast| = |\L| + |B|$, and $|B| \le \aleph_0\cdot |A|$ (countable union of $A$-sized sets). Hence $|N^\ast| \le |\L| + \aleph_0 + |A| + \aleph_0 = |A| + |\L| + \aleph_0$.
+
+We are nearly done, excluding the fact that the universe of $\N^\ast$ might look nothing like that of $\M$ in real terms; so we need to embed $\N^\ast$ into $\M$. We do this using a chain of embeddings $(f_i)_{i=0}^{\infty}$, defined as follows.
+
+Define $A^\ast = \{ a^{\N^\ast} : a\in A \}$, and let $X_0$ be the substructure generated by $A^\ast$. $f_0:\chi_0\ra\M$ is then the embedding induced by the map $a^{\N^\ast}\mapsto a$. $f_0$ is in fact an isomorphism between $\chi_0$ and $\mathcal{B}$ as $\chi_0$ obeys the same rules as $\mathcal{B}$ since they were hard-coded into the theory.
+
+Then suppose we have defined embeddings $f_0\subset f_1\subset\cdots\subset f_n$, each $f_i : \chi_i \xhookrightarrow{} \M$ with $A\subset X_i$.
+
+\textbf{9}. Another go. We will start with the smallest substructure $\mathcal{B}$ with $A\subset B$, and extend it to an elementary substructure without adding in too much stuff.
+
+First note that $|B| \le |A| + \aleph_0$ as seen above (choice). Moreover, $\mathcal{B}\subset \M$, so $\mathcal{B}$ and $\M$ agree on quantifier-free formulae.
+
+Observe that if $\psi$ is the sentence $\forall x_1\dots\forall x_n \phi(x_1,\dots,x_n)$ with $\phi$ quantifier-free, then $\M\models \psi$ iff for all $a_1,\dots,a_n\in M$, $\M\models\phi(a_1,\dots,a_n)$, hence $\mathcal{B}\models \phi(b_1,\dots,b_n)$ for all $b_i\in B$, and so $\mathcal{B}\models \psi$ also. 
+
+We will construct a sequence of structures $(\chi_n)_{n<\alpha}$ for $\alpha = |\L| + \aleph_0$ the cardinality of the set of $\L$-formulae (each formula is derived in finitely many steps, each set of formulae derivable in $n$ steps has cardinality $\le |\L| + \aleph_0$, hence so does their countable union).
+
+$\chi_0 = \mathcal{B}$.
+
+Partially order the $\L$-formulae by $\phi \le \psi$ iff $\phi$ is a subformula of $\psi$. This partial order is well-founded, since each formula has only finitely many subformulae. Hence we may extend this partial order to a well order, and write the set as $\mathcal{P} = \{\phi_i: i<\kappa\}$
+
+The aim will be to have $\chi_\beta$ agree with $\M$ on all formulae $\chi_\delta: \delta < \beta$. Then $\chi_\kappa \equiv \M$.
+
+Suppose that we have $\chi_\beta$ as above, and that $\beta = \delta^+$. We must have $\phi_\beta = \neg\phi_\alpha,\phi_\alpha\land\phi_\gamma$, or $\forall x\phi_\alpha$ for some $\alpha,\gamma < \beta$. In the first two cases it is clear that agreement on $\phi_\alpha$, $\phi_\gamma$ induces agreement on $\phi_\beta$, so if $\phi_\beta$ is of that form then we define $\chi_{\beta^+} = \chi_\beta$.
+
+If instead $\phi_\beta$ is $\forall x \phi_\alpha$, then we observe that the only way in which $\M$ and $\chi_\beta$ can disagree is if there exist some $x_1,\dots,x_n\in M$, $\M\models \neg \phi_\beta(x_1,\dots,x_n)$ but for every $y_1,\dots,y_n\in  X_\beta$, $\chi_\beta \models \phi_\beta(y_1,\dots,y_n)$, else we are quickly done by the induction hypothesis.
+
+Hence there exists $m\in M $ such that $\M\models\neg\phi_\alpha(x_1,\dots,x_n,m)$, but for every $y_1,\dots,y_n,z \in X_\beta$ we have $\chi_\beta\models \phi_\alpha(y_1,\dots,y_n,z)$. We then define $\chi_{\beta^+} $ to be the substructure generated by $\chi_\beta$ and $m$, and we hope that $\chi_{\beta+}\models \neg \phi_\beta(m)$.
+
+\textbf{9}. Third time's the charm.
+
+We'll ignore the subset $A$ for now, and will just aim to show that if we have an $\L$-structure $\M$, $\M$ infinite, then we can find a substructure $\N \preceq \M$ with $|N|\le |\L| +\aleph_0$.
+
+The plan will be to find a chain of substructures $(\A_n)_{n=0}^{\infty}$ where each $\A_i$ satisfies more and more of the sentences of Th$(\M)$, such that their union satisfies them all.
+
+We start with $\A_0$ generated by the constant terms, {\it i.e.} the interpretations of all the closed terms of $L_0 = \L$. $\A_0$ then satisfies any statement in $T$ of the form $\forall \overrightarrow{x} \phi(\overrightarrow{x})$, with $\phi$ quantifier-free - this is since it is a substructure, so it agrees with $\M$ on all quantifier free-formulae.
+
+This is a decent start. The next problem is that formulae like $\exists x\phi$ in $T$ don't necessarily have witnesses in $\A_0$. So for every formula $\exists y \forall \overrightarrow{x} \phi(\overrightarrow{x},y)$ with $\phi$ quantifier-free, we find a witness $m$ and add it to $\A_0$ to obtain a new generated substructure $\A_1$.
+\end{document}
