@@ -768,5 +768,19 @@ Upon scaling, we may assume $f(x)\in \O_K[x]$ with $\max_i (|a_i|) = 1$. Thus we
 Then Theorem 4.5 implies $f(x) = g(x)h(x)$, $0 < \deg g < n$.
 \end{proof}
 
+\section{Perfect Lifts}
+
+Recall: Lecture 3. Every element of $x\in \Q_p$ can be written as $x = \sum_{i=n}^{\infty}a_ip^i$, $a_i\in \{0,1,\dots,p-1\}\eqqcolon A$. However, this is not the best choice of representatives. One we that we can see this is to consider that the map $\mathbb{F}_p \ra A\subset\Z_p$ doesn't respect any algebraic structure.
+
+It turns out there is a natural choice of coset reps in many cases which does respect some algebraic structure.
+
+\begin{defin}[Perfect Ring]
+A ring of characteristic $p$ is a \undf{perfect ring} if th Frobenius map $x\mapsto x^p$ is an automorphism of $R$. A field of characteristic $p$ is a perfect field if it is perfect as a ring.
+\end{defin}
+\begin{remark*}
+Since char $R = p$, $(x+y)^p = x^p + y^p$, so the Frobenius map is a ring homomorphism.
+\end{remark*}
+
+
 
 \end{document}

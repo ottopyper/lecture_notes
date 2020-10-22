@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.7.30)  16 OCT 2020 08:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.7.30)  21 OCT 2020 12:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -279,20 +279,20 @@ File: l3backend-pdfmode.def 2020-06-29 L3 backend support: PDF mode
 (./QuantumComputation.aux)
 \openout1 = `QuantumComputation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 154.
-LaTeX Font Info:    ... okay on input line 154.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
 
 (c:/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -350,12 +350,12 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 156
+LaTeX Font Info:    Trying to load font information for U+msa on input line 157
 .
 (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 156
+LaTeX Font Info:    Trying to load font information for U+msb on input line 157
 .
 
 (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -373,38 +373,41 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 [2
 
-] [3] [4] [5] [6] [7] (./QuantumComputation.aux) ) 
+] [3] [4] [5] [6] [7] [8] [9] [10] (./QuantumComputation.aux) ) 
 Here is how much of TeX's memory you used:
- 5756 strings out of 480906
- 79990 string characters out of 5912173
- 364323 words of memory out of 5000000
- 21267 multiletter control sequences out of 15000+600000
- 543991 words of font info for 63 fonts, out of 8000000 for 9000
+ 5760 strings out of 480906
+ 80026 string characters out of 5912173
+ 364331 words of memory out of 5000000
+ 21270 multiletter control sequences out of 15000+600000
+ 544689 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,10n,37p,824b,326s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2020/texmf-dist/f
-onts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2020/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmbx12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmbxti10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex
-10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pf
-b><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/tex
-live/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2020/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2020/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2020/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr17.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr5.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
-<c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texli
-ve/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2020/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2020/texmf-dist/
-fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2020/texmf-dist/font
-s/type1/public/amsfonts/symbols/msbm7.pfb><c:/texlive/2020/texmf-dist/fonts/typ
-e1/public/cm-super/sfrm1000.pfb>
-Output written on QuantumComputation.pdf (7 pages, 224962 bytes).
+ 36i,14n,37p,824b,326s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2020
+/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2020/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2020/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmbxti10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmex10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cme
+xtra/cmex7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
+0.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:
+/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2
+020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2020/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2020/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr17.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr5.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.
+pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/t
+exlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/202
+0/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2020/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2020/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmti7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/publ
+ic/amsfonts/symbols/msbm10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/a
+msfonts/symbols/msbm7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-sup
+er/sfrm1000.pfb>
+Output written on QuantumComputation.pdf (10 pages, 265254 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
- 76 compressed objects within 1 object stream
+ 126 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

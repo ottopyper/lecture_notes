@@ -699,7 +699,7 @@ So for any prime $p$, $\acf_p\models\psi_{n,d}$ for all $n,d$ since $\acf_p$ is 
 Now consider $\acf_0$. For contradiction, suppose that there exists soem $n,d$ such that $\acf_0\not\models\psi_{n,d}$. Then $\acf_0\models\neg\psi_{n,d}$ since $\acf_0$ is complete. By Compactness, there is a finite set $\Sigma\subset \acf_0$ such that $\sigma \models \neg \psi_{n,d}$. So $\Sigma\subset \acf\cup\{\neg\chi_1,\dots,\neg\chi_m\}$ for some $m$. Choose a prime $p > m$. Then $\acf_p\models \Sigma$.
 
 So $\acf_p\models \neg\psi_{n,d}$, which is a contradiction.
-\begin{theorem*}[Lefschetz Principle]
+\begin{theorem}[Lefschetz Principle]
 Let $\phi$ be an $\L$-sentence. TFAE
 \begin{enumerate}[label=(\arabic*)]
 	\item $\acf_0\models \phi$ {\it i.e.} $\phi$ is true in every $K\models \acf$
@@ -707,5 +707,108 @@ Let $\phi$ be an $\L$-sentence. TFAE
 	\item There is some $n > 0$ such that $\acf_p\models\phi$ for all $p > n$ {\it i.e.} $\phi$ is true in every $K\models \acf$ of sufficiently large characteristic
 	\item For all $n > 0$ there exists $p > n$ such that $\acf_p\cup\{\phi\}$ is consistent, {\it i.e.} $\phi$ is true in some $K\models \acf$ of arbitrarily large characteristic.
 \end{enumerate}
-\end{theorem*}
+\end{theorem}
+
+\marginpar{Lecture 6}
+
+\section{Diagrams \& Extensions}
+
+Let $\M$ be an $\L$-structure.
+
+\begin{theorem}[Remark!]
+%CHANGE THIS TO A NUMBERED REMARK!
+If $h:\M\ra\N$ is an $\L$-embedding then after identifying $a\in M$ with $h(a) \in N$, we can view $\M$ as a substructure of $\N$.
+
+Similarly, if $h$ is an elementary embedding then $\M$ can be viewed as an elementary substructure of $\N$.
+\end{theorem}
+
+Given $A\subset M$, let $\L_A = \L\cup\{\underline{a}:a\in A\}$, where $\underline{a}$ is a new constant symbol. We underline it to differentiate it from the element in $A$.
+
+Then $\M$ is canonically an $\L_A$-structure, with $\underline{a}^\M = a$.
+
+\begin{defin}[Diagram]
+The \undf{diagram of $\M$}, written $D(\M)$, is the $\L_M$-theory consisting of all quantifier-free $\L_M$-sentences $\phi$ such that $\M\models \phi$.
+
+Similarly, the \undf{elementary diagram of $\M$}, written $\Th_M(\M)\coloneqq \Th_{\L_M}(M)$.
+\end{defin}
+
+\begin{prop}
+Suppose $\M$ is an $\L$-structure and $\N^\ast$ is an $\L_M$-structure such that $\N^\ast\models D(\M)$. Let $\N$ be the reduct of $\N^\ast$ to $\L$. Define $h:\M\ra\N$ such that $h(a) = \underline{a}^{\N^\ast}$. Then $h$ is an $\L$-embedding.
+
+Moreover, if $\N^\ast\models \Th_M(\M)$, then $h$ is an elementary embedding.
+\end{prop}
+\begin{proof}
+Use Corollary 3.4. Let $\phi(x_1,\dots,x_n)$ be a quantifier-free $\L$-formula, and fix $a_1,\dots,a_n\in M$. Then $\M\models \phi(a_1,\dots,a_n)$ iff $\M\models \phi(\underline{a_1},\dots,\underline{a_n})$ iff $\phi(\underline{a_1},\dots,\underline{a_n})\in D(\M)$ iff $\N^\ast\models\phi(\underline{a_1},\dots,\underline{a_n})$ iff $\N\models \phi(h(a_1),\dots,h(a_n))$.
+
+The ``moreover'' statement is similar (just drop the quantifier-free claim).
+\end{proof}
+
+\subsection*{Application to Groups}
+
+Recall that an abelian group $G$ is \undf{orderable} if there is a linear order $<$ on $G$ such that for all $x,y,z\in G$ , if $x<y$ then $x+z < y+z$.
+
+Note that any orderable abelian group is torsion-free, since $x > 0\implies nx > 0$ for every $n$. Similarly for $x < 0$. We now prove the converse:
+
+\begin{theorem}[Levi 1942]
+Any torsion-free abelian group is orderable.
+\end{theorem}
+\begin{proof}
+Let $\L^0 = \{+,0\}$ be the language of (abelian) groups. Set $\L = \L^0 \cup\{<\}$, where $<$ is a binary relation symbol. Let $\sigma$ be the $\L$-sentence
+\begin{align*}
+\forall x \forall y\forall z ( x< y \ra x + z < y + z)
+\end{align*}
+Now let $G$ be a torsion-free abelian group, viewed as an $\L^0$ structure.
+
+Define the $\L_G$-theory
+\begin{align*}
+T = \underbrace{D(G)}_{\L_G^0\textrm{-theory}}\cup\{\textrm{axioms for linear order \& abelian groups}\}\cup\{\sigma\}
+\end{align*}
+
+Suppose $T$ has a model $\M$. Then $(M,+^\M,0^\M,<^\M)$ is an ordered abelian group, and $G\subset (M,+^\M,0^\M)$ by Prop 6.3. So $G$ is a subgroup of an ordered abelian group, which is thus orderable.
+
+So all that remains is to show that $T$ has a model.
+
+Fix $\Sigma \subset T$ finite. Let $A = \{a\in G: \underline{a}\textrm{ appears in some }\L_G^0\textrm{-sentence in }\Sigma\}$, and let $H = \langle A\rangle \le G$. Then $H\cong \Z^n$ for some $n\ge 0$ by the structure theorem for (torsion-free) finitely generated abelian groups. View $H$ as an $\L_A$-structure such that $\underline{a}^H = a$ and $<^H$ is the lexicographic ordering. Then $H\subset_{\L_A^0} G$, and so $H\models \phi$ for any $\phi \in D(G)$, using only extra constants from $A$ by Corollary 3.4.
+
+So $H\models \Sigma$. So done by Compactness.
+\end{proof}
+
+
+\section{Quantifier Elimination}
+
+\underline{Idea}: Let $T$ be an $\L$-theory and let $\M\models T$. Then $X\subset M^n$ is \undf{definable} if there is an $\L$-formula $\phi(x_1,\dots,x_n)$ such that $X = \{\bar{a}\in M^n : \M\models \phi(\bar{a})\}$.
+
+\underline{Goal}: Study definable subsets of models of $T$.
+
+Unfortunately, quantifiers make this difficult. $X$ itself might be nice, by the projection $Y = \{(a_1,\dots,a_{n-1})\in M^{n-1}:(\bar{a},\bar{b})\in X\textrm{ for some }b\in M\}$ (defined by $\exists x_n \phi(\bar{x})$) might be complicated.
+
+\begin{defin}[Quantifier Elimination]
+An $\L$-theory $T$ has \undf{quantifier elimination} if for any $\L$-formula $\phi(x_1,\dots,x_n)$ there is a quantifier-free $\L$-formula $\psi(x_1,\dots,x_n)$ such that
+\begin{align*}
+T\models \forall \bar{x}\big((\phi(\bar{x})\leftrightarrow \psi(\bar{x}))
+\end{align*}
+That is to say, $\phi$ and $\psi$ define the same set in any $\M\models T$.
+\end{defin}
+
+\begin{ex}\ 
+\begin{enumerate}[label=(\arabic*)]
+\item $T = \Th(F)$, where $F$ is a field. Let $\phi(w,x,y,z)$ be the statement ``$\left(\begin{array}{cc} w & x\\ y & z\end{array}\right)\textrm{ has an inverse}$'', {\it i.e.} there exist $s,t,u,v$ forming a matrix that inverts it.
+
+Then $T\models \forall w\forall x\forall y\forall z\big(\phi(w,x,y,z)\leftrightarrow wz-xy\ne 0\big)$.
+\end{enumerate}
+\end{ex}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}

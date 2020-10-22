@@ -236,9 +236,21 @@ To see that $\phi$ preserves multiplication, write $f =\phi((f_n))$, $g = \phi((
 
 Hence $\phi$ is a field isomorphism, and so $k((t))$ is indeed the completion of $k(t)$ under $v_0$.
 
-5. (a) We first show that $\Z[1/p]$ is dense in $\Q$; let $x = p^na/b$. $b\not\equiv 0\mod p$, so $\exists c\in\Z$ such that $x = p^nac/(bc)$ with $bc\equiv 1\mod p$. Write $bc = 1 + m$, with $|m|_p < 1$. We can then expand $1/(bc)$ as in 3. to obtain $x = p^nac(1-m+m^2-\dots)$. The sequence $x_k = p^nac(1-m+\dots +(-m)^k)\in\Z[1/p]$ then converges to $x$.
+\textbf{5}. (a) We first show that $\Z[1/p]$ is dense in $\Q$; let $x = p^na/b$. $b\not\equiv 0\mod p$, so $\exists c\in\Z$ such that $x = p^nac/(bc)$ with $bc\equiv 1\mod p$. Write $bc = 1 + m$, with $|m|_p < 1$. We can then expand $1/(bc)$ as in 3. to obtain $x = p^nac(1-m+m^2-\dots)$. The sequence $x_k = p^nac(1-m+\dots +(-m)^k)\in\Z[1/p]$ then converges to $x$.
 
 So $\Z[1/p]$ is dense in $\Q$, which is in turn dense in $\Q_p$. So the closure of $\Z[1/p]$ contains $\Q$ and is closed, hence it contains the closure of $\Q$, which is $\Q_p$. So the closure of $\Z[1/p]$ is $\Q_p$, and thus $\Z[1/p]$ is dense in $\Q_p$.
 
-(b)
+(b) We can write $\Q_p/\Z_p = \{\sum_{i=-n}^{-1}a_ip^i + \Z_p:n\ge 1, a_i\in \{0,\dots,p-1\}\}$. We then define a map $\phi:\Q_p/\Z_p\ra G_p$, the group of $p$-power roots of unity, by mapping $x+\Z_p \mapsto \e^{2\pi i x}$.
+
+This is well defined since for any $y \in \Z_p$, $\phi(y) = 1$. From this we also see that $\phi$ preserves the group identity, and $\phi(x+\Z_p)\phi(y+\Z_p) = \e^{2\pi i x}\e^{2\pi i y} = \e^{2\pi i (x+y)} = \phi(x+y+\Z_p)$.
+
+It is clear that $\phi$ is injective, and for any $x$ we have $\phi(x+\Z_p)^{p^n} = 1$ for some sufficiently large $n$, so this is indeed a map to the group of $p$-power roots of unity.
+
+Lastly, this is surjective since any $\e^{2\pi i/p^k}\in \textrm{Im}\phi$ for all $k$, and these generate the group.
+
+\textbf{6}. (a) If the sequence $(a_i)$ is eventually periodic, then we can write $x = y + z$, where $y$ is a finite series (hence in $\Q$) and $z$ is purely periodic, $z = \sum_{i=n}^{\infty}a_ip^i$ with period $m$.
+
+So $z = \sum_{j = 0}^{\infty}\sum_{i=0}^{m-1}a_{i+n}p^{mj+i+n} = \sum_{i=0}^{m-1}a_{i+n}p^{i+n}\sum_{j=0}^{\infty}p^{mj} = \frac{p^n}{1-p^m}\sum_{i=0}^{m-1}a_{i+n}p^{i}\in \Q$.
+
+Conversely, if $x = p^na/b$, then there exists $c\in \Z$ such that $bc\equiv 1\mod p$, so $x = p^n (ac)/(1-mp) = p^n(ac)\sum_{i=0}^{\infty}m^ip^i$
 \end{document}

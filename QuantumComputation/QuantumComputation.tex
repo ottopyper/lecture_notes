@@ -136,6 +136,7 @@
 \renewcommand{\bar}{\overline}
 \renewcommand{\O}{\mathcal{O}}
 \newcommand{\A}{\mathcal{A}}
+\newcommand{\qft}{\textrm{QFT}}
 
 \newcommand{\poly}{\textrm{poly}}
 \newcommand{\U}{\mathcal{U}}
@@ -369,7 +370,143 @@ $\ast$ we want to solve this in time $O(\poly\log|G|)$, with any constant probab
 		2^{O(\log n)} < 2^O((\log n)^3) < 2^{O(n)}
 	\end{align*}
 So in terms of exponents, these are linear/polynomial/exponential in $\log n$.
-	
+\item Another non-abelian example is the \undf{dihedral group}; there is a connection to the HSP `shortest vector in a lattice'. We are given $n$ linearly independent vectors in $\R^n$, and consider their lattice; the problem is to find the lattice point closest to the origin.
 \end{enumerate}
 \end{remark*}
+
+What we {\it do} have is:
+
+\section*{Quantum Algorithm for Finite Abelian HSP}
+
+We write the group $(G,+)$, additively. We need a couple of components:
+
+\subsection*{Construction of shift invariant states \& Fourier transform for $G$}
+\begin{defin*}[Representation of $G$]
+A group homomorphism $\chi :G\ra\C^\ast = (\C\backslash\{0\},\cdot)$ is called a \undf{representation} of $G$.
+
+For abelian groups, any such map is called an \undf{irreducible representation} (henceforth {\it irrep}) of $G$.
+\end{defin*}
+
+These have the following properties:
+
+\begin{theorem*}[Theorem A]\ 
+\begin{enumerate}[label=(\roman*)]
+	\item any value $\chi(g)$ is a $|G|^{\textrm{th}}$ root of unity (so $\chi : G\ra S^1$, the unit circle in $\C$)
+	\item (Schur's Lemma/Orthogonality) If $\chi_i$ and $\chi_j$ are representations, then
+	\begin{align*}
+		\frac{1}{|G|} \sum_{g\in G} \chi_i(g)\overline{\chi_j(g)} = \delta_{ij}
+	\end{align*}
+	\item There are exactly $|G|$ different representations of $G$.
+\end{enumerate}
+\end{theorem*}
+
+By (iii) we can label the $\chi$'s as $\chi_g: g\in G$.
+
+\begin{remark*}[Example]
+$\chi(g) = 1$ for all $g\in G$ is always an irrep, called the \undf{trivial} irrep; label it as $\chi_0$ for $0\in G$.
+
+Then for any other irrep $\chi\ne \chi_0$, orthogonality to $\chi_0$ gives
+\begin{align*}
+	\sum_{g\in G}\chi(g) = 0
+\end{align*}
+\end{remark*}
+
+We now introduce:
+
+\begin{defin*}[Shift-Invariant States, Shift Operators]
+Consider the state sapce $\mathcal{H}_G$, dimension $|G|$, basis $\ket{g}:g\in G$.
+
+The \undf{shift operators} are
+\begin{align*}
+	U(k) : \ket{g} \mapsto \ket{g+k},\ \ k,g\in G
+\end{align*}
+These all commute, so we have a simultaneous eigenbasis:
+
+For each $\chi_k$, $k\in G$, consider the state
+\begin{align*}
+\ket{\chi_k} = \frac{1}{\sqrt{|G|}}\sum_{g\in G}\overline{\chi_k(g)}\ket{g}
+\end{align*}
+
+By Theorem A (ii), these form an orthonormal basis, and it follow from the group homomorphism property of irreps that these are in fact the simultaneous eigenbasis, $U(g)\ket{\chi_k} = \chi_k(g)\ket{\chi_k}$. These are the \undf{shift-invariant states}.
+\end{defin*}
+\begin{proof}
+We have that
+\begin{align*}
+U(g)\ket{\chi_k} &= \frac{1}{\sqrt{|G|}}\sum_{h\in G}\overline{\chi_k}(h)\ket{g+h}\\
+&= \frac{1}{\sqrt{|G|}}\sum_{h'\in G}\overline{\chi_k}(h'-g)\ket{h'}\\
+&= \frac{1}{\sqrt{|G|}}\chi_k(g)\sum_{h'\in G}\overline{\chi_k}(h')\ket{h'}\\
+&= \chi_k(g)\ket{\chi_k}
+\end{align*}
+Which follows since $\chi_k(g^{-1}) = \overline{\chi_k}(g)$.
+\end{proof}
+\begin{defin*}[Fourier Transform QFT]
+The unitary gate on $\mathcal{H}_G$ mapping $\ket{\chi_g}$ basis to the $\ket{g}$ basis is known as the \undf{Quantum Fourier Transform (QFT)} {\it i.e.}
+\begin{align*}
+\qft\ket{\chi_g} &= \ket{g},\ \forall g\in G\\
+\qft^{-1}\ket{g} &= \ket{\chi_g}
+\end{align*}
+In particular, the $k^{\textrm{th}}$ column of $\qft^{-1}$ in $\ket{g}$-basis is given by components of $\ket{\chi_k}$, {\it i.e.}
+\begin{align*}
+	\left[\qft^{-1}\right]_{gk} = \frac{1}{\sqrt{|G|}}\overline{\chi_k}(g)\ \ \forall g,k\in G
+\end{align*}
+so $QFT$ (as the conjugate transpose) has the matrix
+\begin{align*}
+\left[\qft\right]_{kg} &= \frac{1}{\sqrt{|G|}}\chi_k(g)\\
+\implies \qft\ket{g} &= \frac{1}{\sqrt{|G|}}\sum_{k\in G}\chi_k(g)\ket{k}
+\end{align*}
+\end{defin*}
+\begin{remark*}[Examples] $G = \Z_M$
+Check $\chi_a(b) = \e^{2\pi i ab/M}$ for all $a,b\in \Z_M$ satisfies (Hom), so we have irreps naturally labelled by $a\in \Z_M$, $\chi_0(b) = 1$ for all $b$, giving the `usual' $\qft_M$ for $\Z_M$.
+
+Similarly for $G = \Z_{M_1}\times\dots\times\Z_{M_r}$, where we have
+\begin{align*}
+\left.\begin{array}{c} (a_1,\dots,a_r) = g_1 \\ (b_1,\dots,b_r) = g_2\end{array}\right\rbrace \in G\\
+\chi_{g_1}(g_2) \coloneqq \e^{2\pi i\left( \frac{a_1b_1}{M_1}+\dots+\frac{a_rb_r}{M_r}  \right)}
+\end{align*}
+which satisfies (Hom), and we get
+\begin{align*}
+\qft_G = \qft_{M_1}\otimes \cdots \otimes \qft_{M_r}
+\end{align*}
+\end{remark*}
+
+Importantly, the above is exhaustive due to the classification of all finite abelian groups, which states that they are all isomorphic to a direct product $G\cong \Z_{M_1}\otimes\cdots\otimes\Z_{M_r}$, and furthermore we can take all the $M_i$'s to be (not necessarily distinct) prime powers. 
+
+\subsection*{Quantum Algorithm for Finite Abelian HSP}
+
+We have $f: G\ra X$, hidden subgroup $K$, cosets $K = 0 + K, g_2 + K,\dots,g_m+ K$, where $m = |G|/|K|$ is the number of cosets.
+
+This works on the state space $\mathcal{H}_{|G|}\otimes\mathcal{H}_{|X|}$, with basis $\ket{g}\ket{x}$ for $g\in G$, $x\in X$.
+
+\begin{itemize}
+	\item Make the initial state
+	\begin{align*}
+		\frac{1}{\sqrt{|G|}}\sum_{g\in G} \ket{g}\ket{0}
+	\end{align*}
+	\item Apply $\mathcal{U}_f$, to obtain
+	\begin{align*}
+		\frac{1}{\sqrt{|G|}}\sum_{g\in G}\ket{g}\ket{f(g_0)}
+	\end{align*}
+	\item Measure the second register to see a value $f(g_0)$. Then the first register will give a coset state:
+	\begin{align*}
+		\ket{g_0 + k} = \frac{1}{\sqrt{|K|}} \sum_{k\in K}\ket{g_0 + K} = U(g_0)\ket{K}
+	\end{align*}
+	Where we are writing $\ket{K} = \frac{1}{\sqrt{|K|}}\sum_{k\in K}\ket{k}$.
+	
+	Here the coset has been chosen uniformly at random from all $|G|/|K|$ cosets.
+	
+	\item Apply $\qft$ and measure, to obtain a result $g\in G$.
+	
+	How does the output $g$ relate to $K$? Observe that
+	\begin{itemize}
+		\item The output distribution of $g$ is {\it independent} of $g_0$, so it is the same as that obtained from $\qft\ket{K}$, ({\it i.e.} $g_0 = 0$).
+		
+		This is since if we write $\ket{K}$ in the shift-invariant basis basis $\ket{\chi_g}$, $\ket{K} = \sum_{g\in G}a_g \ket{\chi_g}$, then $\ket{g_0+K} = U(g_0)\ket{K} = \sum a_g\chi_g(g_0)\ket{\chi_g}$. But $\qft \ket{\chi_g} = \ket{g}$, so after $\qft$ we have that $\P[g] = |a_g\chi_g(g_0)|^2 = |a_g|^2$ as $|\chi_g(g_0)| = 1$. Hence we have independence of $g_0$.
+		
+		But what is the distribution?
+		
+		\item How does it relate to $K$?
+	\end{itemize}
+\end{itemize}
+
+
 \end{document}

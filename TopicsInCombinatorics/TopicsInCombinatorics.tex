@@ -523,5 +523,72 @@ H(\alpha) = \alpha \log \frac{1}{\alpha} + (1-\alpha)\log \frac{1}{1-\alpha}
 \]
 is the \undf{entropy function}.
 
+\section{Well-Separated Set Systems}
+
+We shall take a collection $\A\subset [n]^{(n/2)}$, with the condition that $A\ne B\in \A\implies |A\cap B|\le \alpha n$.
+
+Since we expect that $|A\cap B| = n/4$, it makes a huge difference how large $\alpha$ is relative to $1/4$.
+
+If $\alpha > 1/4$, write $\alpha = \frac{1}{4}+\eps$; {\it i.e.} the intersection sizes shouldn't be too much larger than if we just chose them at random.
+
+Let $A \in [n]^{(n/2)}$, and choose $B\in [n]^{(n/2)}$ at random. What is $\P[|A\cap B| >(1/4+\eps)n]$?
+
+Let $m = (1/4 - \eps)n$; then $|A\cap B| \ge (1/4 + \eps)n \iff |A^c\cap B| \le m$.
+
+The total number of such $B$ is just $\binom{n}{n/2}$, and we want to count those which intersect as desired:
+\begin{align*}
+ &=\binom{n}{n/2}^{-1}\sum_{r=0}^{m}\binom{n/2}{r}\binom{n/2}{n/2-r}\\
+ &\le \frac{2\sqrt{n}}{2^n}\frac{2^{n/2}}{\sqrt{n/2}}\sum_{r=0}^{m}\binom{n/2}{r}\\
+ &\le 4 \cdot 2^{-n/2}\sum_{r=0}^{m}\binom{n/2}{r}
+\end{align*}
+We then use the above bound derived earlier, to obtain ($n\mapsto n/2$, $\eps \mapsto 2\eps$):
+\begin{align*}
+\le 4\cdot \e^{-2\eps^2 n}
+\end{align*}
+
+Now pick $A_1,\dots,A_N$ independently at random from $[n]^{(n/2)}$. Call a pair $(i,j)$ {\it bad} if $i\ne j$ and $|A_i\cap A_j| \ge (1/4+\eps)n$.
+
+Then $\E$\# bad pairs $\le \binom{N}{2}\cdot 4\cdot \e^{-2\eps^2 n}$. So we can find $A_1,\dots,A_N$ such that the number of bad pairs is also bounded by that amount.
+
+If \# bad pairs is $\le N/2$, then we can throw away a set from each bad pair and still have $\ge N/2$ sets, which will then be well-separated as desired. For this to work, we have a sufficient condition
+\begin{align*}
+	\frac{N^2}{2}\cdot 4\e^{-2\eps^2n}&\le \frac{N}{2}\\
+\iff N &\le \frac{1}{4}\e^{2\eps^2 n}
+\end{align*}
+
+This technique is good, but we could instead have simply chosen our sets greedily:
+
+Pick $A_1$, find $A_2$ good, find $A_3$ good with both $A_1,A_2$ {\it etc...}, until we get stuck at some $A_N$. Each $A_i$ rules out at most $4\e^{-2\eps^2n}\cdot 2^n$ sets, so we will not get stuck unless $N\cdot 4\e^{-2\eps^2 n} \ge 1$, so we can have $N = \frac{1}{4}\e^{2\eps^2n}$; hence the greedy algorithm works just as well here (though this is not always the case).
+
+What if instead we have $\alpha < \frac{1}{4}$? We now turn to a ubiquitous technique in combinatorics:
+
+\undf{Think of sets as vectors!}
+
+There are many ways in which we can do this; perhaps the most obvious way is to replace it by its indicator sequence.
+
+In this case, we have $A \in [n]^{(n/2)}$; a rather nice way of converting it into a vector is to identify it with the function $f_A: [n]\ra\R$, defined by
+\begin{align*}
+	f_A(x) = \left\lbrace \begin{array}{c}\ \ 1\quad x\in A\\ -1\quad x\not\in A\end{array}\right.
+\end{align*}
+
+If $|A\cap B| \le (1/4 - \eps)n$, then $\langle f_A,f_B\rangle \le -4\eps n$ by drawing a Venn diagram and bounding the various regions appropriately. If we then normalise by letting $g_A = n^{-1/2}f_A$, then $||g_A||_2 = 1$, and $\langle g_A,g_B\rangle \le -4\eps$.
+
+So we can solve a new problem: how many unit vectors in $\R^n$ can there be if any two have inner product $\le -\delta$, for some $\delta > 0$.
+
+Let $u_1,\dots,u_m$ be unit vectors, and $\langle u_i,u_j\rangle \le -\delta$ when $i\ne j$. Consider:
+\begin{align*}
+0\le ||\sum_{i=1}^{m}u_i||^2_2 &= \sum_{i,j=1}^{m}\langle u_i, u_j\rangle\\
+&\le m - m(m-1)\delta\\
+\implies m &\le 1 + \frac{1}{\delta}
+\end{align*}
+Surprisingly, this bound is independent of the dimension, which is a huge contrast from the exponentially-many sets that we had before. In particular, back in the original problem this gives us at most $1 + 1/4\eps$ sets.
+
+This argument generalises very easily. Suppose that each set has size $\theta n$, and $|A \cap B|\le (\theta^2 - \eps)n$. Then again we get a bound that is independent of $n$.
+
+It is worth remarking that the $1 + 1/\delta$ bound is best possible when $\delta = 1/k$ for some $k \in \N$. To achieve this we take the $k+1$ vertices of a regular simplex in $k$-dimensions. To prove this is rather tricky, unless you have a trick:
+
+We are trying to find a simplex with $k+1$ vertices in $\R^k$; the trick is to look in the subsapce $\{x\in \R^{k+1}:x_1+\dots+x_{k+1} = 0\}$. We then find vertices of the form $(-1/k,-1/k,\dots,-1/k,1,-1/k,\dots,-1/k) = v_i$ for the $1$ in the $i^{\textrm{th}}$ place.
+
+Then for $i\ne j$, we have $\langle v_i,v_j\rangle = \frac{k-1}{k^2} - \frac{2}{k} = -\frac{1}{k^2} - \frac{1}{k}$. If $i=j$, then we have $||v_i||^2 = k/k^2 + 1 = 1 + 1/k$. So to normalise, we set $u_i = v_i/\sqrt{1+1/k}$, and this cancels out appropriately to give $\langle u_i, u_j\rangle = - 1/k$, as desired.
 
 \end{document}

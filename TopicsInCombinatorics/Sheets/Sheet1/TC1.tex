@@ -144,6 +144,7 @@
 \newcommand{\valk}{(K,|\cdot|)}
 \renewcommand{\bar}{\overline}
 \renewcommand{\O}{\mathcal{O}}
+\newcommand{\A}{\mathcal{A}}
 
 \renewcommand{\lnot}{\neg}
 \newcommand{\false}{\bot}
@@ -280,5 +281,58 @@ R(m) &\le 1 + R(m-1)m\\
 \end{align*}
 So we have an upper bound $R(m)\le m!(e-1)$ for each $m$.
 
-\textbf{6}.
+\textbf{6}. Write $v_i = (v_{i,j})_{j=1}^n$. Consider $V = ||\left(\sum_i \eps_i v_i\right)^2||$, where the $\eps_i$ are random variables as in Q3.
+\begin{align*}
+\E[V] &= \sum_{j=1}^{n}\E\left[\left(\sum_{i=1}^{n}\eps_i v_{i,j}\right)^2\right]\\
+&= \sum_{j=1}^{n}\sum_{i=1}^{n}v_{i,j}^2 = \sum_{i=1}^{n}\sum_{j=1}^{n}v_{i,j}^2\\
+&=\sum_{i=1}^{n}||v_i||^2\\
+&=n
+\end{align*}
+So there must exist some signs $\eps_i$ such that $||\sum_i\eps_i v_i||^2 \ge n$.
+
+\textbf{7}. Choose a random ordering of the vertices of $G$, and then colour the vertices with the greedy algorithm - {\it i.e.} $c(v_1) = 1$, $c(v_n)$ is the smallest $m$ not in $\{c(v_k):1\le k<n, v_k\in \Gamma(v_n)\}$. Let $X$ be the number of vertices with colour 1.
+
+Then $X = \sum_{v\in G}X_v$, where $X_v$ is the indicator of the event that $v$ appears before all of its neighbours in the random ordering. So $\P[X_v = 1] = 1/(\Gamma(v)+1) \ge 1/(d+1)$, and hence $\E[X] \ge n/(d+1)$. So there exists an independent set of size at least $n/(d+1)$.
+
+If instead the average degree is $d$, then we have
+\begin{align*}
+d + 1 = \frac{\sum_{v\in G}\Gamma(v)+1}{n} \ge \frac{n}{\sum_{v\in G}\frac{1}{\Gamma(v)+1}}
+\end{align*}
+by AM$\ge$HM. Hence
+\begin{align*}
+\E[X] = \sum_{v\in G} \frac{1}{\Gamma(v)+1}\ge \frac{n}{d+1}
+\end{align*}
+which exceeds the $n/2(d+1)$ bound. In particular, there exists an independent set of size $\ge n/(d+1)$.
+
+\textbf{8}. $\mathcal{A}\subset \mathcal{P}[n]$, such that $A,B\in \mathcal{A}\implies |A\Delta B| \ne 2$.
+
+Construct a graph $G = (V,E)$ where $V = \mathcal{P}[n]$ and $AB\in E$ iff $|A\Delta B| = 2$. Let $V_k$ denote the vertices $A$ such that $|A| = k$. We have $|V_k| \binom{n}{k}$.
+
+Note that each $A$ has exactly $\binom{n}{2}$ neighbours; we can see this since there are $\binom{n}{2}$ possibilities for the symmetric difference $A\Delta B$, which will determine $B$ completely.
+
+Or we remark that for $|A| = k$, we have $d(A) = \binom{k}{2} + k(n-k) + \binom{n-k}{2} = \binom{n}{2}$ after a bit of algebra.
+
+Q7 then immediately shows the existence of a set system $\A$ of size $\left(\binom{n}{2}+1\right)^{-1}2^n$.
+
+But we also want the upper bound. For this, we consider for a given set $A$ what is the largest possible size of an independent subset of $\Gamma(A)$.
+
+Quasi-partition $\Gamma(A)$ into classes $C_1,\dots,C_n$, where $B\in \Gamma(A)$ lies in $C_i$ if $i\in A\Delta B$. Each $B\in \Gamma(A)$ then lies in exactly two $C_i$, corresponding to the elements of $A\Delta B$.
+
+In general we have that $B_1\Delta B_2 = (A\Delta B_1)\Delta (A\Delta B_2)$, so if $B_1\ne B_2 \in C_k$ then $|B_1\Delta B_2| = 2$, so they are not independent.
+
+Hence an independent subset of $\Gamma(A)$ may only have at most one member from each $C_i$, and since each $B$ lies in two classes, we can have at most $\lfloor n/2 \rfloor$ - otherwise two lie in the same class.
+
+We now construct let $X = \A$, $Y = \mathcal{P}[n]\backslash A$, and count the edges between $X$ and $Y$.
+
+Every $x\in X$ has exactly $\binom{n}{2}$ edges into $Y$, and for each $y\in Y$ there are at most $\lfloor n/2 \rfloor$ edges into $X$, as we saw above.
+
+Hence $\binom{n}{2}|X| \le \lfloor n/2\rfloor |Y|$. In particular:
+
+\begin{align*}
+|\A| &\le \frac{\lfloor n/2 \rfloor (2^n - |\A|)}{\binom{n}{2}}\\
+\implies |\A|&\le \frac{\lfloor n/2 \rfloor 2^n}{\binom{n}{2}+\lfloor n/2 \rfloor} 
+\end{align*}
+Which gives $|\A| \le 2^n/(n+1)$ for $n$ odd, and $|\A| \le 2^n/n$ for $n$ even. Hence in all cases we have $|\A| \le n^{-1}2^n$.
+
+
 \end{document}
