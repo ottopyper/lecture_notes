@@ -1,0 +1,209 @@
+\documentclass[]{article}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{pagecolor}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{enumerate}
+\usepackage{mathabx}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+\definecolor{thmcolour}{rgb}{0,0,0}
+\definecolor{defcolour}{rgb}{0,0,0}
+\definecolor{textcolour}{rgb}{0,0,0}
+\definecolor{backgroundcolour}{rgb}{1,1,1}
+
+\pagecolor{backgroundcolour}
+\color{textcolour}
+
+\newtheoremstyle{custhm}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{thmcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{thmcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\thmname{#1}
+\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{ (#3)}\fi
+}
+
+\newtheoremstyle{remark}
+{%space above
+}{%space below
+}{% body font
+}{%indent amount
+-0em
+}{%head font
+\bfseries
+}{%head punct
+}{%after head space
+0em
+}{%head spec
+\if\relax\detokenize{#3}\relax \thmname{#1}:
+\else \thmname{#3}:
+\fi
+}
+
+\newtheoremstyle{cusdef}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{defcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{defcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+
+%if numbered, include number
+%if named, include name
+
+\thmname{#1}
+\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{ (#3)}\fi
+}
+
+\theoremstyle{custhm}
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{cusdef}
+\newtheorem{defin}[theorem]{Definition}
+\theoremstyle{custhm}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{custhm}
+\newtheorem{cor}[theorem]{Corollary}
+
+\theoremstyle{custhm}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{custhm}
+\newtheorem*{theorem*}{Theorem}
+
+\theoremstyle{cusdef}
+\newtheorem*{defin*}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark*}{Remark}
+
+
+%\marginpar{to describe which lecture it is}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lef}{\left(}
+\newcommand{\res}{\right)}
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\suminf}{\sum_{n=0}^{\infty}}
+\newcommand{\suminfa}[1]{\sum_{#1=0}^{\infty}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\undf}[1]{\textit{\textbf{#1}}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\it}[1]{\textit{#1}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\proves}{\vdash}
+\newcommand{\lra}{\leftrightarrow}
+\renewcommand{\value}{|\cdot|}
+\newcommand{\val}[1]{\left|#1\right|}
+\newcommand{\valk}{(K,|\cdot|)}
+\renewcommand{\bar}{\overline}
+\renewcommand{\O}{\mathcal{O}}
+
+\renewcommand{\lnot}{\neg}
+\newcommand{\false}{\bot}
+\newcommand{\true}{\top}
+
+\title{Category Theory: Sheet 1}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+
+\maketitle
+\clearpage
+
+\textbf{1.16}. We have, for any $a\in L$, that $a \land 0 = 0$, $a\land 1 = a$, $a\lor 0 = a$. Hence we have identity morphisms $1_{n} = \delta_{ij}$, such that for any $A:n\ra m$ we have that $(A1_{n})_{ij} = \bigvee_{k=1}^{n}(A_{ik}\land \delta_{kj}) = A_{ij}\lor \bigvee_{k=1}^{n}(0) = A_{ij}$, and similarly for the identity on the right.
+
+For $A:k\ra m$ and $B:m\ra n$, the composite $BA$ is given by $(BA){ij} = \bigvee_{k=1}^{m}(B_{ik}\land A_{kj})$, so $BA : k\ra n$ and this composition is associative since we may distributive the meets over the joins. Thus these form a category $\textbf{Mat}_L$.
+
+We then define a functor $F:\textbf{Mat}_L\ra \textbf{Rel}_f$, by $m\mapsto [m]$ and $A\mapsto \{(i,j):A_{ji} = 1\}$. This defines a functor since $F1_n = \{(i,i):i\in[n]\}$ is the identity relation, and $FBFA = \{(i,j):\exists \ell\in[m]\textrm{ such that }(i,\ell)\in FA\textrm{ and }(\ell,j)\in FB \} = \{(i,j):\exists \ell \in [m]\textrm{ such that }B_{j\ell} =1\textrm{ and }A_{\ell i} = 1\} = \{(i,j):(BA)_{ji} = 1\} = FBA$.
+
+This is essentially surjective since the isomorphism classes of objects in $\textbf{Rel}_f$ are all sets of fixed size (any two such sets are isomorphic by a diagonal relation between the two), it is faithful since the data of $FA$ describe precisely the value of $A_{ij}$ for each $i,j$, and every relation $R:[m]\ra[n]$ is the image under $F$ of the matrix $A:m\ra n$, $A_{ji} = \textrm{Id}_{(i,j)\in R}$.
+
+So $F$ is fully faithful and essentially surjective, and hence $\textbf{Mat}_L\equiv \textbf{Rel}_f$.
+
+\textbf{1.17}. To avoid confusion, let $\underline{e}:e\in \mathcal{E}$ be the objects of $\mathcal{C}[\check{\mathcal{E}}]$ and $\tilde{f}$ the morphisms between them.
+
+(i) First note that $dfe = f\implies dfee = dfe = fe$, and similarly $dfe = df $. So $dfe = f = df = fe$, and the other direction is clear. Composition is already defined for such $f$ as in $\mathcal{C}$, so we need only show that this composition preserves the desired property.
+
+Indeed if $df = fe = f$ and $cg = gd = g$, then $cgf = gf = gfe$, so $\tilde{gf} : \underline{e}\ra\underline{c}$ as required.
+
+The identity $1_{\underline{e}}$ is simply $\tilde{e}$, which clearly satisfies $ee = ee = e$, and for any $\tilde{f}$ we have $df = fe = e$, and so $d(fe) = (fe)e = fe$, and similarly for the identity on the left.
+
+So these form a category $\mathcal{C}[\check{\mathcal{E}}]$.
+
+(ii) We will let $I: \mathcal{C} \ra \mathcal{C}[\check{\mathcal{E}}]$ by $A\mapsto \underline{1_A}$ and $f:A\ra B$ is mapped to $\tilde{f}$, which is a morphism in the target category since $1_Bf = f1_A = f$. This is faithful since if $\tilde{f} = \tilde{g}$ then $df = fe = f = g = ge = dg$, and so $I$ must be full since every morphism in $\mathcal{C}[\check{\mathcal{E}}]$ comes from a morphism in $\mathcal{C}$.
+
+
+$\implies$ Suppose we can factor $T = \widehat{T}I$ for some $\widehat{T}$. Given $A\in \C$, and idempotent $e:A\ra A$, consider the objects $\underline{1_A},\underline{e} \in \mathcal{C}[\check{\mathcal{E}}]$. There are morphisms $e_1 : \underline{1_A}\ra \underline{e}$ and $e_2 : \underline{e}\ra \underline{1_A}$, both of which are really just the morphism $e$ but have bit written with subscripts to highlight that they are not the same morphism in $\mathcal{C}[\check{\mathcal{E}}]$, since they do not agree on domain/codomain.
+
+The composite $e_1e_2$ is then the morphism $e:\underline{e}\ra\underline{e}$, which is the identity $1_{\underline{e}}$, and the composite $e_2e_1$ is the morphism $\tilde{e}:\underline{1_A}\ra\underline{1_A} = Ie$. So $Ie$ is a split idempotent in $\mathcal{C}[\check{\mathcal{E}}]$, and hence so is $Te = \widehat{T}Ie$ in $\mathcal{D}$ since $\widehat{T}$ preserves identities.
+
+$\impliedby$ Suppose we have $\tilde{f}:\underline{e}\ra\underline{d}$ in $\mathcal{C}[\check{\mathcal{E}}]$. Say $Te = g_2g_1$, where $g_1:TA\ra C$ and $Td = h_2h_1$, where $h_1:TB \ra D$ split as described.
+
+We then define $\widehat{T}\underline{e} = C$, and similarly $\widehat{T}\underline{d} = D$, and so on for all objects. We then define $\widehat{T}\tilde{f} = h_1Tfg_2$. This preserves identities since if $f = 1_{\underline{e}} = e$, we have $\underline{e} = \underline{d}$ so $h_1 = g_1$ and $Tf = Te = g_2g_1$, so all in all $\widehat{T}\tilde{f} = g_1(g_2g_1)g_2 = (g_1g_2)(g_1g_2) = 1_{C}$.
+
+Moreover $\widehat{T}$ is functorial since (extending the names of objects/morphisms canonincally), $\widehat{T}\tilde{g}\widehat{T}\tilde{f} = (i_1Tgh_2)(h_1Tfg_2) = i_1Tg(h_2h_1)Tfg_2 = i_1 TgTdTfg_2 = i_1T(gf)Teg_2 = i_1T(gf)g_2g_1g_2 = i_1T(gf)g_2 = \widehat{T}\tilde{gf}$.
+
+(iii) The clear object function of our functor will be $T\mapsto \widehat{T}$. Now suppose we have $\alpha:T\ra S$ a natural transformation. We define its image $\widehat{\alpha}$ by its components, given by $\widehat{\alpha}_{\underline{e}}: \widehat{T}\underline{e}\ra\widehat{S}\underline{e}$ by $\widehat{\alpha}_{\underline{e}} = \widehat{S}e_1\alpha_A\widehat{T}e_2$.
+
+We then have naturality: $\widehat{S}f\widehat{S}e_1\alpha_A\widehat{T}e_2 = \hat{S}d_1Sf\hat{S}e_2\widehat{S}e_1\alpha_A\widehat{T}e_2 = \widehat{S}d_1 Sf Se\alpha_A\widehat{T}e_2 = \widehat{S}d_1Sf\alpha_A\widehat{T}e_2 = \widehat{S}d_1\alpha_BTf\widehat{T}e_2 = \widehat{S}d_1\alpha_B \widehat{T}d_2\widehat{T}f = \widehat{\alpha}_{\underline{d}}\widehat{T}f$, as required.
+
+Functoriality also follows: $\widehat{\beta}_{\underline{e}}\widehat{\alpha}_{\underline{e}} = \widehat{R}e_1\beta_A\widehat{S}e_2\widehat{S}e_1\alpha_A\widehat{T}e_2 = \widehat{R}e_1\beta_ASe\alpha_A\widehat{T}e_2 = \widehat{R}e_1\beta_A\alpha_ATe\widehat{T}e_2 = \widehat{R} e_1\beta_A\alpha_A \widehat{T}(e_2e_1e_2) = \widehat{R}e_1\beta_A\alpha_A\widehat{T}e_2 = \widehat{\beta\alpha}_{\underline{e}}$.
+
+So we have defined this `hat' functor between $[\mathcal{C},\mathcal{D}]$ and $[\widehat{\mathcal{C}},\mathcal{D}]$. We need to show it is part of an equivalence.
+
+Essential surjectivity: suppose we have $S\in [\widehat{C},D]$. Then $SI$ is a functor $\mathcal{C}\ra\mathcal{D}$, so we might expect it to be a good candidate to have $\widehat{SI}$ isomorphic to $S$. Note that they aren't necessarily equal, since the functor $SI$ might factorise in different ways, and not in exactly the same way as the definition above.
+
+However, the choice in factorisation arises due to the fact that there may be multiple different ways in which an idempotent $SIe$ can split in $\mathcal{D}$. We must have $S1_A = \widehat{SI}1_A = SIA$, and then we find an isomorphism $Se_1\widehat{SI}e_2 : \widehat{SI}\underline{e}\ra S\underline{e}$ - this has inverse $\widehat{SI}e_1Se_2$.
+
+We use these isomorphisms to define a natural transformation, and hence natural isomorphism, between $S$ and $\widehat{SI}$. This satisfies the naturality properties $SfSe_1\widehat{SI}e_2 =Sd_1Sd_2SfSe_1\widehat{SI}e_2 = Sd_1S(d_2fe_1)\widehat{SI}e_2 = Sd_1\widehat{SI}(d_2fe_1)\widehat{SI}e_2 = Sd_1\widehat{SI}d_2 \widehat{SI}f$. So $\widehat{\cdot}$ is essentially surjective.
+
+We are actually done now; we have functors $F:[\mathcal{C},\mathcal{D}] \ra [\widehat{\mathcal{C}},\mathcal{D}]$ and $G$ in the other direction given by $FT = \widehat{T}$, $F\alpha = \widehat{\alpha}$, $GX = XI$, and for $\widehat{\alpha}:X\ra Y$ let $G\widehat{\alpha} = \alpha$ be the natural transformation given by $\alpha_A = \widehat{\alpha}_{\underline{1_A}}$.
+\end{document}
