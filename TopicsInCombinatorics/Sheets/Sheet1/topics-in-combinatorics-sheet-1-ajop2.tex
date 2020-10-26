@@ -1,0 +1,219 @@
+\documentclass[]{article}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{pagecolor}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{enumerate}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+\definecolor{thmcolour}{rgb}{0,0,0}
+\definecolor{defcolour}{rgb}{0,0,0}
+\definecolor{textcolour}{rgb}{0,0,0}
+\definecolor{backgroundcolour}{rgb}{1,1,1}
+
+\pagecolor{backgroundcolour}
+\color{textcolour}
+
+\newtheoremstyle{custhm}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{thmcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{thmcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\thmname{#1}
+\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{ (#3)}\fi
+}
+
+\newtheoremstyle{remark}
+{%space above
+}{%space below
+}{% body font
+}{%indent amount
+-0em
+}{%head font
+\bfseries
+}{%head punct
+}{%after head space
+0em
+}{%head spec
+\if\relax\detokenize{#3}\relax \thmname{#1}:
+\else \thmname{#3}:
+\fi
+}
+
+\newtheoremstyle{cusdef}
+{%space above
+1em
+}{%space below
+1em
+}{%body font
+\color{defcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{defcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+
+%if numbered, include number
+%if named, include name
+
+\thmname{#1}
+\if\relax\detokenize{#2}\relax:
+\else\thmnumber{ #2}:\fi
+\if\relax\detokenize{#3}\relax
+\else\thmnote{ (#3)}\fi
+}
+
+\theoremstyle{custhm}
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{cusdef}
+\newtheorem{defin}[theorem]{Definition}
+\theoremstyle{custhm}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{custhm}
+\newtheorem{cor}[theorem]{Corollary}
+
+\theoremstyle{custhm}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{custhm}
+\newtheorem*{theorem*}{Theorem}
+
+\theoremstyle{cusdef}
+\newtheorem*{defin*}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark*}{Remark}
+
+
+%\marginpar{to describe which lecture it is}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lef}{\left(}
+\newcommand{\res}{\right)}
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\suminf}{\sum_{n=0}^{\infty}}
+\newcommand{\suminfa}[1]{\sum_{#1=0}^{\infty}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\undf}[1]{\textit{\textbf{#1}}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\it}[1]{\textit{#1}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\proves}{\vdash}
+\newcommand{\lra}{\leftrightarrow}
+\renewcommand{\value}{|\cdot|}
+\newcommand{\val}[1]{\left|#1\right|}
+\newcommand{\valk}{(K,|\cdot|)}
+\renewcommand{\bar}{\overline}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\A}{\mathcal{A}}
+
+\renewcommand{\lnot}{\neg}
+\newcommand{\false}{\bot}
+\newcommand{\true}{\top}
+
+\title{Topics in Combinatorics: Sheet 1}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+
+\maketitle
+\clearpage
+
+\textbf{5}. Colour each member of $X$ red with probability $p$ and blue with probability $1-p$. Let $X_i$ be the indicator of the event that $A_i$ is not monochrome, and let $Y = \sum_{i=1}^{r}X_i$.
+
+$\P[X_i = 1] = 1 - (1/2)^m - (1-1/2)^m = 1 - 2^{1-m}$, since $X_i = 1$ iff the elements of $A_i$ are not all red and not all blue. Hence:
+\begin{align*}
+\E[Y] &= \sum_{i=1}^{r} \P[X_i = 1]\\
+&= r(1-2^{1-m}) = r - 2^{1-m}r
+\end{align*}
+So if $r < 2^{m-1}$ then $2^{1-m}r < 1$, and hence $\E[Y] > r -1$, so there exists some colouring for which $Y = r$, so there exists a colouring of $X$ for which every $A_i$ contains at least one red element and at least one blue element.
+
+Let $R(m)$ be the least $r$ such that there exist sets $A_1,\dots,A_r$ of size $m$ such that for every red-blue colouring there is some $i$ with $A_i$ monochrome. We can bound $R(m)$ recursively.
+
+Given $R(m)$, construct $R(m)(m+1)+1$ sets of size $m+1$ by extending the $A_1,\dots,A_{R(m)}$ $m$-sets.
+
+Pick a set of $B = \{b_i:1\le i\le m+1\}$ such that $B\cap A_i = \emptyset$ for all $i$, and then take the sets $C_{i,j} = A_i\cup\{b_j\}$, altogether along with $B$. Then in any red-blue colouring there must be some $i$ such that $A_i\subset C_{i,j}$ is monochrome, say blue. So then we either have a monochrome set, or every $b_j$ has been coloured red - in which case $B$ is monochrome.
+
+Therefore $R(m+1)\le R(m)(m+1)+1$. Thus:
+\begin{align*}
+R(m) &\le 1 + R(m-1)m\\
+&\le 1 + m + R(m-2)(m-1)m\\
+&\le \sum_{j=0}^{k}\frac{m!}{(m-j)!}+R(m-(k+1))(m-k)(m-(k-1))\dots(m)\\
+&\le \sum_{j=0}^{m-2} + R(1)m!= \sum_{j=0}^{m-1}\frac{m!}{(m-j)!} =m!\sum_{j = 0}^{m-1}\frac{1}{(m-j)!}\\
+&=m!\sum_{\ell = 1}^{m}\frac{1}{\ell!} \le m!(-1 + \sum_{\ell = 0}^{\infty}\frac{1}{\ell!})\\
+&\le m!(e-1)
+\end{align*}
+
+So all in all we have $2^{m-1}\le R(m) \le m!(e-1)$.
+
+\clearpage
+
+\textbf{8}. $\mathcal{A}\subset \mathcal{P}[n]$, such that $A,B\in \mathcal{A}\implies |A\Delta B| \ne 2$.
+
+Construct a graph $G = (V,E)$ where $V = \mathcal{P}[n]$ and $AB\in E$ iff $|A\Delta B| = 2$. Set systems satisfying the given condition are then precisely the independent sets of vertices in $G$.
+
+Note that each $A$ has exactly $\binom{n}{2}$ neighbours; we can see this since there are $\binom{n}{2}$ possibilities for the symmetric difference $A\Delta B$, which will determine $B$ completely.
+
+Q7 then immediately shows the existence of a set system $\A$ of size $\left(\binom{n}{2}+1\right)^{-1}2^n$.
+
+For the upper bound, consider for a given set $A$ what is the largest possible size of an independent subset of $\Gamma(A)$.
+
+Partition $\Gamma(A)$ into classes $C_1,\dots,C_n$, where $B\in \Gamma(A)$ lies in $C_i$ if $i\in A\Delta B$. Each $B\in \Gamma(A)$ then lies in exactly two $C_i$, corresponding to the elements of $A\Delta B$.
+
+In general we have that $B_1\Delta B_2 = (A\Delta B_1)\Delta (A\Delta B_2)$, so if $B_1\ne B_2 \in C_k$ then $|B_1\Delta B_2| = 2$, so they are not independent.
+
+Hence an independent subset of $\Gamma(A)$ may only have at most one member from each $C_i$, and since each $B$ lies in two classes, we can have at most $\lfloor n/2 \rfloor$ - otherwise two lie in the same class.
+
+Now, given such a set system $\A$, let $X = \A$, $Y = \mathcal{P}[n]\backslash A$, and count the edges between $X$ and $Y$.
+
+Every $x\in X$ has exactly $\binom{n}{2}$ edges into $Y$, and for each $y\in Y$ there are at most $\lfloor n/2 \rfloor$ edges into $X$, as we saw above.
+
+Hence $\binom{n}{2}|X| \le \lfloor n/2\rfloor |Y|$. In particular:
+
+\begin{align*}
+|\A| &\le \frac{\lfloor n/2 \rfloor (2^n - |\A|)}{\binom{n}{2}}\\
+\therefore |\A|&\le \frac{\lfloor n/2 \rfloor 2^n}{\binom{n}{2}+\lfloor n/2 \rfloor} 
+\end{align*}
+This gives $|\A| \le 2^n/(n+1)$ for $n$ odd, and $|\A| \le 2^n/n$ for $n$ even. Hence in all cases we have $|\A| \le n^{-1}2^n$.
+
+\end{document}
