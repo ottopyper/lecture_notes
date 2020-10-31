@@ -163,6 +163,8 @@
 \newcommand{\ac}[1]{\mathcal{#1}}
 \newcommand{\acf}{\textrm{ACF}}
 \newcommand{\F}{\mathbb{F}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\rg}{\textrm{RG}}
 
 \title{Model Theory}
 \author{Lectures by Gabriel Conant}
@@ -800,11 +802,101 @@ Then $T\models \forall w\forall x\forall y\forall z\big(\phi(w,x,y,z)\leftrighta
 
 
 
+\marginpar{Lecture 8}
 
+\begin{remark*}
+Recall Theorem 6.2 (QE test)
+\begin{enumerate}[label=\arabic*)]
+	\item In condition (iii), we may assume that $\A\subset\M$ for some model $\M\models T$. Otherwise, $T\cup D(\A)$ is inconsistent and thus complete
+	\item In both conditions (ii) and (iii), we may assume that $\A$ is finitely generated
+\end{enumerate}
+\end{remark*}
 
+\begin{theorem}
+$\acf$ has quantifier elimination.
+\end{theorem}
+\begin{proof}
+We apply Theorem 6.2(iii). Fix a finitely-generated $\L$-structure $\A$ (in the language of fields). We want to show $\acf\cup D(\A)$ is complete. We use Vaught's Test.
 
+Fix $K_1,K_2\models\acf\cup D(\A)$ uncountable with $|K_1| = |K_2|$. Then $\A$ is a finitely generated integral domain contained in $K_1$ and $K_2$.
 
+So char$(K_1)$ = char\((K_2)\). Let $F_i$ be the field of fractions of $\A$ in $K_i$. There is a field isomorphism $\tau : F_1\ra F_2$ fixing $\A$ pointwise. Since $\A$ is finitely generated, trdeg$(F_i)$ is finite. So trdeg$(K_1/F_1)$ = trdeg$(K_2/F_2)$.
 
+So $\tau$ extends to an isomorphism $\tau^\ast: K_1\ra K_2$ fixing $\A$.
+\end{proof}
+We now see a very common application of quantifier elimination of $\acf$.
+
+\begin{defin}[Constructible Set]
+Let $F$ be a field. Then $X\subset F^n$ is \undf{constructible} if it is a Boolean combination of subsets of $F^n$ defined by $p(x_1,\dots,x_n) = 0$, where $p \in F[x_1,\dots,x_n]$.
+\end{defin}
+\begin{cor}[Chevalley]
+If $K\models \acf$ and $X\subset K^n$ is constructible, then the projection
+\begin{align*}
+Y = \{(a_1,\dots,a_{n-1})\in K^{n-1}:(\overline{a},b)\in X\textrm{ for some }b\in K\}
+\end{align*}
+is constructible.
+\end{cor}
+
+\begin{remark*}[Compare]
+Consider $X = \{(x,y)\in \R^2:x = y^2\}$. Then $Y = \R^{\ge 0}$.
+
+Exercise: think about more examples in the rationals.
+\end{remark*}
+\begin{proof}
+Note that $X\subset K^n$ is constructible iff there is a quantifier-free formula $\phi(x_1,\dots,x_n,y_1,\dots,y_m)$ ($y_i$ parameters) and parameters $b_1,\dots,b_m\in K$ such that $X$ is defined by $\phi(\bar{x},\bar{b})$.
+
+Fix quantifier-free formula $\phi(\bar{x},\bar{y})$ and $\bar{b}$ such that $\phi(\bar{x},\bar{b})$ defines $X$. Let $\psi(x_1,\dots,x_{n-1},\bar{y})$ be $\exists x_n\phi(\bar{x},\bar{y})$. Then $\psi(\bar{x},\bar{b})$ defines $Y$. Then by $QE$ $\psi(\bar{x},\bar{y})$ is equivalent to some quantifier-free formula. So $Y$ is constructible.
+\end{proof}
+
+\subsection*{Rado Graphs}
+
+We work with the language of graphs $\L = \{E\}$, $E$ a binary relation.
+
+\begin{defin}[Rado Graph]
+A \undf{Rado Graph} is a graph $(V,E)$ such that $V\ne \emptyset$ and for any finite disjoint $X,Y\subset V$ there is some $v\in V$ such that $E(v,x)$ for all $x\in X$ and $\neg E(v,y)$ for all $y\in Y$.
+\end{defin}
+\begin{defin}[RG]
+We let $\rg$ be the theory of Rado graphs in the language of graphs. In particular:
+\begin{align*}
+	\rg &= \{ \forall x \neg E(x,x),\forall x\forall y(E(x,y)\ra E(y,x)) \}\\
+		&\cup \left\lbrace \forall x_1,\dots,x_k\forall y_1,\dots,y_k\left(\bigwedge_{i,j}x_i\ne x_j \ra \exists v\left(\bigwedge_{i=1}^{k}E(x_i,v) \land \bigwedge_{i=1}^{k}\neg E(y_i,v)\right)\right):k\ge 1\right\rbrace
+\end{align*}
+\end{defin}
+
+\begin{theorem}
+$\rg$ is $\aleph_0$-categorical.
+\end{theorem}
+\begin{proof}\ 
+\begin{enumerate}[label=\arabic*)]
+	\item $\rg$ has a countable model.
+	
+	Let $A = (V,E)$ be any finite graph. Set $A_0 = A$. Given $A_n$, define $V(A_{n+1}) = V(A_n)\cup\{v_{X,Y}:X,Y\subset V(A_n)\textrm{ disjoint}\}$, with new edges $E(v_{X,Y},x)$ for all $x\in X$ (and no others). So $A_0\subset A_1\subset A_2\subset\dots$ is a chain of substructures.
+	
+	Let $M = \bigcup_{n=0}^{\infty}A_n$. Then $M\models\rg$. Moreover, $M$ is countable since each $A_n$ is finite. 
+	
+	\item Any two countable models are elementarily equivalent.
+	
+	Let $\M,\N\models \rg$ countable. We show $\M\cong \N$ via a back and forth argument. Enumerate $M = \{a_n : n\ge 0\}$ and $N = \{b_n:n\ge 0\}$. Let $h_0: a_0\mapsto b_0$. Given $h_n:X_n\ra Y_n$, extend to include $a_{n+1}$ and $b_{n+1}$.
+	
+	Partition $X_n$ into the neighbourhood of $a_{n+1}$ and its complement. We then partition $Y_n$ by its image under $h_n$, and use the Rado axioms to find a vertex $b$ connected to $h_n(\Gamma(a_{n+1}))$ and none of its complement. Similarly find appropriate $a$ for $b_{n+1}$, and extend $h_n$ to include these pairs, giving us $h_{n+1}$.
+\end{enumerate}
+Hence $\rg$ is $\aleph_0$-categorical.
+\end{proof}
+\begin{cor}
+$\rg$ is complete
+\end{cor}
+\begin{proof}
+Use Vaught's Test. Note that $\rg$ has no finite models.
+\end{proof}
+\begin{remark*}[Claim]
+If $\M\models \rg$ then every finite graph is an induced subgraph of $\M$.
+\end{remark*}
+\begin{proof}
+The proof of Theorem 7.6 shows this when $\M$ is countable. Then for any $\M\models \rg$ there exists a countable $\M_0$ such that $\M_0\le \M$ by DLST ({\it c.f.} Sheet 1 Question 9).
+\end{proof}
+\begin{remark*}[Exercise]
+	Suppose $\M,\N\models\rg$ countable and $f: X\ra Y$ is a graph isomorphism for some finite $X\subset \M$ and $Y\subset \N$. Then $f$ extends to an isomorphism from $\M$ to $\N$.
+\end{remark*}
 
 
 
