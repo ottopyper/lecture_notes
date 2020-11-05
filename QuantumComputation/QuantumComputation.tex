@@ -369,10 +369,13 @@ $\ast$ we want to solve this in time $O(\poly\log|G|)$, with any constant probab
 		\poly (n) < n^{O((\log n)^2)} < \textrm{exp}\\
 		2^{O(\log n)} < 2^O((\log n)^3) < 2^{O(n)}
 	\end{align*}
+
 So in terms of exponents, these are linear/polynomial/exponential in $\log n$.
 \item Another non-abelian example is the \undf{dihedral group}; there is a connection to the HSP `shortest vector in a lattice'. We are given $n$ linearly independent vectors in $\R^n$, and consider their lattice; the problem is to find the lattice point closest to the origin.
 \end{enumerate}
 \end{remark*}
+
+\marginpar{Lecture 4}
 
 What we {\it do} have is:
 
@@ -488,7 +491,7 @@ This works on the state space $\mathcal{H}_{|G|}\otimes\mathcal{H}_{|X|}$, with 
 	\end{align*}
 	\item Measure the second register to see a value $f(g_0)$. Then the first register will give a coset state:
 	\begin{align*}
-		\ket{g_0 + k} = \frac{1}{\sqrt{|K|}} \sum_{k\in K}\ket{g_0 + K} = U(g_0)\ket{K}
+		\ket{g_0 + K} = \frac{1}{\sqrt{|K|}} \sum_{k\in K}\ket{g_0 + k} = U(g_0)\ket{K}
 	\end{align*}
 	Where we are writing $\ket{K} = \frac{1}{\sqrt{|K|}}\sum_{k\in K}\ket{k}$.
 	
@@ -505,8 +508,119 @@ This works on the state space $\mathcal{H}_{|G|}\otimes\mathcal{H}_{|X|}$, with 
 		But what is the distribution?
 		
 		\item How does it relate to $K$?
+		\marginpar{Lecture 5}
+		
+		Recall that $$\qft\ket{k} = \frac{1}{\sqrt{|G|}} \sum_{\ell \in G} \chi_{\ell}(k)\ket{\ell}$$
+		
+		In particular
+		\begin{align*}
+			\qft\ket{K} = \frac{1}{\sqrt{|G|}} \frac{1}{\sqrt{K}} \sum_{\ell \in G} \left[\sum_{k\in K}\chi_{\ell}(k)\right] \ket{\ell}
+		\end{align*}
+	where $[\cdots]$ invovles irreps $\chi_\ell$ of $G$ restricted to $K < G$, which are irreps of $K$. Hence
+	\begin{align*}
+		[\cdots] = \left\lbrace \begin{array}{cc} |K|&\quad \textrm{ if }\chi_{\ell}\textrm{ restricts to trivial irrep on }$K$ \\ 0&\quad \textrm{ otherwise}\end{array}  \right.
+	\end{align*}
+So the measurement gives a uniformly random choice of $\ell$, such that $\chi_{\ell}(k) = 1$ for all $k \in K$, giving information about $K$.
+
+	For instance, if $K$ has generators $k_1,\dots,k_M$, where $M = O(\log |K|) = O(\log |G|)$ (this is true for all finite groups), then the output has $\chi_{\ell}(k_i) = 1$ for all $i$.
+	
+	It can be shown that if $O(\log |G|)$ such $\ell$s are chosen uniformly at random, then with probability $> 2/3$ they suffice to determine the generating set via the equation $\chi_{\ell}(k) = 1$.
+	
+	See Sheet 1 \# 2 for an example of this problem and calculation.
 	\end{itemize}
 \end{itemize}
 
+A trivial but nonetheless useful fact about irreps of $G$ is that they restrict to irreps of $K$, and in fact we could have a trivial irrep of $G$ that restricts to the trivial irrep of $K$ - as we saw above.
+
+\begin{remark*}[Example]\
+If $G = \Z_{M_1}\times\cdots\times \Z_{M_q}$, we had for $\ell = (\ell_1,\dots,\ell_q), g\in (b_1,\dots,b_q)\in G$ irreps $$\chi_{\ell}(g) = \e^{2\pi i\sum_{j=1}^{q}\left(\frac{\ell_j b_j}{m_j}\right)}$$
+
+So for $k = (k_1,\dots,k_q)\in K$, the equation $\chi_{\ell}(k) = 1$ becomes
+\[
+\frac{\ell_1 k_1}{m_1} +\dots + \frac{\ell_q k_q}{m_q} \equiv 0\mod 1
+\]
+- that is to say, it is an integer. This is a homogeneous, linear equation in $k = (k_1,\dots,k_q)$ and $O(\log |K|)$ independent such equations determine $K$ as the null space of the linear system.
+\end{remark*}
+
+\begin{remark*}[Remarks on HSP for {\it non}-abelian groups $G$]
+Disclaimer: there is no known efficient algorithm for this problem.
+
+As before, we can easily generate coset states
+\[
+\ket{g_0 K} = \frac{1}{\sqrt{|K|}} \sum_{k \in K}\ket{g_0 k}
+\]
+where the $g_0$ are chosen randomly. But there arise new problems with the QFT construction. In particular, there is no basis of shift invariant states because the shift operators do not commute.
+
+So if we apply the Fourier transform to the above state, it no longer works. We can make partial progress though.
+
+\textbf{Construction of non-abelian FT}
+
+Suppose we have $d$-dimensional representations of $G$, which are group homomorphisms
+\[
+\chi : G \ra U(d)
+\]
+where the $U(d)$ are $d\times d$ unitary matrices. So $\chi(g_1 g_2) = \chi(g_1)\cdot \chi(g_2)$, where $\cdot$ denotes matrix multiplication.
+
+We then say $\chi$ is \undf{irreducible} (so an irrep) if no subspace of $\C^d$ is left invariant by all matrices $\chi(g): g\in G$. In other words, we cannot simultaneously block diagonalise all the $\chi(g)$s by a basis change.
+
+Looking back at the abelian case, we can consider the irreps as matrices also, but since all the matrices commute with each other they can all be simultaneously block diagonalised, and reduce to 1-dimensional representations.
+
+A \undf{complete set} of irreps is a set $\chi_1,\dots,\chi_M$ such that any irrep is unitarily equivalent to one of them, by which we mean $\chi \equiv \chi'$ if $\chi' = V\chi V^{-1}$ for some $V \in U(d)$.
+
+\begin{theorem*}[Non-Abelian Generalisation of Theorem A]
+If $d_1,\dots,d_M$ are the dimensions of a complete set of irreps $\chi_1,\dots,\chi_M$, then
+\begin{enumerate}[label = (\roman*)]
+	\item $d_1^2 +\dots + d_m^2 = |G|$
+	\item Write $\chi_{i,jk}(g)$ for the $(j,k)^{\textrm{th}}$ entry of matrix $\chi_i(g)$. Then we have (Schur's orthogonality)
+	\[
+	\sum_{g\in G} \chi_{i,jk}(g)\bar{\chi}_{i',j'k'}(g) = |G| \delta_{ii'}\delta_{jj'}\delta{kk'}
+	\]
+\end{enumerate}
+\end{theorem*}
+Hence the states
+\[
+\ket{\chi_{i,jk}} \equiv \frac{1}{\sqrt{|G|}} \sum_{g\in G}\bar{\chi}_{i,jk}(g)\ket{g}
+\]
+form an orthonormal basis.
+
+$\qft$ on $G$ is then defined as the unitary map that rotates the $\{\ket{\chi_{i,jk}}\}$ basis into the standard basis $\{\ket{g}\}$.
+
+But the $\ket{\chi_{i,jk}}$ are \undf{not} shift invariant for all $U(g_0)$s, so measurement of the coset state $\ket{g_0 K}$ in the $\ket{\chi}$ basis has output distribution that is \undf{not} independent of $g_0$.
+
+However, a `partial' shift invariance survives. Instead of performing a complete measurement, we can do an incomplete measurement on only the $i$ labels and not the $j$.
+
+We call this measurement $M_{\textrm{rep}}$ on $\ket{g_0 K}$ that distinguishes only irrep labels ($i$ values) and \undf{not} all $(i,j,k)$s, {\it i.e.} the measurement outcome $i$ is associated to the $d_i^2$-dimensional subspace spanned by $\{\ket{\chi_{i,jk}}\}_{j,k=1,\dots,d_i}$.
+
+Then it can be shown that $\chi_i(g_1g_2) = \chi_i(g_1)\chi_i(g_2)$ implies that the output distribution of the $i$-values is independent of $g_0$. This gives direct, but incomplete information about $K$.
+
+For instance, conjugate subgroups $K$ and $L = g_0 Kg_0^{-1}$ for some $g_0 \in G$ give the same output distribution of $i$s.
+
+
+For efficient HSP algorithm (if we use $\qft$), we need $\qft$ to be efficiently implementable, {\it i.e.} in $\poly(\log|G|)$ times - this is unusual, and a very special thing to ask for.
+
+This is true for abelian groups, and some non-abelian groups, such as $P_n$ - but even for this group there is still no known efficient hidden subgroup algorithm.
+
+Consider $\Z_{2^n}$; we have a tower of subgroups $\{0\} < \Z_2 < \Z_4 <\dots < \Z_{2^n}$, and the fast Fourier transform on this group works recursively by determining the transform on the next subgroup using the previous one. There is a similar construction $\{e\}<P_2 <\dots < P_n$. However, there is still no efficient $HSP$ algorithm known.
+
+\textbf{Known partial results}:
+
+For normal subgroups ({\it i.e.} $gK = Kg$ for all $g\in G$), we have
+\begin{theorem*}[Hallgren, Russell, Tashina SIAMJ. Comp\_ vol32 p916-934 (2003)]\ 
+
+Suppose $G$ has $\qft$ efficiently implementable. Then if the hidden subgroup $K$ is a normal subgroup, then there is an efficient quantum HSP algorithm.
+\end{theorem*}
+
+In particular, we find $\{\ket{g_0 K}\}$ and do $M_{\textrm{rep}}$ on it, and repeat $O(\log |G|)$ times. Then $K$ normal implies the outputs suffice to efficiently determine $K$.
+
+\begin{theorem*}[Effinger, Heyer, Krull, 2004]
+For general non-abelian HSP, $M = O(\poly \log |G|)$ random coset states $\ket{g_1 K},\dots,\ket{g_M K}$ suffice to determine $K$.
+\end{theorem*}
+ In particular, there is always efficient {\it query} complexity. Unfortunately, there is no known method to efficiently determine $K$ from the $M$ coset states (see Sheet 1 \# 7 for a proof of this theorem).
+ 
+ The way we do this is to use a measurement procedure on $\ket{g_1K}\otimes \dots\otimes \ket{g_M K}$ that takes exponential time in $\log |G|$ to complete.
+
+
+
+\end{remark*}
 
 \end{document}
