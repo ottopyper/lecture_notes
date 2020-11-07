@@ -154,6 +154,7 @@
 \renewcommand{\bar}{\overline}
 \renewcommand{\O}{\mathcal{O}}
 \newcommand{\Th}{\textrm{Th}}
+\newcommand{\tp}{\textrm{tp}}
 
 \renewcommand{\lnot}{\neg}
 \newcommand{\false}{\bot}
@@ -166,6 +167,7 @@
 \newcommand{\A}{\mathcal{A}}
 \newcommand{\rg}{\textrm{RG}}
 \newcommand{\D}{\mathcal{D}}
+\newcommand{\sman}{S_n^\M(A)}
 
 \title{Model Theory}
 \author{Lectures by Gabriel Conant}
@@ -954,10 +956,61 @@ The proof of Theorem 7.6 shows this when $\M$ is countable. Then for any $\M\mod
 \begin{remark*}[Exercise]
 	Suppose $\M,\N\models\rg$ countable and $f: X\ra Y$ is a graph isomorphism for some finite $X\subset \M$ and $Y\subset \N$. Then $f$ extends to an isomorphism from $\M$ to $\N$.
 \end{remark*}
+\marginpar{Lecture 9}
 
+\begin{theorem}
+RG has QE
+\end{theorem}
+\begin{proof}
+\underline{Option 1}: Theorem 6.2(iii). Consider $RG \cup \D(\A)$, where $\A$ is a finite graph (see last exercise).
 
+\underline{Option 2}: Theorem 6.2(ii). Fix $\M,\N\models \textrm{RG}$ and $\A\subset \M\cap \N$. Fix a q.f. formula $\phi(x_1,\dots,x_n,y)$ and $a_1,\dots,a_n\in A$. Assume $\M\models \phi(\bar{a},b)$ for some $b\in M$. Want to show that $\N\models \exists \phi(\bar{a},y)$.
 
+Write $\phi(\bar{x},y)$ as $$\bigvee_{s=1}^{k}\bigwedge_{t=1}^{\ell_s}\theta_{s,t}(\bar{x},y)$$ where each $\theta_{s,t}$ is atomic or negated atomic (this is known as \textit{disjunctive normal form}). $\exists s\le k$ such that $$\M\models\bigwedge_{t=1}^{\ell_s}\theta_{s,t}(\bar{a},b)$$
+Each $\theta_{s,t}$ is one of: $x_i = x_j, x_i = y,E(x_i,x_j),E(x_i,y)$, or the negation of one of the above. If we have $x_i = y$ appearing then $b = a_i\in A\subset N$. So $\N \models \phi(\bar{a},b)$ since $\phi$ is q.f.. We can assume that no $x_i = y$ appears. Let $X = \{a_i:\M\models E(a_i,b)\}$ and $Y = \{a_i : \M\models \neg E(a_i,b)\}$. $X$ and $Y$ are finite disjoint subsets of $A\subset N$. Choose $c\in N$ such that $\N\models E(a_i,c)$ iff $a_i \in X$, and $c\not\in\{a_1,\dots,a_n\}$. We do this by finding a new element connected to everything in $X$ and nothing in $Y$, and ensure that $c$ is not connected to this new vertex either.
 
+Then $\N\models \bigwedge_{t}\theta_{s,t}(\bar{a},c)$ (check). So $\N\models \phi(\bar{a},c)$.
+\end{proof}
+
+\section{Types}
+
+\underline{Motivation}: Given $\M$, we want to understand ``potential behaviour'' of elements in elementary extensions.
+
+\underline{Terminology}: Given an $\L$-structure $\M$ and $A\subset M$, we call an $\L_A$-formula an \undf{$\L$-formula with parameters from $A$}. We write these as $\phi(\bar{x},\bar{a})$ where $\phi(\bar{x},\bar{y})$ is an $\L$-formula and $\bar{a}$ is from $A$. (Identifiy $a$ with $\underline{a}^\M$ - this should not cause problems in most cases).
+
+Now suppose $\M$ is an $\L$-structure and $\N\succeq\M$. If $a\in N\backslash M$ then the $\L_N$-formula $x = a$ doescribes the new behvaiour in a trivial way.
+
+OTOH: If $\phi(x)$ is an $\L$-formula with parameters from $\M$ and $\N\models \phi(a)$ for some $a\in N$, then $\N\models \exists x\phi(x)$ so $\M\models \exists \phi(x)$.
+
+\underline{Idea}: New behaviour cannot be controlled with one formula at a time.
+
+\underline{Notation}: Let $p$ be a set of formulas in free variables $x_1,\dots,x_n$. We also write $p(x_1,\dots,x_n)$. Given $\M$ and $a_1,\dots,a_n\in M$, we write $\M\models p(a_1,\dots,a_n)$ if $\M\models \phi(\bar{a})$ for all $\phi\in p$. We say ``$\bar{a}$ realises $p$ (in $\M$)''. Also write $\bar{a}\models p$. We call $p$ \undf{consistent} if it is realised in some structure.
+
+\begin{remark*}[Exercise]
+$p$ is consistent iff every finite subset of $p$ is consistent.
+\end{remark*}
+
+\begin{defin}[$n$-type]
+Let $\M$ be an $\L$-structure and fix $A\subset M$. An \undf{$n$-type over $A$ w.r.t. $\M$} is a set $p$ of $\L$-formulae with parameters from $A$ in free variables $x_1,\dots,x_n$ such that $p\cup \Th(\M)$ is consistent.
+
+We say $p$ is \undf{complete} if, for every $\L_A$-formula $\phi(x_1,\dots,x_n)$, either $\phi \in p$ or $\neg \phi \in p$.
+
+Let $S_n^\M(A)$ denote the set of all complete $n$-types over $A$ w.r.t. $\M$.
+\end{defin}
+
+\begin{ex}
+Given $a_1,\dots,a_n\in M$, let $\textrm{tp}^\M(a_1,\dots,a_n/A)$ be the set of all $\L_A$-formulae $\phi(x_1,\dots,x_n)$ such that $\M\models \phi(\bar{a})$. Then $\tp^\M(\bar{a}/A)\in S_n^\M(A)$, and $\bar{a}\models \tp^\M(\bar{a}/A)$.
+\end{ex}
+\begin{prop}
+If $p \in S_n^\M(A)$, then there is $\N\succeq\M$ with $|N| \le |M| + |\L|$, and $\bar{a}\in N^n$ such that $p = \tp^\N(\bar{a}/A)$.
+\end{prop}
+\begin{proof}
+By assumption, $p\cup\Th_A(\M)$ is consistent. We want to showt hat $p \cup \Th_M(\M)$ is consistent, which is not \it{quite} what we have.
+
+Fix $\Sigma \subset p \cup \Th_M(\M)$ finite. So $\Sigma \subset p \cup \{\phi_1,\dots,\phi_t\}$ where $\phi_i$ is an $\L_M$-sentence, and $\M\models \phi_i$. Let $\phi^\ast$ be $\bigwedge_{i=1}^{t}\phi_i$. We can write $\phi^\ast$ as $\phi(\underline{b}_1,\dots,\underline{b}_m)$ where $b_1,\dots,b_m\in \M\backslash A$ and $\phi(x_1,\dots,x_n)$ is an $\L_A$-formula. Since $\M\models \phi(b_1,\dots,b_m)$, we have that $\M\models \exists \bar{v}\phi(v_1,\dots,v_m)$. So $\exists \bar{v}\phi(\bar{v})\in \Th_A(\M)$. Since $p\cup \Th_A(\M)$ is consistent, there is $\N\models \Th_A(\M)$ and $\bar{a} \in N^n$ such that $\N\models p(\bar{a})$.
+
+Since $\N\models \exists \bar{v}\phi(\bar{v})$, there is $\bar{c} \in N^m$ such that $\N\models \phi(\bar{c})$. Expand $\N$ to an $\L_M$-structure such that $\underline{b}_i^\N = c_i$ and $\underline{b}^\N$ is arbitrary for $b\in M\backslash (A\cup \{b_1,\dots,b_m\})$. Then $\N\models \phi(\underline{b}_1,\dots,\underline{b}_m)$, \it{i.e.} $\N\models \phi^\ast$. So $\N\models \Sigma$.
+\end{proof}
 
 
 \end{document}

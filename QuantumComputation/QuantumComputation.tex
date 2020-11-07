@@ -618,9 +618,56 @@ For general non-abelian HSP, $M = O(\poly \log |G|)$ random coset states $\ket{g
  In particular, there is always efficient {\it query} complexity. Unfortunately, there is no known method to efficiently determine $K$ from the $M$ coset states (see Sheet 1 \# 7 for a proof of this theorem).
  
  The way we do this is to use a measurement procedure on $\ket{g_1K}\otimes \dots\otimes \ket{g_M K}$ that takes exponential time in $\log |G|$ to complete.
-
-
-
 \end{remark*}
+\marginpar{Lecture 6}
+
+\section{Quantum Phase Estimation (PE) Algorithm}
+
+This is a unifying principle for quantum algorithms, and again uses $\qft$. It has many applications, {\it e.g.} an alternative factoring algorithm to Shor's algorithm, due to A. Kitaev (Sheet 2 \#2).
+
+\underline{Scenario}: we are given a unitary operator in $d$ dimensions, and an eigenstate $\ket{v_\phi}:U\ket{v_{\phi}} = \e^{2\pi i \phi}\ket{v_\phi}$. We want to estimate $\phi$, with $0 < \phi < 1$, to $n$ binary bits of precision. In particular we have $\phi = 0.i_1i_2\dots i_n\dots$ in binary, and we want to determine $i_1,\dots,i_n$ for any given $n$.
+
+We will need the \undf{controlled-$U^k$} for integers $k$:
+\begin{align*}
+CU^k\ket{0}\ket{\xi} &= \ket{0}\ket{\xi}\\
+CU^k\ket{1}\ket{\xi} &= \ket{1}(u\ket{\xi})\\
+\end{align*}
+
+Note also that $U^k\ket{v_\phi} = \e^{2\pi i k\phi}\ket{v_\phi}$, and $C(U^k) = (CU)^k$.
+
+\begin{remark*}
+Given $U$ as a formula or circuit description, we can readily implement $CU$ {\it e.g.} by controlling each gate of the circuit.
+
+But if $U$ is given as a black box ({\it i.e.} physical operation) then we need further information in order to implement $CU$.
+
+We can see this since $U$ as a black box is equivalent to $\e^{i\theta}U$ as a black box, but the controlled versions of these gates are different, since the $C$-$(\e^{i\theta}U)$ gate will switch global phase on $\ket{0} + \ket{1}$ to a local phase.
+
+It in fact suffices to have an eigenstate $\ket{\alpha}$ with known/specified eigenvalue $\e^{i\alpha}: U\ket{\alpha} = \e^{i\alpha}\ket{\alpha}$. Then $\e^{i\theta}U$ has $\alpha \mapsto \alpha + \theta$.
+\end{remark*}
+
+
+We will actually want a ``generalised controlled-$U$'', given for $x \in \Z_n$:
+\begin{align*}
+	{\ket{x}}\ket{\chi} \mapsto U^x\ket{\chi}
+\end{align*}
+We can make it from $cU^k$ as follows. For $x = x_{n-1}\dots x_1x_0$ in binary... [diagram].
+
+If input $\ket{\chi} = \ket{v_\phi}$, then we get $\e^{2\pi i\phi x}\ket{x}\ket{v_\phi}$.
+
+
+\begin{theorem*}[PE]
+If the measurements give output $\theta = 0.y_0y_1\dots y_{n-1}$, with $\phi = 0.z_0,\dots,z_{n-1}z_{n}\dots$ then
+\begin{enumerate}[label=(\alph*)]
+	\item $\P(\theta$ is closest $n$ binary digit approx to $\phi) \ge 4/\pi^2 \approx 0.4$
+	\item $\P(|\theta - \phi| \ge \eps)$ is at most $O(1/2^n\eps)$, and we will show it is in fact $\le 1/2^{n+1}\eps$.
+\end{enumerate}
+\end{theorem*}
+
+\begin{remark*}
+In Theorem PE (a), we have probability $4/\pi^2$ that {\it all} $n$ lines of $n$-line PE process give correct bits.
+
+But: if we want $\phi$ accurate to $m$ bits with probability $1 - \eta$, then use Theorem PE (b) with $\eps = 1/2^m$. Then we'll need $n > m$ lines with $\eta = 1/2^{n+1}\eps$ and $\eps = 1/2^m$, {\it i.e.} $n = m + \log (1/\eta) -1$, where $n$ is the number of lines in the PE algorithm, $m$ is the number of bits we want with high probability, and $\log(1/\eta) -1 $ is the number of additional bits we require to ensure this accuracy.
+\end{remark*}
+
 
 \end{document}

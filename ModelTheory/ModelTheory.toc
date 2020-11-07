@@ -6,3 +6,4 @@
 \contentsline {section}{\numberline {5}Algebraically Closed Fields}{11}%
 \contentsline {section}{\numberline {6}Diagrams \& Extensions}{13}%
 \contentsline {section}{\numberline {7}Quantifier Elimination}{15}%
+\contentsline {section}{\numberline {8}Types}{19}%
