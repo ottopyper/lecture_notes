@@ -107,6 +107,9 @@
 \theoremstyle{remark}
 \newtheorem*{remark*}{Remark}
 
+\theoremstyle{custhm}
+\newtheorem*{lemma*}{Lemma}
+
 
 %\marginpar{to describe which lecture it is}
 
@@ -590,5 +593,144 @@ It is worth remarking that the $1 + 1/\delta$ bound is best possible when $\delt
 We are trying to find a simplex with $k+1$ vertices in $\R^k$; the trick is to look in the subsapce $\{x\in \R^{k+1}:x_1+\dots+x_{k+1} = 0\}$. We then find vertices of the form $(-1/k,-1/k,\dots,-1/k,1,-1/k,\dots,-1/k) = v_i$ for the $1$ in the $i^{\textrm{th}}$ place.
 
 Then for $i\ne j$, we have $\langle v_i,v_j\rangle = \frac{k-1}{k^2} - \frac{2}{k} = -\frac{1}{k^2} - \frac{1}{k}$. If $i=j$, then we have $||v_i||^2 = k/k^2 + 1 = 1 + 1/k$. So to normalise, we set $u_i = v_i/\sqrt{1+1/k}$, and this cancels out appropriately to give $\langle u_i, u_j\rangle = - 1/k$, as desired.
+
+\marginpar{Lecture 5}
+
+We now consider the case where $\alpha = 1/4$. We are quickly lead to the following question.
+
+Suppose we have $u_1,\dots,u_m$ non-zero vectors in $\R^n$, and $\langle u_i,j_j\rangle \le 0$ for all $i\ne j$. How big can $m$ be? (This corresponds to the question of asking how many sets we can have of size $n/2$ with $|A_i\cap A_j| \le n/4$.)
+
+We will prove by induction that if $u_1,\dots,u_{2n+1}$ are non-zero vectors, then $\exists i\ne j$ such that $\langle u_i,u_j\rangle > 0$. Moreover if $u_1,\dots,u_{2n}$ satisfy $\langle u_i,u_j\rangle \le 0$ for all $i\ne j$, then they are of the form $a_ie_i,b_ie_i$ for $i = 1,\dots,n$ with $a_i > 0$, $b_i < 0$ and $e_1,\dots,e_n$ an orthonormal basis.
+
+Suppose we have $u_1,\dots,u_{2n}\in \R^n$ non-zero, and that $i\ne j\implies \langle u_i,u_j\rangle \le 0$. For each $i\ge 2$, write $u_i = a_iu_1 + v_i$, with $\langle u_1,v_i\rangle = 0$. Since $\langle u_1,u_i\rangle \le 0$, we get that $a_i\le 0$. Moreover, $\langle u_i,u_j\rangle = a_ia_j + \langle v_i,v_j\rangle \le 0$. Since the $a_i$ are both non-positive, we conclude that $\langle v_i,v_j\rangle \le 0$.
+
+But $v_2,\dots,v_{2n} \in \langle u_1\rangle^\perp$, of dimension $n-1$. And we have $2(n-1)+1$ vectors, so by the induction hypothesis we deduce that $v_i$ must be $0$ for some $i$; let it be $i$.
+
+So $u_i = a_iu_1$, so $a_i < 0$ since $u_i\ne 0$. So we have two of the vectors $u_1,au_1$ for some $a < 0$, and this implies that all other vectors are orthogonal to $u_1$. This leaves a remaining $2(n-1)$ vectors, to which we apply induction and we are done.
+
+Now suppose we have a set system $\A\subset [n]^{(n/2)}$ such that $A\ne B \in \A \implies |A\cap B| \le n/4$. We then deduce that $|\A| \le 2(n-1)$.
+
+From this arises another question: can we find $n\times n$ matrices with $\pm 1$ entries that are orthogonal? (By orthogonal, we mean that the rows and columns of the matrices are orthogonal - normalising them would give an orthogonal matrix in the normal linear algebra sense). These matrices are called $\undf{Hadamard matrices}$.
+
+For example, observe that $$\left(\begin{array}{cc} A & A \\ A & -A\end{array}\right)$$ is a Hadamard matrix. This construction gives us a way of building more Hadamard matrices, by letting $A$ be itself an orthogonal matrix. For instance, we have $(1)$, then $\left(\begin{array}{cc} 1 & 1 \\ 1 & -1\end{array}\right)$, then $$ \left(  \begin{array}{cccc} 1 & 1 & 1 & 1\\ 1 & -1 & 1 & -1\\ 1 & 1 & -1 & -1 \\ 1 & -1 & -1 & 1\end{array}\right)$$
+
+The $k^{\textrm{th}}$ matrix in this sequence is known as $W_k$, the Walsh matrices.
+
+We now look at a difference construction of a Hadamard matrix, called the \undf{Paley Matrices}. This requires a small amount of elementary number theory.
+
+Take a prime $p$ of the form $p = 4m+3$. We define
+\begin{align*}
+	A_{xy} = \left\lbrace \begin{array}{cc} 1&\quad x - y \textrm{ is a quad. res.}\\ -1&\quad \textrm{otherwise}\end{array}  \right. = \left(\frac{x-y}{p}\right)
+\end{align*}
+
+We note that we do not view $0$ as a quadratic residue.
+
+If we take the $x^{\textrm{th}}$ row and the $y^{\textrm{th}}$ rows of $A$, we get
+\begin{align*}
+	\sum_{z}A_{xz}A_{yz} &= \sum_{z} \left(\frac{x-y}{p}\right)\left(\frac{y-z}{p}\right)\\
+	&= \sum_{z}\left(\frac{z}{p}\right)\left(\frac{z+d}{p}\right)\textrm{ for }d = y-x\\
+	&= -\left(\frac{d}{p}\right)\\
+	&= -\left(\frac{d}{p}\right) - \left(\frac{-d}{p}\right) + \sum_{z\ne 0,-d}\left(\frac{z}{p}\right)\left(\frac{z_d}{p}\right)
+\end{align*}
+Observe that if $-1 = x^2$ then $(-1)^{(p-1)/2} = x^{p-1} = 1$. So $-1$ is not a quadratic residue, so the first two terms cancel out.
+
+We now take advantage of the multiplicative property of the Legendre symbol:
+\begin{align*}
+	&= \sum_{z\ne 0,-d} \left(\frac{z^2}{p}\right)\left(\frac{1+dz^{-1}}{p}\right)\\
+	&= \sum_{z\ne 0,d}\left(\frac{1+dz^{-1}}{p}\right)
+	&= \sum_{x\ne 0,1}\left(\frac{x}{p}\right)\\
+	&= -1
+\end{align*}
+
+We then take this matrix $A$, and surround it with $1$s along the bottom row and final column. This contributes an additional $1$ to each inner product between two rows, so the result is zero and all of the rows are clearly orthogonal to each other, with the exception of the final row. But this still works, because we get the sum of all the Legendre symbols off the diagonal and final column, a $-1$ on the diagonal and a $1$ on the final column. So the inner product is still zero, and all the rows are pairwise orthogonal.
+
+This matrix is the Paley matrix, and it is another example of a Hadamard matrix.
+
+Note: this is also a useful technique in combinatorics, which is to use algebra to come up with particularly nice constructions.
+
+Consider now the question of for which $n$ is there an $n\times n$ Hadamard matrix? We know that if $n\ge 4$, then $n$ must be a multiple of 4. A current open problem is: can we do it for all multiples of 4? The least $n$ for which we are unsure is $n = 668$.
+
+\section{The Sum-Product Problem}
+
+Suppose we have a set $A\subset \R_{+}$. We define the \undf{sum set} $A + A = \{a+b:a,b\in A\}$ and the \undf{product set} $A\cdot A = \{ab:a,b\in A\}$. We can do this for other operations too, like the \undf{quotient set} $A/A = \{a/b:a,b\in A\}$.
+
+What can we say about the sizes of these new sets?
+
+For example, $|A| = n \implies |A+A| \le \frac{n(n+1)}{2}$ by counting individual elements and distinct pairs. In the other direction, if we take $A = \{1,2,\dots,n\}$ then $|A+A| = 2n-1$, and it is easy to see that this is best possible; if we have $a_1<a_2\dots < a_n$, then we obtain $2n-1$ distinct elements of $A+A$ by looking at $a_1+a_1 < a_1 + a_2 < a_1 + a _3 <\dots <a_1 + a_n < a_2 + a_n <\dots < a_n + a_n$.
+
+For the product set, a similar type of proof works. Suppose we have $A = \{1,2,4,\dots,2^{n-1}\}$. Then $|A\cdot A| = 2n-1$, and this is again best possible.
+
+\begin{remark*}[Erdos Szemeredi sum-product problem]\ 
+
+This problem was first posed by Erdos and Szemeredi:
+
+Is it true that $\forall c > 0$ $\exists n_0$ such that $\forall n\ge n_0, \max\{|A+A|,|A\cdot A|\}\ge n^{2-c}$.
+\end{remark*}
+
+This is somewhat plausible, and if we were to find a counterexample it would need to be an intermediate case where both $A+A$ and $A\cdot A$ are small.
+
+For the moment, you might ask what we can say about $A$ if $|A + A| \le n^{1.99}$, but unfortunately we don't yet know very much at all.
+
+We haven't solved this problem yet, but we do have the following result:
+\begin{theorem*}[Jozsef Solymosi]
+There is a bound $\ge n^{4/3}$ for the sum-prodcut problem.
+\end{theorem*}
+\begin{defin*}[Additive Energy]
+Let $A\subset \R$. Define $\rho_A^+(x) = \#\{(a,b)\in A^2:a+b = x\}$.
+
+The \undf{additive energy} of $A$ is $\sum_{x\in A + A}\rho_A^+(x)^2$.
+
+We similarly have $\rho_A^\times(x) = |\{(a,b)\in A^2 : ab = x\}|$, and $\rho_A^{\div}(x) = |\{(a,b)\in A^2 : a/b = x\}|$.
+
+The \undf{multiplicative energy} is then $\sum_{x\in A\cdot A}\rho_A^\times(x)^2$
+\end{defin*}
+
+\begin{lemma*}
+\[
+\sum_{x\in A\cdot A} \rho_A^\times(x)^2 = \sum_{x\in A/A} \rho_A^\div(x)^2
+\]
+\end{lemma*}
+\begin{proof}
+Both sides count $|\{(a,b,c,d)\in A^4 : ab = cd\}|$. This is clearly true for the LHS; for each $x$ we take all pairs multiplying to $x$, and square those to obtain quadruples \it{i.e.} paris of pairs.
+
+But $ab = cd \iff a/c = d/b$, so it becomes clear that the RHS is exactly the same quantity for similar reasons.
+\end{proof}
+
+\subsection*{Lower bound}
+
+Note first that $\sum_{x\in A\cdot A}\rho_A^\times(x) = |A|^2$, since any pair of elements $(a,b)$ contributes one to $|A|^2$ (clearly), and one to the LHS since it appears once in exactly one $\rho$-set. Moreover, by Cauchy-Schwarz, we have
+\begin{align*}
+	|A|^2 &= \sum_{x\in A\cdot A}\rho_A^\times(x)\\
+	&\le |A\cdot A|^{\frac{1}{2}} \left(\sum_{x\in A.A}\rho_A^\times9x)^2\right)^{\frac{1}{2}}\\
+	\therefore \textrm{ mult. energy }&\ge \frac{|A|^4}{|A.A|}
+\end{align*}
+
+\subsection*{Upper Bound}
+
+We'll begin by partitioning $A\times A$ according to ``gradient'', where we look at the plane split up by the gradients \it{i.e.} members of $A/A$.
+
+Let $A/A = \{m_1,\dots,m_t\}$, $m_i < m_j$ for $i < j$. For each $i$, let $B_i = \{(a,b)\in A^2 : b/a = m_i\}$ - these are the points in $A\times A$ lying on the line with gradient $m_i$.
+
+Now it would be great if each $B_i$ had the same size - unfortunately there is no reason for this to be the case. So we use a new strategy called \undf{dyadic decomposition}.
+
+Each $B_i$ has size between $1$ and $|A|$. So we can partition $A/A$ into at most $\lceil \log_2|A|\rceil$ sets such that if $m_i$ and $m_j$ are in the same set, then $|B_i| \ge \frac{1}{2}|B_j|$.
+
+We also know that $\sum\rho_A^\div (x)^2 = \sum_{i}|B_i|^2$. By averaging, we can find a collection of the $B_i$s, which we shall rename as $B_1,\dots,B_s$ such that $$\sum_{i=1}^{s}|B_i|^2 \ge \frac{1}{\lceil\log_2|A|\rceil}\sum\rho_A^\div(x)^2$$
+
+We want to put an upper bound on the LHS. Consider $B_1 + B_2$; the directions of each set are linearly independent, we see that no two elements overlap and we get $|B_1+B_2| = |B_1||B_2|\ge |B_1|^2/2$, and all the elements lie between the lines of $B_1$ and $B_2$. Moreover, $B_1+B_2\subset (A\times A) + (A\times A) = (A+A)\times (A+A)$ (this is the Cartesian product).
+
+In general, we find that all $B_i + B_{i+1}$ are contained in this set, and in our lower bound we get all the $|B_i|^2$ except for $i = s$, so we need a bit more. We define a new set called $B_{s+1}$ by drawing in a new vertical line through the first point in $B_s$, and mark off the points with the same height as those of $B_s$ - these are still contained within $A\times A$, and then $B_s + B_{s+1} \subset (A+A)\times(A+A)$ also. So then
+
+\begin{align*}
+\sum_{i=1}^{s}|B_i|^2 &\le 2|A + A|^2\\
+\therefore \frac{|A|^4}{|A.A|} \le \sum\rho_A^\times(x)^2 &\le 2|A+A|^2 \lceil\log_2|A|\rceil
+\end{align*}
+
+Now we are done; we have that
+\begin{align*}
+	|A+A|^2|A.A| &\ge \frac{|A|^4}{2\lceil\log_2|A|\rceil}\\
+	\implies \max\{|A+A|,|A.A|\}&\ge \frac{|A|^{4/3}}{2^{1/3}\lceil\log_2|A|\rceil^{1/3}}
+\end{align*}
+
 
 \end{document}
