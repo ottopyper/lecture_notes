@@ -1,10 +1,16 @@
 \babel@toc {english}{}
-\contentsline {section}{\numberline {1}Review of First Order Logic}{3}%
-\contentsline {section}{\numberline {2}Complete Theories}{5}%
-\contentsline {section}{\numberline {3}Homomorphisms}{7}%
-\contentsline {section}{\numberline {4}Categoricity}{9}%
-\contentsline {section}{\numberline {5}Algebraically Closed Fields}{11}%
-\contentsline {section}{\numberline {6}Diagrams \& Extensions}{13}%
-\contentsline {section}{\numberline {7}Quantifier Elimination}{15}%
-\contentsline {section}{\numberline {8}Types}{19}%
-\contentsline {subsection}{\numberline {8.1}Type Spaces}{21}%
+\contentsline {section}{\numberline {0}Review of First Order Logic}{3}%
+\contentsline {section}{\numberline {1}Lecture 2}{5}%
+\contentsline {section}{\numberline {2}Homomorphisms}{7}%
+\contentsline {section}{\numberline {3}Categoricity}{9}%
+\contentsline {section}{\numberline {4}Algebraically Closed Fields}{11}%
+\contentsline {section}{\numberline {5}Diagrams \& Extensions}{13}%
+\contentsline {section}{\numberline {6}Lecture 7}{15}%
+\contentsline {section}{\numberline {7}Lecture 8}{16}%
+\contentsline {section}{\numberline {8}Lecture 9}{18}%
+\contentsline {section}{\numberline {9}Lecture 10}{20}%
+\contentsline {subsection}{\numberline {9.1}Type Spaces}{21}%
+\contentsline {section}{\numberline {10}Lecture 12}{23}%
+\contentsline {section}{\numberline {11}dummy}{24}%
+\contentsline {section}{\numberline {12}Lecture}{24}%
+\contentsline {section}{\numberline {13}Prime \& Atomic Models}{26}%

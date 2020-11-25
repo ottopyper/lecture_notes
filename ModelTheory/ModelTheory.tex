@@ -126,6 +126,8 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
+\setcounter{section}{-1}
+
 %\marginpar{to describe which lecture it is}
 
 \newcommand{\Na}{\mathbb{N}}
@@ -171,6 +173,8 @@
 \newcommand{\D}{\mathcal{D}}
 \newcommand{\sman}{S_n^\M(A)}
 
+\renewcommand{\subset}{\subseteq}
+
 \title{Model Theory}
 \author{Lectures by Gabriel Conant}
 \date{}
@@ -182,7 +186,6 @@
 	\tableofcontents
 	\clearpage
 
-\marginpar{Lecture 1}
 \section{Review of First Order Logic}
 
 A \undf{language} is a set $\L$ of function symbols, relation symbols, and constant symbols. Additionally, each function/relation symbol has an assigned \it{arity} $n\ge 1$.
@@ -281,7 +284,7 @@ Similarly, $\exists x(x=x)$ (``The Axiom of Non-Triviality'') is always satisfie
 
 A consequence of \undf{G{\"o}del's Completeness Theorem} is that a theory is satisfiable iff it is consistent. This is a very important theorem, though we will mostly be focussing on the model theoretic aspect (satisfiability).
 
-\marginpar{Lecture 2}
+\section{Lecture 2}
 
 We now consider a fixed language $\L$.
 
@@ -321,7 +324,7 @@ Then $M^{\ast}\models\Sigma$, so $T$ is finitely satisfiable. Hence by the Compa
 Then let $\mathcal{N}$ be the reduct of $\mathcal{N}^\ast$ to $\L$ (same universe, different interpretation). Then $\mathcal{N}\models T$ and $|N| = \kappa$.
 \end{proof}
 
-\section{Complete Theories}
+\section*{Complete Theories}
 
 \begin{defin}[Semantic Entailment]
 Let $T$ be an $\L$-theory and $\phi$ an $\L$-sentence. Then $T\models \phi$ (`$T$ \undf{models} $\phi$, `$T$ \undf{implies} $\phi$') if any model of $T$ is also a model of $\phi$.
@@ -389,7 +392,6 @@ Suppose $T$ is not complete. Then there is a sentence $\phi$ such that $T\cup\{\
 By (a), these theories have infinite models. By Lowenheim-Skolem, these theories have models of size $\kappa$. But these are both models of $T$ and hence are elementarily equivalent $\bot$ by (b).
 \end{proof}
 
-\marginpar{Lecture 3}
 
 Showing that two structures are elementarily equivalent is often difficult to do directly, so we need to find other ways around it.
 
@@ -509,7 +511,6 @@ Then $\M \subset \N$ and $\M \equiv \N$, but $\M\not\preceq\N$, for instance $\M
 So the inclusion map might be an embedding, but it is not necessarily elementary.
 \end{ex}
 
-\marginpar{Lecture 4}
 
 \section{Categoricity}
 
@@ -612,7 +613,6 @@ If in fact the condition above is strengthened to $\preceq$, then we say it is a
 If $(M_i)_{i<\alpha}$ is a chain then we have a well-defined structure $\bigcup_{i < \alpha}\M_i$.
 \end{defin}
 
-\marginpar{Lecture 5}
 
 \section{Algebraically Closed Fields}
 
@@ -718,7 +718,6 @@ Let $\phi$ be an $\L$-sentence. TFAE
 \end{enumerate}
 \end{theorem}
 
-\marginpar{Lecture 6}
 
 \section{Diagrams \& Extensions}
 
@@ -783,7 +782,7 @@ So $H\models \Sigma$. So done by Compactness.
 \end{proof}
 
 
-\section{Quantifier Elimination}
+\section*{Quantifier Elimination}
 
 \underline{Idea}: Let $T$ be an $\L$-theory and let $\M\models T$. Then $X\subset M^n$ is \undf{definable} if there is an $\L$-formula $\phi(x_1,\dots,x_n)$ such that $X = \{\bar{a}\in M^n : \M\models \phi(\bar{a})\}$.
 
@@ -805,7 +804,7 @@ That is to say, $\phi$ and $\psi$ define the same set in any $\M\models T$.
 
 Then $T\models \forall w\forall x\forall y\forall z\big(\phi(w,x,y,z)\leftrightarrow wz-xy\ne 0\big)$.
 
-\marginpar{Lecture 7}
+\section{Lecture 7}
 
 \item $T = \Th(\R,+,\cdot,0,1)$. $\phi(x)$ is $\exists y(x = y^2)$. Note that $\phi$ defines $\R^{\ge 0}$. We can in fact not write this quantifier-free:
 
@@ -863,7 +862,7 @@ So it suffices to show $\Sigma$ has a model, which we will do by compactness. Su
 \end{proof}
 
 
-\marginpar{Lecture 8}
+\section{Lecture 8}
 
 \begin{remark*}
 Recall Theorem 6.2 (QE test)
@@ -958,7 +957,7 @@ The proof of Theorem 7.6 shows this when $\M$ is countable. Then for any $\M\mod
 \begin{remark*}[Exercise]
 	Suppose $\M,\N\models\rg$ countable and $f: X\ra Y$ is a graph isomorphism for some finite $X\subset \M$ and $Y\subset \N$. Then $f$ extends to an isomorphism from $\M$ to $\N$.
 \end{remark*}
-\marginpar{Lecture 9}
+\section{Lecture 9}
 
 \begin{theorem}
 RG has QE
@@ -974,7 +973,7 @@ Each $\theta_{s,t}$ is one of: $x_i = x_j, x_i = y,E(x_i,x_j),E(x_i,y)$, or the 
 Then $\N\models \bigwedge_{t}\theta_{s,t}(\bar{a},c)$ (check). So $\N\models \phi(\bar{a},c)$.
 \end{proof}
 
-\section{Types}
+\section*{Types}
 
 \underline{Motivation}: Given $\M$, we want to understand ``potential behaviour'' of elements in elementary extensions.
 
@@ -1014,7 +1013,7 @@ Fix $\Sigma \subset p \cup \Th_M(\M)$ finite. So $\Sigma \subset p \cup \{\phi_1
 Since $\N\models \exists \bar{v}\phi(\bar{v})$, there is $\bar{c} \in N^m$ such that $\N\models \phi(\bar{c})$. Expand $\N$ to an $\L_M$-structure such that $\underline{b}_i^\N = c_i$ and $\underline{b}^\N$ is arbitrary for $b\in M\backslash (A\cup \{b_1,\dots,b_m\})$. Then $\N\models \phi(\underline{b}_1,\dots,\underline{b}_m)$, \it{i.e.} $\N\models \phi^\ast$. So $\N\models \Sigma$.
 \end{proof}
 
-\marginpar{Lecture 10}
+\section{Lecture 10}
 
 \begin{remark}
 If $\M\le \N$ and $A \subset M$, then $S_n^\M(A) = S_n^\N(A)$.
@@ -1157,7 +1156,7 @@ We now build $\M = \N_0 \le \N_1\le \N_2\le \dots$ such that $|N_i| \le |M|+|\L|
 $\N$ is $\aleph_0$-homogeneous: any $\bar{a},\bar{b},c$ from $\N$ all lie in $N_i$ for some $i$, so we find a solution in $\N_{i+1}$.
 \end{proof}
 
-\marginpar{Lecture 12}
+\section{Lecture 12}
 %fine, I'll start using his system...
 \underline{Recall}: $\M$ is $\kappa$-saturated $\implies |\M| \ge \kappa$.
 
@@ -1227,7 +1226,139 @@ If $a\in A\subset M$, then $\tp^\M(a/A)$ is isolated since $\{\tp^\M(a/A)\} = [x
 (ii)$\implies$(iii). Assume $\phi(\bar{x})$ isolates $p$. Fix an $\L_A$-formula $\psi(\bar{x})\in p$. WTS $\M\models \forall \bar{x}(\phi(\bar{x})\ra\psi(\bar{x}))$. Suppose $\bar{a}\in M^n$ such that $\M\models \phi(\bar{a})$. Then $\tp^\M(\bar{a}/A)\in [\phi(\bar{x})]$, so $p = \tp^\M(\bar{a}/A)$. So $\M\models \psi(\bar{a})$.
 
 (iii)$\implies$(ii). Assume (iii). Then for all $\L_A$-formulae $\psi(\bar{x})\in p$, we have $\phi(\bar{x})\subset[\psi(\bar{x})]$ since any $q \in [\phi(\bar{x})]$ is realised by $\bar{a} \in N^n$ in some $\N\models \Th_A(\M)$. So $\N\models \psi(\bar{a})$. So $q \in [\psi(\bar{x})]$. If $q \in [\phi(\bar{x})]$ then $p\subset q$. So $[\phi(\bar{x})] = \{p\}$.
+\end{proof} 
+\section{dummy}
+\section{Lecture}
+
+Let $T$ be a complete, consistent theory.
+
+\begin{prop}
+If $p \in S_n(T)$ is isolated then $p$ is realised in any $\M\models T$.
+\end{prop}
+\begin{proof}
+Fix $p \in S_n(T)$ isolated by $\phi(\bar{x})\in p$. Fix $\M\models T$. By Prop 8.4, there is $\N\succeq \M$ realising $p$. So $\N\models \exists \bar{x}\phi(\bar{x})$. So $\M\models \exists \bar{x}\phi(\bar{x})$. Fix $\bar{a}\in M^n$ such that $\M\models \phi(\bar{a})$. We then show $\bar{a}\models p$.
+
+Fix $\psi(\bar{x})\in p$. Then $T\models \forall \bar{x}(\phi(\bar{x})\ra\psi(\bar{x}))$. So $\M\models \psi(\bar{a})$.
 \end{proof}
+
+\begin{theorem*}[Omitting Types Theorem]
+Assume $\L$ is countable, and $p \in S_n(T)$ is non-isolated. Then there is countable $\M\models T$ such that $p$ is not realised in $\M$ (\it{i.e.} $\M$ \undf{omits} $p$)
+\end{theorem*}
+
+This is a relatively complicated argument.
+
+\begin{proof} (Henkin construction; non-examinable)
+Let $\L^\ast = \L\cup C$, where $C$ is a countably infinite set of new constant symbols.
+
+An $\L^\ast$-theory $T^\ast$ has the \undf{witness property} if for any $\L^\ast$-formula $\phi(x)$ there is a constant symbol $c\in C$ such that $T^\ast \models(\exists x\phi(x)\ra \phi(c))$.
+
+\underline{Fact}: (Part II) Suppose $T^\ast$ is a complete, satisfiable $\L^\ast$-theory with the witness property.
+
+Define $\sim$ on $C$ such that $c\sim d$ iff $T^\ast \models c = d$. Let $M = C/\sim$ and define an $\L^\ast$-structure $\M$ on $M$ such that
+\begin{align*}
+	\left\lbrace \begin{array}{ll} c^\M = [c] \textrm{ ($\sim$-equivalence class)} \\ f^\M([c_1],\dots,[c_n]) = [d] \textrm{ iff } T^\ast \models f(c_1,\dots,c_n) = d\\
+	R^\M = \{([c_1],\dots,[c_n])\in M^n:T^\ast\models R(c_1,\dots,c_n)\} \end{array}\right.
+\end{align*}
+Then $\M$ is a well-defined $\L^\ast$ structure and $\M\models T^\ast$ - this requires checking. In particular, for any $\L$-formula $\phi(x_1,\dots,x_n)$ and $c_1,\dots,c_n\in C$, $\M\models \phi([c_1],\dots,[c_n])$ iff $T^\ast\models \phi(c_1,\dots,c_n)$, the $\L^\ast$-sentence.
+
+We call $\M$ the \undf{Henkin model} of $T^\ast$.
+
+Fix $p \in S_N(T)$ non-isolated.
+
+\underline{Goal}: Build a complete, satisfiable $L^\ast$-theory $T^\ast\supseteq T$ with the witness property such that $\forall c_1,\dots,c_n\in C$ there is $\psi(\bar{x})\in p$ such that $T^\ast\models \neg\psi(c_1,\dots,c_n)$.
+
+Then given such a $T^\ast$, the Henkin model omits $p$ since it denies some formula from $p$ on every tuple of (equivalence classes of) constants.
+
+Enumerate all $\L^\ast$-sentences $\phi_0,\phi_1,\dots$ and also enumerate $C^n = \{\bar{c}_0,\bar{c}_1,\dots\}$. We build a satisfiable $\L^\ast$-theory $T^\ast = T\cup\{\theta_0,\theta_1,\dots\}$ such that
+\begin{enumerate}[label=\arabic*)]
+	\setcounter{enumi}{-1}
+\item $\models \theta_i\ra\theta_j$ for all $i > j$ (this is for convenience)
+\item Either $\models \theta_{3i+1}\ra\phi_i$ or $\models \theta_{3i+1}\ra\neg\phi_i$ (completeness)
+\item If $\phi_i$ is $\exists v\psi(v)$ for some $\psi$ and $\models \theta_{3i+1}\ra\phi_i$, then $\models \theta_{3i+2}\ra\psi(c)$ for some $c\in C$
+
+(witness property: $T^\ast \models (\exists v\psi(v)\ra\psi(c))$ as $\N\models T^\ast$ and $\N\models \exists v\psi(v)$, and $\N\models \phi_i$ so $\N\models \psi(c)$)
+
+\item $\models \theta_{3i+3}\ra\neg\psi(\bar{c}_i)$ for some $\psi(\bar{x})\in p$ (omit $p$)
+\end{enumerate}
+
+We construct this model inductively. Let $\theta_0$ be $\forall v(v=v)$ ($\theta_0$ does nothing). Now suppose we have $\theta_0,\dots,\theta_m$ as above.
+
+\underline{Case 1}: $m+1 = 3i+1$. If $T\cup\{\theta_m,\phi_i\}$ is satisfiable then $\theta_{m+1}$ is $\theta_m\land\phi_i$. Otherwise, let $\theta_{m+1}$ be $\theta_m\land \neg\phi_i$. Then $T\cup\{\theta_{m+1}\}$ is satisfiable, since in either case we're adding the conjunction of two axioms. This relies on the inductive hypothesis that $T\cup\{\theta_m\}$ is satisfiable.
+
+\underline{Case 2}: $m+1 = 3i+2$. Suppose $\phi_i$ is $\exists v\psi(v)$ for some $\psi$, and $\models \theta_m\ra \phi_i$ (if this fails we simply let $\theta_{m+1}$ be $\theta_m$). Choose $c\in C$ not used in $\theta_m$. Let $\theta_{m+1}$ be $\theta_m\land\psi(c)$. This satisfies the above hypotheses. Moreover, $T\cup\{\theta_{n+1}\}$ is satisfiable: Let $\N\models T\cup\{\theta_m\}$. Then $\N\models \phi_i$. Choose $a\in N$ such that $\N\models \psi(a)$. Re-interpret $c^\N = a$. Then $\N\models T\cup\{\theta_{m+1}\}$.
+
+\underline{Case 3}: $m+1 = 3i+3$. Let $\bar{c}_i = (c_1,\dots,c_n)$. WLOG assume $x_1,\dots,x_n$ are not used in $\theta_m$. We build an $\L$-formula $\phi(x_1,\dots,x_n)$ from $\theta_m$ as follows:
+\begin{itemize}
+	\item replace $c_t$ by $x_t$ for all $t \le n$.
+	\item then replace any $c\in C\backslash\{c_1,\dots,c_n\}$ by a new variable $v_c$ and add $\exists v_c$ to the front.
+\end{itemize}
+Then $\phi(\bar{x})$ does not isoalte $p$. By Prop 11.6, $\exists \psi(\bar{x})\in p$ such that $\not\models \forall\bar{x}(\phi(\bar{x})\ra\psi(\bar{x}))$.
+
+Let $\theta_{m+1}$ be $\theta_m\land \neg\psi(c_1,\dots,c_n)$. $T\cup\{\theta_{m+1}\}$ is satisfiable: Choose $\N\models T$ such that $\N\not\models \forall \bar{x}(\phi(\bar{x})\ra\psi(\bar{x}))$. Pick $\bar{a}\in N^n$ such that $\N\models \phi(\bar{a})\land \neg\psi(\bar{a})$. Make $\N$ an $\L^\ast$-structure:
+
+Interpret $c_t^\N$ as $a_t$. If $c\in C\backslash\{c_1,\dots,c_n\}$, then $c^\N$ is a witness to $\exists v_c$ in $\N\models \phi(\bar{a})$. Then $\N\models \theta_m$ and $\N\models \neg\psi(c_1,\dots,c_t)$. So $\N\models \theta_{m+1}$.
+\end{proof}
+
+\section{Prime \& Atomic Models}
+
+$T$ is a complete, consistent $\L$-theory with infinite models.
+
+\begin{defin}\ 
+\begin{enumerate}[label=\arabic*)]
+	\item $\M$ is \undf{atomic} if every $n$-type over $\emptyset$ realized in $\M$ is isolated
+	\item $\M$ is \undf{prime} if for any $\N\models T$ there is an elementary embedding $\M\xhookrightarrow{}\N$
+\end{enumerate}
+\end{defin}
+
+\begin{remark*}[Example]
+$K\models \acf_0$. Then $\bar{\Q}\subseteq K$. So $\bar{\Q}\preceq K$ by QE.
+\end{remark*}
+\begin{theorem}
+Assume $\L$ is countable. Then $\M\models T$ is prime iff it is countable and atomic.
+\end{theorem}
+So up to issues of cardinality, we can think of prime and atomic as the same thing.
+\begin{proof}
+$\implies$: Assume $\M\models T$ is prime. Then $\M$ is countable since $T$ has a countable model (by DLST), into which $\M$ embeds. Suppose $p \in S_n(T)$ is non-isolated. By OTT there is some $\N\models T$ omitting $p$. Since $\M\preceq\N$, $\M$ omits $p$. So $\M$ is atomic.
+
+$\impliedby$: Assume $\M\models T$ is countable and atomic. Fix $\N\models T$. WTS $\M\preceq\N$. Enumerate $M = \{a_n:n\ge 1\}$. We build partial elementary $f_0\subset f_1\subset f_2\dots$ from $M$ to $N$ such that $a_n\in \textrm{dom}(f_n)$ and dom$(f_n)$ is finite. Then $f = \bigcup f_n$ is an elementary embedding from $\M$ to $\N$.
+
+We start as before with $f_0 = \emptyset$, which is partial elementary since $\M\equiv \N$. Now suppose we have $f_n$. Let $\phi(x_1,\dots,x_{n+1})$ be a n $\L$-formula isolating $\tp^\M(a_1,\dots,a_{n+1})$, which exists since $\M$ is atomic. $\M\models \exists x_{n+1}\phi(a_1,\dots,a_n,x_{n+1})$, so $\N\models \exists x_{n+1}\phi(f_n(a_1),\dots,f_n(a_n),x_{n+1})$. Pick $b\in N$ such that $\N\models \phi(f(a_1),\dots,f_n(a_n),b)$. Fix an $\L$-formula $\psi(x_1,\dots,x_{n+1})$ such that $\M\models \psi(a_1,\dots,a_{n+1})$. WTS $\N\models \psi(f_n(a_1),\dots,f_n(a_n),b)$.
+
+By Prop 11.6, $T\models \forall x_1\dots\forall x_{n+1}(\phi(\bar{x})\ra\psi(\bar{x}))$. So $\N\models \psi(f_n(a_1),\dots,f_n(a_n),b)$. So $f_{n+1} = f_n\cup\{(a_{n+1},b)\}$ is partial elementary.
+\end{proof}
+
+\begin{theorem}
+Assume $\L$ is countable. TFAE:
+\begin{enumerate}[label=\roman*)]
+	\item $T$ has a prime model
+	\item $T$ has an atomic model
+	\item For all $n\ge 1$, the isolated types in $S_n(T)$ are dense.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+We have (i)$\iff$(ii) by Theorem 13.2 (and Sheet 1 \#9).
+
+(ii)$\implies$(iii): Let $\M\models T$ be atomic. Fix $n\ge 1$, and an $\L$-formula $\phi(\bar{x})$ such that $[\phi(\bar{x})]\ne \emptyset$. WTS $[\phi(\bar{x})]$ contains an isolated type. Note $\M\models \exists \bar{x}\phi(\bar{x})$. Choose $\bar{a}\in M^n$ such that $\M\models \phi(\bar{a})$. Then $\tp^\M(\bar{a})$ is isolated (since $\M$ is atomic) and it is in $[\phi(\bar{x})]$.
+
+(iii)$\implies$(ii): [Henkin construction, non-examinable] Let $\L^\ast = \L\cup\{c_1,c_2,\dots\}$. Let $\phi_0,\phi_1,\dots$ enumerate all $\L^\ast$-sentences. We build $T^\ast = T \cup \{\theta_0,\theta_1,\dots\}$ such that $T^\ast$ is complete, satisfiable, has the witness property, and such that the Henkin model of $T^\ast$ is atomic (as an $\L$-structure). This is similar to the OTT.
+
+Let $\theta_0$ be $\forall x(x=x)$. Suppose we have $\theta_0,\theta_1,\dots,\theta_m$.
+
+The cases $m+1\in \{3i+1,3i+2\}$ are identical to the proof of OTT.
+
+\underline{Case $m+1 = 3i+3$}: Choose $n\ge i$ such that all new constants used in $\theta_n$ are in $\{c_1,\dots,c_n\}$. Let $\psi(x_1,\dots,x_n)$ be an $\L$-formula such that $\theta_m$ is $\psi(c_1,\dots,c_n)$. By induction, $T\cup\{\theta_m\}$ is consistent. So $T\cup\{\psi(x_1,\dots,x_n)\}$ is consistent, and so $[\psi(\bar{x})]\ne \emptyset$. Then by (iii), there is some isolated type $p \in [\psi(\bar{x})]$. Let $\phi(\bar{x})$ isolate $p$. Let $\theta_{m+1}$ be $\theta_m\land \phi(c_1,\dots,c_n)$.
+
+$T\cup\{\theta_{m+1}\}$ is consistent: choose $\N\models T$ with $\bar{a}\in N^n$ realising $p$. Expand $\N$ to an $\L^\ast$-structure such that $c_i^\N = a_i$ (for $i\le n$). Then $\N\models T\cup\{\theta_{m+1}\}$.
+
+Now let $\M\models T^\ast$ be the Henkin model. WTS $\M$ is atomic (as an $\L$-structure). For arbitrarily large $n$, we have $\phi(x_1,\dots,x_n)$ isolating $p \in S_n(T)$ such that $T^\ast \models \phi(c_1,\dots,c_n)$. So $\tp^\M(c_1^\M,\dots,c_n^\M)$ is isolated for all $n\ge1$.
+
+For any tuple $\bar{a}$ from $\M$, WTS $\tp^\M(\bar{a})$ is isolated. WLOG the coordinates of the tuple are distinct, \it{i.e.} $(a,b,c)$ isolated by $\psi(x_1,x_2,x_3)$, $(a,a,b,c)$ isolated by $\psi(x_1,x_3,x_4)\land x_2 = x_3$.
+
+So $\bar{a}$ is a sub-tuple of $([c_1],\dots,[c_n])$ for some $n$.
+
+\underline{General fact}: Given any $\M$ and $a_1,\dots,a_n\in M$, if $\tp^\M(a_1,\dots,a_n)$ is isolated by $\phi(x_1,\dots,x_n)$, then for all $\emptyset\ne I\subset \{1,\dots,n\}$, $\tp^\M((a_i)_{i\in I})$ is isolated by $(\exists x_i)_{i\not\in I}\phi(x_1,\dots,x_n)$.
+\end{proof}
+
 
 \end{document}
 
