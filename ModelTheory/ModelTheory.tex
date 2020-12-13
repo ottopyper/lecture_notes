@@ -11,6 +11,11 @@
 \usepackage[margin=1.2in]{geometry}
 \usepackage{enumerate}
 \usepackage{enumitem}
+\usepackage{tikz}
+\newcommand*\circled[1]{%
+   \tikz[baseline=(C.base)]\node[draw,circle,inner sep=1.2pt,line width=0.2mm,](C) {#1};}
+\newcommand*\Myitem{%
+   \stepcounter{enumi}\item[\circled{\theenumi}]}
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -1359,36 +1364,329 @@ So $\bar{a}$ is a sub-tuple of $([c_1],\dots,[c_n])$ for some $n$.
 \underline{General fact}: Given any $\M$ and $a_1,\dots,a_n\in M$, if $\tp^\M(a_1,\dots,a_n)$ is isolated by $\phi(x_1,\dots,x_n)$, then for all $\emptyset\ne I\subset \{1,\dots,n\}$, $\tp^\M((a_i)_{i\in I})$ is isolated by $(\exists x_i)_{i\not\in I}\phi(x_1,\dots,x_n)$.
 \end{proof}
 
+\section{Lecture}
+$T$ is a complete theory in a countable language with infinite models.
 
-\end{document}
+\begin{remark*}[Recall]
+For any $n\ge1$, $|S_n(T)|\le 2^{\aleph_0}$.
+\end{remark*}
+\begin{lemma}
+	For any $n\ge 1$, if $|S_n(T)| < 2^{\aleph_0}$ then $S_n(T)$ is countable and the isolated types are dense.
+\end{lemma}
+Note that this is a purely topological result, as is seen in the proof.
+\begin{proof}
+	$S_n(T)$ is a second countable, totally disconnected, compact, Hausdorff space. Let $X$ be any such space. We show that if $X$ is uncountable \it{or} the isolated points are not dense, then $|X| \ge 2^{\aleph_0}$.
+
+	Let $\mathcal{B}$ be a countable basis for $X$ consisting of clopen sets, and assume $\mathcal{B}$ is closed under intersections and complements (is a \it{Boolean algebra})
+
+	\underline{Case 1}: $X$ is uncountable.
+
+	\underline{Claim}: If $U\in \mathcal{B}$ and $|U| > \aleph_0$ then $\exists V\in \mathcal{B}$ such that $|U\cap V|,|U\backslash V| > \aleph_0$.
+	
+	\underline{Proof of claim}: Suppose not. Let $\mathcal{C} = \{V\in \mathcal{B}:|U\cap V| > \aleph_0\}$. Fix $V_1,V_2\in \mathcal{C}$. Set $W = V_1\cap V_2$. If $W\not\in \mathcal{C}$ then $|U\backslash W| > \aleph_0$. Note $U\backslash W = (U\backslash V_1)\cup(U\backslash V_2)$, so WLOG $|U\backslash V_1| > \aleph_0$, which is a contradiction since $V_1\in \mathcal{C}$. So $\mathcal{C}$ is a collection of non-empty closed sets, and $\mathcal{C}$ is closed under intersections. Since $X$ is compact, there is some $p \in X$ such that $p \in V$ for all $V \in \mathcal{C}$. We then show that $$U = \{p\}\cup\bigcup_{V\in \mathcal{B}\backslash\mathcal{C}}U\cap V$$
+	Then $U$ is a countable union of countable sets, and hence countable.
+
+	To do this, we fix $q \in U$ such that $q \ne p$. There is $V\in \mathcal{B}$ such that $q \in V$ and $p \not \in V$. So $V \in \mathcal{B}\backslash \mathcal{C}$. So $q \in U\cap V$.$\ \  \qedsymbol$
+
+	\underline{Notation}: $2^\omega$ is the set of seqeuences of $0,1$ indexed by $\mathbb{N}$. $2^{<\omega}$ is the set of finite sequences of $0,1$. We have a partial order on $2^\omega \cup 2^{<\omega}$ given by proper initial segment.
+
+	We build a collection $\{U_\sigma\}_{\sigma\in 2^{<\omega}}$ such that $\forall \sigma \in 2^{<\omega}$, $U_\sigma \in \mathcal{B}$, $|U_{\sigma}| > \aleph_0$, $U_{\sigma} = U_{\sigma 0}\cup U_{\sigma 1}$, and $U_{\sigma0}\cap U_{\sigma1} = \emptyset$. Let $U_{\emptyset} = X$. Given $U_\sigma$, let $V \in \mathcal{B}$ be as in the Claim. Let $U_{\sigma 0} =  U_\sigma \cap V$ and $U_{\sigma 1} = U_\sigma\backslash V$.
+
+	Now, for any $\alpha \in 2^\omega$, there is $p_\alpha \in \bigcap_{i\ge 0}U_{\alpha\upharpoonright i}$, where $\alpha \upharpoonright i$ is the infinite sequence $\alpha$ cut off after the first $i$ entries. By construction, $\alpha \ne \beta\implies p_\alpha \ne p_\beta$. So $|X|\ge 2^{\aleph_0}$.
+
+	\underline{Case 2}: The isolated points in $X$ are not dense.
+
+	We will build $\{U_\sigma\}_{\sigma \in 2^{<\omega}}$ as above, but just iwth $U_\sigma \ne \emptyset$.
+
+	Let $U_\emptyset$ be a non-empty clopen set with no isolated points. Suppose we have $U_\sigma$. $U_\sigma$ has no isolated points, so there exist distinct $p,q \in U_\sigma$. Partition $U_\sigma$ into $U_{\sigma 0}$ and $U_{\sigma 1}$ with $p \in U_{\sigma 0}$ and $q \in U_{\sigma 1}$ by Hausdorffness. As before, $|X|\ge 2^{\aleph_0}$.
+\end{proof}
+
+\begin{theorem}\ 
+	\begin{enumerate}[label=\alph*)]
+		\item Suppose $|S_n(T)|<2^{\aleph_0}$ for all $n$. Then $T$ has a prime model and a countable saturated model.
+		\item If $T$ has a countable model, then $T$ has a prime model.
+	\end{enumerate}
+\end{theorem}
+\begin{proof} (a): Apply Lemma 14.1, Theorem 13.3 and Theorem 11.2.
+
+	(b): Apply Theorem 11.2, Lemma 14.1, Theorem 13.3.
+\end{proof}
+
+\begin{remark*}[Fact]
+$\Th(\Z,+,0)$ has no countable saturated model (Ex 11.3(c)), and no prime model (Baldwin, Blass, Glass, Kuecker 1972). This is (essentially) because the type of $1$ is not isolated; there is no way to pin down what $1$ really is.
+
+On the other hand, $\Th(\Z,+,0,1)$ then there is a prime model and no countable saturated model.
+\end{remark*}
+
+\begin{defin}
+	For $\kappa \ge \aleph_0$, let $I(T,\kappa)$ be the number of models of $T$ of size $\kappa$ up to isomorphism.
+\end{defin}
+\begin{remark*}
+	$1 \le I(T,\kappa) \le 2^\kappa$, where the upper bound is given by the number of $\L$-strucutres of size $\kappa$, which are determined (essentially) by picking subsets of a set of size $\kappa$ (relations, graphs of functions).
+
+	[Recall Morley's Theorem: If $I(T,\kappa) =1 $ for some $\kappa > \aleph_0$, then $I(T,\kappa) = 1$ for all $\kappa > \aleph_0$.]
+\end{remark*}
+\begin{prop}
+	If $I(T,\aleph_0) < 2^{\aleph_0}$, then $S_n(T)$ is countable for all $n\ge 1$ (and so $T$ has a prime model and a countable, saturated model).
+\end{prop}
+\begin{proof}
+	Assume $I(T,\kappa) = \kappa < 2^{\aleph_0}$. Let $(\M_i)_{i<\kappa}$ be all countable models of $T$. Fix $n$. Let $X_i$ be the set of $p \in S_n(T)$ realised in $\M_i$. Each $X_i$ is countable and $S_n(T) = \bigcup_{i<\kappa}X_i$. So $|S_n(T)|\le \kappa < 2^{\aleph_0}$. So $S_n(T)$ is countable by Lemma 14.1.
+\end{proof}
+
+\begin{remark*}[Example]
+	$T = \acf_p$. $I(T,\aleph_0) = \aleph_0$. Also $T = $ TFDAG.
+\end{remark*}
+
+\begin{remark*}[Vaught's Conjecture (1961)]
+	If $I(T,\aleph_0) < 2^{\aleph_0}$, then $I(T,\aleph_0) \le \aleph_0$.
+\end{remark*}
+This is, of course, trivial if one assumes CH - but it is an open problem of ZFC, and one of the oldest in model theory.
+\begin{remark*}[Morley (1970)]
+	If $I(T,\aleph_0) < 2^{\aleph_0}$ then $I(T,\aleph_0)\le \aleph_1$.
+\end{remark*}
+
+\section{Lecture}
+
+\begin{remark*}[Examples of $I(T,\aleph_0)$]\ \\
+	\underline{$I(T,\aleph_0) = 2^{\aleph_0}$}:\ 
+	\begin{enumerate}
+		\item $T = \Th(\Z,+,0)$ [$|S_1(T)| = 2^{\aleph_0}\implies I(T,\aleph_0) = 2^{\aleph_0}$]
+		\item $T = \Th(\Z,<)$. In this case, $S_n(T)$ is countable for all $n$ (via Sheet 2 \#5)
+		
+		Given a linear order $\A$, let $\M_\A = \Z\cdot \A$ (\it{i.e.} replace each point in $\A$ with a copy of $\Z$). Then $\M_\A\models T$. Now $A\not\cong \mathcal{B} \implies \M_\A \not\cong \M_{\mathcal{B}}$. By Cantor, \# of countable linear orders is $2^{\aleph_0}$, and so $I(T,\aleph_0) = 2^{\aleph_0}$.
+	\end{enumerate}
+
+	\underline{$I(T,\aleph_0) = \aleph_0$}: $\acf_p$, TFDAG.
+
+	\underline{$I(T,\aleph_0) = 1$}: (\it{i.e.} $T$ is $\aleph_0$-categorical) DLO, RG, InfSets.
+\end{remark*}
+
+\begin{remark}
+	If $T$ is $\aleph_0$-categorical then its unique countable model is saturated and prime by Prop 14.4.
+\end{remark}
+
+\begin{theorem}[Ryll-Narzewski/Enegler/Svenonius 1959]
+	Let $T$ be a complete theory in a countable language with infinite models. TFAE:
+	\begin{enumerate}[label=\emph{\roman*)}]
+		\item $T$ is $\aleph_0$-categorical
+		\item $\forall n\ge 1$, every type in $S_n(T)$ is isolated.
+		\item $\forall n\ge 1$, $S_n(T)$ is finite.
+		\item $\forall n\ge 1$, the number of $\L$-formulae in $x_1,\dots,x_n$ is finite, up to equivalence in $T$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	(i)$\implies$(ii): Every type over $\emptyset$ is realised in the unique countable model, which is an atomic model (Remark 15.1).
+
+	(ii)$\implies$(iii): Suppose $X$ is a compact space, and every point is isolated. Then $(\{p\})_{p\in X}$ is an open cover, which has a finite subcover; hence $X$ itself is finite.
+
+	(iii)$\implies$(ii): If $X$ is Hausdorff and finite then all points are isolated.
+
+	(ii)/(iii)$\implies$(iv): Fix $n\ge 1$. Let $S_n(T) = \{[p_1,\dots,p_k\}$ and let $\phi_i(\bar{x})$ isolate $p_i$. Then for any $\L$-formula $\psi(\bar{x})$, we have that
+	\begin{align*}
+		T\models\forall\bar{x}\left(\psi(\bar{x})\leftrightarrow\bigvee_{\psi\in p_i}\phi_i(\bar{x})\right)
+	\end{align*}
+	by Prop 11.6.
+
+	(iv)$\implies$(ii): Fix $n\ge 1$. Let $\phi_1(\bar{x}),\dots,\phi_k(\bar{x})$ represent all $\L$-formulae in $x_1,\dots,x_n$. Then $p \in S_n(T)$ is isolated by
+	\begin{align*}
+		\bigwedge_{\phi_i\in p}\phi_i(\bar{x}) \land \bigwedge_{\phi_i\not\in p}\neg\phi_i(\bar{x})
+	\end{align*}
+
+	(ii)$\implies$(i): If (ii) holds, then every model of $T$ is atomic. So every model of $T$ is $\aleph_0$-homogeneous (Sheet 3 \#1a). Moreover, every model of $T$ realises all types in $S_n(T)$ by Prop 12.1. So every countable model of $T$ is saturated by Prop 10.5. So $T$ is $\aleph_0$-categorical by Prop 11.4.
+\end{proof}
+\begin{cor}
+	Let $G$ be an infinite group, and $T = \Th(G)$ (in the language of groups) is $\aleph_0$-categorical. Then $G$ has finite exponent.
+\end{cor}
+\begin{proof}
+	Want to show there is some $n\in \mathbb{N}$ such that $g^n = 1$ for all $g\in G$. Suppose not.
+
+	\underline{Case 1}: $G$ is torsion-free. WLOG $G$ is countable. Then $T\cup \{x^n\ne 1_G : n\ge 1\}$ is finitely satisfiable, so by DLST it has a countable model $H\not\cong G\ \false$.
+
+	\underline{Case 2}: There is some $g \in G$ of infinite order. For $k \ge 1$, let $p_k = \tp(g,g^k)\in S_2(T)$. If $k < \ell$ then $p_k$ contains $x_2 = x_1^k$, but $p_\ell$ does not. So $S_2(T)$ is infinite. Contradiction.
+\end{proof}
+
+\underline{Fact}: Any abelian group of finite exponent has an $\aleph_0$-categorical compelte theory.
+
+\begin{cor}
+	Suppose $T$ is a complete $\aleph_0$-categorical $\L$-theory, with $\L$ countable. Then, for any $\L_0 \subset \L$, $T\upharpoonright \L_0 = \{\phi\in T:\phi \textrm{ is an }\L\textrm{-sentence}\}$ is still $\aleph_0$-categorical.
+\end{cor}
+\begin{proof}
+	Apply Theorem 15.2(iv). If there are only finitely many $\L$-formulae modulo $T$, then there's only finitely many $\L_0$-formulae modulo the restriction of $T$ to $\L_0$ - and these characterise $\aleph_0$-categoricity.
+\end{proof}
+\begin{ex}\ [$I(T,\aleph_0) = 3$] Let $\L = \{<,c_0,c_1,c_2,\dots\}$.\ \\
+	Let $T = $ DLO $\cup\ \{c_n<c_{n+1}:n\ge0\}$.
+
+	\underline{Claim}: $T$ is complete.
+	\begin{proof}(Vaught's Test)
+		Fix countable $\M,\N\models T$. Want to show that $\M\equiv \N$. It suffices to show that the reducts to any finite sublanguage are isomorphic.
+		
+		\underline{Note}: DLO $\cup\ \{c_0 < c_1<\dots < c_n\}$ is $\aleph_0$-categorical (\it{e.g.} as in proof of Sheet 2 \#4).
+
+		\underline{Claim}: $I(T,\aleph_0) = 3$.
+		\underline{Proof of Claim}: $\M_1$ is $(\Q,<)$ with $c_n^{\M_1} = n$ (no upper bound for the constant $c_n$s). $\M_2$ is $(\Q,<)$ with $\sqrt{2} - 1/n < c_n^{\M_2} < \sqrt{2}$ (upper bound exists, but no supremum).
+		$\M_3$ is $(\Q,<)$ with $c_n^{\M_3} = 1 - 1/n$ (supremum exists).
+
+		These are three countable models of the theory, and no two of them are isomorphic since the upper bound properties must be preserved by isomorphism.
+
+		If $\M\models T$, then $\M\cong \M_i$ for some $i$, depending on which sup properties it has.
+
+		This can be modified to obtain $I(T,\aleph_0) = k$ for all $k\ge 3$ (Sheet 3 \#2).
+	\end{proof}
+\end{ex}
+
+\section{Lecture}
+
+\begin{theorem}[Vaught 1959]
+	Suppose $T$ is a complete $\L$-theory, with $\L$-countable. Then $I(T,\aleph_0) \ne 2$.
+\end{theorem}
+\begin{proof}
+	Assume for contradiction that $I(T,\aleph_0) = 2$. By Prop 14.4, $T$ has a prime model $\M$ and a countable, saturated model $\N$. By Theorem 15.2, there exists some non-isolated $p\in S_n(T)$ for some $n\ge 1$. So $\M$ omits $p$, and there exists $\bar{a}\in N^n$ realising $p$. Let $T^\ast = \Th_{\bar{a}}(\N)$. Then $\N$ is still saturated as an $\L_{\bar{a}}$-structure (Sheet 3 \#3). So $T^\ast$ has a prime model $\mathcal{B}$ by Theorem 14.2(b).
+
+	Let $\A = \mathcal{B}\upharpoonright\L\models T$. So $\A$ realises $p$. So $\A\not\cong\M$, and hence $\A\cong \N$. So then $\mathcal{B} = \N$ (Sheet 3 \#3). So the prime model of $T^\ast$ is saturated. So $T^\ast$ is $\aleph_0$-categorical by Theorem 15.2, so $T$ is $\aleph_0$-categorical by Corollary 15.4. $\false$
+\end{proof}
+
+\section*{Uncountably Saturated Models}
+
+\begin{theorem}
+	For any infinite $\M$ and any $\kappa \ge |\L| + \aleph_0$, there is an $\N\succeq\M$ such that $\N$ is $\kappa^+$-saturated and $|N| \le |M|^\kappa$.
+\end{theorem}
+\begin{proof}
+	Fix $\kappa \ge |\L| + \aleph_0$. Notation: $X\subset_\kappa Y$ means $X\subset Y$ and $|X| \le \kappa$.
+
+	\underline{Claim}: For any $\M$, there is $\N\succeq\M$ such that $|N|\le |M|^\kappa$ and $\N$ realises all types in $S_1^\M(A)$ for all $A\subset_\kappa M$.
+
+	\underline{Proof of Claim}: \# subsets of $\M$ of size $\le \kappa$ is $|M|^\kappa$ and if $|A|\le \kappa$, then $\S_1^\M(A)| \le 2^\kappa\le |M|^\kappa$. Enumerate all such types as $(p_\alpha)_{\alpha < |M|^\kappa}$ ($\alpha$ ordinal). Build an elementary chain $(\M_\alpha)_{\alpha < |M|^\kappa}$ such that $\M_0 = \M$, for limit $\alpha$ $\M_\alpha = \bigcup_{i<\alpha}\M_i$, and $\M_{\alpha+1} \succeq \M_\alpha$ realises $p_\alpha$ such that $\M_{\alpha+1} \le |M_\alpha| + |\L|$ (by Prop 8.4). Let $\N = \bigcup_\alpha \M_\alpha$. Then $|N| \le |M|^\kappa$ and $\N$ realises all $p_\alpha$. $\qedsymbol$
+
+	Fix $\M$. Now build elementary chain $(\N_\alpha)_{\alpha < \kappa^+}$ such that $|N_\alpha| \le |M|^\kappa$, and:
+	\begin{enumerate}
+		\item $\N_0 = \M$
+		\item $\alpha$ limit, $\N_\alpha = \bigcup_{i<\alpha}\N_i$
+		\item Given $\alpha < \kappa^+$, let $\N_{\alpha+1}\succeq \N_\alpha$ such that $|N_{\alpha+1}| \le |N_\alpha|^\kappa$ and $\N_{\alpha+1}$ realises all types over all sets $A\subset_\kappa N_{\alpha}$ (by the Claim).
+	\end{enumerate}
+	Then let $\N = \bigcup_{\alpha < \kappa^+}\N_\alpha$. By induction on $\alpha$, $|N|\le |M|^\kappa$. $\N$ is $\kappa^+$-saturated since $A\subset_\kappa N\implies A\subset_\kappa \N_\alpha$ for some $\alpha < \kappa^+$.
+\end{proof}
+
+Let $T$ be an $\L$-theory with infinite models.
+
+\begin{cor}
+	If $\kappa \ge |\L|+\aleph_0$ and $2^\kappa = \kappa^+$, then $T$ has a saturated model of size $\kappa$.
+\end{cor}
+\begin{proof}
+	By 16.2, $T$ has a $\kappa^+$-saturated model of size $(|\L|+\aleph_0)^\kappa = 2^\kappa = \kappa^+$.
+\end{proof}
+
+\underline{Fact}: If $\kappa > |\L| + \aleph_0$ is regular and $2^\lambda \le \kappa$ for all $\lambda < \kappa$, then $T$ has a saturated model of size $\kappa$.
+
+\begin{remark*}[Basic Facts]\ 
+	\begin{enumerate}[label = \arabic*)]
+		\item If $\M\equiv \N$, $|M| = |N|$ and $\M,\N$ are saturated, then $\M\cong \N$ (Sheet 3 \#4).
+		\item Suppose $\kappa > |\L| + \aleph_0$. Then $\M$ is $\kappa$-saturated iff $\M$ is $\kappa$-homogeneous and for all $\N\equiv \M$, if $|N| < \kappa$ then $\N$ elementarily embeds into $\M$ (we say $\M$ is \undf{$\kappa$-universal}).
+	\end{enumerate}
+\end{remark*}
+
+\section*{Stability}
+
+Let $T$ be a complete theory with infinite models.
+
+\begin{defin}
+	Given $\kappa \ge |\L| + \aleph_0$, we say $T$ is \undf{$\kappa$-stable} if for any $\M\models T$, $|M| = \kappa$, we have $|S_1(M)| = \kappa$. $T$ is \undf{stable} if it is $\kappa$-stable for some $\kappa \ge |\L| + \aleph_0$.
+\end{defin}
+
+\begin{ex}\ 
+	\begin{enumerate}
+		\Myitem $\acf_p$, TFADG are $\kappa$-stable for all $\kappa \ge \aleph_0$ (see Example 9.3).
+		\Myitem $T = \Th(\Z,+,0,1, (\equiv_n )_{n\ge 2})$, where $x\equiv_n y\iff \exists z(x-y = nz)$. $T$ has QE.
+
+		Fix $\M\models T$. Given $f:\{\textrm{primes}\}\ra \mathbb{N}$ such that $0\le f(n) < n$, we have a complete $1$-type $p_f = \{x\ne a:a\in \M\}\cup \{x\equiv_n f(n):n\textrm{ is prime}\}\in S_1(M)$.
+
+		By QE, $S_1(M) = \{\tp(a/M):a\in M\}\cup\{p_f\}_f$. So $|S_1(M)| = |M| + 2^{\aleph_0}$. Thus $T$ is $\kappa$-stable iff $\kappa \ge 2^{\aleph_0}$.
+		\Myitem If $\M\models\rg$ then $|S_1(M)| = 2^{|M|}$ (Example 9.4). So RG is not $\kappa$-stable for any $\kappa$.
+	\end{enumerate}
+\end{ex}
+
+\section{Lecture}
+
+Again $T$ is complete with infinite models.
+
+\begin{remark*}[Recall]
+	A cardinal $\kappa$ is \undf{regular} if every unbounded subset of $\kappa$ has size $\kappa$ (\it{i.e.} cofinality $\kappa$). For instance, $\aleph_0$, $\aleph_1$, $2^{\aleph_0}$ are regular. $\aleph_\omega$ is not regular, as $\{\aleph_n:n\ge 1\}$ is unbounded.
+\end{remark*}
+
+\begin{theorem}
+	Suppose $T$ is $\kappa$-stable and $\kappa$ is regular. Then $T$ has a saturated model of size $\kappa$.
+\end{theorem}
+\begin{proof}
+	\underline{Step 1}: If $\M\models T$, $|M| = \kappa$, then $\exists \N \succeq \M$ such that $|N| = \kappa$ and $\N$ realises all $1$-types over $\M$.
+
+	\underline{Proof of Step 1}: Enumerate $S_1(M) = \{p_\alpha:\alpha < \kappa\}$ by $\kappa$-stability. Build chain.
+
+	\underline{Step 2}: Build $(\M_\alpha)_{\alpha < \kappa}$ such that $|M_0| = \kappa$. $\M_{\alpha+1}\ge \M_\alpha$ realises all $1$-types over $\M_\alpha$ and $|\M_{\alpha+1}| = \kappa$. Let $\M = \bigcup_{\alpha<\kappa} \M_\alpha$. Then $|M| = \kappa$. If $A\subset M$, $|A| <\kappa$, then $A\subset\M_\alpha$ for some $\alpha < \kappa$ since $\kappa$ is regular. So $\M$ realises all $1$-types over $A$.
+\end{proof}
+
+\begin{theorem}
+	Suppose $\L$ is countable and $T$ is $\aleph_0$-stable. Then $T$ is $\kappa$-stable for all $\kappa\ge \aleph_0$.
+\end{theorem}
+\begin{proof}
+	Fix $\kappa \ge \aleph_0$. Assume $T$ is not $\kappa$-stable, so we have $\M\models T$, $|M| = \kappa$ such that $|S_1(\M)| > \kappa$. Then there exists an $\L_M$-formula $\phi(x)$ such that $|[\phi(x)]|>\kappa$ (\it{e.g.} $[x=x]=S_1(M)$).
+
+	\underline{Claim}: For any $\L_M$-formula $\phi(x)$ if $|[\phi(x)]| > \kappa$ then there exists an $\L_M$-formula $\psi(x)$ such that $|[\phi \land \psi]| > \kappa$, $|[\phi \land \neg \psi]| > \kappa$.
+
+	\underline{Proof of Claim}: Adapt the claim from the proof of Lemma 14.1.
+
+	Now build $\{\phi_\sigma\}_{\sigma\in 2^{<\omega}}$ such that $[\phi_\sigma]$ is partitioned $[\phi_{\sigma 0}]\sqcup [\phi_{\sigma 1}] $ and $[\phi_\sigma]\ne \emptyset$. Let $\N\preceq \M$ be such that $|N| = \aleph_0$ (by DLST) and $\N$ contains all parameters used in all $\phi_\sigma$s (possible since everything is countable).
+
+	For $\alpha \in 2^\omega$, find $p_\alpha\in S_1(N)$ such that $\phi_{\alpha \upharpoonright i}\in p_\alpha$ for all $i > 0$. This gives us $|S_1(N)| = 2^{\aleph_0}$, so $T$ is not $\aleph_0$-stable.
+\end{proof}
+
+\begin{cor}
+	If $T$ is $\aleph_0$-stable then $T$ has a saturated model of size $\kappa$ for all regular $\kappa \ge \aleph_0$.
+\end{cor}
+
+\begin{remark*}[Fact]
+	$\aleph_0$-stable theories have saturated models of all infinite cardinalities - but this is harder to prove.
+\end{remark*}
+
+\begin{defin}
+	Fix $\M\models T$, and an $\L$-formula $\phi(x_1,\dots,x_m,y_1,\dots,y_n)$. Then $p \in S_m(M)$ is \undf{definable wrt $\phi(\bar{x},\bar{y})$} if there exists an $\L_M$-formula $\psi(y_1,\dots,y_n)$ such that for all $\bar{b}\in M^n$: $$\phi(\bar{x},\bar{b})\in p \iff \M\models \psi$$
+	We say $p \in S_m(M)$ is \undf{definable} if it is definable wrt any $\L$-formula $\phi(\bar{x},\bar{y})$ (any $\bar{y})$.
+\end{defin}
+
+\begin{ex}\ \\
+	\begin{enumerate}[label = \arabic*)]
+		\item $p = \tp(a/M)$ where $a \in M$. Given $\phi(x,\bar{y})$, let $\psi(\bar{y})$ be $\phi(a,\bar{y})$ (this is an $\L_M$-formula). So realised types are fairly trivially definable.
+		\item $T$ is DLO. $\M$ is $\Q$. Choose $p \in S_1(\Q)$ such that $x < b$ is in $p$ iff $\sqrt{2}<b$. Let $\phi(x,y)$ be $x < y$. Then $\{b \in \Q: \phi(x,b)\in p\} = (-\infty,\sqrt{2})\cap\Q$. By QE, any definable subset of $\Q$ is a finite Boolean combination of intervals with endpoints in $\Q$.
+	\end{enumerate}
+\end{ex}
+
+\begin{remark*}[Notation]
+	Let $x$ be a tuple of variables. $M^x$ denotes $M^{|x|}$.
+\end{remark*}
+
+\begin{defin}
+	Let $\phi(x,y)$ be an $\L$-formula ($x,y$ tuples). Then $\phi(x,y)$ has the \undf{order property wrt $T$} if there exists $\M\models T$ and $(a_i)_{i\ge 0}$, $(b_i)_{i\ge0}$ such that for all $i\ge 0$ we have $a_i \in M^x,b_i\in M^y$, and, for all $i,j$, $\M\models \phi(a_i,b_j)$ iff $i\le j$. 
+
+	\it{E.g.} In $\Q$, $x\le y$ has the order property (wrt DLO). Let $a_i = b_i = i$.
+\end{defin}
+
+\begin{remark*}[Fundamental Theorem of Stability (Shelah 1976)]
+	\emph{
+	TFAE:
+	\begin{enumerate}[label=\arabic*)]
+		\item $T$ is stable.
+		\item For any $\M\models T$, any $p \in S_n(M)$ is definable.
+		\item No $\L$-formula has the order property wrt $T$.
+	\end{enumerate}
+	}
+\end{remark*}
+
+For now we only show 2$\implies$1.
+
+\begin{proof}
+	\underline{FTS2$\implies$FTS1}: Assume $2$. Fix $\kappa \ge |\L| + \aleph_0$ such that $\kappa^{|\L|+\aleph_0} = \kappa$ (\it{e.g.} $\kappa = 2^{|\L|+\aleph_0}$). We show $T$ is $\kappa$-stable.
+
+	Fix $\M\models T$, $|M| = \kappa$. Let $X = \{\L\textrm{-formulae }\phi(x,\bar{y})\}$ and $Y = \{\textrm{all }\L_M\textrm{-formulae }\psi(\bar{y})\}$ (any $\bar{y}$). Given $p \in S_1(M)$, define $F_p : X\ra Y$ such that $F_p(\phi(x,\bar{y}))$ witnesses that $p$ is definable wrt $\phi(x,\bar{y})$. Then $p\mapsto F_p$ is an injective function (exercise) from $S_1(M)$ to $Y^X$. So $|S_1(M)| \le |Y^X| = \kappa^{|\L|+\aleph_0} = \kappa$.
+\end{proof}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\end{document}  
