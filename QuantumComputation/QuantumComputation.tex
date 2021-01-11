@@ -669,5 +669,242 @@ In Theorem PE (a), we have probability $4/\pi^2$ that {\it all} $n$ lines of $n$
 But: if we want $\phi$ accurate to $m$ bits with probability $1 - \eta$, then use Theorem PE (b) with $\eps = 1/2^m$. Then we'll need $n > m$ lines with $\eta = 1/2^{n+1}\eps$ and $\eps = 1/2^m$, {\it i.e.} $n = m + \log (1/\eta) -1$, where $n$ is the number of lines in the PE algorithm, $m$ is the number of bits we want with high probability, and $\log(1/\eta) -1 $ is the number of additional bits we require to ensure this accuracy.
 \end{remark*}
 
+\marginpar{Lecture 7}
 
+\begin{proof}
+	Recall that we have
+	\begin{align*}
+		\qft^{-1}\ket{x} = \frac{1}{\sqrt{2^n}} \sum_{y=0}^{2^n-1}\e^{-2\pi i yx/2^n}\ket{y}
+	\end{align*}
+	
+	So for the state $\ket{A}$ used earlier, we have
+	\begin{align*}
+		\qft^{-1}\ket{A} = \frac{1}{2^n} \sum_{y}\left[ \e^{2\pi i (\phi - y/2^n)x}\right]\ket{y}
+	\end{align*}
+	So for the measurement, the probability that we see the $n$-bit integer $y = y_0y_1\dots y_{n-1}$ is
+	\begin{align*}
+		\frac{1}{2^{2n}}\left|\sum_{x=0}^{2^n-1}\e^{2\pi i (\phi - y/2^n)x}\right|^2
+	\end{align*}
+	Letting $\delta(y)\coloneqq \phi - y/2^n)$, we see that we have a geometric series with ratio $\e^{2\pi i\delta(y)}$, solve
+	\begin{align*}
+		\P[\textrm{see }y] = \frac{1}{2^{2n}}\left| \frac{1-\e^{2^n\cdot 2\pi i \delta(y)}}{1 - \e^{2\pi i \delta(y)}} \right|^2
+	\end{align*}
+	We now aim to bound/estimate this expression, which we do by bounding the numerator/denominator appropriately. Note that:
+	\begin{enumerate}[label=(\roman*)]
+		\item $|1 - \e^{i\alpha}| = |2\sin(\alpha/2)| \ge \frac{2}{\pi}|\alpha|$ for $|\alpha| < \pi$
+		\item $|1 - \e^{i\beta}| \le \beta$, by comparing the length of the chord and the arc between $1$ and $\e^{i\beta}$ on the unit circle
+	\end{enumerate}
+
+	So for (a), in the probability equation we use (i) with $\alpha = 2^n\cdot 2\pi \delta(a) < 2^n\cdot 2\pi/2^{n+1} < \pi$, and so $|1 - \e^{i\alpha}| \ge \frac{2}{\pi}|\alpha| = 2^{n+2}\delta(a)$, where $a$ is the closest $n$-bit string, so its distance from $\phi$ is small.
+
+	Then we use (ii) with $\beta = 2\pi\delta(a)$ to upper bound the bottom line, and hence
+	\begin{align*}
+		\P[\textrm{see }a] \ge \frac{1}{2^{2n}}\left(\frac{2^{n+2}\delta(a)}{2\pi \delta(a)}\right) = \frac{4}{\pi^2}
+	\end{align*}
+
+	For (b), we upper bound the probability equation and sum over all $y$ such that $|\delta(y)| > \eps$.
+
+	For the top line, we use that $|1 - \e^{i\alpha}| \le 2$ for any $\alpha$ (trivially), and for the bottom line we use (i), so $|1 - \e^{2\pi i\delta(y)}| \ge 4\delta(y)$. Hence
+	\begin{align*}
+		\P[y] \le \frac{1}{2^{2n}}\left(\frac{2}{4\delta(y)}\right)^2 = \frac{1}{2^{2n+2}\delta(y)^2}
+	\end{align*}
+	Now we sum over all $y$ such that $|\delta(y)| > \eps$; the $\delta(y)$ values are separated by $1/2^n$s, so let $\delta_+$ (resp. $\delta_-$) be the first $\delta(y)$ with $\delta(y)\ge \eps$ (resp. $\delta(y)\le -\eps$). So $|\delta_+|,|\delta_-|\ge \eps$.
+
+	Then if $|\delta(y)| \ge \eps$ we have $|delta(y) = \delta_+ + \frac{k}{2^n}$, $k = 0,1,\dots$ or $=\delta_- - \frac{k}{2^n}$, $k = 0,1,\dots$. So $|\delta(y)|\ge \eps +\frac{k}{2^n}$, $k = 0,1,dots$ in each case.
+
+	So
+	\begin{align*}
+		\P[|\delta(y)| \ge \eps] &\le 2\sum_{k=0}^{\infty}\frac{1}{2^{2n+2}}\frac{1}{(\eps+\frac{k}{2^{n}})^2}\\
+		&\le \frac{1}{2}\int_{0}^{\infty}\frac{1}{2^n\eps + k)^2}\textrm{d}k\\
+		&=\frac{1}{2}\int_{2^n\eps}^{\infty}\frac{\textrm{d}k}{k^2} = \frac{1}{2^{n+1}\eps}
+	\end{align*}
+\end{proof}
+
+This is an extremely useful theorem, and we will see it in various places.
+
+\begin{remark*}[Further Remarks on use of PE]\ 
+	\begin{enumerate}
+		\item If $C-U^{2^k}$ is implemented as $(C-U)^{2^k}$ then the PE algorithm needs exponential time in $n$, via $1 + 2 +\dots + 2^{n-1} = 2^{n}-1$ $C-U$ gates.
+		
+		But for some special $U$s, $U^{2^k}$ and $C-U^{2^k}$ can be implemented in $\poly(k)$ time, so we get the polynomial time PE algorithm. For instance, we can use repeated squaring to calculate exponents efficiently.
+
+		This leads to an alternative factoring algorithm (more generally, order-finding or periodicity algorithm) due to Kitaev using PE.
+
+		\item If instead of $\ket{v_\phi}$ we use general $d$-dimensional input state $\ket{\xi}$, what happens? Since we know what happens on eigenstates, and these form a basis, we have that
+		\begin{align*}
+			\ket{xi} &= \sum_{j}c_j\ket{v_{\phi_j}}\\
+			U\ket{v_{\phi_j}} &= \e^{2\pi \phi_j}\ket{v_{\phi_j}}
+		\end{align*}
+		We then get (before the final measurement) a unitary process:
+		\begin{align*}
+			\ket{0\dots 0}\ket{\xi} \xrightarrow{U_{\textrm{PE}}} \sum_{j}c_j\ket{\phi_j}\ket{v_{\phi_j}}
+		\end{align*}
+		and the Born rule implies the final measurement gives a choice of one of the $\phi_j$s, chosen with probability $|c_j|^2$. In particular, you don't get an arbitrary average of the $\phi_j$s, you can precisely one of them (at random), which is still useful information.
+
+		This works perfectly if $\phi_j$s have at most $n$ digits, the number of lines in the PE algorithm. Otherwise with $m$ lines and general $\phi_j$s we get a precision issue (usually swept under the rug); more precisely:
+
+		Using Theorem PE(b), if we want $m$ bits correct with probability $1 - \eta$, we use $n = m + o(\log 1/\eta)$ lines, and $U_{\textrm{PE}}$ acts as above with $\ket{\phi_j}$ registers replaced by
+		\begin{align*}
+			(\sqrt{1-\eta})\ket{\tilde{\phi}_j}+\sqrt{\eta}\ket{\textrm{perp}}
+		\end{align*}
+		with $\ket{\textrm{perp}}\perp \ket{\tilde{\phi}_j}$, where $\ket{\tilde{\phi}_j}$ are all $n$ bit strings with the first $m$ bits correct for $\phi$, and $\ket{perp}$ all $n$ bit strings with the first $m$ not correct. Measurement will then give $\tilde{\phi}_j$ value with $m$ correct bits with probability $|c_j|^2(1-\eta)$.
+
+		We often ignore this prceision issue, since we can make $\eta$ very, very small with modest $o(\log 1/\eta)$ overhead. The final state is $\eta$-close to state giving $\phi$ perfectly.
+	\end{enumerate}
+
+\end{remark*}
+
+\section*{Amplitude Amplification}
+
+	This is the apotheosis of technique in Grover's algorithm.
+
+	\underline{Some background}:
+
+	\begin{remark*}[Reflection operation] Recall:
+		\begin{itemize}
+			\item state $\ket{\alpha}$ in $\mathcal{H}_d$ gives a $1$-dim subspace $L_\alpha$, and $(d-1)$-dime orthogonal complement $L_\alpha^{\perp}$
+			\begin{align*}
+				I_{\ket{\alpha}} &\coloneqq I - 2\ket{\alpha}\bra{\alpha}\\
+				\therefore I_{\ket{\alpha}}\ket{\alpha} &= - \ket{\alpha}\\
+				I_{\ket{\alpha}}\ket{\beta} &= \ket{\beta}\ \textrm{for any }\ket{\beta}\perp\ket{\alpha}
+			\end{align*}
+			\textit{i.e.} $I_{\ket{\alpha}}$ is reflection in $(d-1)$-dim mirror $L_\alpha^\perp$.
+
+			Note for any unitary $U$, $UI_{\ket{\alpha}}U^\dagger = I_{U\ket{\alpha}}$
+
+			\item For $k$-dim subspace $A\subseteq \mathcal{H}_d$ with any orthonormal basis $\ket{a_1},\dots \ket{a_k}$, $P_A = \sum_{i=1}^{k} \ket{a_i}\bra{a_i}$ is the projection operator into $A$ (note that this is independent of the choice of orthonormal basis). Then we have
+			\begin{align*}
+				I_A &\coloneqq I - 2P_A\\
+				\implies I_A\ket{\xi} &= \ket{\xi}\textrm{ if }\ket{\xi}\in A^{\perp}\\
+				I_A\ket{\xi} &= -\ket{\xi}\textrm{ if }\ket{\xi}\in A
+			\end{align*}
+			So $I_A$ is relection in the $(d-k)$-dim mirror $A^\perp$.
+		\end{itemize}
+	\end{remark*}
+
+\subsection*{Recap of Grover's Algorithm}
+
+\begin{enumerate}[label=-]
+	\item search for unique `good' item in an unstructured database of $N = 2^n$ items. This is formalised as:
+	
+	Given an oracle for $f$:$n$-bits $\ra$ $1$-bit.
+
+	Promise: there is a unique $x_0 \in n$-bits with $f(x_0) = 1$.
+
+	Problem: find $x_0$.
+
+	\item closely related to NP \& Boolean satisfiability problem
+	
+\end{enumerate}
+\begin{itemize}
+	\item Using one query to the $(n+1)$-qubit $U_f$, we can implement the reflection operator:
+	\begin{align*}
+		I_{\ket{x_0}}:\ket{x_0} \ra \left\lbrace \begin{array}{cc} \ket{x} & x\ne x_0 \\ -\ket{x} & x = x_0 \end{array}\right.
+	\end{align*}
+
+	Visually, we apply $U_f$ to $\ket{x}\left(\frac{\ket{0} - \ket{1}}{2}\right)$ and discard the last qubit.
+
+	\item Then consider the Grover iteration operator on $n$ qubits
+	\begin{align*}
+		Q\coloneqq -H_nI_{\ket{0}}H_nI_{\ket{x_0}} = -I_{\ket{\psi_0}}I_{\ket{x_0}}
+	\end{align*}
+	where $H_n = H\otimes \dots\otimes H$, $\ket{\psi_0} = H_n\ket{0\dots0} = \frac{1}{\sqrt{2^n}}\sum_{x}\ket{x}$. So one application of $Q$ uses 1 query to $U_f$.
+\end{itemize}
+
+\begin{theorem*}[Grover 1996]
+	In the $2$-dimensional span of $\ket{\psi_0}$ and (unknown) $\ket{x_0}$ the action of $Q$ is rotation by angle $2\alpha$ where $\sin\alpha = \frac{1}{\sqrt{N}}$.
+\end{theorem*}
+Hence to find $x_0$ given $U_f$:
+\begin{enumerate}
+	\item Make $\ket{\psi_0}$
+	\item Apply $Q$ $m$ times, where
+	\begin{align*}
+		m = \frac{\arccos \frac{1}{\sqrt{N}}}{2\arcsin\frac{1}{\sqrt{N}}} = \frac{\beta}{2\alpha}
+	\end{align*}
+	with $\cos\beta = \frac{1}{\sqrt{N}}$, $\beta$ being the angle between $\ket{\psi_0}$ and $\ket{x_0}$ (nearly orthogonal).
+
+	This rotates $\ket{\psi_0}$ very close to $\ket{x_0}$ (within $\pm \alpha$)
+
+	\item Measure, to see $x_0$ with high probability $\approx \cos^2\alpha  = 1 - \sin^2\alpha = 1 - \frac{1}{N}$.
+	
+	For large $N$, $\arccos\frac{1}{\sqrt{N}} \approx \frac{\pi}{2}$ and $\arcsin\frac{1}{\sqrt{N}} \approx \frac{1}{\sqrt{N}}$. So $m = \frac{\pi}{4}\sqrt{N}$ iterations/queries to $U_f$ are sufficient (it can be shown this is also necessary).
+\end{enumerate}
+
+Classically, we need $O(N)$ queries to see $x_0$ with any constant probability (independent of $N$), so we have obtained a \underline{square root} time speed up quantumly.
+
+\subsection*{Amplitude Amplification Problem}
+
+Let $G$ be any subspace (``good subspace'') of state space $\mathcal{H}$ and let $G^{\perp}$ be its orthogonal complement, such that $\mathcal{H} = G \oplus G^\perp$ (the latter is the ``bad subspace'').
+
+Given any $\ket{\psi}\in \mathcal{H}$, we have unique decomposition with real non-negative coefficients:
+\begin{align*}
+	\ket{\psi} = \sin\theta \ket{g} + \cos\theta\ket{b}
+\end{align*}
+with $\ket{g} \in G$ and $\ket{b}\in G^\perp$.
+
+We now introduce reflections that flip $\ket{\psi}$ and good vectors:
+\begin{align*}
+	I_{\ket{\psi}} &= I - 2\ket{\psi}\bra{\psi}\\
+	I_G &= I - 2P_G
+\end{align*}
+So $\sin \theta = ||P_G\ket{\psi}|| = $ length of good projection of $\ket{\psi}$.
+
+Then introduce $Q\coloneqq -I_{\ket{\psi}}I_G$. This is a generalisation of Grover's Algorithm to any subspace.
+
+\begin{theorem*}[Amplitude Amplification]
+	In the $2$-dimensional subspace spanned by $\ket{\psi}$ and $\ket{g}$ (or equivalently by orthonormal vectors $\ket{g}$ and $\ket{b}$), $Q$ is rotation by $2\theta$ where $\sin \theta = $ length of good projection of $\ket{\psi}$.
+\end{theorem*}
+
+\begin{proof}
+	W have $I_G\ket{g} = - \ket{g}$, $I_G\ket{b} = \ket{b}$ so
+	\begin{align*}
+		Q\ket{g} &= -I_{\ket{\psi}}I_{G}\ket{g} = I_{\ket{\psi}}\ket{g}\\
+		Q\ket{b} &= -I_{\ket{\psi}}\ket{b}
+	\end{align*}
+	Now
+	\begin{align*}
+		I_{\ket{\psi}} &= I - 2(\sin\theta\ket{g} + \cos\theta\ket{b})(\sin\theta\bra{g} + \cos\theta\bra{b})\\
+		&= I - 2\big[\sin^2\theta \ket{g}\bra{g} + \sin\theta\cos\theta\ket{g}\bra{b}+\sin\theta\cos\theta\ket{b}\bra{g}+\cos^2\theta\ket{b}\bra{b}\big]
+	\end{align*}
+	And direct calculation (using $\langle g | b \rangle = 0$, $\langle g | g\rangle = \langle b | b \rangle = 1$) gives:
+	\begin{align*}
+		Q\ket{b} &= \cos2\theta\ket{b} + \sin2\theta \ket{g}\\
+		Q\ket{g} &= -\sin2\theta \ket{b} + \cos2\theta \ket{g}\\
+		&= I\ket{g} - 2\sin^2\theta\ket{g} - 2\sin\theta\cos\theta \ket{b}\\
+		&= (1-2\sin^2\theta)\ket{g} - 2\sin\theta\cos\theta\ket{b}\\
+		&= \cos2\theta \ket{g} - sin2\theta \ket{b}
+	\end{align*}
+	So in the $\{\ket{b},\ket{g}\}$ basis, the matrix of $Q$ is
+	\begin{align*}
+		Q = \left[\begin{array}{cc} \cos2\theta & -\sin2\theta \\ \sin2\theta & \cos 2\theta \end{array}\right]
+	\end{align*}
+	Which is a rotation through $2\theta$.
+\end{proof}
+
+We can then very simply observe that $Q^n\ket{\psi} = \sin((2n+1)\theta)\ket{g} + \cos((2n+1)\theta)\ket{b}$, and if we measure $Q^n\ket{\psi}$ for good vs bad, then $\P[\textrm{good}] = \sin^2(2n+1)\theta$. This is maximised when $(2n+1)\theta = \pi/2$, \textit{i.e.} $n = \pi/4\theta - \frac{1}{2}$ (taken to the nearest integer).
+
+\begin{remark*}[Example]
+If we had $\theta = \pi/6$, then $n = \pi/4\theta - \frac{1}{2} = 1$ (exactly), and $Q^1$ rotates $\ket{\psi}$ exactly onto $\ket{g}$, hence we obtain a good result with certainty.
+\end{remark*}
+
+Generally, for given $\theta$, $n$ is not an integer so we instead take the nearest integer to $\pi/4\theta - \frac{1}{2} \approx \pi/4theta$ for small $\theta$, and $Q^n\ket{\psi}$ will be within angle $\pm \theta$ of $\ket{g}$. So $\P[\textrm{good}]\ge \cos^2\theta \approx 1 - o(\theta^2)$.
+
+All of this can be implemented if $I_{\ket{\psi}}$ and $I_{G}$ can be implemented (see ES2).
+
+For $I_G$, it suffices for $G$ to be spanned by computational basis states $\ket{x}$s and the indicator function ($f(x) = 1$ for $x$ good and $f(x) = 0$ for $x$ bad) is efficiently computatble.
+
+For $I_{\ket{\psi}}$: often have $\mathcal{H} = n$-qubits and $\ket{\psi} = H_n\ket{0\dots 0}$, and then $I_{\ket{W\psi}}$ can be implemented in $O(n)$ time.
+
+\begin{remark*}[Notes]\ 
+	\begin{enumerate}
+		\item In the AA process, relative amplitudes of good labels in $\ket{g}$ staty the same as they were in $\ket{\psi} = \sin\theta\ket{g} + \cos\theta \ket{b}$, and AA amplifies the overall $\ket{g}$ amplitude at the expensive of the $\ket{b}$ amplitude.
+	
+		This is useful for state preparations. For instance:
+		\begin{align*}
+			\sum_{x\in (\Z/N\Z)^\times}\ket{x}
+		\end{align*}
+
+		\item Final state is generally not exactly $\ket{g}$, but if $\sin\theta$ is known, then we can modify the AA process to make it exact, with only a very modest increasee in queries to the oracle - so we can obtain $\ket{g}$ with certainty (ES2).
+	\end{enumerate}
+\end{remark*}
 \end{document}
