@@ -84,6 +84,21 @@
 \if\relax\detokenize{#3}\relax\thmname{#1}:\else\thmname{#3}:\fi
 }
 
+\newtheoremstyle{numremark}
+{%space above
+}{%space below
+}{% body font
+}{%indent amount
+-0em
+}{%head font
+\bfseries
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\thmname{#1}\thmnumber{ #2}:
+}
+
 \newtheoremstyle{cusdef}
 {%space above
 1em
@@ -131,6 +146,9 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
+\theoremstyle{numremark}
+\newtheorem{numremark}[theorem]{Remark}
+
 \setcounter{section}{-1}
 
 %\marginpar{to describe which lecture it is}
@@ -177,6 +195,7 @@
 \newcommand{\rg}{\textrm{RG}}
 \newcommand{\D}{\mathcal{D}}
 \newcommand{\sman}{S_n^\M(A)}
+\newcommand{\gp}{\textrm{gp}}
 
 \renewcommand{\subset}{\subseteq}
 
@@ -1687,6 +1706,322 @@ For now we only show 2$\implies$1.
 	Fix $\M\models T$, $|M| = \kappa$. Let $X = \{\L\textrm{-formulae }\phi(x,\bar{y})\}$ and $Y = \{\textrm{all }\L_M\textrm{-formulae }\psi(\bar{y})\}$ (any $\bar{y}$). Given $p \in S_1(M)$, define $F_p : X\ra Y$ such that $F_p(\phi(x,\bar{y}))$ witnesses that $p$ is definable wrt $\phi(x,\bar{y})$. Then $p\mapsto F_p$ is an injective function (exercise) from $S_1(M)$ to $Y^X$. So $|S_1(M)| \le |Y^X| = \kappa^{|\L|+\aleph_0} = \kappa$.
 \end{proof}
 
+\section{Lecture}
+$T$ complete, infinite models.
+\begin{proof}\underline{FTS1$\implies$FTS3}:
+	Suppose $\phi(x,y)$ has the order proprety with respect to $T$ ($x,y$ tuples). Fix $\kappa \ge |\L| + \aleph_0$. WTS $T$ is not $\kappa$-stable.
 
+	\underline{Claim}: There is a  linear order $(I,<)$ such that $|I| > \kappa$ and there is $J \subseteq I$ such that $|J| = \kappa$ and $J$ is dense.
+
+	\underline{Proof of Claim}: Fix minimal $\lambda \le \kappa$ such that $2^\lambda < \kappa$. Let $I = \Q^\lambda$, and the order given lexicographically: given distinct $f,g\in I$, set $f<g$ iff $f(\alpha) < g(\alpha)$ where $\alpha < \lambda$ is least such that $f(\alpha) \ne g(\alpha)$.
+
+	Let $J = \{f\in I:\exists \alpha < \lambda \textrm{ such that }f(x) = 0\textrm{ for all }x\ge \alpha\}$. Then $|J| \le \max_{\alpha < \lambda}2^{\alpha}\le \kappa$. \qed
+
+	Let $I$ be as in the claim. Consider
+	\begin{align*}
+		T \cup\{\phi(x_i,y_j):i,j\in I,i\le j\}\cup\{\neg\phi(x_i,y_j):i,j\in I,i>j\}
+	\end{align*}
+	This is finitely satisfiable since $\phi(x,y)$ has the order property wrt $T$. So $\exists \N\models T$ and $(a_i)_{i\in I}$ and $(b_i)_{i\in I}, a_i\ni N^d,b_i\in N^y$ and $\N\models \phi(a_i,b_j)$ iff $i\le j$. By DLST $\exists \M\preceq\N$ such that $|M| = \kappa$ and $b_i \in M^y$ for all $i\in J$. We show $|S_x(M)| \ge |I| > \kappa$, and thus $T$ is not $\kappa$-stable (ES3 \#5).
+	
+	For $i\in I$, let $p_i = \tp(a_i/M)$. Fix $i,j\in I$ such that $i<j$. $\exists k\in J$ such that $i < k < j$. So $\phi(x,b_k)\in p_i$ and $\phi(x,b_k)\not\in p_j$. So $p_i\ne p_j$. \qedsymbol
+
+	Lastly, we have \underline{FTS3$\implies$FTS2}: Fix an $\L$-formula $\phi(x,y)$ such that $\phi$ does not have the order property wrt $T$. Now fix $\M\models T$. We show that any $p \in S_x(M)$ is definable wrt $\phi(x,y)$.
+
+	This proof is long and topological.
+
+	Let $X = S_x(M)$ and $Y= S_y(M)$. Let $A = \{\tp(a/M):a\in M^x\}\subseteq X$. $A$ is dense in $X$: Given an $\L_M$-formula $\psi(x)$, if $[\psi(x)]\ne\emptyset$ then $\M\models \exists x\psi(x)$, so $\exists a \in M^x$ such that $\M\models \psi(a)$, so $\tp(a/M)\in [\psi(x)]\cap A$. Also let $B = \{\tp(b/M):b\in M^y\}$. Then $B$ is dense in $Y$ by the same argument.
+
+	Identify $A$ with $M^x$ and $B$ with $M^y$. Let $2 = \{0,1\}$ (as a discrete space). Define $f:A\times B\ra 2$ such that $f(a,b) = 1$ iff $\M\models \phi(a,b)$.
+
+	\underline{Notation}: Given $a\in A$, $b\in B$, let $f_b:A\ra 2$ and $f^a:B\ra 2$ be the corresponding fiber functions (\it{e.g.} $f_b(a) = f(a,b)$).
+
+	Given $b\in B$, let $\hat{f}_b:X\ra 2$ such that for $p \in X=S_x(M)$, $\hat{f}_b(p) = 1$ iff $\phi(x,b)\in p$. Now claim that $\hat{f}_b$ extends $f_b$: given $a\in A$, $\hat{f}_b(a) = 1$ iff $\phi(x,b)\in \tp(a/M)$ iff $\M\models \phi(a,b)$ iff $f_b(a) = 1$ by definition. Moreover, $\hat{f}_b$ is continuous: $\hat{f}_b^{-1}(\{1\}) = [\phi(x,b)]$, and $\hat{f}_b^{-1}(\{0\}) = [\neg\phi(x,b)]$ and these are both clopen sets.
+
+	Similarly, given $a \in A$, $\hat{f}^a:Y\ra 2$ such that $\hat{f}^a(q) = 1$ iff $\phi(a,y)\in q$.
+
+	This brings us to...
+
+	\underline{Main Claim}: There is a separately continuous function $F:X\times Y\ra 2$ extending $f$. By separately continuous, we mean that if one coordinate is fixed the resulting function is continuous.
+
+	For now, we suppose that this is true. Fix $ p \in S_x(M) = X$. WTS $p$ is definable wrt $\phi(x,y)$. $F^p:Y\ra 2$ is continuous. Set $D = (F^p)^{-1}(\{1\})$. $D$ is clopen in $Y = S_y(M)$. So $D = [\psi(y)]$ for some $\L_M$-formula $\psi(y)$ (ES2\#7). Fix $b\in M^y = B$.
+	\begin{align*}
+		\phi(x,b)\in p &\iff \hat{f}_b(p)=1\\
+		&\iff F_b(p) = 1\quad \textrm{ $F_b,\hat{f}_b$ are continuous extensions of $f_b$ and $A$ is dense}\\
+		&\iff F^p(b)=1\\
+		&\iff \tp(b/M)\in D = [\psi(y)]\\
+		&\iff M\models \psi(b)
+	\end{align*}
+
+	\underline{Proof of Main Claim}
+
+	\undf{Goal}: show that $\forall p \in X,q\in Y$ there exist open neighbourhood $U_{pq}$ of $p$ and $V_{pq}$ of $q$ such that for all $a\in A\cap U_{pq}$ and $b\in B\cap V_{pq}$, $\hat{f}_b(p) = \hat{f}^a(q)=t_{pq}$ (definition of $t_{pq}$). ($\ast$)
+
+	Suppose this fails. Fix $p\in X, q\in Y$ such that for all open neighbourhoods $U$ containing $p$, $V$ containing $q$, there exists $a\in A\cap U$ and $b\in B\cap V$ such that $\hat{f}_b(p)\ne \hat{f}^a(q)$. We build $(a_n)_{n\ge 0}$ from $A = M^x$ and $(b_n)_{n\ge 0}$ from $B = M^y$ such that for all $n$:
+
+	\begin{enumerate}
+		\item $\hat{f}_{b_n}(p) \ne \hat{f}^{a_n}(q)$
+		\item $\forall i<n$, $f(a_n,b_i) = \hat{f}_{b_i}(p)$
+		\item $\forall i < n$, $f(a_i,b_n) = \hat{f}^{a_i}(q)$
+	\end{enumerate}
+
+	Suppose we have this. Pass to subsequences so that $(\hat{f}_{b_n}(p))_n$ and $(\hat{f}^{a_n}(q))_n$ are constant.
+
+	\underline{Case 1}: For all $n$, $\hat{f}_{b_n}(p) = 0$ and $\hat{f}^{a_n}(q) = 1$
+
+
+	Given this, define $F:X\times Y\ra \{0,1\}$ such that $F(p,q) = t_{pq}$.
+	
+	$F$ extends $f$: for $a\in A,b\in B$, $a\in A\cap U_{ab}\implies t_{ab} = \hat{f}^a(b) = f(a,b)$.
+	
+	$F$ is separately continuous: \it{e.g.} $p \in X, t\in 2$:
+	\begin{align*}
+		(F^p)^{-1}(\{t\}) = \bigcup\left\lbrace V_{pq}:q\in Y,t_{pq} = t\right\rbrace
+	\end{align*}
+
+	So $\M\models \phi(a_i,b_j)$ for all $i < j$ and $\M\models \neg\phi(a_i,b_j)$ for all $i > j$.
+
+	WLOG $(f(a_n,b_n))_n$ is constant (by passing to a further subsequence). If it is $1$, then $\M\models \phi(a_i,b_j)\iff i\le j$. If it is $0$, let $b_i' = b_{i+1}$. Then $\M\models \phi(a_i,b_j')\iff i\le j$.
+
+	\underline{Case 2}: For all $n$, $\hat{f}_{b_n}(p) = 1$ and $\hat{f}^{a_n} = 0$.
+
+	By a similar argument to above (passing to subsequences when necessary), we get WLOG that $\M\models \phi(a_i,b_j)\iff i \ge j$. But it turns out this is enough - fix $k\ge 1$. For $i,j\le k$, let $a_i'' = a_{k-i}$ and $b_i'' = b_{k-i}$. Then $\M\models \phi(a_i'',b_j'')\iff i\le j$. This does not give us an infinite instance of the order property, but rather arbitrarily long finite sequences; it is a consequence of compactness that there then exists an infinite sequence (\it{c.f.} ES3 \#6).
+
+	So all we have left is to build the sequence with the above properties, which we do inductively:
+
+	Pick $a_0,b_0$ such that $\hat{f}_{b_0}(p)\ne\hat{f}^{a_0}(q)$ (choose $U = X,V = Y$ in condition $\neg$($\ast$)).
+
+	Suppose we have $(a_i)_{i < n}$ and $(b_i)_{i<n}$. Pick $a_n,b_n$ as follows. Let $U = \bigcap_{i<n}\{u\in X:\hat{f}_{b_i}(u) = \hat{f}_{b_i}(p)\}$. This is an open neighbourhood of $p$. Similarly, let $V = \bigcap_{i<n}\{v\in Y:\hat{f}^{a_i}(v) = \hat{f}^{a_i}(q)\}$.
+
+	Now by $\neg(\ast)$ there exists $a_n\in A\cap U$ and $b_n\in B\cap V$ such that $\hat{f}_{b_n}(p) \ne \hat{f}^{a_n}(q)$.
+
+	So for all $i < n$, $f(a_n,b_i) = \hat{f}_{b_i}(a_n) = \hat{f}_{b_i}(p)$, and $f(a_i,b_n) = \hat{f}^{a_i}(b_n) = \hat{f}^{a_i}(q)$.
+
+	This concludes the proof of the main claim, and hence the proof of the entire theorem.
+\end{proof}
+
+\section{Lecture}
+
+This was not Shelah's original proof; that uses more combinatorics and involves colouring binary tress; this is a more recent proof.
+
+\begin{numremark}
+	The previous proof did not use Hausdorffness of $X$ or $Y$. We could instead repeate the previous proof with a coarser topology on $Y$ generated by $[\phi(a,y)]$ for all $a \in M^x$. Then given $p \in S_x(M)$, we get a $\phi$-definition $\psi(y)$ to be a Boolean combination of $\phi(a,y)$ for $a\in M^x$.
+\end{numremark}
+
+\begin{numremark}
+	Assume that $T$ is complete with infinite models, and $\L$ is countable.
+	\begin{enumerate}[label=\arabic*)]
+		\item $\aleph_0$-stable $\implies$ $\kappa$-stable for all $\kappa \ge \aleph_0$
+		\item stable $\implies$ $\kappa$-stable for all $\kappa^{\aleph_0} = \kappa$.
+	\end{enumerate}
+\end{numremark}
+
+\begin{remark*}[Shelah 1976]
+	Let $\Sigma(T) = \{\kappa: T \textrm{ is }\kappa\textrm{-stable}\}$. Then $\Sigma(T)$ is one of :
+	\begin{itemize}
+		\item $\{\kappa \ge \aleph_0\}$ (sometimes known as $\omega$-stable). This includes $\acf_p$, TFDAG, InfSets.
+		\item $\{\kappa \ge 2^{\aleph_0}\}$. Examples include $\Th(\Z,+,0)$.
+		\item $\{\kappa^{\aleph_0} = \kappa\}$. For instance, $\Th(\Z^\omega,+,0)$, or any separably closed field that is not $\acf$.
+		\item $\emptyset$. These theories include RG, DLO.
+	\end{itemize}
+
+	The first two cases together are known as \it{superstable}, the third is \it{strictly stable}, the first three are \it{stable} and the fourth is \it{unstable}.
+
+
+\end{remark*}
+
+\begin{remark*}[Motto]
+	Stable algebraic structures are ``nice''.
+\end{remark*}
+\begin{remark*}[Example]
+	(fields) $T = \Th(F)$ where $F$ is a field.
+
+	[Macintyre 1971/Cherlin-Shelah 1980] If $T$ is superstable then $F\models \acf$.
+
+	[Macintyre-Shelah-Wood 1975] If $F$ is separably closed then $T$ is stable.
+\end{remark*}
+\begin{remark*}[Stable Fields Conjecture]
+	If $T$ is stable then $F$ is separably closed.	
+\end{remark*}
+
+\underline{Open problem}: Is $\Th(\C(t))$ stable? This is often a test question for the above.
+
+\section{Lecture}
+
+\subsection*{Stable Groups}
+
+\begin{defin}[Expansion of a Group]
+	Let $\L$ be a language. An $\L$-structure $G$ is an \undf{expansion of a group} if $\L$ contains the language of groups and the reduct of $G$ to the group language is a group.
+
+	We conflate the structure $G$ with its universe for notational convenience.
+\end{defin}
+
+\begin{remark*}[Examples]\ 
+	\begin{enumerate}
+		\item If $G$ is an abelian group then $\Th(G,+,0)$ is stable (folklore - no attributed author).
+		\item If $G$ is a free group then $\Th(G,\cdot,1)$ is stable (Sela 2006)
+		\item If $P = \{2^n:n\ge 1\}$ then $\Th(\Z,+,0,P)$, where $P$ is a unary relation that determines whether or not something is a power of two, is stable (Mousa-Scanlon 2007).
+		\item Let $G$ be an algebraic group over some $K\models \acf$. Consider the expansion of $G$ by relation symbols for all subsets of $G^n$ ($n\ge 1$) definable in the field language. Then $\Th(G)$ is $\omega$-stable.
+	\end{enumerate}
+\end{remark*}
+
+Let $T = \Th(G)$ where $G$ is an expansion of a group. Given an $\L_G$-formula $\phi(x)$ (note we could have multiple variables instead) let $\phi(G) = \{a\in G:G\models \phi(a)\}$. Recall that $X\subseteq G$ is \undf{definable} if $X = \phi(G)$ for some $\L_G$-formula $\phi(x)$.
+
+\begin{defin}
+	Let $\phi(x,y_1,\dots,y_n)$ be an $\L$-formula. Define $H_\phi$ to be the collection of all finite-index subgroups of $G$ of the form $\phi(G,\bar{b})$ for some $\bar{b}\in G^n$. Let $G^{0}(\phi) = \bigcap_{H\in H_{\phi}}H$, which we write as $\bigcap H_\phi$. If $H_\phi = \emptyset$ then $G^{0}(\phi) = G$.
+\end{defin}
+
+\begin{ex}
+	$G = (\Z,+,\cdot,0,1)$. $\phi(x,y)$ is $\exists z(x=y\cdot z)$ (colloquially, $y$ divides $x$). Then $\phi(\Z,m) = m\Z$. So $G^{0}(\phi) = \{0\}$.
+\end{ex}
+
+\begin{theorem}[Baldwin-Saxl 1976]
+	Assume $T = \Th(G)$ is stable. Then for any $\L$-formula $\phi(x,y_1,\dots,y_n)$, there is a finite $\mathcal{F}\subseteq H_\phi$ such that $G^{0}(\phi) = \bigcap \mathcal{F}$. Moreover, $G^0(\phi)$ is definable by an $\L$-formula.
+\end{theorem}
+\begin{proof}
+	Fix $\phi(x,\bar{y})$. WLOG $H_\phi \ne \emptyset$.
+
+	\underline{Claim 1}: There exists $m\ge 1$ such that for all finite $H\subseteq H_\phi$ then there exists $\mathcal{F}\subseteq H$, $|\mathcal{F}| = m$, such that $\bigcap H = \bigcap \mathcal{F}$.
+
+	\underline{Proof of Claim 1}: Suppose not. Fix $m\ge 1$. Then there exists finite $H\subseteq H_\phi$ such that for all $\mathcal{F}\subseteq H$, $|\mathcal{F}| = m$, we have $\bigcap H\subsetneq \bigcap \mathcal{F}$. After thinning $H$, we may assume $|H| > m$ and if $\mathcal{F}\subsetneq H$ then $\bigcap H\subsetneq \bigcap \mathcal{F}$. Let $H = \{H_1,\dots,H_k\}$ ($k>m$).
+
+	For $1\le i \le k$, choose $g_i \in \big(\bigcap_{j\ne i}H_j\big)\backslash H_i$. Given $I \subseteq \{1,\dots,k\}$, let $g_I = \prod_{i\in I}g_i$. Then $g_I \in H_j$ if and only if $j\not\in I$:
+	\begin{align*}
+		j\not\in I &\implies g_i \in H_j\ \forall i\ni I \implies g_I\in H_j\\
+		j\in I &\implies g_{I\backslash\{j\}}\in H_j\textrm{ and }g_j\not\in H_j\implies g_I\not\in H_j
+	\end{align*}
+
+	Choose $\bar{b}_j\in G^n$ such that $H_j = \phi(G,\bar{b}_j)$. Let $a_i = g_{<i}\coloneqq \prod_{j<i}g_j$. Then $G\models \phi(a_i,\bar{b}_j)$ iff $g_{<i}\in H_j$ iff $i\le j$. Since $k$ can be chosen arbitarily large, we get the order property for $\phi(x,\bar{y})$ by ES3 \#6. \qed
+
+	Fix $m\ge 1$ as in Claim 1. Let $\psi(x,\bar{y}_1,\dots,\bar{y}_n)$ be $\bigwedge_{i=1}^{m}\phi(x,\bar{y}_i)$.
+
+	\underline{Claim 2}: $H_\psi$ contains a minimal element.
+
+	\underline{Proof of Claim 2}: Suppose not. There is $H_0 > H_1 > H_2 >\dots$ with $H_i \in H_\psi$. Choose $g_i \in H_i\backslash H_{i+1}$. Then $g_i \in H_j$ iff $j \le i$. So $\psi$ has the order property wrt $T$. \qed
+
+	Let $H$ be a minimal element of $H_\psi$. Note that $H = \bigcap \mathcal{F}$ where $\mathcal{F}\subseteq H_\phi$, $|\mathcal{F}| = m$.
+
+	\underline{Claim 3}: $H = G^0(\phi)$.
+	
+	\underline{Proof of Claim 3}: $G^0(\phi) \le H$ be definition of $G^0(\phi)$. Fix $K\in H_\phi$. WTS $H\le K$.
+
+	By Claim 1, $H\cap K\in H_\psi$. By minimality of $H$, $H= H\cap K$, \it{i.e.} $H\le K$. \qed
+
+	\underline{Claim 4}: $G^0(\phi)$ is definable by an $\L$-formula.
+
+	\underline{Proof of Claim 4}: Let $k = [G:G^0(\phi)]$. Then $a\in G^0(\phi)$ iff for all $\bar{b}\in g^n$, if $\phi(G,\bar{b})$ is a subgroup of $G$ of index at most $k$, then $\phi(a,\bar{b})$.
+
+	This is expressible by an $\L$-formula (all the above statements are first-order, exercise; the key is that the index is now uniformly bounded.\qed
+
+	This concludes the proof of the whole theorem.
+\end{proof}
+
+\section{Lecture}
+
+\underline{Setting}: $G$ is an expansion of a group. $T = \Th(G)$. Assume $T$ is stable.
+
+\begin{defin}
+	Let $G^0$ be the intersection of all definable finite index subgroups of $G$.
+\end{defin}
+\underline{Note}: $G^0 = \bigcap_{\phi}G^0(\phi)$.
+
+\begin{ex}\ 
+	\begin{enumerate}[label = \arabic*)]
+		\item $\Th(\Z,+,0) = T$. If $G\models T$ then $G^0 = \bigcap_{n\ge 1}nG$. So if $G = \Z$, $G^0 = \{0\}$. If $G$ is $\aleph_0$-saturated, then $G^0$ is nontrivial.
+		\item $G$ is an algebraic group over some $\acf$. $G^0$ is the connected component of $G$ wrt the Zariski topology.
+	\end{enumerate}
+\end{ex}
+
+\begin{numremark}
+	$G^0$ is a normal subgroup.
+\end{numremark}
+\underline{Goal}: Another description of $G^0$.
+
+To work towards this goal, we will look at a more general notion of being a coset of a finite index subgroup.
+
+\begin{defin}[bi-generic]
+	$X\subseteq G$ is \undf{bi-generic} if $\exists a_1,\dots,a_n,b_1,\dots,b_n\in G$ such that $G = \bigcup_{i=1}^{n}a_iXb_i$.
+
+	So cosets are special types of bi-generic subsets.
+\end{defin}
+
+\begin{lemma}
+	If $X\subseteq G$ is definable, then either $X$ of $G\backslash X$ is bi-generic.
+\end{lemma}
+\begin{proof}
+	Suppose not. We build $(a_i)_{i\ge 1}$ and $(b_i)_{i\ge 1}$ such that $a_ib_j \in X$ iff $i \le j$. [So if $\phi(x)$ defines $X$ then $\phi(x\cdot y)$ has the order property. Note that this glosses over the fact that $\phi$ might have parameters, but this is easy to deal with. Let $a_0 \in X$ and $b_0 = 1$.
+	
+	Choose $a_n \not \in \bigcup_{i<n} Xb_i^{-1}$, which exists since $X$ is not bi-generic. In particular, this says that $a_nb_i\not\in X\ \forall i<n$, and choose $b_n\not\in \bigcup_{i\le n}a_i^{-1}(G\backslash X)$ - this says that $a_ib_n\in X\ \forall i \le n$. These two statements gives us the order property up to $n$.
+\end{proof}
+
+\begin{ex}
+	$\Th(\Z,+,<,0)$ is unstable. $\mathbb{N}$ and $\Z\backslash \mathbb{N}$ are definable and not bi-generic.
+\end{ex}
+
+\begin{lemma}
+	If $X,Y\subseteq G$ are definable and $X\cup Y$ is bi-generic, then $X$ or $Y$ is bi-generic.
+\end{lemma}
+\begin{proof}
+	Assume $G = \bigcup_{i = 1}^{n}a_i(X\cup Y)b_i = \underbrace{\bigcup_{i=1}^{n}a_iXb_i}_{A}\cup\underbrace{\bigcup_{i=1}^{n}a_iYb_i}_B$. Note that $A$ and $B$ are both definable also.
+
+	If $A$ is bi-generic, then so is $X$.
+
+	Suppose $A$ is not bi-generic. Then $G\backslash A$ is bi-generic by 21.5. So $B$ is bi-generic since $G\backslash A \subseteq B$). So $Y$ is bi-generic.
+\end{proof}
+
+\begin{defin}
+	$p \in S_1(G)$ is bi-generic if every $X \in p$ is bi-generic.
+
+	\underline{Convention}: Identify $\L_G$-formula $\phi(x)$ with $\phi(G)$.
+\end{defin}
+
+\begin{prop}
+	There is a bi-generic type $p \in S_1(G)$.
+\end{prop}
+\begin{proof}
+	Let $q = \{\neg X:X\subseteq G\textrm{ is definable and not bi-generic}\}$. Then $q$ is finitely satisfiable in $G$: Fix $X_1,\dots,X_n\subseteq G$ definable, not bi-generic. Then $X_1\cup \dots\cup X_n$ is not bi-generic by 21.7. So $\neg X_1\cap\dots\cap \neg X_n = \neg(X_1\cup\dots\cup X_n)\ne \emptyset$.
+
+	Now extend $q$ to some $p\in S_1(G)$. If $X\in p$ then $\neg X\not\in q$, so $X$ is bi-generic.
+\end{proof}
+
+\begin{defin}
+	Given $p \in S_1(G)$ and $g \in G$, define $\gp = \{gX:X \in p\}$.
+
+	\underline{ES4}: $\gp \in S_1(G)$.
+\end{defin}
+
+\begin{defin}
+	Given $p \in S_1(G)$ and $X\subseteq G$ definable, let
+	\begin{align*}
+		H^p_X = \{g \in G :\ \forall a \in G, aX\in p \iff aX \in gp\}
+	\end{align*}
+\end{defin}
+\begin{theorem}
+	If $p \in S_1(G)$ and $X\subseteq G$ is definable, then $H^p_X$ is a definable subgroup of $G$. Moreover, if $p$ is bi-generic then $H^p_X$ has finite index.
+\end{theorem}
+\begin{proof}
+	Fix $p \in S_1(G)$ and definable $X \in G$. \underline{Exercise}: $H^p_X$ is a subgroup. Since $p$ is definable, there exists $\psi(y)$ such that for all $a \in G$, $aX \in p\iff G\models \psi(a)$. [$\psi(y)$ is the definition for $p$ wrt the formula $\phi(x,y)$ given by ``$y^{-1}\cdot x \in X$'']
+
+	So $g \in H^p_X\iff G \models \forall a(\psi(a)\leftrightarrow \psi(g^{-1}a))$, which is a formula in one free variable $g$ and hence the subgroup $H^p_X$ is definable.
+
+	Given $q,r\in S_1(G)$, write $q\sim r$ iff: $\forall a,b\in G, aXb \in q \iff aXb \in r$; this is easily shown to be an equivalence relation.
+
+	\underline{Main Claim}: There are only finitely many bi-generic types in $S_1(G)$ mod $\sim$.
+	
+	For now, we assume this claim. Now assume $p$ is bi-generic. Suppose $\exists g_1,g_2,\dots$ in $G$ such that $\forall i\ne j,g_i^{-1}g_j\not\in H^p_X$. So for all $i\ne j$, there exists $a \in G$ such that $aX \in p\iff aX\not\in g_i^{-1}g_jp$, \it{i.e.} $g_iaX\in g_ip \iff g_iaX\not\in g_jp$. In particular then, for all $i\ne j$ we have $g_ip \not\sim g_jp$. But each $g_ip$ is bi-generic [ES4], and by the claim we have only finitely many such types; contradicton.
+\end{proof}
+
+\begin{cor}
+	If $p \in S_1(G)$ is bi-generic, then
+	\begin{align*}
+		G^0 = \bigcap_{X\textrm{ def. }\subseteq G}H^p_X
+	\end{align*}
+	So $G^0 = \{g\in G: gp = p\}=:$ \emph{Stab}$(p)$.
+\end{cor}
+\begin{proof}
+	$G^0 \le H^p_X$ for all definable $X\subseteq G$, so it must also lie within their intersection. For the other direction, it suffices to fix definable finite index normal subgroup $K\triangleleft G$, and show $\bigcap_{X\subseteq G}H^p_X \le K$.
+
+	Check $H^p_K = K$.
+\end{proof}
 
 \end{document}  
+

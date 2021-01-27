@@ -754,7 +754,7 @@ This is an extremely useful theorem, and we will see it in various places.
 
 \end{remark*}
 
-\section*{Amplitude Amplification}
+\section{Amplitude Amplification}
 
 	This is the apotheosis of technique in Grover's algorithm.
 
@@ -907,4 +907,154 @@ For $I_{\ket{\psi}}$: often have $\mathcal{H} = n$-qubits and $\ket{\psi} = H_n\
 		\item Final state is generally not exactly $\ket{g}$, but if $\sin\theta$ is known, then we can modify the AA process to make it exact, with only a very modest increasee in queries to the oracle - so we can obtain $\ket{g}$ with certainty (ES2).
 	\end{enumerate}
 \end{remark*}
+
+\subsection*{Applications of AA}
+\ 
+\begin{enumerate}
+	\item Grover search with one or more $(k)$ good items in $N = 2^n$
+	\begin{align*}
+		\ket{\psi} &= \ket{\psi_0} = \frac{1}{\sqrt{2^n}}\sum_{x\in \Z_2^n}\ket{x}\\
+		&= \sqrt{\frac{k}{N}}\left(\frac{1}{\sqrt{k}}\sum_{\textrm{good}}\ket{x}\right) + \sqrt{\frac{N-k}{k}}\left(\frac{1}{\sqrt{N-k}}\sum_{\textrm{bad}}\ket{x}\right)
+	\end{align*}
+
+	$G$ spanned by the good $\ket{x}$s. $\sin\theta = \sqrt{\frac{k}{N}}$ so $Q$ is rotation through $2\theta$, where $\theta\coloneqq \arcsin\sqrt{\frac{k}{N}} \approx \sqrt{\frac{k}{N}}$ (since $N$ is often much larger than $k$ - if not then this whole problem is roughly a non-issue, just pick randomly).
+
+	So $O(\sqrt{N/k})$ queries needed.
+
+	Note that if $N = 4$, $n = 2$, $k = 1$ then $\theta = \pi/6$, $2\theta = \pi/3$, so one query gives the good item of one in four with certainty - despite being very simple, this is rather remarkable as classicly this is clearly impossible.
+
+
+	\item \underline{Square-root speedup of general quantum algorithms}
+	
+	Let $A$ be a quantum algorithm/circuit (\textit{i.e.} is the unitary operator for the whole circuit), let the input state be $\ket{0\dots0}$; so the final state is $A\ket{0\dots0}$. The good labels are the desired computational outcomes.
+
+	Write $A\ket{0\dots 0} = \alpha\ket{a} + \beta\ket{b}$, $\alpha = \sin\theta$ where $\ket{a}$ is a normalised, generally unequal supervision of good labels $\sum_{\textrm{good }x}c_x\ket{x}$.
+
+	So $\P[\textrm{success in 1 run}] = |\alpha|^2$, so we need $o(1/|\alpha|^2)$ repetitions of $A$ to succeed with any given constant (high) probability $1 - \eps$.
+
+	However, we can instead use AA!
+
+	Note that we assume that we can easily check if the answer is good or bad (this is characteristic of NP, where it is hard to find an answer but easy to verify one). This assumption is so that we can then implement $I_G:\ket{x}\ra -\ket{x}$ if $x$ good, and $\ket{x}$ if $x$ bad (reflection in the good labels).
+
+	Consider $\ket{\psi} = A\ket{0\dots0}$ and
+	\begin{align*}
+		Q = -I_{A\ket{0\dots0}}I_G = - AI_{\ket{0\dots0}}A^\dagger I_G
+	\end{align*}
+	so all parts are implementable: it is easy to invert $A$ as we have the circuit, $I_G$ is as above, and $I_{\ket{\psi_0}} = I - 2\ket{0\dots0}\bra{0\dots0}$ (\textit{c.f.} ES2).
+
+	So by the Amplitude Amplification theorem $Q$ is rotation through $2\theta$ with $\sin\theta = |\alpha|$. So after $n\approx \pi/4\theta = o(1/\theta) = o(1/\sin\theta) = o(1/|\alpha|)$ (small $\alpha$) repetitions, $A\ket{0\dots0}$ will be rotated very near to $\ket{g}$ and the final measurement will succeed with high probability.
+
+	So we get a square root speedup over the direct method.
+
+	Moreover, if the success probability of $A$ (\textit{i.e.} $|\alpha|^2$) is \underline{known} then the exact ``improved modified'' AA process converts the probabilistic algorithm $A$ into a deterministic one (get the outcome with certainty - this isn't too important in practice, but is theoretically interesting).
+
+	\item \underline{Quantum Counting 1998} (uses AA \& PE together)
+
+	Given $f:\Z_2^n\ra\Z_2$ with $k$ good $x$s, we want to estimate $k$ (rather than just find some good $x$). These counting problems in complexity theory are known to be significantly more difficult than more simple existence problems.
+
+	Recall that the Grover operator $Q_G$ for $f$ is rotation through $2\theta$ in $2$-dimensional plane of $\ket{\psi_0} = \frac{1}{\sqrt{2^n}}\sum_{x\in\Z_2^n}\ket{x}$ and its good projection $\ket{g} = \frac{1}{\sqrt{k}}\sum_{x\textrm{ good}}\ket{x}$ with $\sin\theta = \sqrt{k/N}\approx \theta$ for $k <<N$.
+
+	Also recall facts about 2D rotation through $2\theta$ in the $\{\ket{b},\ket{g}\}$ (o.n.b) plane. We have eigenvectors $\ket{e_{\pm}} = \frac{1}{\sqrt{2}}(\ket{b}\pm i\ket{g})$, with eigenvalues $\lambda_{\pm} = \e^{\pm2i\theta}$ (this is true for any o.n.b replacing $\ket{b},\ket{g}$).
+
+	Then check $\ket{\psi_0} \coloneqq \sin\theta\ket{g} + \cos\theta\ket{b} = \frac{1}{\sqrt{2}}(\e^{i\theta}\ket{e_+}+\e^{-i\theta}\ket{e_-})$ - that is to say this is an equally weighted superposition of $\ket{e_{\pm}}$s.
+
+	For PE application we write eigenvalues $\e^{\pm2i\theta}$ as $\e^{2\pi i\phi_{\pm}}$ with $0\le \phi_{\pm} < 1$. We have $\phi_+ = (2\theta)/(2\pi) = \theta/\pi$, and $2\pi \phi_- = -2\theta+2\pi$ so $\phi_- = 1 - \theta/\pi$ (note $\theta/pi = \frac{1}{\pi}\sqrt{\frac{k}{N}}$).
+
+	Hence: running the PE algorithm with $U = \textrm{Grover }Q$ and eigenstate register set to $\ket{\phi_0}$ will output (an approximation to) $\theta/\pi$ or $1 - \theta/\pi$ with probability $1/2$. For small $\theta$ these are easily distinguishable. Hence in either case we get an approximation to $\theta = \sqrt{k/N}$.
+
+	More precisely (with $n$ as above), for any $m$, running PE with $m$ qubit lines gives an $m$-bit approximation to $\sqrt{k/N}$ and uses $2^m$ $C-Q$ gates, \textit{i.e.} $2^m$ queries to $f$. So by theorem PE(a) we learn $\sqrt{k/n}$ to additive error $O(1/2^m)$ with constant probability $4/\pi^2$ using $O(2^m)$ queries to $f$.
+
+	Write $\frac{1}{2^m}$ as $\frac{\delta}{\sqrt{N}}$. So $\delta$ is the error in $\sqrt{k}$ directly. So we learn $\sqrt{k}$ to additive error $O(\delta)$ using $O(2^m) = O(\sqrt{N}/\delta)$ queries. Therefore we learn $k$ itself to additive error $O(\delta\sqrt{k})$ using $O(\sqrt{N}/\delta)$ queries.
+
+	But classically, the same approximation (obtained with constant probailitiy) this requires $O(N/\delta^2)$ queries, which is \underline{quadratically} more.
+
+\end{enumerate}
+
+\section{Hamiltonian Simulation}
+
+The aim here is to use a quantum computer to simulate the evolution/dynamics of a quantum system, given its Hamiltonian $H$. This is an extremely important and very active area of quantum research, and is expected to be one of the first useful real-world applications of quantum computing. The reason is that studying the behavior of molecules of even relatively modest length becomes extremely difficult classically, but is extremely useful for developing new drugs with the correct intended effects.
+
+For $n$ qubits, we generally need $O(2^n)$ time on a classical computer, but we will do it in $\poly(n)$ time (for a suitable class of $H$s).
+
+\subsection*{Hamiltonians \& Quantum Evolution}
+
+We have a physical system: a state $\ket{\psi}$, with a Hamiltonian $H$. A Hamiltonian is a self-adjiont (Hermitian) operator/matrix, the physical interpretation of which is the ``energy observable''. Time evolution is given by the Schrodinger equation ($\bar{h} = 1$):
+\begin{align*}
+	\frac{\textrm{d}}{\textrm{d}t}\ket{\psi(t)} = -iH\ket{\psi(t)}
+\end{align*}
+so the solution is characterised by $H$. We remark that the Hamiltonian can in general be time-dependent, but we will only consider the time independent case.
+
+Formally then, $\ket{\psi(t)} = \e^{-iHt}\ket{\psi(0)}$ where the exponential given is the matrix exponential defined by the series $\e^A = I + A + A^2/2! +\dots$ for any square matrix $A$. Moreover, if $H$ is Hermitian than $\e^{iH}$ is always unitary. Thus our problem is as follows:
+
+Given $H$ and a time $t$, we want to simulate the action of a unitary $U(t) = \e^{-iHt}$ to a suitably good approximation.
+
+We already have a notion for what it is for two vectors to be `close', but we need to formalise a notion of closeness between (unitary) operators; for this we use the operator norm (spectral norm) given by
+\begin{align*}
+	||A|| &= \max_{||\ket{\psi}||=1}||A\ket{\psi}||\\
+	&= |\textrm{max eigenvalue}|\quad\textrm{if $A$ diagonalisable}
+\end{align*}
+It is easy to see that:
+\begin{itemize}
+	\item $||A+B|| \le ||A|| + ||B||$
+	\item $||AB|| \le ||A||\cdot||B||$
+\end{itemize}
+
+We then say that $U$ approxiamtes $\tilde{U}$ to within $\eps$ if $||U - \tilde{U}|| < \eps$; this has the geometrical interpretation that for any normalised $\ket{\psi}$ the vectors $U\ket{\psi}$ and $\tilde{U}\ket{\psi}$ are at most $\eps$ apart.
+
+\subsection*{$k$-local Hamiltonians}
+
+$H$ on $n$ qubits is a $2^n\times 2^n$ Hermitian matrix. We'll want to simulate $U = \e^{-iHt}$ with a circuit of size $\poly(n,t)$ using \underline{basic} unitary gates (so the operations themselves don't grow too large, negating the speed up by circuit length) and size $\poly(1/\eps)$ for $\eps$-approxiamtion.
+
+Note that not all $H$s can be efficiently simulated, but some important physical classes can be.
+
+\begin{defin*}[$k$-local]
+	$H$ is $k$-local ($k$ fixed constant) on $n$ qubits if $$H = \sum_{j=1}^{m} H_j$$ where each $H_j$ is a Hermitian matrix acting on at most $k$ qubits (not necessarilyh continguous), \textit{i.e.} each $$H_j = \tilde{H}_j \otimes I$$, where $\tilde{H}_j$ acts on some $k$ qubits and $I$ is the identity on the rest.
+\end{defin*}
+
+So this is still an exponentially large matrix, but it is a description of constant size. So we must have $m\le {n\choose k} = O(n^k) = \poly(n)$ terms in $H$, each with constant size description. So the whole Hamiltonian can be specified with $\poly(n)$ size; generally though this is not the case since there are exponentially many degrees of freedom.
+
+\begin{remark*}[Examples]\ 
+	\begin{enumerate}[label=\arabic*)]
+		\item $H = X\otimes I\otimes I - 5Z\otimes I\otimes Y$ is $2$-local on $3$ qubits.
+		\item Write $M_{(k)}$ to denote the $1$-qubit operator $M$ acting on the $k^{\textrm{th}}$ (and $I$ on all the others). The \undf{Ising model} on an $(n\times n)$ square lattice of qubits is
+		\begin{align*}
+			H = J\sum_{i,j=1}^{n-1}Z_{(i,j)}Z_{(i,j+1)} + Z_{(i,j)}Z_{(i+1,j)}
+		\end{align*}
+		these pairs act on all nearest neighbours on the square lattice.
+
+		The \undf{Heisenberg Model} on a line is
+		\begin{align*}
+			H = \sum_{i=1}^{n-1}J_xX_iX_{i+1} + J_yY_iY_{i+1}+J_zZ_iZ_{i+1}
+		\end{align*}
+		where $J,J_x,J_y,J_z$ are all constants.
+	\end{enumerate}
+\end{remark*}
+
+Note: we will want to exponentiate a Hamiltonians, but in general $\e^{-i\sum_j H_jt}\ne \prod_j \e^{-iH_jt}$ if the $H_j$s don't commute.
+
+But: $\e^{-iH_jt}$s are \underline{local} unitary gates, \it{i.e.} acting on $k$ qubits each, and we'll simulate $U(t_0) = \e^{-i\sum_jH_jt_0}$ in terms of $\e^{-iH_jt}$s (even if they don't commute) for suitably small values of $t$ - and we'll have a $\poly(n,t_0)$-sized circuit too, as required.
+
+If we want to use some standard universal gate set (to further express the gates above) then we invoke:
+
+\begin{theorem*}[Solovay-Kitaev Theorem]
+	Let $U$ be a unitary operator on $k$ (constant) qubits and $S$ any universal set of quantum gates. Then $U$ can b eapproximated to within $\eps$ using $O(\log^c(1/\eps)$ gates from $S$ with $c < 4$ (but exponential in $k$, if $k$ is varying).
+\end{theorem*}
+\begin{proof}
+	Omitted. See \it{e.g.} Nielsen \& Chuang.
+\end{proof}
+
+In particular, this means that all $S$-products of length $O(\log^c(1/\eps)$) will get within $\eps$ of any element of $U(k)$.
+
+We'll also need a lemma about accumulation of error (\it{c.f.} ES3):
+
+\begin{lemma}[Lemma A]
+	Let $\{U_i\}$ be sets of $m$ unitary operators with $||U_i-V_i||\le \eps$  for all $i = 1,\dots,n$. Then $||U_m\dots U_1-V_m\dots V_1|| \le m\eps$, \it{i.e.} errors accumulate only \underline{linearly}
+\end{lemma}
+\begin{proof}
+	Easy induction.
+\end{proof}
+
+\subsection{Hamiltonian Simulation for local Hamiltonians}
+
+\underline{Warm-up}: the (easy) commuting case.
 \end{document}
