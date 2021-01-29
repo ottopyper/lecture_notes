@@ -1,0 +1,409 @@
+\documentclass[]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+\newcommand{\I}{\textrm{I}}
+\newcommand{\II}{\textrm{II}}
+\newcommand{\om}{\omega}
+\newcommand{\lom}{{<\omega}}
+
+\newcommand{\lh}{\ell h}
+
+\newcommand{\game}{
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $m_0$ & & $m_2$ & & $m_4 $& & $\dots $\\ \hline
+            II & & $m_1$ & & $m_3 $& &$ m_5$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+}
+
+\title{Infinite Games}
+\author{Lectures by Benedikt L{\"o}we}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+\reversemarginpar{Lecture 1}
+
+\section{Introduction}
+Before this course kicks off, we will first discuss a few things that this course is \it{not} about. Do bear in mind though that this is still an advanced set theory course, building off the content found in IID Logic and Set Theory.
+
+\underline{Literature}: Some useful literature can be found in `The Higher Infinite' - in particular, Chapter 6 ``Determinacy'', sections 27 (Infinite Games) and 28 (AD and Combinatorics).
+
+The term ``Infinite Games'' can evoke different reactions in different mathematicians. We will get on to formal definitions later, but the games we will consider have the following properties. They are:
+\begin{itemize}
+    \item Two-player
+    \item Length $\omega$
+    \item Win-lose
+    \item Perfect information
+    \item Perfect recall
+\end{itemize}
+Essentially, they are infinite versions of board games.
+
+A notable theorem from the finite analogue of this theory is that of Zermelo, which is that very finite such game is determined - this is considered rather trivial, and we will see the difference between the application of this to the finite case versus the infinite case.
+
+\subsection{Two Players}
+
+We have two players: I and II.
+
+Three-player games do not, in general, admit winning strategies. Consider the following example:
+
+I, II, III are playing. Player I is given a gold coin.
+
+\underline{Round 1}: I can give it to II or to III.
+
+\underline{Round 2}: Whoever has the coin can give it to I or to II.
+
+The person with the coin wins.
+
+So if II gets the coin, they will keep it and win. Player I can either hand the win to II, or leave it to chance with III. III has no win condition, and II cannot force anyone to give them the coin. So no-one has a winning strategy. However, \undf{coalitions} $\{I,II\}$, $\{I,III\}$, $\{II,III\}$ can each ensure a win.
+
+What we have encountered here is \undf{cooperation}, which fundamentally changes the strategies and payoffs; this phenomenon cannot arise in two-player games, as they players are always competing directly with each other.
+
+\subsection{Length $\omega$}
+
+In game theory in economics, there is research on potentially infinite games.
+
+Consider the prisoner's dilemma, concisecly represented by:
+
+\begin{center}
+    \begin{tabular}{cc|cc}
+        2 & 2 & 1 & 3 \\ \hline
+        3 & 1 & 0 & 0
+    \end{tabular}
+\end{center}
+
+There is a lot of research on this game as a single-move game, but it can also be thought of as a repeated game, where many rounds are played one after the other. In fact, if you fix a length of the game in advance this will affect the strategy of the players. Economists have deal with games which are, while certainly not infinte, of unknown length, and as such it happens that infinite games can serve as a useful model for this situation From there we can study asymptotic behaviour, or evolutionary phenomena.
+
+The point here is that if we only think of \it{truly} infinite games, \it{i.e.} it will take an infinite amount of time to win, then the situation is fundamentally different.
+
+\begin{remark}[Example] The Prime Factor Game\ \\
+
+\begin{center}
+    \begin{tabular}{cccccccccc}
+        I & $k_0$ & & $k_1$ & & $k_2$ & & $k_3$ & &\dots \\
+        II & & $p_0$ & & $p_1$ & & $p_2$ & & $p_3$ &\dots
+    \end{tabular}
+\end{center}
+
+The $k_i\ge 2$ are natural numbers, and the $p_i$ are prime numbers. At the end of the game, we look at $K = \{k_i:i\in \N\}$ and $P = \{p_i:i \in \N\}$. We say that Player II wins if $P$ is the set of all prime factors in $K$ (and no more).
+
+\underline{Observe}: Player II has a winning strategy.
+
+Let $k_0 = q_0^{\ell_0}\dots q_m^{\ell_m}$. Then play as though $p_0 = q_0$, $p_1 = q_1$, $p_2 = q_2$, exhausting the finitely many prime factors of $k_0$ before moving on to $k_1$. Repeating ad infinitum, it is clear that the set $P$ is precisely what is desired.
+
+However, if we look at how this is going for II after any finite number of moves $N \in \N$, then in most runs of the game, the finite sets $\{k_0,\dots,k_N\}$ and $\{p_0,\dots,p_N\}$ do not look like a win for player II; it will seems as though things are going worse and worse for II.
+
+This critically highlights how the asymptotic behaviour can be drastically different from the outcome of the game after infinite time.
+\end{remark}
+
+A common objection to this type of material is that you can't play these games, so how could you know who wins?
+
+The above example clearly highlights that even though, of course, the games cannot actually be played, we may still be able to prove that a winning strategy does or does not exist for either player. So we are replacing actually playing the game with thinking about the different strategies for it.
+
+Let's modify the PFG slightly:
+
+\begin{center}
+    \begin{tabular}{cccccccc}
+        I & & $k_0$ & & $k_1$ & & $k_2$ & \dots \\ 
+        II & $p_0$ & & $p_1$ & & $p_2$ & & \dots
+    \end{tabular}
+\end{center}
+
+Now Player I has a winning strategy instead. Take $p_0$, find another prime $q \ne p_0$ and play $k_i = q^{i+1}$. Then $K = \{q^{i+1}:i \in \N\}$. So II wins iff $P = \{q\}$, but $p_0 \in P$. So II loses.
+
+\subsection{Win-Lose}
+
+There is a related notion here called \undf{zero-sum}; in these games, there is a fixed payoff that is split between the two players. So, for instance, the Prisoner's Dilemma is \undf{not} zero-sum because the total payoff differs between some outcomes. However, the game
+\begin{center}
+    \begin{tabular}{cc|cc}
+        1&1&0&2\\ \hline
+        2&0&1&1
+    \end{tabular}
+\end{center}
+\it{is} zero-sum.
+
+\undf{Win-lose} simply means that the payoff is an indivisible $1$. So in our case, payoff functions are characteristic functions of a \undf{payoff set}.
+
+\subsection{Perfect Information}
+
+Paradigmatic: board games, after which this idea was modelled.
+
+A non-example is \it{card games}, in which your own hand is only known to you. Unsurprisingly, this scenario is called \it{imperfect information}.
+
+Consider yet another variant of PFG:
+
+\begin{center}
+    \begin{tabular}{cccccccccc}
+        I & $k_0$ & & $k_1$ & & $k_2$ & & $k_3$ & &\dots \\
+        II & & $p_0$ & & $p_1$ & & $p_2$ & & $p_3$ &\dots
+    \end{tabular}
+\end{center}
+
+Here, player I picks $k_i$, but does not have to reveal $k_i$ before II has played $p_i$. Here, although it may happen with probability zero, it is possible for II to beat any set of moves that I makes simply by being lucky, and guessing only prime factors for numbers chosen by I. However, it is clear that it is impossible to ensure that this is the case.
+
+So neither of the two players has a winning strategy in this variant. The study of these imperfect information games is closely related to probability.
+
+\subsection{Perfect Recall}
+
+This means that both of the players remember everything that has happened before; the opposite of course would be that the players have a finite, bounded memory.
+
+For instance, take PFG with the additional constraint that Player II can only remember the last 1000 moves. Now Player I has a strategy that might win; on the first move, pick a natural number with at least 1001 distinct prime factors. Then II will have no idea what move to make at $N = 1001$; they might guess, and so they can still win, but they have no way to ensure this (and again it will not be very likely).
+
+Imperfect recall is very relevant in applications of infinite games in computer science.
+
+\reversemarginpar{Lecture 2}
+
+We fix a set $M$ of moves. In most cases, $M$ will simply be $\N$ - but we will aim to keep this slightly more general for now.
+
+Note that from the perspective of a set theorist, we think of $\N$ as equal to $\omega$, and in particular $n = \{0,1,\dots,n-1\}$. Moreover, functions are \it{set-theoretic} functions, \it{i.e.} sets of ordered pairs with the function property. For instance:
+\begin{align*}
+    M^n = \{s; s:n\ra M\}
+\end{align*}
+is the set of functions from the \it{set} $n$ to the set $M$. If $s\in M^n$ and $t \in M^k$, with $k>n$, then $s\subset t$ is the same as saying ``$s$ is an initial segment of $t$'', or that ``$t$ is an extension of $s$''.
+
+Since we are thinking of sequences as functions, we can also write: if $m<n$ and $s \in M^n$, then $s\restriction m \in M^m$.
+
+These are well-known formal definitions of these objects, but they will be used particularly ruthelessly here.
+
+We make another important definition:
+\begin{align*}
+    M^{<\omega} \coloneqq \bigcup_{n\in \N}M^n
+\end{align*}
+This is the set of all finite sequences of elements of $M$; these will be called the \undf{positions} of the game. We also have:
+\begin{align*}
+    M^\omega \coloneqq \{x;x:\N\ra M\}
+\end{align*}
+is the set of all \undf{runs} or \undf{plays} of the game \it{i.e.} the set of all sequences of $M$ of length $\omega$. Note that if $x\in M^\omega$ is a run and $n\in \N$, then $$x\restriction n:n\ra M$$ is the position that the play producing $x$ was in after $n$ rounds.
+
+\underline{The games on $M$}:
+
+\begin{center}
+    \begin{tabular}{c|ccccccc}
+        I & $m_0$ & & $m_2$ & & $m_4 $& & $\dots $\\ \hline
+        II & & $m_1$ & & $m_3 $& &$ m_5$ & $\dots$ 
+    \end{tabular}
+\end{center}
+We are restricting our attention to games where I,II play in alternation and player I starts. [Remark: more general games can be described by these; see later.]
+
+Then $x(i)\coloneqq m_i$ is the run produced by the game, and $s\coloneqq x\restriction n$ is the $n^\th$ position.
+
+If $x \in M^\omega$, we write
+\begin{align*}
+    x_\I(i) &\coloneqq x(2i)\\
+    x_\II(i) &\coloneqq x(2i+1)
+\end{align*}
+$x_I,x_{II}\in M^\omega$ correspond to the moves made by players I,II respectively. If $x,y\in M^\omega$, we write $x\ast y$ (\undf{interleaving}) for the sequence $z$ defined by:
+\begin{align*}
+    z(n) \coloneqq \left\lbrace  \begin{array}{ccc}x(k)&n = 2k\\ y(k) &n = 2k+1 \end{array}\right.
+\end{align*}
+
+Clearly, $x_\I \ast x_\II = x$.
+
+If $A\subset M^\omega$, we call $A$ a \undf{payoff set}. In the game $G(A)$, we say that player I wins a run $x \in M^\om$ if $x \in A$; otherwise player II wins.
+
+We call any function $$\sigma:M^{<\om} \ra M$$ a \undf{strategy}. Note that a strategy looks at the entire game up until that point to decide the next move; this is the perfect recall aspect. You may wonder why we bother defining a strategy for player I at odd length positions, and this is largely for notational convenience; it is a little easier to have this notational overkill.
+
+Note that each strategy in this sense can be thought of a strategy for I, plus a strategy for II. Let
+\begin{align*}
+    O&\coloneqq \bigcup_{n\textrm{ odd}}M^n\\
+    E &\coloneqq \bigcup_{n\textrm{ even}}M^n
+\end{align*}
+Then $\sigma\restriction E$ is a strategy for I, and $\sigma \restriction O$ is a strategy for II. So there is redundance in the notation.
+
+If $\sigma, \tau$ are strategies, we can play them against each other by interleaving them as $\sigma\ast\tau \in M^\om$, which is defined by:
+\begin{align*}
+    (\sigma\ast\tau)(2n)&\coloneqq \sigma((\sigma\ast\tau)\restriction 2n)\\
+    (\sigma\ast\tau)(2n+1)&\coloneqq \tau((\sigma\ast\tau)\restriction 2n+1)
+\end{align*}
+We say that $\sigma$ is \undf{winning for I in $G(A)$} if $\forall \tau(\sigma\ast\tau\in A)$, \it{i.e.} I always wins regardless of II's strategy. Similarly, we say that $\tau$ is \undf{winning for II in $G(A)$} if $\forall \sigma(\sigma\ast\tau\not\in A)$.
+
+We say that a set $A$ is \undf{determined} if one of the two players has a winning strategy in $G(A)$.
+
+\begin{remark}\ 
+    \begin{itemize}
+        \item Clearly, at most one player can have a winning strategy (otherwise, play them against each other).
+        \item However, it is not obvious (and not true, up to the axiom of choice) that every set is determined.
+        \item In fact, we will see that AC implies that there are non-determined sets, but ``every set is determined'' (Axiom of Determinacy, AD) is consistent ZF - though this requires more nuance, but we will discuss all of this later.
+    \end{itemize}
+\end{remark}
+
+You may ask: is that really the most general form of games that we want to look at? What if we wanted to include things like `forbidden' moves, or allowing one or two players to make several moves at a time, or having two different move sets? It turns out that we don't need to worry about this:
+
+A set $T\subset M^{\lom}$ is called a \undf{tree} if it is closed under initial segments, \it{i.e.} if $s\in T$ and $t\subset s$ then $t \in T$.
+
+These trees look very much like the trees one might encounter in graph theory/combinatorics; though there are some small differences. In this set-theoretic notion of a tree, each node in the tree contains within it all of the information abou the path from the root (\it{i.e.} the empty set, $\emptyset$) to it.
+
+If $T$ is a tree on $M$ and $x\in M^\om$, we say that $x$ is a \undf{branch through $T$} if for all $n \in \N$, $x\restriction n \in T$. We write $[T]$ for the set of branches through $T$; in some literature this is referred to as the \undf{body of $T$}.
+
+\begin{remark}[Example]
+    $M^\lom$ is a tree; $[M^\lom] = M^\om$.
+\end{remark}
+
+We can think of a tree $T$ as ``finitary'' rules for a game: if $x\not\in [T]$, then there is a least $n$ for which $x\restriction n\not\in T$. If $n$ is odd, then player I left the tree, and if $n$ is even then player II left the tree.
+
+Define a game $G(A;T)$ where $A\subset [T]$ and $T$ is a tree on $M$.
+The game is as usual:
+\game
+If $x \in A$, then player I wins. If $x\not\in [T]$ and the least $n$ for which $x\restriction n\not\in T$ is even, then player I wins. In all other cases, player II wins.
+
+Now, even though this looks more general due to the introduction of the tree $T$, it can be seen that this is in fact a special case of a $G(A)$ game, since we can define: $$A_T \coloneqq \{x \in M^\om; x\in A\textrm{ or }x\not\in [T]\textrm{ and the least }n\textrm{ s.t. } x\restriction n\not\in T\textrm{ is even}\}$$. Then $G(A;T)$ and $G(A_T)$ are \undf{the same game}.
+
+Note that we haven't quite defined what it means to be the same game, but in this particular case it should be rather clear that these two are indeed the same game.
+
+This idea of using trees gives us a lot of flexibility with the move set.
+
+\begin{remark}[Example 1]
+    Suppose the moves for I are in $X$, and the moves for II are in $Y$. We can take $M\coloneqq X\cup Y$, $A\subset M^\om$, and
+    \begin{align*}
+        T\coloneqq \{s;\ \forall n\in \N,\ s(2n)\in X\textrm{ and }s(2n+1)\in Y\}
+    \end{align*}
+    Then $G(A;T)$ is the game we desire.
+\end{remark}
+
+\begin{remark}[Example 2]
+    Suppose I can always make two moves in $X$, but II can only make one move. We then take $M\coloneqq X^2\cup X^1$, and apply the idea of Ex. 1 with $X = X^2$ and $Y = X^1$.
+\end{remark}
+
+\begin{remark}[Example 3]
+    If $X\subset Y$, then every game $G(A)$ on $X$ can be thought of as a game on $Y$ by $G(A;T)$, where $$T\coloneqq X^{\lom} \subset Y^{\lom}$$
+\end{remark}
+
+\begin{defin*}[Strategic Tree]
+    Let $\sigma$ be a strategy. We define the \undf{I-strategic tree} and the \undf{II-strategic tree} on $M$ as follows:
+    \begin{align*}
+        T_\sigma^\I &\coloneqq \{s\in M^{\lom}; \forall n(s(2n)=\sigma(s\restriction 2n))\}\\
+        T_\sigma^\II &\coloneqq \{s\in M^\lom; \forall n(s(2n+1)=\sigma(s\restriction 2n+1))\}
+    \end{align*}
+
+    When drawing out these trees, for instance $T_\sigma^\I$, the layers alternate between making any choice from $M$ (representing II's moves) and making the only choice dictated by $\sigma$ for I.
+
+    II-strategic trees look the same except that we have branching in odd length nodes and no branching in even length nodes.
+
+    $T$ is called \undf{strategic} if there is $\sigma$ such that $T = T^\I_\sigma$ or $T = T^\II_\sigma$.
+\end{defin*}
+
+\underline{Observe}: $$T_\sigma^\I = \{(\sigma\ast \tau)\restriction n; \tau \textrm{ any strategy and }n\in \N\}$$ $$T_\sigma^\I = \{(\tau\ast \sigma)\restriction n; \tau \textrm{ any strategy and }n\in \N\}$$
+
+\underline{Therefore}: $$ [T_\sigma^\I] = \{\sigma\ast \tau; \tau \textrm{ any strategy}\}$$
+$$ [T_\sigma^\II] = \{\tau\ast\sigma; \tau \textrm{ any strategy}\}$$
+
+\begin{remark}[Proposition]\ 
+    \begin{enumerate}
+        \item $\sigma$ is a winning strategy for I in $G(A)\iff [T_\sigma^\I]\subset A$
+        \item $\sigma$ is a winning strategy for II in $G(AS)\iff [T_\sigma^\II]\cap A = \emptyset \iff [T_\sigma^\I]\subset M^\omega \backslash A$
+    \end{enumerate}
+
+    \underline{Also}: $A$ is determined iff either $A$ contains $[T_\sigma^\I]$ for some $\sigma$ or $M^\om \backslash A$ contains $[T_\sigma^\II]$ for some $\sigma$.
+\end{remark}
+
+\underline{Notation}: If $s,t\in M^\lom$, we write $st$ for the concatenation of $s$ and $t$. This also works if $t$ is infinite; if $x \in M^\om$ and $s\in M^\lom$, then similarly $sx\in M^\om$ is the concatenation.
+
+If $t$ is a length 1 sequence, say $t = \langle m\rangle$, we also write $sm$ for $st = s\langle m\rangle$; this is usually unambiguous.
+
+For the length of a sequence we write $\lh(s) = \textrm{dom}(s)$.
+
+\begin{defin*}[Splitting Node, Perfect Tree, Perfect Set]\ 
+    \begin{enumerate}[label=\arabic*)]
+        \item If $T$ is a tree and $s \in T$ we say $s$ is a \undf{splitting node} if there are $m\ne m'$ such that both $sm,sm' \in T$.
+        \item $T$ is \undf{perfect} if for each $s \in T$ there is a $t\supseteq s$ such that $t\in T$ and $t$ is splitting in $T$.
+        
+        [Remark: every strategic tree is perfect]
+
+        \item $A\subset M^\om$ is \undf{perfect} if there is a perfect tree $T$ such that $A = [T]$.
+        
+        \underline{Remark}: Compare to the topological notion of a \undf{perfect set}: clsoed without isolated points. We will find out later that, with the right toplology on $M^\om$, these notions will coincide.
+
+    \end{enumerate}
+\end{defin*}
+
+\begin{theorem*}[Cantor]
+    Suppose $A\subset 2^\om \equiv \{0,1\}^\om$ is perfect and non-empty. Then $A$ has cardinality $2^{\aleph_0}$.
+\end{theorem*}
+\begin{proof}
+    $A\subset 2^\om$ and $|2^\om| = 2^{\aleph_0}$, so $|A| \le 2^{\aleph_0}$. So by Cantor-Schr{\"o}der-Bernstein, it is enough to show that there is an injection from $2^\om$ into $A$.
+
+    We define this injection via a function $\phi : 2^{\lom} \ra T$, where $T$ is perfect such that $A = [T]$. We will define this by recursion (this is known as a \it{Cantor scheme}):
+    \begin{align*}
+        \phi(\emptyset) &\coloneqq \emptyset\\
+    \end{align*}
+    Suppose $\phi(s) = t \in T$. Since $T$ was perfect, find $u\supseteq t, u \in T$ that is splitting: $u0,u1\in T$. To ensure this is uniquely defined (to potentially avoid issues with Choice), take the minimal one. Then:
+    \begin{align*}
+        \phi(s0) &\coloneqq u0\\
+        \phi(s1) &\coloneqq u1
+    \end{align*}
+    This finishes the definition of $\phi$. We then define:
+    \begin{align*}
+        \hat{\phi}&:2^\om \ra [T] = A\\
+        \hat{\phi}(x)&\coloneqq \bigcup_{n\in \N}\phi(x\restriction n)
+    \end{align*}
+    We need to check some things:
+    \begin{enumerate}
+        \item $\lh(\phi(x\restriction n)) \ge n$
+        \item $\phi(x\restriction n)\subset \phi(x\restriction m)$ if $n\le m$
+        
+        $\implies \hat{\phi}:2^\om\ra2^\om$
+
+        \item $\hat{\phi}(x)\restriction u\subset \phi(x\restriction k)$ for some $k$ so $\hat{\phi}(x)\restriction u\in T$, so $\hat{\phi}(x)\in [T]$.
+        
+        So we indeed have that $\hat{\phi}:2^\om \ra [T]$.
+    \end{enumerate}
+
+    It remains to show that $\hat{\phi}$ is an injection:
+
+    Suppose $x\ne y$. Find $n$ such that $x\restriction n = y\restriction n$, but $x(n)\ne y(n)$. WLOG, say $x(n) = 0$ and $y(n) = 1$. But then $\phi(x\restriction n+1)\ne \phi(y\restriction n+1)$, since the former ends in $0$ and the latter in $1$. This implies that $\bigcup_{k\in \N}\phi(x\restriction k)\ne \bigcup_{k\in \N}\phi(y\restriction k)$, hence $\hat{\phi}(x)\ne \hat{\phi}(y)$.
+\end{proof}
+
+\begin{remark}
+    If $|M|\ge 2$ and $T$ is a perfect tree on $M$, then the same proof shows that $2^{\aleph_0}\le |[T]|$.
+\end{remark}
+
+\begin{remark}[Corollary]
+    If $|M|\ge 2$, then:
+    \begin{enumerate}[label = (\roman*)]
+        \item if player I has a winning strategy in $G(A)$, then $|A|\ge 2^{\aleph_0}$
+        \item if player II has a winning strategy in $G(A)$ then $|M^\om \backslash A| \ge 2^{\aleph_0}$.
+    \end{enumerate}
+    This follows from:
+    \begin{enumerate}
+        \item strategic trees are perfect
+        \item perfect sets are large
+        \item winning startegy means ``includes strategic tree''
+    \end{enumerate}
+\end{remark}
+
+Note that if $A\subset M^\om$ with $|M|\ge 2$, then either $|A|\ge 2^{\aleph_0}$ or $|M\backslash A| \ge 2^{\aleph_0}$.
+
+The corollary gives a necessary condition on when a fixed player has a winning strategy, but no non-trivial necessary condition for determinacy.
+
+\subsection*{Sufficient Conditions}
+
+Let's do the following as a warmup.
+
+Prove that if $A$ is countable, then player II has a winning strategy in $G(A)$.
+
+\begin{remark}[Proposition]
+    If $A = \{a_i;i \in \N\}$ is countable, then player II has a winning strategy in $G(A)$.
+\end{remark}
+\begin{proof}
+    In II's round $k$ [that means digit $2k+1$], II takes care of $a_k$, simply by playing $1 - a_k(2k+1)$ (assume again we are playing on $M = \{0,1\}$; on anything else just pick something different to $a_k(2k+1)$).
+
+    So the strategy $\tau$ is:
+    \begin{itemize}
+        \item ignore everything player I does
+        \item blindly play $1 - a_k(2k+1)$ in your $k^\th$ move.
+    \end{itemize}
+
+    Clearly then for any $\sigma$,
+    \begin{align*}
+        (\sigma\ast \tau)_\II(k) &= (\sigma \ast \tau)(2k+1)\\
+        &= 1 - a_k(2k+1)\\
+        &\ne a_k(2k+1)
+    \end{align*}
+    So $\sigma \ast \tau\ne a_k$ for arbitrary $k$, so $\sigma\ast \tau \not \in A$. Thus $\tau$ is winning.
+\end{proof}
+
+\end{document}

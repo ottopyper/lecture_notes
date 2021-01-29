@@ -1,0 +1,180 @@
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{pagecolor}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{tikz}
+\newcommand*\circled[1]{%
+   \tikz[baseline=(C.base)]\node[draw,circle,inner sep=1.2pt,line width=0.2mm,](C) {#1};}
+\newcommand*\Myitem{%
+   \stepcounter{enumi}\item[\circled{\theenumi}]}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+\definecolor{thmcolour}{rgb}{0,0,0}
+\definecolor{defcolour}{rgb}{0,0,0}
+\definecolor{textcolour}{rgb}{0,0,0}
+\definecolor{backgroundcolour}{rgb}{1,1,1}
+
+\pagecolor{backgroundcolour}
+\color{textcolour}
+
+\newtheoremstyle{custhm}
+{%space above
+}{%space below
+}{%body font
+\color{thmcolour}\em
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{thmcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\thmname{#1}\if\relax\detokenize{#2}\relax:\else\thmnumber{ #2}:\fi\if\relax\detokenize{#3}\relax\else\thmnote{ (#3)}\fi
+}
+
+\newtheoremstyle{ex}
+{%space above
+}{%space below
+}{%body font
+\color{thmcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{thmcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\thmname{#1}\if\relax\detokenize{#2}\relax:\else\thmnumber{ #2}:\fi\if\relax\detokenize{#3}\relax\else\thmnote{(#3)}\fi
+}
+
+\newtheoremstyle{remark}
+{%space above
+}{%space below
+}{% body font
+}{%indent amount
+-0em
+}{%head font
+\bfseries
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\if\relax\detokenize{#3}\relax\thmname{#1}:\else\thmname{#3}:\fi
+}
+
+\newtheoremstyle{numremark}
+{%space above
+}{%space below
+}{% body font
+}{%indent amount
+-0em
+}{%head font
+\bfseries
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\thmname{#1}\thmnumber{ #2}:
+}
+
+\newtheoremstyle{cusdef}
+{%space above
+}{%space below
+}{%body font
+\color{defcolour}
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{defcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+%if numbered, include number
+%if named, include name
+\thmname{#1}\if\relax\detokenize{#2}\relax:\else\thmnumber{ #2}:\fi\if\relax\detokenize{#3}\relax\else\thmnote{ (#3)}\fi
+}
+
+\theoremstyle{custhm}
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{cusdef}
+\newtheorem{defin}[theorem]{Definition}
+\theoremstyle{custhm}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{custhm}
+\newtheorem{cor}[theorem]{Corollary}
+
+\theoremstyle{custhm}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{ex}
+\newtheorem{ex}[theorem]{Example}
+
+\theoremstyle{custhm}
+\newtheorem*{theorem*}{Theorem}
+
+\theoremstyle{cusdef}
+\newtheorem*{defin*}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark*}{Remark}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\theoremstyle{numremark}
+\newtheorem{numremark}[theorem]{Remark}
+
+\setcounter{section}{-1}
+
+%\marginpar{to describe which lecture it is}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lef}{\left(}
+\newcommand{\res}{\right)}
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\suminf}{\sum_{n=0}^{\infty}}
+\newcommand{\suminfa}[1]{\sum_{#1=0}^{\infty}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\undf}[1]{\textit{\textbf{#1}}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\it}[1]{\textit{#1}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\proves}{\vdash}
+\newcommand{\lra}{\leftrightarrow}
+
+\renewcommand{\bar}{\overline}
+\renewcommand{\O}{\mathcal{O}}
+
+
+\newcommand{\ac}[1]{\mathcal{#1}}
+\newcommand{\A}{\mathcal{A}}
+
+
+\renewcommand{\subset}{\subseteq}
+
+\renewcommand{\th}{\textrm{th}}
