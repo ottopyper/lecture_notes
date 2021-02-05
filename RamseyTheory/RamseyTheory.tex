@@ -1,0 +1,530 @@
+\documentclass[10pt]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+\usepackage{graphicx}
+
+\newcommand{\hj}{\textrm{HJ}}
+
+\title{Ramsey Theory}
+\author{Lectures by Imre Leader}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+Ramsey Theory is all about the following question:
+
+\begin{center}
+    \underline{\textbf{Can we find some order in (enough) disorder?}}    
+\end{center}
+
+In a sense, the entire course is about answering this question in different settings.
+
+Chapter 1: Monochromatic systems. Abstract and concrete.
+
+Chapter 2: Partition Regular Equations. More concrete; looking at the naturals with addition and multiplication, and asking about order/disorder there.
+
+Chapter 3: Infinite Ramsey Theory. Abstract; taken to a limit (countable only though).
+
+Prerequisites: None (other than some basic concepts of topology \it{e.g.} open/closed/compact sets).
+
+Literature: In theory, this course is self-contained. But if you would like a different viewpoint/some reinforcement, consider:
+\begin{itemize}
+    \item Bollobas, ``Combinatorics'', C.U.P. 1986 (For Ch. 3)
+    \item Graham, Rothschild, Spencer, ``Ramsey Theory'', Wiley 1990 (For Ch. 1\&2)
+\end{itemize}
+
+Example Sheets: this a 16 lecture course, so there are 3 sheets and 3 classes.
+
+\clearpage
+\section{Chapter 1}
+\subsection{Monochromatic Systems}
+
+This is the introductory chapter from which everything else will flow.
+
+In this course, we take $\N = \{1,2,3,\dots\}$, and write $[n] = \{1,2,\dots,n\}$. For a set $X$ and $r\in \N$, we write $X^{(r)} = \{A\subset X : |A| = r\}$; this is the collection of all $r$-sets in $X$.
+
+\underline{Queston}: Suppose that we are given a $2$-colouring of $\N^{(2)}$, \it{i.e.} a $c:\N^{(2)}\ra\{1,2\}$. Can we find an infinite subset $M\subset \N$ such that $M$ is monochrome, \it{i.e.} $c$ is constant on $M^{(2)}$.
+
+Let's try some examples to get a feel for it.
+
+\begin{remark*}[Examples]\ 
+    \begin{enumerate}
+        \item Colour $ij$ red if $i + j$ is even, and blue if $i+j$ is odd.
+        
+        Here we can do it, rather easily - take $M = \{2,4,6,8,\dots\}$, or any subset thereof, or all the odd numbers, \it{etc...}.
+
+        \item Colour $ij$ red if $\max\{n:2^n|i+j\}$ even, and blue otherwise.
+        
+        This is also a yes, \it{e.g.} $M = \{4^0,4^1,4^2,\dots\}$.
+
+        \item Colour $ij$ red if $i+j$ has an even number of (distinct) prime factors, and blue otherwise.
+        
+        This is also a yes, but it is not obvious how...
+    \end{enumerate}
+\end{remark*}
+
+\begin{theorem}[Ramsey's Theorem]
+    Let $c$ be a $2$-colouring of $\N^{(2)}$. Then there exists an infinite monochromatic $M\subset \N$.
+\end{theorem}
+\begin{proof}
+    Pick any $a_1 \in \N$. There are infinitely many edges out of $a_1$, so infinitely many have the same colour; say all edges from $a_1$ to infinite set $B_1$ have colour $c_1$.
+
+    Now within $B_2$, we take a point $a_2$ and find an finite $B_2\subset B_1\backslash\{a_2\}$ such that all edges from $a_2$ to $B_2$ are the same colour - these may be red or blue.
+
+    Repeat this process again, within $B_3$, and repeat ad infinitum.
+
+    This gives us an infinite sequence $(a_i)_{i=1}^{\infty}$ of points, and infinite sequence of colours $c_i$ such that edge $a_i$ to $a_j$ with $i<j$ has colour $c_i$.
+
+    Take a constant subsequence of $c_i$, say $c_i:i\in I$. Then $M = \{a_{i}:i\in I\}$ is monochromatic.
+\end{proof}
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item This is sometimes called a `2-pass' proof, because we had to do the whole induction, and then go over it again to finish it off.
+        \item In example 3, no such example is known!
+        \item The same proof shows that whenever $\N^{(2)}$ is $k$-coloured (\it{i.e.} $c:\N^{(2)}\ra [k]$), there still exists an infinite monochromatic set.
+        
+        Alternatively, we could deduce this from Theorem 1 plus induction. We could view the colours as `1' and `2 or 3 or $\dots$ or $k$' and apply Theorem 1; if we get an infinite $1$-set, then done, and if we get an infinite `2 or $\dots$ or $k$'-set then done by induction on $k$.
+
+        \item An infinite monochromatic set is \undf{more} than having arbitrarily large finite monochromatic sets, \it{e.g.} take disjoint blue $K_2$, $K_3$, $K_4$, and so on, then connect everything remaining with red edges. While this (of course) does not contradict Ramsey's Theorem, we clearly have arbitrarily large blue sets (the $K_n$s), but there is no \it{infinite} blue set.
+    \end{enumerate}
+\end{remark*}
+
+\begin{remark*}[Example]
+    Any sequence $x_1,x_2,\dots$ in $\R$ (or any totally ordered set) has a monotone subsequence.
+
+    Indeed, $2$-colour $\N^{(2)}$ by giving $ij$ ($i<j$) colour \it{up} if $x_i < x_j$, and \it{down} if $x_i > x_j$. Then apply Theorem 1.
+\end{remark*}
+
+\reversemarginpar{Lecture 2}
+
+What if we coloured $\N^{(r)}$, say for $r = 3,4,\dots$. Given a $2$-colouring $c:\N^{(r)}\ra \{1,2\}$, must there be an infinite monochromatic set?
+
+For instance, $r = 3$: colour $ijk$ ($i < j < k$) red if $i | j+k$, and blue otherwise. Here we can do this easily - just take $M = \{2^0,2^1,2^2,\dots\}$.
+
+\begin{theorem}[Ramsey for $r$-sets]
+    Let $r \in \N$. Then whenever $\N^{(r)}$ is $2$-coloured, there exists an infinite monochromatic set.
+\end{theorem}
+\begin{proof}
+    In the previous proof, when we picked $a_1$ and looked at the lines out of it to other points, we in fact used the $r = 1$ case on the colouring induced on the singletons in the neighbourhood of $a_1$. Armed with these ideas, the proof here will act in exactly the same way.
+
+    $r = 1$ is trivial (just infinite pigeonhole), or if you prefer $r = 2$ is Theorem 1. We apply induction on $r$. Thus suppose the result holds for $r - 1$. Given $c:\N^{(r)}\ra \{1,2\}$, we look at the induced colouring.
+
+    Pick $a_1 \in \N$, and look at $(\N\backslash\{a_1\})^{(r-1)}$. This has an induced colouring $d$ given by $d(F) = c(F\cup\{a_1\})$. Now by induction there is an infinite $B_1\subset \N\backslash\{a_1\}$ such that all the $r-1$-sets have the same colour according to $d$, \it{i.e.} $c(F\cup\{a_1\}) = c_1$ for all $F\subset B^{(r-1)}$, for some colour $c_1 \in [r]$.
+
+    Repeating, we have $a_1 \in B_1$, and infinite $B_2\subset B_1\backslash \{a_2\}$ such that all $F\cup \{a_2\}$, $F\in B_2^{(r-1)}$, have the same colour $c_2$.
+
+    We keep going to infinity, giving us an infinite sequence of distinct points $a_1,a_2,\dots$ and colours $c_1,c_2,\dots$ such that $c(a_{i_1},a_{i_2},\dots,a_{i_r})=c_{i_1}$ ($i_1 < i_2 < \dots < i_r$). There is then an infinite index set $I$ such that $c_i:i\in I$ is constant, and so $M = \{a_i:i\in I\}$ is monochrome.
+\end{proof}
+
+\begin{remark*}[Example]
+    We saw from Theorem 1 that given points $(1,x_1),(2,x_2),\dots$ in $\R^2$, there exists a subsequence such that the induced (piecewise-linear) function is monotone.
+
+    Functions can have other properties that are stricter; for instance, we could ask for the function to be convex/concave - in fact we can ensure that this is the case.
+
+    On the surface, this seems really hard - but not for us, with $r$-set Ramsey.
+
+    Indeed, just $2$-colour $\N^{(3)}$ by giving $ijk$ colour \it{convex} if they form a convex shape, and \it{concave} (otherwise) if they from a concave shape (any three points must fall into one of the two categories).
+    
+    We get an infinite monochrome subsequence; the induced function is either convex or concave for any of the three points; and so the overall function is convex/concave.
+\end{remark*}
+
+How long does the proof take in the $r = 3$ case? Well, to find each $a_i$ we need to do an infinite two-pass proof (of the $r = 2$ case). So this happens an infinite number of times, and then theres another pass at the end. Essentially, it takes a very long time.
+
+Surprisingly, the infinite version of Ramsey \it{implies} the finite version.
+
+\begin{theorem}[Finite Ramsey]
+    For all $m, r$ there exists an $n$ such that whenever $[n]^{(r)}$ is $2$-coloured, there exists a monochromatic $m$-set.
+\end{theorem}
+\begin{proof}
+    Suppose not. We will show that there ia a $2$-colouring of $\N^{(r)}$ without a monochromatic $m$-set, (massively) contradicting Theorem 2.
+
+    For each $n\ge r$, have a $2$-colouring $c_n$ of $[n]^{(r)}$ with no monochromatic $m$-set. [We want to take their union to get a bad colouring of the whole of $\N^{(r)}$, but the problem is that the colours aren't necessarily \it{nested}, \it{i.e.} any two agree where both defined.]
+
+    There are only finitely many ways to $2$-colour $[r]^{(r)}$ (two, in fact), so infinitely many of the $c_n$ agree on $[r]^{(r)}$: say $c_n\restriction [r]^{(r)} = d_r$ for all $n\in A_1$, some $d_n:[r]^{(r)}:\{1,2\}$.
+
+    There are only finitely many ways to $2$-colour $[r+1]^{(r)}$, so infintely many of the $c_n:n\in A_1$ agree on $[r+1]^{r+1}$: say $c_n\restriction [r+1]^{(r)} = d_{r+1}$ for all $n \in A_2$, for some $d_{r+1}:[r+1]^{(r)}\ra \{1,2\}$.
+
+    Continue inductively. We obtain colourings $d_n:[n]^{(r)}\ra\{1,2\}$ for each $n\ge r$ such that
+    \begin{enumerate}[label=\arabic*)]
+        \item $d_n$ has no monochromatic $m$-set, since $d_n = c_n'\restriction [n]^{(r)}$ for some $n' \ge n$
+        \item $d_{n'}\restriction [n]^{(r)} = d_n$ for all $n' \ge n$ by construction of the $d_n$s
+    \end{enumerate}
+
+    Now put $c(F) = d_n(F)$, any $n\ge \max F$ (for each $r$-set $F$). We can say \it{any}, because all the colourings agree.
+
+    This is well-defined (by 2)), and has no monochromatic $m$-set (by 1)). Massive contradiction.
+\end{proof}
+
+\begin{remark*}[Remarks]
+    This is called a `compactness' argument, similar to the proof of Bolzano-Weierstrass in IA Analysis. What we are essentially doing is showing that if the space $\{1,2\}^{\N}$ of $2$-colourings, with the product topology (\it{i.e.} induced from the metric $d(f,g) = 1/(\min \{n:f(n)\ne g(n)\})$) is (sequentially) compact.
+
+    \underline{Note}: This proof also gives \it{no} information on how large $n = n(m,r)$ can be (such proofs do exists though, \it{c.f.} IID Graph Theory).
+\end{remark*}
+
+What if we colour $\N^{(2)}$ with infinitely many colours, \it{i.e.} have $c:\N^{(2)}\ra X$, some set $X$?
+
+Of course, we do not get an infinite monochromatic set, since \it{e.g.} we can just colour each edge with a unique colour. But we can ask a slightly different question...
+
+Do we always get an infinte ste $m$ such that $c\restriction m^{(2)}$ is either constant or injective?
+
+Sadly, the answer is still no. We can achieve this by colouring $ij$ ($i<j$) with colour $i$. This clearly is neither injective nor constant on any infinite subset.
+
+Another option  here is that we can colour $ij$ with colour $j$ ($i<j$) - then each colour class is finite, instead of infinite. As it happens, at least one of these four situations must arise:
+
+\begin{theorem}
+    Let $c$ be a colouring of $\N^{(2)}$ with an arbitrary set of colours. Then there exists an infinite $M\subset \N$ such that one of the following holds:
+    \begin{enumerate}[label=\roman*)]
+        \item $c$ is constant on $M^{(2)}$
+        \item $c$ is injective on $M^{(2)}$
+        \item $\forall ij,kl \in M^{(2)}$, $c(ij) = c(kl)\iff i = k$
+        \item $\forall ij,kl \in M^{(2)}$, $c(ij) = c(kl)\iff j = l$
+    \end{enumerate}
+\end{theorem}
+
+[It is worth remarking that this trivially implies Theorem 1: if there are only finitely many colours, then cases ii), iii), iv) cannot happen.]
+
+\begin{proof}
+    There is a superbly nice idea here. The act of comparing pairs of edges is the same as asking a question about the 4-set of the vertices, and we can use Ramsey's Theorem for $r = 4$ to help us here.
+
+    Define a $2$-colouring of $\N^{(4)}$ by giving $ijkl$ colour \it{same} if $c(ij) = c(kl)$, and \it{dif} if $c(ij)\ne c(kl)$. Note that, as ever, the notation implies $i<j<k<l$.
+
+    By Ramsey for $4$-sets, ther exists an infinite monochromatic $M_1$ for this colouring. If the colour is \it{same}, then we have case i). Indeed, given $ij,kl\in M_1^{(2)}$, choose $m < n$ in $M_1$ with $m > i,j,k,l$. Then $c(ij) = c(mn)$, and $c(kl) = c(mn)$ (this deals with the case $j= k$, and other anomalies). So we may otherwise assume that $M_1$ has colour diff.
+
+    Now, $2$-colour $M_1^{(4)}$ by giving $ijkl$ colour \it{same} if $c(jk) = c(il)$, and \it{diff} if not.
+
+    Again by $Ramsey$-4, we have infinite $M_2\subset \M_1$ monochromatic for this colouring. Note that we cannot have $M_2$ be the colour \it{same}, as otherwise pick $i < j < k < l < m < n \in M_2$. We would then have $c(jk) = c(in) = c(lm)$, contradicting $j,k,l,m \in M_1$. Thus $M_2$ is colour \it{diff}.
+
+    The final type of edge pairs in a $4$-set could be interlocking:
+
+    $2$-colour $M_2^{(4)}$ by giving $ijkl$ colour \it{same} if $c(ik) = c(jl)$, and \it{diff} if not. Again we obtain an infinite monochromatic $M_3 \subset M_2$. Once again, we cannot have $M_3$ colour \it{same}, else we choose $i < j < k < l < m < n \in M_3$, and we have $c(im) = c(kn) = c(jl)$, contradicing the fact that $i,j,l,m \in M_2$. Thus $M_3$ is colour \it{diff}.
+
+    So now we know that any two edges in $M_3$ have different colours if they are not adjacent; we now deal with the adjacent case.
+
+    $2$-colour $M_3^{(3)}$ by giving $ijk$ colour \it{same} if $c(ij) = c(jk)$, and \it{diff} if not. Have an infinite monochromatic $M_4 \subset M_3$. We cannot have $M_4$ colour \it{same}, else pick $i < j < k < l \in M_4$, and we have $c(ij) = c(jk) = c(kl)$, contradicting the above. So $M_4$ is colour \it{diff}.
+
+    There are other ways that edge pairs can be adjacent, and these account for the various cases in the Theorem.
+
+    $2$-colour $M_4^{(3)}$ by giving $ijk$ colour \it{left-same} if $c(ij) = c(ik)$, and \it{left-diff} if not. We obtain infinite monochromatic $M_5\subset M_4$.
+
+    Finally, $2$-colour $M_5^{(3)}$ by giving $ijk$ colour \it{right-same} if $c(jk) = c(ik)$, and \it{right-diff} otherwise.
+
+    We obtain infinite monochromatic $M_6\subset M_5$.
+\begin{center}
+    \includegraphics[scale=0.8]{together.jpg}
+\end{center}
+
+    \underline{If $M_6$ is \it{left-diff} and \it{right-diff}}: All pairs of edges have a different colour; this is case 2.
+
+    \underline{If $M_6$ is \it{left-same} and \it{right-diff}}: If edges meet at the left they are the same; at the right they are different; this is case 3.
+
+    \underline{If $M_6$ is \it{left-diff} and \it{right-same}}: Similarly, this is case 4.
+
+    \underline{If $M_6$ is \it{left-same} and \it{right-same}}: Pick $i < j < k \in M_6$. Then $c(ij) = c(ik) = c(jk)$, contradiction.
+\end{proof}
+
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item We could use just one colouring, by colouring a $4$-set $ijkl$ with the partition of $[4]^{(2)}$ induced by $c$ on $\{i,j,k,l\}$. The number of colours is then the number such partitions, which is ${4\choose 2} = 6$. We didn't do this because it seems a bit magical and out of the blue, and slightly obscures what's going on. There are also lots of symbols, making it a bit unpleasant.
+        
+        \item Similarly, if $c:\N^{(r)}\ra X$ is an arbitrary colouring, we get an infinite $M\subset \N$ and a set $I\subset [r]$ such that $\forall x_1,\dots,x_r,y_1,\dots,y_r\in M^{(r)}$ we have $c(x_1,\dots,x_r) = c(y_1,\dots,y_r) \iff x_i=y_i\ \forall i\in I$, where $I$ is an index set. These $2^r$ coloursing are called the \undf{canonical} colourings of the $r$-sets.
+        
+        For instance, $ = 2$:
+        \begin{itemize}
+            \item Case i) corresponds to $I = \emptyset$
+            \item Case ii) corersponds to $I = \{1,2\}$
+            \item Case iii) corresponds to $I = \{1\}$
+            \item Case iv) corresponds to $I = \{2\}$
+        \end{itemize}
+    \end{enumerate}    
+\end{remark*}
+
+\subsection{Van der Waerden's Theorem}
+
+If we $2$-colour $\N$, can we find $3$ consecutive poitns of the same colour?
+
+\underline{Answer}: of course not; just colour $\N$ alternately.
+
+What about $3$ equally spaced points, \it{i.e.} $(a,a+d,a+2d)$? This is not obviously false. If it were true though, that would be nice - we would have found some order amongst the disorder. Could we find more, perhaps $4$ points, or even $m$?
+
+\underline{Aim}: For every $m$, whenever $\N$ is $2$-coloured there exists a monochromatic artihmetic progression of length $m$.
+
+Just to be clear, by length we mean the number of terms \it{i.e.} a sequence $\{a, a + 2,\dots, a+(m-1)d\}$ has length $m$.
+
+This is Van der Waerden's Theorem, and it is very hard to solve.
+
+By our usual compactness argument, this is the same as:
+
+\underline{Aim'}: $(\forall m)(\exists N)$ such that whenever $[n]$ is $2$-coloured, there exists a monochromatic AP of length $m$.
+
+Indeed, if this is false then there is an $m$ such that for every $n \ge m$ there is a colouring $c_n$ of $[n]$ with no monochromatic AP of length $m$. We want to combine these into one big colouring of $\N$, but we can't yet.
+
+But infinitely many $c_n$ agree on $[m]$, and, of those, infinitely many agree on $[m+1]$, and so on.... Put together those (nested) restrictions to obtain a $2$-colouring of $\N$ with no monochromatic AP of length $m$. Contradiction.
+
+In proving this (Aim'), one key idea is to generalise: we in fact show that $\forall m,k\ \exists n$ such that whenever $[n]$ is $k$-coloured there exists a monochromatic AP of length $m$.
+
+\underline{Note}: proving a \it{stronger} result might be \it{easier}, \it{e.g.} in a proof by induction.
+
+Another key idea: given APs $A_1,\dots,A_r$, each of length $m$ - so $A_i = \{a_i,a_i+d_i,\dots,a_i+(m-1)d_i\}$ - we say they are \undf{focused} at $f$ if $a_i + md_i = f$ for each $i$. \it{E.g.} $\{1,4\}$ and $\{5,6\}$ are focused at $7$.
+
+If in addition each $A_i$ is monochromatic (for a given colouring), with no two the same colour, we say they are \undf{colour-focused}. Why do we care?
+
+In a $k$-colouring, if we have APs $A_1,\dots,A_k$, each of length $m-1$, that are colour-focused, then we actually have a monochromatic AP of length $m$, by asking ``what colour is the focus?''
+
+Write $W(m,k)$ for the least $n$ (if it exists) such that whenever $n$ is $k$-coloured, there exists a monochromatic AP of length $m$.
+
+\begin{prop}
+    $\forall k, \exists n$ such that whenever $[n]$ is $k$-coloured there exists a monochromatic AP of length $3$.
+\end{prop}
+\underline{Note}: This will be contained in Theorem 6; it is included here for clarity.
+
+
+\begin{proof}
+    \underline{Claim}: $\forall r \le k, \exists n$ such that whenever $[n]$ is $k$-coloured, we have either:
+    \begin{itemize}
+        \item a monochromatic AP of length 3, or
+        \item $r$ colour-focused APs of length 2
+    \end{itemize}
+    Given this: put $r = k$ and look at the focus. Whatever colour it is, we get a monochromatic AP of length 3.
+    
+    \underline{Proof of Claim}: Induction on $r$. $r = 1$ is trivial (can take $n = k+1$).
+
+    Given $n$ suitable for $r - 1$, we'll show that $(k^{2n}+1)\cdot 2n$ is suitable for $r$. So given a $k$-colouring of $[(k^{2n}+1)2n]$, with no mono AP of length 3:
+
+    Break up $[(k^{2n}+1)2k]$ into blocks of length $2n$, say $B_1,B_2,\dots,B_{k^{2n}+1}$, where $B_i = [(i-1)2n+1,i2n]$ (square brackets denote interval with endpoints).
+
+    Inside any interval of length $2n$, we have $r-1$ colour-focused APs of length 2 (by choice of $n$), together with their focus (as length = $2n$).
+
+    Now, the number of ways to $k$-colour a block is $k^{2n}$, and since we have $k^{2n}+1$ it must be the case that some two are identically coloured, say $B_s$ and $B_{s+t}$. Inside $B_s$, we have $r-1$ colour-focused APs of length $2$, say $\{a_1,a_1+d_1\},\dots,\{a_{r-1},a_{r-1}+d_{r-1}\}$ focused at $f$.
+
+    But now the APs $\{a_1,a_1+d_1+2nt\},\dots,\{a_{r-1},a_{r-1}+d_{r-1}+2nt\}$ are colour-focused at $f + 4nt$, and $\{f,f+2nt\}$ is also focused there, giving $r$ colour-focused APs of length $2$. So we have finished the induction, so proved the claim, so finished the proof.
+\end{proof}
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item The idea of looking at the number of ways to colour a block is called a \undf{product argument}.
+        
+        \item The proof shows that $$W(3,k) \le \left. k^{k^{.^{.^{k^{4k}}}}}\right\rbrace k$$
+        
+        So \it{e.g.} $W(3,3)\le 3^{3^{12}}$. This is a `tower-type' bound.
+    \end{enumerate}
+\end{remark*}
+
+We are now better-equipped to tackle the full theorem:
+
+\begin{theorem}[Van der Waerden's Theorem]
+    $\forall m,k,\exists n$ such that whenever $[n]$ is $k$-coloured there exists a monochromatic AP of length $m$.
+\end{theorem}
+\begin{proof}
+    We induct on $m$. $m=1$ is trival (or $m = 2$ is pigeonhole, or $m = 3$ is Prop 1.5).
+
+    So we may assume that that $W(m-1,k)$ exists for every $k$.
+
+    \underline{Claim}: for every $r\le k$, there exists $n$ such that whenever $[n]$ is $k$-coloured, we have either:
+    \begin{itemize}
+        \item a monochromatic AP of length $m$, or
+        \item $r$ colour-focused APs of length $m-1$
+    \end{itemize}
+    [Given this, put $ r = k$ and look at the focus to get a mono AP of length $m$.]
+
+    \underline{Proof of Claim}: Induction on $r$: $r = 1$ (take $n = W(m-1,k)$).
+    Given $n$ suitable for $r-1$, we'll show that $W(m-1,k^{2n})\cdot 2n$ is suitable for $r$.
+
+    So, we are given a $k$-colouring of $[W(k-1,k^{2n})2n]$, with no mono AP of length $m$:
+
+    Break up $[W(m-1,k^{2n})]$ into blocks of length $2n$, say $B_1,B_2,\dots,B_{W(m-1,k^{2n})}$, where $B_i = [(i-1)2n+1,i2n]$.
+
+    As in the proof before, we need three equally spaced identical blocks - but this is much harder to get.
+
+    The number of ways to $k$-colour a block is $k^{2n}$, so since we have $W(m-1,k^{2n})$ \it{blocks}, we must have (by definition of $W(m-1,k^{2n})$) some  $m-1$ equally spaced blockes that are coloured identically. Say $B_s, B_{s+t},\dots,B_{s+(m-2)t}$.
+
+    Now, inside $B_s$ we have $r-1$ colour-focused APs of length $m-1$ (by definition of $n$), together with their focus (as length = $2n$): say $A_1,\dots,A_{r-1}$ focused at $f$, where $A_i$ has first term $a_i$ and common difference $d_i$. Then the APs $A_1',\dots,A_{r-1}'$, where $A_i'$ has first term $a_i$ and common difference $d_i + 2nt$ are colour-focused at $f + (m-1)2n$, and also $\{f,f+2nt,f+2(2nt),\dots,f+(m-2)2nt$ is monochromatic of a different colour to the $A_i'$s. This gives $r$ colour-focused APs of length $m-1$.
+
+    This completes the induction, which proves the claim, which completes the outer induction on $m$ and hence concludes the proof.
+\end{proof}
+
+\underline{Note}: for these proofs, focus on the pictures (even though I haven't drawn them here)!
+
+\marginpar{Lecture 5}
+
+\subsection*{The Ackermann/Grzegorczyk Hierarchy}
+
+\begin{defin*} The \undf{Ackermann} or \undf{Grzegorcyzk} \undf{Hierarchy} is the sequence of funcgtions $f_1,f_2,\dots$ (each $\N\ra\N$) given by:
+    \begin{itemize}
+        \item $f_1(x) = 2x$
+        \item $f_{n+1}(x) = f_n^{(x)}(1) = \underbrace{f_n(f_n(\dots f_n}_{x\textrm{ times}}(1)\dots))$
+    \end{itemize}
+\end{defin*}
+
+Let's explore these a bit.
+\begin{itemize}
+    \item $f_2(x) = 2^x$
+    \item $f_3(x) = \left. 2^{2^{.^{.^{2}}}} \right\rbrace x$
+    \item $f_4(1) = 2$, $f_4(2) = 2^2 = 4$, $f_4(3) = 2^{2^{2^2}} = 65536$, $f_4(4) = \left. 2^{2^{.^{.^{2}}}} \right\rbrace 65536$ \it{etc}...
+\end{itemize}
+
+We say $f:\N\ra \N$ is of \undf{type $n$} if there exist $c,d > 0$ such that $f_n(cx) \le f(x) \le f_n(dx)$ for all $x$. So our upper bound for $W(3,k)$ was a function of $k$ of type 3 (note that even though it is a tower of $k$s, not $2$s, the height of the tower is far more significant). Our bound on $W(m,k)$ ($m$ fixed) is of type $m$.
+
+In fact, our bound on $W(m) = W(m,2)$, as a function of $m$, grows faster than every $f_n$! [This means that $W(m)$ is \it{not} primitive recursive.] This is often a feature of such `double inductions', and for a long time it was thought that perhaps $W(m)$ really does grow this fast.
+
+However, Shelah (1987) found a proof of VdW using induction only on $m$. His proof gives that $W(m,k) \le f_4(m+k)$. This isn't bad, but $f_4$ is still a pretty big function. Graham offered \$1000 for a bound on $W(m)$ that was $f_3(m)$. Gowers (1998) showed $W(m) \le 2^{2^{2^{2^{2^{m+9}}}}}$ - `almost' of type $2$ - a huge improvement on type 3.
+
+What about a lower bound? It is known that $W(m) \ge \frac{2^m}{8m}$; this is comparatively extremely small.
+
+\begin{cor}
+    Whenever $\N$ is finitely coloured, some colour class arbitrarily long APs. \qedsymbol
+\end{cor}
+\begin{remark*}
+    We \it{cannot} guarantee an infinite AP - \it{e.g.} R-BB-RRR-BBBB....
+    
+    Alternatively, list all infinite APs as $A_1,A_2,\dots$ (which we can do since they are countable). Pick distinct $x_1,y_1\in A_1$ and make $x_1$ red and $y_1$ blue. Now pick distinct $x_2,y_2 \in A_2 \backslash \{x_1,y_1\}$ and make $x_2$ red, $y_2$ blue. Continue. Then we wipe out all the APs.
+
+    The idea here is that there simply aren't enough APs.
+\end{remark*}
+
+\begin{theorem}[Strengthened Van der Waerden Theorem]
+     For all $m$, whenever $\N$ is finitely coloured there exists an AP of length $m$ that, together with its common difference, is monochromatic.
+\end{theorem}
+\begin{proof}
+    We will prove this with VdW itself (this is the sign of a good theorem).
+
+    We induct on $k$, the number of colours. $k = 1$ is trivial.
+
+    Given $n$ suitable for $k-1$ (\it{i.e.} $n$ such that whenever $[n]$ is $k-1$-coloured, there exists a monochromatic AP+CD of length $m$), we'll show $W(n(m-1)+1,k)$ suitable for $k$.
+
+    Given a $k$-colouring of $[W(n(m-1)+1,k)]$, we have a mono AP of length $n(m-1)+1$; say $\{a,a+d,\dots,a+2d,\dots,a+n(m-1)d\}$ is red.
+
+    Now if $d$ is red then we are done by $\{a,a+d,\dots,a+(m-1)d\}\cup\{d\}$ is monochromatic. Similarly, if any $rd$, $1\le r \le n$ is red, then we are done since $\{a,a+rd,\dots, a + (m-1)rd\}\cup\{rd\}$ is monochromatic.
+
+    Thus none of $\{d, 2d, \dots, nd\}$ is red, \it{i.e.} $\{d,2d,\dots,nd\}$ is $(k-1)$-coloured. So, by definition of $n$, we are done.
+\end{proof}
+
+What kind of bounds do we get here? Since we are iterating on the left hand side, this actually grows vastly more quickly than anything we have considered before; it's so mind bogglingly large that it essentially isn't worth thinking about.
+
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item From now on, we don't care aboud bounds.
+        \item The case $m = 2$ is \it{Schur's Theorem}: Whenever $\N$ is finitely coloured, there exists monochromatic $x,y,z$ with $x + y = z$.
+        \item Can also prove Schur direcly from Ramsey. Indeed, given a $k$-colouring $c$ of $\N$, induce a colouring of $[n]^{(2)}$ ($n$ large enough) by $d(ij) = c(j-i)$.
+        
+        By Ramsey, we can find a monochromatic triangle, say $ijk$. So $c(j-i) = c(k-j) = c(j-i)$, and $(j-i) + (k-j) = (k-i)$, so done.
+    \end{enumerate}
+\end{remark*}
+
+\subsection{The Hales-Jewett Theorem}
+
+You may have noticed that we haven't taken full advantage of the structure of the natural numbers - all we needed was some idea of equal spacing, and we didn't care so much about the additive structure. It turns out that we have a theorem that describes the same phenomenon but with all the clutter removed.
+
+\begin{defin*}[Combinatorial Line]
+Let $X$ be a finite set. A subset $L$ of $X^n$ (`the $n$-dimensional cube on alphabet $X$') is called a \undf{line} or \undf{combinatorial line} if there exists non-empty $I\subset [n]$ and $a_i \in X$, each $i \in [n] - I$ such that $$L = \{(x_1,\dots,x_n)\in X^n: x_i = a_i\ \forall i \not\in I, x_i = x_j\ \forall i,j\in I\}$$
+We call $I$ the set of \undf{active coordinates}
+\end{defin*}
+
+For example, in $[3]^{(2)}$, lines can be:
+\begin{itemize}
+    \item vertical lines, where $I = \{2\}$
+    \item horizontal lines, where $I = \{1\}$
+    \item one diagonal line, where $I = \{1,2\}$ (the main diagonal only)
+\end{itemize}
+In $[3]^{3}$, we could have
+\begin{itemize}
+    \item $\{(1,2,1),(1,2,2),(1,2,3)\}$ with $I = \{3\}$, or
+    \item $\{(1,3,1),(2,3,2),(3,3,3)\}$ with $I = \{1,3\}$, \it{etc}...
+\end{itemize}
+
+Note that the definition of `line' is invariant under reorderings of $x$ - so \it{e.g.} $\{1,3),(2,2),(3,1)\}$ is \it{not} a line in $[3]^{2}$.
+
+\begin{theorem}[The Hales-Jewett Theorem]
+    For all $m,k$ there exists $n$ such that whenever $[m]^{n}$ is $k$-coloured, there exists a monochromatic line.
+\end{theorem}
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item The least such $n$ (if it exists) is denoted $\hj(m,k)$.
+        \item A game of $m$-in-a-row Noughts \& Crosses, played in enough dimensions, cannot end in a draw! [Exercise: show that it is a first-player win (optional).]
+        \item $\hj\implies$VdW immediately: just map $X^n$ linearly to $\N$ (note: perhaps requries positive coefficients).
+        
+        Indeed, given a $k$-colouring $c$ of $\N$, induce a $k$-colouring $d$ of $[m]^n$ ($n$ large) by $d((x_1,\dots,x_n)) = c(x_1+\dots+x_n)$. By assumption we have a monochromatic line $L$ in $[m]^{n}$, which corresponds to a monochromatic AP of length $m$ in $\N$ (with common difference = \# active coords of $L$).
+
+        Thus we can view HJ as an `abstract version' of VdW.
+    \end{enumerate}
+\end{remark*}
+
+Before we begin, we also need a few definitions:
+
+For a line $L$ in $[m]^{(n)}$, write $L^-$ for its first point and $L^+$ for its last point (in the ordering on $[m]^{(n)}$) given by $x \le y$ if $x_i \le y_i$ for all $i$)
+
+Say lines $L_1,\dots,L_r$ are \undf{focused} at $f$ if $L_i^+ = f$ for all $i$, and they are \undf{colour-focused} (for a given colouring) if in addition each $L_i - \{L_i^+\}$ is monochromatic, no two of the same colour.
+
+\begin{proof}
+   Induction on $m$. $m = 1$ is trivial.
+
+   Given $m > 1$, we may assume $\hj(m-1,k)$ exists for all $k$.
+
+   \underline{Claim}: for all $r\le k$, there exists an $n$ such that whenever $[m]^{(n)}$ is $k$-coloured, there exists either:
+   \begin{itemize}
+       \item a monochromatic line, or
+       \item $r$ colour-focused lines
+   \end{itemize}
+   [Then done: put $r = k$ and look a the focus.]
+
+   \underline{Proof of Claim}: Induction on $r$.
+
+   $r = 1$ is done - take $n = \hj(m-1,k)$.
+
+   Given $n$ suitable for $m-1$, we'll show $n + \hj(m-1,k^{m^n}) = : n + n'$ is suitable for $r$.
+
+   So, given a $k$-colouring $c$ of $[m]^{n+n'}$ with no monochromatic line: View $[m]^{n+n'}$ as $[m]^{n}\times [m]^{n'}$. There are $k^{m^n}$ ways to colour $[m]^{n}\times [m]^{n'}$. At each point of $[m]^{n'}$ we have one of $k^{m^n}$ ``patterns''.
+
+   So by choice of $n'$, we have a line $L$ in $[m]^{n'}$ such that for all $a \in [m]^{n}$, for all $b,b' \in L - \{L^+\}$ we have $c(a,b) = c(a,b') =: c'(a)$, say. By definition of $n$, $c'$ has $r-1$ colour-focused lines, say $L_1,\dots,L_{r-1}$ with active coordinate sets $J_1,\dots,J_{r-1}$ respectively, focused at $f$. Let $L$ have active coord set $I$. Then the lines $L_1',\dots,L_{r-1}'$, where $L_i'$ starts at $(L_i^-,L^-)$ and has active coord set $J_i\cup I$, are colour-focused at $(f,L^+)$. Also the line starting $(f,L^-)$ with active coord set $I$ is monochromatic (apart from final point), of a different colour to the $L_i'$s, giving $r$ colour-focused lines.
+
+   This completes the induction, hence the proof of the claim, has the whole proof.
+\end{proof}
+
+What is a line though? If you think about it, it's just a one-dimensional subspace. This begs the question, can we perhaps get a monochromatic \it{two}-dimesional subspace?
+
+A \undf{$d$-parameter set} or \undf{$d$-dimensional subspace} of $X^n$ is a set $S \subset X^n$ such that there exist disjoint, non-empty $I_1,\dots,I_d\subset [n]$ and $a_i \in X$, each $i \in [n]-(I_1\cup\dots\cup I_d)$ such that
+\begin{align*}
+    S = \{x \in X^n : x_i = a_i\ \forall i\not\in I_1\cup\dots\cup I_d,\textrm{ and }x_i = x_j\ \forall i,j\textrm{ with }i,j\in I_k\textrm{ for some }k\}
+\end{align*}
+For instance, in $X^3$:
+\begin{itemize}
+    \item $\{(x,y,2):x,y\in X\}$ is a $2$-parameter set: $I_1 = \{1\}$, $I_2 = \{2\}$
+    \item $\{(x,y,x):x,y\in X\}$ is a $2$-parameter set: $I_1 = \{3\}$, $I_2 = \{2\}$
+\end{itemize}
+
+This is in fact true.
+
+\begin{theorem}[Extended Hales-Jewett Theorem]
+    For all $m,k,d$ ther exists $m$ such that whenever $[m]^{n}$ is $k$-coloured, there exists a monochromatic $d$-parameter set.
+\end{theorem}
+\begin{proof}
+    View $X^{dn}$ (the $dn$-dimensional cube over alphabet $X$) as $(X^d)^n$, the $n$-dimensional cube on alphabet $X^d$. Clearly any line in $(X^d)^n$ (alphabet $X^d$) corresponds to a $d$-parameter set in $X^{dn}$ (alphabet $X$). So we are done - we can take $n = d\cdot \hj(m^d,k)$.
+\end{proof}
+
+Let $S$ be a finite subset of $\N^d$. A \undf{homothetic copy} of $A$ is any set of the form $a + \lambda S$, where $a \in \N^d$ and $\lambda \in S$.
+
+For instance, in $\N^1$, a homothetic copy of $\{1,2,\dots,m\}$ is precisely an AP of length $m$.
+
+Can we guarantee a homothetic copy of $S$ that is monochromatic? For instance, in $\N^2$, can we find a monochromatic square?
+
+\begin{theorem}[Gallai's Theorem]
+    Let $S$ be a finite subset of $\N^d$. Then, whenever $\N^d$ is fiinitely coloured, there exists a monochromatic homothetic copy of $S$.
+\end{theorem}
+\begin{proof}
+    Let $S = \{S(1),\dots,S(m)\}$. Given a $k$-colouring $c$ of $\N^d$, induce a $k$-colouring $c'$ of $[m]^n$ ($n$ large) by: $c'(x_1,x_2,\dots,x_d) = c(S(x_1)+\dots + S(x_d))$.
+
+    Then we have a monochromatic line $L$ for $c'$ ($n$ large), say with active coord set $I$. But now, taking $S(x_1)+\dots + S(x_d)$ for each $x \in L$, we have a monochromatic, homothetic copy of $S$ (with $\lambda = |I|$).
+\end{proof}
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item Suppose $S = \{(0,0),(1,0),(0,1),(1,1)\} \subset \N^2$. Then we get a monochromatic square. Could we instead have applied Extended HJ, $d = 2$, on alphabet of size $2$?
+        
+        The answer is \it{no}: this would only give a monochromatic rectangle.
+
+        \item Or, can prove Gallai by product arguments and focusing (don't try it, symbol overload, but similar argument).
+    \end{enumerate}
+\end{remark*}
+
+\marginpar{Lecture 7}
+
+\end{document}

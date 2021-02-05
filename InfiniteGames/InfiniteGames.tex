@@ -406,4 +406,240 @@ Prove that if $A$ is countable, then player II has a winning strategy in $G(A)$.
     So $\sigma \ast \tau\ne a_k$ for arbitrary $k$, so $\sigma\ast \tau \not \in A$. Thus $\tau$ is winning.
 \end{proof}
 
+\reversemarginpar{Lecture 3}
+
+\underline{Necessary}: we have determined some necessary conditions for wins:
+\begin{itemize}
+    \item I wins $G(A)\implies |A| = 2^{\aleph_0}$
+    \item II wins $G(A)\implies |\om^\om\backslash A| = 2^{\aleph_0}$
+\end{itemize}
+\underline{Sufficient}: we also have the sufficient condition:
+\begin{itemize}
+    \item if $A$ is countable, then player II wins.
+\end{itemize}
+
+Note that we write `I/II' wins as shorthand for `I/II has a w.s.'
+\ \\
+
+\begin{theorem*}\ \\
+    \begin{enumerate}
+        \item If $A\subset \om^\om$ such that $|A| < 2^{\aleph_0}$, then player II has a winning strategy in $G(A)$.
+        \item If $A\subset \om^\om$ such that $|\om^\om\backslash A| < 2^{\aleph_0}$ then player I has a winning strategy in $G(A)$.
+    \end{enumerate}
+\end{theorem*}
+\begin{proof}
+    The proofs of 1 and 2 are essentially just switching the roles of I,II. So we are just going to prove 1.
+
+    \underline{Caution}: our games are \it{not} fully symmetric; I is not in the same situation as II. Moving first can sometimes be an advantage, and sometimes a disadvantage. The above claim must thus be checkd carefully.
+
+    Let $|A| < 2^{\aleph_0}$. Define an equivalence relation $\sim$ on $\om^\om$ by $$x\sim y \iff x_{II} = y_{II}$$. So equivalence classes look like this:
+    \begin{align*}
+        C_z \coloneqq \{x; x_{II} = z\}
+    \end{align*}
+    So there is a bijection between the $\sim$-equivalence classes and $\om^\om$. In particular, there are $2^{\aleph_0}$ such equivalence classes. By the pigeonhole principle, we find $z$ such that $$C_z \cap A = \emptyset$$. Then define $\tau$ as:
+    \begin{itemize}
+        \item ignore everything player I does
+        \item just play the next digit of $z$
+    \end{itemize}
+    Formally, we can say $\tau(s)\coloneqq z(n)$ if $\lh(s) = 2n+1$, and whatevery you like on the even entries. Then if $\sigma$ is any strategy, we have
+    \begin{align*}
+        (\sigma\ast\tau)_{\II} &= z\\
+        \implies \sigma\ast\tau &\in C_z\\
+        \implies \sigma\ast\tau&\not\in A
+    \end{align*}
+    So $\tau$ is a w.s. for II.
+\end{proof}
+
+This is called a \undf{blindfolded strategy}, since II doesn't care about what I is doing (and doesn't need to know). Formally, this is when there is $z\in \om^\om$ such that for player II, $\tau(s)\coloneqq z(n)$ if $\lh(s) = 2n+1$, or similarly for player I $\sigma(s)\coloneqq z(n)$ if $\lh(s) = 2n$. We normally denote this as $\tau_z$ if for player II, and $\sigma_z$ if for player I.
+
+\underline{Consequence}: If we have any set $A$ that is not determined, then it must be the case that $|A| = |\om^\om \backslash A| = 2^{\aleph_0}$. So we have a bit of an idea that a non-determined set must look a bit symmetric.
+
+\underline{Next goal}: Find such a non-determined set.
+
+\begin{theorem*}[uses AC]
+    There is a non-determined subset $A\subset \om^\om$.
+\end{theorem*}
+\begin{proof}
+    The idea here is to ensure that $A$ contains no strategic trees, which we do by enumerating them and then distributing the branches between $A$ and its complement.
+
+    We did prove in Lecture 3 that if $T$ is a strategic tree, then $|[T]| = 2^{\aleph_0}$.
+    
+    \underline{Question}: How many strategic trees are there?
+
+    \underline{Notation}: We write Trees $\coloneqq \{T;T\textrm{ is a tree on }\om\}$, and STrees$\coloneqq \{T;T\textrm{ is a strategic tree on }\om\}$.
+
+    We remark that a tree $T\subset \om^\om$, which is countable, so this gives an upper bound on the size of Trees. So we have $|$STrees$|\le|$Trees$|\le2^{\aleph_0}$. Can we also find a lower bound? This is where the blindfolded strats come in...
+
+    If $z\ne z'\in \om^\om$, then $[T^\I_{\sigma_z}]\cap[T^\I_{\sigma_{z'}}] = \emptyset$. So $T_{\sigma_z}^\I \ne T^\I_{\sigma_{z'}}$.
+
+    Together (with Cantor-Schr{\"o}der-Bernstein), we get a bijection between $2^{\aleph_0}$ and STrees.
+
+    Note that so far we haven't used AC, with the mild exception that the notation $2^{\aleph_0}$ implies the existence of an ordinal in bijection with the powerset of $\om$, which requires AC. However, the above can be reformulated as saying that we have injections $\om^\om \xhookrightarrow{} \dots \xhookrightarrow{} \om^\om$, and then use CSB; choiceless.
+
+    However, we need a little bit of choice now. We aren't going to use the full AC, but only that the set $\om^\om$ is wellorderable. This implies:
+    \begin{itemize}
+        \item $2^\aleph_0$ \it{is} an ordinal (so we can do transfinite recursion on it)
+        \item there is a choice funcntion $c:\mathcal{P}\om^\om\backslash \emptyset \ra \om^\om$ (\it{i.e.} $c(A)\in A$)
+    \end{itemize}
+
+    Equipped with this, we do the construction. We had that $|\textrm{STrees}| = 2^{\aleph_0}$, so write STrees $=\{T_\alpha; \alpha < 2^{\aleph_0}\}$ and do the following transfinite recursion:
+
+    We are going to define sets $A_\alpha,B_\alpha$ in stages for $\alpha < 2^{\aleph_0}$ in such a way that $|A_\alpha| = |B_\alpha| = |\alpha|$ ($\ast$). In the end we will see $A_\alpha \cap B_\alpha = \emptyset$.
+
+    \underline{$\alpha = 0$}: $A_0 = B_0 = \emptyset$.
+
+    \underline{$\alpha = \beta+1$}: Suppose we have $A_\beta,B_\beta$. Consider $T_\beta\in$ STrees. Then $|[T_\beta]| = 2^{\aleph_0}$. By $(\ast)$, $|A_\beta| = |B_\beta| = |\beta|<2^{\aleph_0}$. This implies that $|A_\beta\cup B_\beta|<2^{\aleph_0}$. Thus $[T_\beta]\backslash (A_\beta \cup B_\beta)\ne\emptyset$ (even better, it has $2^{\aleph_0}$ many elements).
+
+    Define:
+    \begin{align*}
+        a_\beta & \coloneqq c([T_\beta]\backslash(A_\beta\cup B_\beta))\\
+        b_\beta & \coloneqq c([T_\beta]\backslash (A_\beta\cup B_\beta\cup \{a_\beta\}))
+    \end{align*}
+    Note that the latter input for $c$ is still non-empty since $|[T_\beta]\backslash (A_\beta\cup B_\beta)| = 2^{\aleph_0}$.
+
+    Then let $A_\alpha \coloneqq A_\beta \cup \{a_\beta\}$, and similarly $B_\alpha \coloneqq B_\beta\cup\{b_\beta\}$. Moreover, $|A_\alpha| = |\beta + 1| = |\alpha| = |B_\alpha|$, satisfying IH.
+
+    \underline{$\alpha$ is a limit}: For all $\beta < \alpha$, $A_\beta$, $B_\beta$ are defined and satisfy $(\ast)$. So we let:
+    \begin{align*}
+        A_\alpha &\coloneqq \bigcup_{\beta<\alpha}A_\beta\\
+        B_\alpha &\coloneqq \bigcup_{\beta<\alpha}B_\beta
+    \end{align*}
+    Obviously, $|A_\alpha| = |\alpha| = |B_\alpha|$ since they are each unions of things of the right size (there is an increasing sequence of bijections that converges to what we want, formally), so $(\ast)$ is still satisfied.
+
+    Now we let
+    \begin{align*}
+        A &\coloneqq \bigcup_{\alpha <2^{\aleph_0}}A_\alpha\\
+        B &\coloneqq \bigcup_{\alpha < 2^{\aleph_0}}B_\alpha
+    \end{align*}
+    \underline{Note 1}: $A\cap B = \emptyset$; if not, then $a_\alpha = b_\beta$ for some $\alpha,\beta$. WLOG $\alpha \le \beta$. This then contradicts the choice of $b_\beta$.
+
+    \underline{Note 2}: $|A| = 2^{\aleph_0} = |B|$. This is good, since it was a necessary condition for $A$ and $B$ being non-determined, as we found earlier.
+
+    \underline{Claim}: $A$ is not determined (and similarly $B$).
+
+    \underline{Proof of Claim}: Suppose $A$ is determiend. Then there is a strategic tree $T_\alpha$, $\alpha <2^{\aleph_0}$, such that either $[T_\alpha] \subset A$ or $[T_\alpha]\cap A = \emptyset$. But consider $a_\alpha,b_\alpha \in [T_\alpha]$. We have $a_\alpha \in A$, $b_\alpha \in B$, \it{i.e.} $b_\alpha\not\in B$. This rules out both cases, so contradiction. This proves the theorem.
+\end{proof}
+
+You may notice that this is the very same diagonalisation argument that crops up all over the place.
+
+\underline{Discussion}: we used AC to produce a non-determined set. [Usually, AC implies the existence of pathologies, \it{e.g.} a non-Lebesgue measurable set, or the Banach-Tarski decomposition of the unit ball. AC does not produce a constructive method for teh pathological objects, since the construction depends on the choice function.
+
+\underline{Motto (hope)}: If a set $A$ is `nice' or `simple', then it is not pathological.
+
+Similarly here; though we have just proved that non-determined sets may exist, the ones we have found are all pathological. We might ask if non-determined sets only arise this way. Hence:
+
+\underline{Goal}: Make `nice' and `simple' precise, and prove that nice sets are determined.
+
+\reversemarginpar{Lecture 5}
+
+\begin{defin*}[Quasistrategy]
+    A function $$\sigma:M^{\lom}\ra \mathcal{P}(M)\backslash \{\emptyset\}$$ is called a \undf{quasi-strategy}. Strategies can be identified as a special case of quasistrategies: $$(\forall s)|\sigma(s)| = 1$$ which clearly induced a strategy as we have defined it.
+
+    We also have a notion of \undf{quasistrategic trees}:
+    \begin{align*}
+        Q_\sigma^\I &\coloneqq \{s\in M^\lom; (\forall n) s(2n)\in \sigma(s\restriction 2n)\}\\
+        Q_\sigma^\II &\coloneqq \{s\in M^{\lom}; (\forall n) s(2n+1)\in \sigma(s\restriction 2n+1)\}
+    \end{align*}
+    A quasistrategy is \undf{winning for I in $G(A)$} if $[Q_\sigma^\I]\subset A$, and \undf{winning for II in $G(A)$} if $[Q_\sigma^\II]\cap A = \emptyset$.
+
+    As before, at worst one of the two players can have a winning quasistrategy.
+\end{defin*}
+
+\begin{defin*}[Quasidetermined Set]
+    A set $A\subset M^\om$ is called \undf{quasidetermined} if either I or II has a winning qs in $G(A)$.
+\end{defin*}
+
+\begin{remark*}[Lemma]
+    If $M$ is wellorderable, then every quasistrategic tree on $M$ contains a strategic tree on $M$.
+\end{remark*}
+
+[\underline{Consequence}: if $M$ is wellorderable and $A\subset M^\om$ is quasidetermined, then it is determined.]
+
+\begin{proof}
+    Let $\sigma$ be a quasistrategy $\sigma :M^\lom \ra \mathcal{P}(M)\backslash \{\emptyset\}$. If $M$ is wellorderable, then there is a choice function $c:\mathcal{P}(M)\backslash \{\emptyset\}\ra M$ (\it{i.e.} such that $c(A)\in A$ for each $A$).
+
+    Then define $\sigma^\ast \coloneqq c\circ \sigma:M^\lom \ra M$. By construction, $T_{\sigma^\ast}^\I \subset Q_\sigma^\I$ and $T_{\sigma^\ast}^\II \subset Q_\sigma^\II$.
+\end{proof}
+
+Note that we needed a bit of choice here - that $M$ is wellorderable.
+
+Compare with out proof of the existence of a non-determined set from Lecture 4 (we used a wellordering of $M^\om$ to get $A\subset M^\om$ non-determined) to this, where we just use a wellordering of $M$. This requires significantly less choice, and it is often the case that $M$ comes equipped with a wellordering but $M^\om$ does not, \it{e.g.} $M = \N$.
+
+\begin{defin*}[Closed Set]
+    A set $A\subset M^\om$ is called \undf{closed} if there is a tree $T$ on $M$ such that $A = [T]$.
+\end{defin*}
+
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item This is actually the notion of being closed in a topological space; we will see this space in the next lecture.
+        \item Zermelo's finite games can be represented by closed payoff sets.
+        
+        Finite game of length $n$: let's say $f:M^n\ra \{\I,\II\}$ is the functino labelling the leaves according to which player wins.
+
+        Let $A\coloneq \{x\in M^\om ; f(x\restriction n) = \I\}$. Then the finite game is just $G(A)$. This is just playing an infinite game, but having decided the outcome already after $n$ moves.
+
+        We can also define:
+        \begin{align*}
+            T\coloneqq \{s\in M^\lom; f(s\restriction n) = \I\textrm{ and }\lh(s)\ge n \textrm{ or }\lh(s) < n\textrm{ and there is a }t\supseteq s \textrm{ s.t. } f(t)=\I\}
+        \end{align*}
+        Clearly, $[T] = A$. Thus all finite games are closed games.
+    \end{enumerate}
+\end{remark*}
+
+\begin{theorem*}[Gale-Stewart]
+    All closed sets $A\subset M^\om$ are quasidetermined.
+\end{theorem*}
+\begin{proof}
+    If $A = [T]$, this means that if $x\not \in A$, then $x\not\in [T] = \{x\in M^\lom; (\forall n)x\restriction n\in T\}$. This implies there is some $n$ such that $x\restriction n\not \in T$. These are positions thare are won for sure by player II.
+
+    Define a partial function $$\ell:M^\lom \ra \{\I,\II\}$$ by $\ell(s) = \II\iff s\not\in T$. Apply the following recursion rules to the partial labellings:
+
+    We extend $\ell$ to $\ell^+\supseteq \ell$ according to the following rules. If $\ell(s)$ is undefined:
+    \begin{itemize}
+        \item and $\lh(s)$ is even [I moves] and $\forall m\in M$, $\ell(sm)=\II$, then $\ell^+(s)\coloneqq = \II$
+        \item and $\lh(s)$ is odd [II moves] and $\exists m\in M$, $\ell(sm) = \II$, then $\ell^+(s) = \II$
+    \end{itemize}
+    Our transfinite recursion is then in the normal way:
+    \begin{itemize}
+        \item $\ell_0\coloneqq \ell$
+        \item $\ell_{\alpha+1} \coloneqq (\ell_\alpha)^+$
+        \item $\ell_{\lambda} \coloneqq \bigcup_{\alpha < \lambda} \ell_\alpha$
+    \end{itemize}
+    It's easy to construct examples of truly transfinite processes like this [needs $|M|\ge \aleph_0$].
+
+    \underline{Claim}: this process terminates at some ordinal $\alpha$, \it{i.e.} $\ell_{\alpha} = \ell_{\alpha+1} = (\ell_{\alpha})^+$.
+
+    \underline{Proof of Claim}: for $s\in M^\om$, we can define an \it{age function}:
+    \begin{align*}
+        \textrm{age}(s)\coloneqq \left\lbrace \begin{array}{c}\textrm{least }\beta\textrm{ s.t. }\ell_{\beta}(s)\textrm{ is defined}\\ 0\quad\textrm{ if }\ell_{\beta}(s)\textrm{ is never defined}\end{array}\right.
+    \end{align*}
+    So if the process never terminates, then age is a surjection from the set $M^\lom$ onto the (proper) class Ord. This contradicts the Axiom of Replacement.
+
+    Let $\alpha$ be this termination point. We can then define:
+    \begin{align*}
+        \hat{\ell}(s)\coloneqq \left\lbrace \begin{array}{c}\II\quad \textrm{ if }s\in \textrm{dom}(\ell_\alpha)\\ \I\qquad \ \ \ \textrm{otherwise}\end{array}\right.
+    \end{align*}
+    Then $\hat{\ell}\supseteq \ell_\alpha$, effectively just taking $\ell_\alpha$ and filling everything else in with $\I$s. So $\hat{\ell}$ is a total function.
+
+    \underline{Claim}: If $\hat{\ell}(\emptyset) = \I$, then player I has a winning quasistrategy; otherwise, $\hat{\ell}(\emptyset) = \II$ and player II has a winning q.s.
+
+    Given this, the proof is complete.
+\end{proof}
+
+\marginpar{Lecture 6}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}

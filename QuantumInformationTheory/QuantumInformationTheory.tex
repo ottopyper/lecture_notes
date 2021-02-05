@@ -1,0 +1,250 @@
+\documentclass[]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+\newcommand{\av}{\textrm{av}}
+\newcommand{\un}{\underline{u}^{(n)}}
+\newcommand{\ten}{T_\eps^{(n)}}
+\newcommand{\aen}{A_\eps^{(n)}}
+
+\title{Quantum Information Theory}
+\author{Lectures by Sergii Strelchuk}
+\date{}
+
+\begin{document}
+\maketitle
+
+\marginpar{Lecture 1}
+
+\begin{defin*}[Surprisal]
+    Consider an event described by a random variable $X$ which takes values $x \in J$ ($J$ a discrete, finite, we call it the \it{alphabet}), and each $x$ occurs with probability $p(x)$ for all $x \in J$. We will denote this as $X\sim p(x),x\in J$.
+
+    A measure of uncertainty given an outcome $x$ is given by \undf{surprisal}:
+    \begin{align*}
+        \mathcal{I}(x)\coloneqq -\log p(x)
+    \end{align*}
+    We will consider logarithms to be base 2, as we are working (temporarily) in the realm of classical information theory. Note that surprisal does not depend on the values $x$, but their probabilities.
+\end{defin*}
+
+\begin{defin*}[Shannon Entropy]
+    The \undf{Shannon entropy} $H(X)$ of a discrete random variable $X\sim p(x),x\in J$ is defined as:
+    \begin{align*}
+        H(X) \coloneqq -\sum_{x\in J}p(x)\log p(x)
+    \end{align*}
+\end{defin*}
+
+\begin{remark*}[Example (binary entropy)]
+    Let $X$ be Bernoulli with probability $p$.
+
+    Then $H(X) = -p\log p - (1-p)\log(1-p) \coloneqq h(p)$.
+\end{remark*}
+
+Claude Shannon asked (and attempted to answer) a few questions, back in the day:
+
+\underline{Question 1}: What is the limit to which information can be reliably compressed in a manner such that it can be recovered ``reliably'' (\it{i.e.} with low probability of error, made specific later)?
+
+This is often of interest, because we often have a physical limit (\it{e.g.} laptop hard drive) for storing information, and we will want to store as much as possible safely.
+
+\underline{Question 2}: What is the maximum amount of information that can be reliably transmitted per use of communication channel?
+
+In other words, how do we store and how do we send information?
+
+\underline{Answer 1}: Shannon's Source Coding Theorem: the limit of reliable compression is given by the Shannon entropy of the `source'.
+
+We will consider the sources to be discrete, with a finite alphabet. One of the simplest examples of a source is a \undf{Memoryless Source}.
+
+\begin{defin*}[Memoryless Source]
+    This is characterised by $\{p(u)\}_{u\in J}$, where $u$ is a `letter', emitted with probability $p(u)$.
+
+    The source can emit multiple signals, each of which is given by a random variable $U_i$, characterised by $p(u) = \mathbb{P}[U_i=u],u\in J$ for $1\le i\le n$.
+
+    So the source emits a sequence $(u_1,\dots,u_n)\in J^n$, with probability
+    \begin{align*}
+        p(u_1,\dots,u_n)&\coloneqq \P(U_1=u_1,\dots,U_n = u_n),u_i\in J \\
+        &= p(u_1)\dots p(u_n)
+    \end{align*}
+    This is memoryless because the $U_i$ are iid; this is an `iid information source'. We characterise the Shannon entropy of the source as:
+    \begin{align*}
+        H(U) \equiv H(\{p(u)\})&\coloneqq H(U_1) = H(U_2) = \dots = H(U_n)\\
+        &= -\sum_{u\in J}p(u)\log p(u)
+    \end{align*}
+\end{defin*}
+
+Why is data compression even possible? As it happens, there is a lot of redundancy in data, for instance if some things occur more often than others; we can take advantage of this using:
+
+\begin{defin*}[Variable/Fixed Length Coding]\ 
+    \undf{Variable length coding} is a protocol by which more frequent outputs of the source are assigned shorter descriptions.
+
+    \undf{Fixed length coding} is a protocol by which signals with a high probability of occurence are assigned unique fixed length binary strings. Signals with low probability of occurence are mapped to some fixed string \it{i.e.} we will not care about them.
+\end{defin*}
+
+We will see a brief example of variable length coding, but after that the remainder of the course will be focused on fixed length coding.
+
+\begin{remark*}[Example (Variable Length Coding)]
+    Suppose we have a source emitting one of eight signals in $[8]$. The table shows the probailities of each occuring, as well as a naive encoding $C$ and a variable length encoding $\tilde{C}$.
+
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|} \hline
+             $u$ &1 & 2 & 3 & 4 & 5& 6 & 7 & 8 \\ \hline
+             $p(u)$ & $\frac{1}{2}$ & $\frac{1}{4}$ & $\frac{1}{8}$ & $\frac{1}{16}$ & $\frac{1}{64}$ & $\frac{1}{64}$ & $\frac{1}{64}$ & $\frac{1}{64}$\\ \hline
+             $C(u)$ & 000 & 001 & 010 & 011 & 100 & 101 & 110 & 111\\ \hline
+             $\tilde{C}(u)$ & 0 & 10 & 110 & 1110 & 111100 & 111101 & 111110 & 111111 \\ \hline
+        \end{tabular}
+    \end{center}
+
+    While $\tilde{C}$ might seem counterintuitive (the strings are longer), this actually saves on the average length of the source code; for $C$, the average is $3$, whereas for $\tilde{C}$ the average is 2.
+
+    As it happens, the average description here is equal to the entropy:
+    \begin{align*}
+        H(p_u) = -\sum_{u=1}^{8}p(u)\log p(u) = 2
+    \end{align*}
+    We will see later that this is no coincidence.
+\end{remark*}
+
+In order to poperly reason about entropy and compression, we need to make a few definitons.
+
+\section{Classical Data Compression}
+
+\begin{defin*}[Classical Data Compression]
+    Consider a memoryless source characterised by a sequence of random variables $U_1,\dots U_n$, $p(u) = \P(U_k = u),u\in J$, $1\le k\le n$, $|J| = d$. Let $U\sim p(u),u\in J$.
+
+    A \undf{compression map $C^n$ of rate $R$} maps each signal as follows:
+    \begin{align*}
+        C^n:\underline{u}^{(n)} = (u_1,\dots,u_n)\mapsto \underline{x} = (x_1,\dots,x_{nR})
+    \end{align*} where $u_i \in J$ and $x_k \in \{0,1\}, 1\le k\le \lceil nR \rceil $.
+    
+     So $C^n$ maps a message $\underline{u}^{(n)}$ into a codeword $\underline{x}$ of length $nR$.
+
+     A \undf{decompression map $D^n$} goes the other way:
+     \begin{align*}
+         D^n : \underline{x} \in \{0,1\}^{\lceil nR \rceil} \mapsto \underline{u}'^{(n)} = (u_1',\dots,u_n')
+     \end{align*} with probability $p(\underline{u}'^{(n)}|\underline{x})$.
+
+     So $D^n(C^n(\underline{u}^{(n)})) = \underline{u}'^{(n)}$.
+
+     The triple $C_n \coloneqq (C^n,D^n,R)$ is called a \undf{code} of rate $R$ and block length $n$.
+
+     The average probability of error of a code is given by:
+
+     \begin{align*}
+         P_{\textrm{av}}^{(n)}(C_n) \coloneqq \sum_{\underline{u}^{(n)}\in J^n}p(\underline{u}^{(n)})\cdot \P(D^n(C^n(u^{(n)}))\ne u^{(n)})
+     \end{align*}
+\end{defin*}
+
+\marginpar{Lecture 2}
+
+Recall that for a \undf{memoryless source}, $p(\underline{u}^{(n)}) = \prod_{i=1}^{n}p(u_i)$.
+
+We say that a compression/decompression scheme is \undf{reliable} if there exists a sequence of codes $\mathcal{C}_n$ such that:
+\begin{align*}
+    \lim\limits_{n\ra\infty}P_{\textrm{av}}^{(n)}(\mathcal{C}_n) = 0
+\end{align*}
+Equivalently, for any given $\eps \in (0,1)$ and $n$ large enough, we have that:
+\begin{align*}
+    \sum_{\underline{u}^{(n)}\in J^n}P(\underline{u}^{(n)})\P(D^n(C^n(\underline{u}^{(n)}))\ne \underline{u}^{(n)})\le \eps
+\end{align*}
+
+The \undf{data compression limit} is given by
+\begin{align*}
+    \inf\{ R:\exists \mathcal{C}_n\coloneqq (C^n,D^n,R) \textrm{ s.t. } \lim\limits_{n\ra\infty} P_{\av}^{(n)}(\mathcal{C}_n) = 0\}
+\end{align*}
+
+\section*{Typical Sequences}
+
+\begin{defin*}[Typical Set]
+    Consider an i.i.d information source described by random variables $U_1,\dots,U_n$, $U_i\sim p(u),u\in J$. For any $\eps\in (0,1)$, the \undf{typical set} $T_\eps^{(n)}$ is the set of sequences $(u_1,\dots,u_n)\in J^n$ such that:
+    \begin{align*}
+        2^{-n(h(U)+\eps)}\le p(u_1,\dots,u_n)\le 2^{-n(H(U)-\eps)}
+    \end{align*}
+    where $H(U)$ is the Shannon entropy.
+
+    $|T_\eps^{(n)}|$ denotes the size of the typical set, and $\P(T_\eps^{(n)}$ the probability of a typical set.
+
+    The typical sequences in the set occur with roughly the same probability. We will see that for $\underline{u}\in J^n$, if $\underline{u} \in T_\eps^{(n)}$ then $p(\underline{u})\approx 2^{-nH(u)}$.
+\end{defin*}
+
+Is this a good way of capturing typicality? Consider the following situation.
+
+We have a memoryless source that emits the letter $u\sim p(u)$. A typical sequence of length $n$ will have length $n p(u)$ on average.
+
+The probability of such a sequence of $n$ symbols is approximately given by 
+\begin{align*}
+    \prod_{u\in J}p(u)^{np(u)} &= \prod_{u\in J}2^{\log p(u)^{np(u)}}\\
+    &= 2^{n\sum_{n\in J}p(u)\log p(u)}\\
+    &= 2^{-nH(U)}
+\end{align*}
+
+\begin{theorem}[Typical Sequence Theorem]
+    Fix $\eps \in (0,1)$. Then for any $\delta > 0$ there exists $n_0(\delta)$ such that the following is true (for any $n > n_0(\delta)$?):
+    \begin{enumerate}
+        \item If $(u_1,\dots,u_n)\in T_\eps^{(n)}$, then $$H(u) - \eps \le -\frac{1}{n} \log p(u_1,\dots,u_n) \le H(u) + \eps$$
+        \item $$\P(T_\eps^{(n)}) > 1 - \delta$$
+        \item $$|T_\eps^{(n)}| \le 2^{n(H(u)+\eps)}$$
+        \item $$|T_\eps^{(n)}| > (1-\delta) 2^{n(H(u)-\eps)}$$
+    \end{enumerate}
+\end{theorem}
+
+\begin{cor}
+    For any $\delta > 0$ there exists $n_0(\delta) > 0$ such that for any $n > n_0(\delta)$ the set $J^n$ decomposes into disjoint subsets $A_\eps^{(n)}, T_\eps^{(n)}$ such that:
+    \begin{enumerate}
+        \item $$\P(A_\eps^{(n)}) < \delta$$
+        \item The probability of a typical sequence is bounded by $$2^{-n(H(u)+\eps)} \le \P(\underline{U}^{(n)} = \underline{u}^{(n)})\le 2^{-n(H(u) - \eps)}$$
+        where $\underline{U}^{(n)}\coloneqq (U_1,U_2,\dots,U_n)$ is a sequence of sources, $\underline{u}^{(n)} = (u_1,\dots,u_n)\in J^n$
+    \end{enumerate}
+\end{cor}
+
+
+\begin{theorem}[Shannon's Source Coding Theorem]
+    Suppose $\{U_i\}, U_i\sim p(u)$ is an i.i.d. information source, with Shannon entropy $H(u)$.
+
+    Now suppose $R > H(u)$. Then there exists a reliable compression scheme of rate $R$ for the given source.
+
+    Conversely, if $R < H(u)$ then ther is no reliable compression scheme of rate $R$.
+\end{theorem}
+\begin{proof}
+    \underline{Case}: Suppose $R > H(u)$.
+
+    Choose $\eps\in (0,1)$ such that $H(u) + \eps < R$. Take $n$ large enough so that $T_\eps^{(n)}$ satisfies the Typical Sequence Theorem. Then for any $\delta > 0$ there are at most $2^{n(H(u)+\eps)} < 2^{nR}$ $\eps$-typical sequences, \it{i.e.} $|T_\eps^{(n)}| < 2^{nR}$.
+    \begin{enumerate}[label = \arabic*)]
+        \item Divide all sequences $J^n$ into $2$ sets, $T_\eps^{(n)}, A_\eps^{(n)}$.
+        \item Order all the elements in $T_\eps^{(n)}$ (say, lexicographically). Each $\eps$-typical sequence can then be identified with its index.
+        
+        Since $|T_\eps^{(n)}| \equiv \#$ typical sequences $\le 2^{n(H(u)+\eps)} < 2^{nR}$, the indexing requires no more than $\lceil nR \rceil$ bits.
+
+        Examine each output of the source. 
+
+        \item If it is typical, store the index (bit sequence) of a (the?) sequence. Prefix the typical bit seqeunces by $1$. Then total length is $\lceil nR \rceil + 1$.
+        
+        \item If the string is not typical, we will assign a fixed bit string $(00\dots 0)$ of length $\lceil nR \rceil + 1$.
+        
+        The errors in the decompression then occur when trying to decompress the atypical sequences, which occur with vanishing probability for $n$ large. So this is reliable.
+
+    \end{enumerate}
+\end{proof}
+
+\underline{Case}: Suppose $R < H(u)$. Then the compression scheme is not reliable; we need a lemma.
+
+\begin{lemma}
+    Let $S(n)$ be a collection of strings $\underline{u}^{(n)}$ of length $n$ of size $|S (n)| \le 2^{nR}$, where $R < H(u)$. Each $\underline{u}^{(n)}$ is produced by the source with probability $p(\underline{u}^{(n)})$. Then for any $\delta > 0$ and sufficiently large $n$:
+    \begin{align*}
+        \sum_{\underline{u}^{(n)}\in S(n)} p(\underline{u}^{(n)}) \le \delta
+    \end{align*}
+\end{lemma}
+\begin{proof}(sketch). Split $S(n)$ into typical and atypical sequences.
+    \# typical sequences of $S(n)$ is $\le $ the total \# of sequences of $S(n)$. Hence $|S(n)| \le 2^{nR}$. So each typical sequence has probability $\approx 2^{-nH(u)}$.
+
+    So the total probability of the typical sequences in $S(n)$ scales as $2^{nR} \cdot 2^{-nH(u)} = 2^{-n(h(u) - R)} \ra 0$ as $n\ra \infty$. More rigorously:
+
+    \begin{align*}
+        \P(S(n)) &= \sum_{\underline{u}^{(n)} \in S(n)}p(\underline{u}^{(n)})\\
+                 &= \sum_{\un \in S(n) \cap \ten}p(\un) + \sum_{\un \in S(n) \cap \aen}P(\un)\\
+                 &\le |S(n)|2^{-n(H(u)-\eps)} + \P(\aen)
+    \end{align*}
+    and both of these terms vanish in the limit due to the above discussion.
+\end{proof}
+
+Essentially this says that if we try to code with a rate too low, the size of the typical sets vanish at an exponential rate, and the compression becomes unreliable.
+
+\marginpar{Lecture 3}
+
+\end{document}
