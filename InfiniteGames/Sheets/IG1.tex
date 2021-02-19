@@ -1,0 +1,234 @@
+\documentclass[]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+\newcommand{\I}{\textrm{I}}
+\newcommand{\II}{\textrm{II}}
+\newcommand{\om}{\omega}
+\newcommand{\lom}{{<\omega}}
+\newcommand{\lh}{\ell h}
+\renewcommand{\ac}{\textrm{AC}}
+\newcommand{\bosig}{\bm{\Sigma}}
+\newcommand{\bopi}{\bm{\Pi}}
+\newcommand{\bodel}{\bm{\Delta}}
+\newcommand{\dom}{\textrm{dom}}
+\usepackage{bm}
+
+\newcommand{\game}{
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $m_0$ & & $m_2$ & & $m_4 $& & $\dots $\\ \hline
+            II & & $m_1$ & & $m_3 $& &$ m_5$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+}
+
+\title{Infinite Games: Example Sheet 1}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{enumerate}[label = (\arabic*)]
+    \item Clearly if $\sigma$ is winning then it beats all blindfolded strategies, since it beats all strategies.
+
+    Conversely, assume $\sigma$ beats all blindfolded strategies $\tau_x$. Suppose there exists a strategy $\tau$ such that $\sigma\ast \tau = x \not \in A$. But then $\sigma \ast \tau = \sigma \ast \tau_{x_\II} \in A$, contradiction. \qed
+
+    \item $A$ and $M^\om\backslash B$ are determined. If I has a winning strategy $\sigma$ for $G(A)$, then $\sigma$ is also winning (and hence drawing) in $G_{\textrm{draw}}(A,B)$. If instead II has a winning strategy $\tau$ in $G(A)$, then for any $\sigma$, $\sigma\ast\tau \in M^\om \backslash A$ so $\tau$ is drawing in $G_{\textrm{draw}}(A,B)$.
+    
+    It is clear that if both players have a drawing strategy then neither has a winning strategy, else the drawing strategy loses to the winning strategy. On the other hand, suppose neither has a winning strategy. This must mean that II has a winning strategy $\tau$ in $G(A)$, and I has a winning strategy $\sigma$ in $G(M^\om \backslash B)$.
+    
+    Now for any $\sigma'$, $\sigma' \ast \tau \not\in A$, and for any $\tau'$, $\sigma\ast\tau' \not\in B$. So these are both drawing. \qed
+
+    \item Our game will have move set $(M^\lom\cup M^\om)^\lom$. Construct a tree $T$ with $V(T) = \{x = \langle x_0,x_1,\dots,x_n\rangle \in (M^\lom\cup M^\om)^\lom;\ \lh(x_0x_1\dots x_n) \le \om \}$. I note that we haven't precisely defined $st$ for $s$ infinite, but it can be viewed canonically as a sequence indexed by an ordinal, the ordinal might just be larger than $\om$. If $\alpha = \lh(st)$, then $st$ will be defined on all $\beta < \alpha$.
+    
+    The purpose of this definition is that we will want to allow at most one `infinite' move followed by only empty moves thereafter, so after concatenation we're still in $M^\om$. This is in case $\mu$ is eventually constant on some sequence of inputs. The idea is to allow the players to make all their moves at once, even if they would be making infinitely many.
+    
+    In $T$, say that $s'$, $t'$ are adjacent for $\dom(s') \subset\dom(t')$ if and only if we have $s' = \langle  s_0,s_1,\dots,s_n\rangle $ and $t' = \langle s_0,s_1,\dots,s_n,t\rangle$ such that:
+    
+    \begin{itemize}
+        \item if $\mu(\emptyset) = \I$ and $\lh(s_0\dots s_n)< \om$ then for any $u \subsetneqq t$ we have $\mu(s_0\dots s_n) = \mu(s_0\dots s_nu) \ne \mu(s_0\dots s_nt)$
+        \item if $\mu(\emptyset) = \II$ then:
+        \begin{itemize}
+            \item if  $0 < \lh(s_0\dots s_n) < \om$ then for any $u \subsetneqq t$ we have $\mu(s_0\dots s_n) = \mu(s_0\dots s_nu) \ne \mu(s_0\dots s_nt)$
+            \item if $s' = \langle \rangle$ then $t = \emptyset$
+        \end{itemize}
+       
+        \item if $\lh(s_0\dots s_n) = \om$ then $t = \emptyset$
+    \end{itemize}
+
+    Informally, after $n$ moves a player can play any sequence, finite or infinte, that keeps the total concatenation in $M^\lom \cup M^\om$ and changes $\mu$ on and only on the final symbol of the sequence (or after the whole sequence if infinite).
+
+    The branches of this tree are then of the form $x = \langle s_0,s_1,\dots,s_n,\dots\rangle$ where:
+    \begin{itemize}
+        \item either we have $s_i$ finite for each $i$, and $\mu(s_0)\ne \mu(s_1)\ne \mu(s_2)\dots$ but $\mu(s_0\dots s_n u)$ is constant for $u\subsetneqq s_{n+1}$
+        \item or $s_n$ is infinite for exactly one $n$, and $s_m = \emptyset$ for $m > n$.
+    \end{itemize}
+    These branches correspond exactly with plays $s_0s_1s_2\dots$ of $G_\mu(A)$, and the set $A$ itself is identified with $\{s':s_0s_1s_2\dots \in A\}$. \qed
+
+    \item By `$\aleph_1$ is regular' I am assuming that I need to show that a countable union of countable ordinals is countable in ZF+$\ac_\om(\R)$.
+    
+    So suppose $\omega_1 = \bigcup_{y\in\om} \alpha_y$, $\alpha_y$ countable.
+
+    By Cantor-Schroder-Bernstein there exists a bijection $g: \mathcal{P}\Q \ra \R$. Define $$A_y = \{g(S):S\subset\Q\textrm{ has order type }\alpha_y\}$$ and use $\ac_\omega(\R)$ to obtain a collection $\{r_y:y\in \N\}$ such that $g^{-1}(r_y)\coloneqq S_y$ has order type $\alpha_y$. We remark that each $A_y$ is non-empty since it can be shown without AC that every ordinal can be embedded into $\Q$.
+
+    We then `squish' $S_y$ into the interval $[y,y+1)$ via the map $$s\mapsto y + 1 - 1/(s + 1 - \min S_y)$$ which is order-preserving (the order is flipped once by $x\mapsto 1/x$, and then again by negation). Call this new set $T_y$.
+
+    Then let $ S = \bigcup_{y\in\om} T_y$. $S$ is well-ordered since infinite decreasing sequences must get stuck in some least interval $[n,n+1)$, and thereafter would form a decreasing sequence in a well-ordered set.
+
+    As a result of this, we can see that $S$ is countable without using $\ac$; simply well-order the rationals (which we can do without choice) and for each $s\in S$ pick the least rational under this order in the interval $(s,s^+)$. This defines a clear injection $S\xhookrightarrow[]{} \Q$, so $S$ is countable and hence has countable order type $\beta$.
+
+    But $T_y \subset S$ for all $y$, so $\alpha_y \le \beta$ for all $y$. But $(\alpha_y)$ is an unbounded sequence, so $\beta \ge \omega_1$. So $\beta$ is uncountable. Contradiction. \qed
+
+    \item We have a subset $A\subset X\times X$; we construct a family $\{A_x:x\in X\}$ of non-empty subsets of $X$, where $A_x = \{y: (x,y)\in A\}$ if any such $y$ exist, else $A_x = \{x\}$. The choice function $c$ we obtain is nearly what we want, but we must exclude some values of $x$ from the domain (those which do not appear in the left side of $A$)
+    
+    Let $f = c\restriction \{x\in X:\exists y: (x,y)\in A\}$. Then $x \in \dom f$ iff there is some $y \in X$ such that $(x,y) \in A$, and for all $x \in \dom(f)$ we have that $(x,f(x)) = (x,c(x)) \in A$ since $c(x) \in A_x = \{y:(x,y)\in A\}$ is non-empty and by definition is what we want.
+
+    Hence every $A\subset X\times X$ has a uniformisation. \qed
+
+    \item Let $\mathcal{C} = \{A_m:m\in M\}$ be a family of non-empty subsets of $M$. We construct a finite game of length 2 on move set $M$ by building a tree $T$ as follows:
+    
+    \begin{itemize}
+        \item on the first move, player I can play anything
+        \item given $m \in T$, the possible moves for player II are $\{s:s\in A_m\}$.
+    \end{itemize}
+    So, explcitily, $T = \{\emptyset\}\cup\{m:m\in M\}\cup\{ms:m\in M,s\in A_m\}$.
+
+    The payoff set $A$ is simply $\emptyset$, \it{i.e.} player II always wins. By assumption, this game $G(A,T)$ is determined, so someone has a winning strategy; clearly this must be player II.
+
+    So II has a winning strategy $\tau$, which in turn naturally induces a choice function $c$ for $\mathcal{C}$ given by $c(m) = \tau(\langle m\rangle)$. \qed
+
+    \item Let $\mathcal{C} = \{A_s:s \in M^\lom\}$ be our family with $A_s\subset M$ non-empty.
+    
+    Define a game $G(A,T)$ by constructing a tree $T$ according to the rule $((s\in T)\land (sm \in T)\implies m \in A_s)$, and let $A = [T]$. This game is quasidetermined; the quasistrategy $\sigma : M^\lom \ra \mathcal{P}(M)$ given by $\sigma(s) = A_s$ is winning for player I. Hence the game is determined, by assumption. So there exists a winning strategy $c : M^\lom \ra M$ with $c(s) \in A_s$; this is our choice function.
+    
+    Conversely, let $A\subset M^\om$ be quasi-determined. So someone has a winning quasistrategy $\sigma : M^\lom \ra \mathcal{P}(M)\backslash \emptyset$. Let $A_s = \sigma(s)$, and then use $\ac_{M^\lom}(M)$ to obtain a choice function $c$, which is in fact a winning strategy. \qed
+
+    \item Let $Q = Q_\sigma^\I$, so $\sigma$ is the quasistrategy for $Q$.
+    
+    Use AC to wellorder $M$. This induces a wellordering of $M^\lom$ lexicographically, and hence there exists a `minimal' choice function $c : M^\lom \ra \mathcal{P}(M)$ with $c(s) \in \sigma(s)$ for all $s$, by taking $c(s)$ minimal. This induces a strategic sub-tree of $Q$.
+
+    We now have a quasistrategic tree $Q$ and a strategic subtree $S\subset Q$ - equivalently, a substrategy $c$ of the quasistrategy $\sigma$. Now we just need to show that some other substrategies exist, namely for any $m \in \sigma(s)$ there is a choice function/strategy $c'$ with $c'(s) = m$. But this is indeed the case; we can modify $c$ to obtain $c_{m,s}$ defined as:
+    \begin{align*}
+        c_{m,s}(t) = \left\lbrace \begin{array}{cc} c(t)\quad&t\ne s \\ m\quad & t = s \end{array} \right.
+    \end{align*}
+    These have strategic trees $S_{m,s}$; then $Q = \bigcup_{m\in \sigma(s)}S_{m,s}$.
+
+    We might not want to use a choice axiom quite as strong as being able to wellorder $M$, so we might instead try this using just $\ac_{M^\lom}(M)$; the game $G([Q],Q)$ is quasidetermined, with $\sigma$ winning for $Q$. By the equivalence in (7), we know that there exists a winning strategy for player I, whose tree will be a subtree of $Q$.
+
+    We now have a quasistrategic tree $Q$ and a strategic subtree $S\subset Q$ - equivalently, a substrategy $c$ of the quasistrategy $\sigma$. But now we're back in the same situation as the first case, and with the same (choiceless) definitions we have $Q = \bigcup_{m\in \sigma(s)}S_{m,s}$.
+    
+    So it looks like we needed the weaker of ``$M$ is wellorderable'' and $\ac_{M^\lom}(M)$.
+
+    In fact, $\ac_{M^\lom}(M)$ (or the equivalence in (7)) is necessary; let us assume the hypothesis of (8) holds, and let $A$ be quasidetermined; say player I has a winning quasistrategy $\sigma$. Then let $Q = Q_\sigma^\I$; by assumption, $Q = \bigcup_{i \in I}S_i$ for strategic subtrees $S_i$, $i \in I$ some index set. We can then pick any $i \in I$ and read off the winning strategy induced by $S_i$. Hence $A$ is determined.
+
+    So we did indeed require some amount of choice to complete the proof.
+
+    \item We assume $|M| > 1$; pick any $m\ne u \in M$ and let $A = [\langle m \rangle]$. Then the stratgey `always pick $m$' is winning in $G(A)$, and the strategy `always pick $u$' is winning in $G(M^\om \backslash A)$.
+    
+    \item A potential source of confusion here is that the roles of player I and player II are interchanged for games $G(A)$ and $G(A_m)$, so to avoid this I will call the players of $G(A)$ player I \& II, and players of $G(A_m)$ by `the first player' and `the second player'.
+    
+    Suppose that for all $m$, the first player has a winning strategy $\sigma$ in $G(A_m)$ - that is to say, playing $\sigma$ ensures the run ends up in $A_m$. Then, regardless of player I's initial choice of $m$, player II (the first player for the game that has now become $G(A_m)$) can play such a strategy, ensuring the run of $G(M^\om\backslash A)$ lies in $A$, so player II wins.
+
+    Otherwise, there exists some $m$ for which the second player of $G(A_m)$ has a winning strategy, \it{i.e.} they can ensure the run $x$ of $G(A_m)$ ends up in $M^\om\backslash A_m$; equivalently, they can ensure that $mx \not \in A$. Player I then plays such an $m$, becomes the second player of $G(A_m)$, and ensures an overall run $mx \not \in A$, so $mx \in M^\om \backslash A$. So player I wins.
+
+    In the second case, we are able to write down a strategy for player I, only making two arbitrary choices (the choice of $m$ and the choice of winning strategy thereafter). So in this case $M^\omega \backslash A$ is determined. In the first case though, while it is the case that if two people were actually to sit down and play the game then player II would win while only making one arbitrary choice, in order to fully specify their strategy in advance of the game beginning would require them to pick a winning $\sigma_m$ for all $m\in M$, which requires choice. Thus, assuming this much choice, $M^\omega \backslash A$ is determined.
+
+    \item Assuming AC, let $A\subset M^\om$ be a non-determined set.
+    \begin{enumerate}[label = (\alph*)]
+        \item wlog assume $A^c$ is also not determined, otherwise we are done.
+        
+        We first define the useful notion of a product of two games; say $G(A_1)$ is played on $M_1$ and $G(A_2)$ is played on $M_2$. Games can then be played on the product of the move set, similar to playing them both simultaneously. $G(A_1\times A_2)$ is played on $M_1\times M_2$. Strictly speaking, runs on this move set are of the form $\langle (m_0,m'_0),(m_1,m'_1),\dots \rangle$, but it is easier to write their concatenation as $(x,y)$, where $x = m_0m_1\dots$ and $y = m_0'm_1'\dots$.
+
+        \underline{Claim}: player I (and similarly II) has a w.s. for $G(A_1\times A_2)$ iff they have a w.s. for $G(A_1)$ and a w.s. for $G(A_2)$.
+
+        \underline{Proof of Claim}: If $\sigma$ is winning for $G(A_1)$ and $\tau$ is winning for $G(A_2)$ then player I can ignore the intertwined nature of the games and just play $\sigma$ on the first game, $\tau$ on the second game, achieving a win on both. The argument is the same if player II has winning strategies; just play them in both games.
+
+        Conversely, suppose player I has a winning strategy $\sigma = \sigma(s,t)$ on $G(A_1\times A_2)$ where $s$ is the position of the first game and $t$ the second. The idea is to imagine playing a second game $G(A_2)$ when playing $G(A_1)$.
+
+        Fix $y = y_0y_1\dots \in M_2^\om$. Suppose after $n$ moves the position of $G(A_1)$ is $s_0s_1\dots s_{n-1}$ and the position of $G(A_2)$ is $t_0t_1\dots t_{n-1}$. 
+
+        \begin{itemize}
+            \item if $n = 0$, let $(s_0,t_0) = \sigma(\langle \rangle, \langle \rangle)$
+            \item if $n$ even, let $(s_n,t_n) = \sigma(s,t)$. Then $\sigma'(s) = s_n$, $t_n = t$.
+            \item if $n$ odd, then let $s_n$ be the move played by player II. Then define $t_n = y_n$.
+        \end{itemize}
+
+        Note that all of player I's moves are (inductively) determined only by the position $s$, so this is a true strategy on $G(A_1)$.
+
+        This then plays out like a game of $G(A_1\times A_2)$ where player I plays according to $\sigma$, achieving a win on both games and hence on $G(A_1)$ and $G(A_2)$ individually. The result is very similar for player II - the method is the same, with slightly different notation. $\qedsymbol$
+
+        We now construct our game as follows. $M_1 = M$, let $A$ be as defined above (non-determined with non-determined complement), and let $B \subset M_2^\om$ be determined with a winning strategy $\sigma_B$ for player I. Our game is then played on $M\times M_2$ with payoff set $(M^\om \times B)\cup (A\times B^c)$. So player I wins if they win the second game (regardless of the outcome of the first game), or if they lose the second and win the first (so they just need to win one of the games).
+
+        This is determined; player I can ignore the outcome of the first game, and just play $\sigma_B$ on the second game to achieve victory. What about the complement?
+
+        This game is also played on $M\times M_2$. Previously, player I would win if they achieved a win in either game, so now the condition is that player I will win if they `lose' in both games:
+        \begin{align*}
+            ((M^\om\times B)\cup (A\times B^c))^c &= (M^\om \times B)^c \cap (A\times B^c)^c\\
+            &= (M^\om \times B^c) \cap ((A^c\times B^c)\cup(A^c\times B)\cup (A\times B))\\
+            &=A^c \times B^c
+        \end{align*}
+
+        So this is a product game. By the claim, since $A^c$ is not determined neither is $A^c\times B^c$.
+
+        \item This can also be done with a product. We want the intersection to be $A\times B$ for $A$ not determined. Put another way, we want to find two win conditions $p(a,b)$, $q(a,b)$ that are determined but such that $p(a,b)\land q(a,b) \iff a\land b$. Indeed, let $p(a,b)$ be $(b\implies a)$, and let $q(a,b)$ be $b$.
+        
+        Then if $(b\implies a) \land (b)$ holds, so must $b$, and hence so must $a$ else $b\implies a$ is false.
+
+        So we define our sets $A_1 = (A^c\times B)^c$, $A_2 = M_1^\om\times B$, with $B$ determined such that player I has a w.s. for both $G(B)$ and $G(B^c)$ (as in (9)). Then it is clear that $A_2$ is determined, since player I need only win the second game, which they can do. $A_1$ is also determined, because player I can ensure the run of the second game ends up in $B^c$, so the outcome of $A$ is immaterial.
+        
+        Their intersection is then:
+        \begin{align*}
+            A_1\cap A_2 &= (A^c \times B)^c \cap (M_1^\om\times B)\\
+            &= ((A\times B)\cup (M_1^\om\times B^c))\cap (M_1^\om \times B)\\
+            &= (A\times B)\cup (\emptyset)\\
+            &= A\times B
+        \end{align*}
+
+        Therefore, again by the claim, this game cannot be determined.
+
+        \item We use a different approach. Let $M = \om$, and suppose that $A$ has non-trivial boundary. Then we can write $A = A^\circ \cup \partial A$, where $A^\circ$ is the interior of $A$ and $\partial A$ is the boundary. $\partial A$ is closed, hence determined (assuming AC). Then if $A^\circ$ is determined, we are done. Otherwise, we have an open set that is not determined. So henceforth assume wlog that $A$ is open.
+    
+        In this case, we have $A = \bigcup_{s \in \om^\lom}[sx_{s}]$ for $x_s$ a minimal sequence such that any $y \in \om^\om$ that begins with $sx_s$ must lie in $A$. While not a finite union, this is at least a countable union of clopen sets, each of which are clopen and thus determined. \qed
+        
+    \end{enumerate}
+
+
+
+    \item Let $M = 2^\om$ and $A = \{000\dots\}$. $A$ is closed, but not open. This game is very easy for II to win; they just need to play a 1 at any point during the run. In the original partial labelling $\ell_0$, every position other than those $s \in [000\dots]$ is given the label `II'. Then the labelling $\ell_1$ gives every $s = 00\dots 0$ of odd length the label `II', and by $\ell_2$ everything is labelled `II'. So II could play 0 every time, to which I can respond 0, and the run is $x = 000\dots$, and so II loses.
+    
+    However, if the payoff set $A$ is clopen then so is its complement $A^c$ - crucially, $A^c$ is closed. We know that at any $s$ such that $\hat{\ell}(s) = \II$, if it is II to play then there is always a move possible to a position with label `II' that reduces age, and if it is I to play then all moves are to positions with label II that reduce age. Therefore any such $s$ can be extended to some $y \in A^c$.
+    
+    So suppose $x \in [Q_\II]$, \it{i.e.} has all labels `II'. Then for all $n$ there exists $y_n \in A^c$ such that $y_n$ and $x$ agree up to $x\restriction n$ (at least), so $d(x,y_n) \le 2^{-n}$. Therefore $y_n \ra x$, and for all $n$ $y_n\in A^c$, which is closed. Hence their limit $x$ also lies in $A^c$. So II wins this run. \qed
+
+
+    \item $P\backslash Q = P\cap Q^c$ is the intersection of an open set and a closed set \it{i.e.} an open set and a tree; write this as $P\cap T$.
+    
+    For some of the runs $x \in \om^\om$, we are going to find $n$ such that if the game reaches position $x\restriction n$ then the game that follows from that point is determined.
+
+    \underline{Case 1}: $x \not \in [T]$. There is a minimal $n$ such that $x\restriction n\not\in T$. If this position is reached, then II will certainly win. Thus label $(x\restriction n)$ with `II'.
+
+    \underline{Case 2}: $x\in [T]\cap P$. Then there is a minimal $n$ such that for all $y \in \om^\om$, $y\restriction n = x\restriction n \implies y \in P$ since $P$ is open. Define $A_s = \{y \in \om^\om : sy \in [T]\}$. Consider the game $G(A_s)$. Note that $A_s$ is closed: let $y \in [T_{A_s}]$. For all $m \in \N$, there exists $z \in A_s$ such that $d(y,z) < 2^{-m}$, hence $d(sy,sz) < 2^{-m}$. So $sy$ is a limit of a sequence of points in $[T]$, so $sy \in [T]$, so $y \in A_s$. Hence $A_s = [T_{A_s}]$.
+
+    This means that the game $G(A_s)$ is determined (assuming some choice). Now set $s  = x\restriction n$; this means that forevermore, both players are playing in $P$. If $\lh(s)$ is even, it is player I to play, so whoever has the winning strategy for $G(A_s)$ will win from that position; we thus label $s$ with the victor of $G(A_s)$. If instead $\lh(s)$ is odd, then it is II to play; they can look at all continuations $sm$ and see who is the winner of $G(A_{sm})$; then the winner is always player I regardless of choice of $m$, so we label $s$ with `I'. Otherwise, there is some $m$ for which $G(A_{sm})$ is won for player II, so can force a win from $s$ by playing $m$. Hence we label $s$ with `II'.
+
+    \underline{Case 3}: $x \in [T]\backslash P$. There two sub-cases to consider here; those $x \in [T]$ that lie on the boundary of $P$, and those that do not.
+
+    For those that do not, there is some minimal $n$ such that $(x\restriction n)$ has no continuation into $P$, so II wins; label $x\restriction n$ with `II'.
+
+    Finally, we have those $x \in [T]$ for which there are runs $y \in P\cap [T]$ such that $x\restriction n = y\restriction n$ for arbitrarily large $n$. Call this set $B$.
+
+    We now proceed in a similar manner to the proof of Gale-Stewart; we have a parital labelling $\ell : \om^\lom \ra \{\I,\II\}$ as described above. We use transfinite recursion in the same way as in G-S to obtain a partial labelling $\ell_\alpha$ (label a node `I' if it is player I's turn and there exists a move to another position labelled `I', \it{etc}...), where $\alpha$ is the least ordinal for which the recursion process terminates. But instead of completing the labelling, we will leave any positions still unlabelled as they are.
+
+    Now if $\ell_\alpha(\emptyset) = \II$, then (as in G-S), the induced quasistrategy $Q_\II$ is winning for II; let $x \in [Q_\II]$, and suppose $x \in P\cap [T]$. Then as above there is some least $n$ for which the game is `stuck' in $P$ since $P$ is open, so the age of $x\restriction n$ is zero and its label must be `I', contradiction.
+
+    If instead $\ell_\alpha(\emptyset) = \I$, then we remark that the quasistrategy $Q_I$ always allows player I to stay on labels `I' and decrease the age of the position, and always forces player II to stay on labels `I' and decrease the age of the position. So the age must hit zero at some point, at which we know player I has a forced win.
+
+    Lastly, consider the case when $\emptyset$ has no label. Note that at every position $s$, if $s$ is unlabelled then there must be an unlabelled node to move to, and no node labelled with the player making that move; otherwise, by definition, $s$ would have received a label in the recursion process.
+
+    So we know that if any player chooses to leave the unlabelled vertices then they will automatically lose. So let $x \in [Q_0]$ be a run that is entirely unlabelled. We see again that we cannot have $x \in P\cap [T]$, otherwise there will be some $n$ for which $x\restriction n$ has an age zero label, contradiction. So if $\emptyset$ is unlabelled, II has a winning quasistrategy.
+
+    In any event, one of the players has a winning quasistrategy, and hence a winning strategy assuming as much choice as in (7). \qed
+\end{enumerate}
+
+\end{document}

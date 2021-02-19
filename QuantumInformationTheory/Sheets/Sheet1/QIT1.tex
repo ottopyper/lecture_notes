@@ -1,0 +1,183 @@
+\documentclass[]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+\newcommand{\av}{\textrm{av}}
+\newcommand{\un}{\underline{u}^{(n)}}
+\newcommand{\ten}{T_\eps^{(n)}}
+\newcommand{\aen}{A_\eps^{(n)}}
+
+\title{Quantum Information Theory: Sheet 1}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+\textbf{Exercise 1}. a) By definition, if $\underline{u}\in J^n$ then
+\begin{align*}
+    2^{-n(H(u)+\eps)}&\le p(u_1,\dots,u_n) \le 2^{-n(H(U)-\eps)}\\
+    \implies -n(H(U)+\eps) &\le \log p(u_1,\dots,u_n) \le -n(H(U)-\eps)\\
+    \implies H(U)-\eps &\le -\frac{1}{n}p(u_1,\dots,u_n) \le H(U) + \eps
+\end{align*}
+
+c) We have that $\mathbb{P}(T_\eps^{(n)})  = \sum_{u \in T_\eps^{(n)}}p(u)$. Therefore:
+\begin{align*}
+    (1-\delta) < \P(T_\eps^{(n)}) \le |\ten|p_{\max} \le |\ten|2^{-n(H(U)-\eps)}
+\end{align*}
+and the result follows. Similarly:
+\begin{align*}
+    2^{-n(H(U)+\eps)}|\ten| \le |\ten| p_{\min} \le \P(\ten) \le 1
+\end{align*}
+and again the result follows.
+
+\textbf{Exercise 2}. $p(0) = 0.4$, $p(1) = 0.6$, binary source described by $U_1,U_2,U_3$.
+
+\begin{enumerate}
+    \item The most probable sequence in $\{0,1\}^3$ is $111$, which occurs with probability $0.216$
+    \item We first calulate the entropy, which is given by $H(U) = -0.4\log0.4 - 0.6\log 0.6 \approx 0.971$. For $\eps = 0.2$, the typical sequences are then those that occur with probability $p$, where $0.0876 \le p \le 0.201$. So the typical set is $\{001,010,100,011,101,110\}$.
+    \item The total probability of these sequences is $0.72$.
+    \item A smallest set of probability at least $0.72$ is $\{111,011,101,110\} \cup\{x\}$, for any $x \in \{001,010,100\}$.
+    
+    \item This set of higher probability thus has its benefits in that it will yield a lower error rate in the compression scheme. However, it is in general impractical to use a `high probability set' where the criteria for determining whether something is in the set or not is unclear; we had to made an arbitrary choice to create such a set. In proofs it is more convenient to have a more general, simpler definition of a typical set.
+\end{enumerate}
+
+\textbf{Exercise 3}.
+\begin{enumerate}
+    \item We have that $H(X) = -\sum_{x\in J_X}p(x)\log p(x) = -\sum_x \sum_y p(x,y)\log p(x)$, and hence:
+    \begin{align*}
+        -H(X,Y) + H(X) + H(Y) &= \sum_{x}\sum_{y}p(x,y)\log\frac{p(x,y)}{p(x)p(y)}
+    \end{align*}
+    which we recognise as the relative entropy of the two distributions $\{p(x,y)\}_{x,y}$ and $\{p(x)p(y)\}_{x,y}$, noting that the first is absolutely continuous with respect to the second since if $p(x)p(y) = 0$ then either $p(x) = 0$ or $p(y) = 0$, and in either case $p(x,y) = 0$ since not both of $x,y$ can occur.
+
+    The relative entropy of two probability distributions is always non-negative, and equals zero if and only if the two probaility distributions are identical, \it{i.e.} for each $x,y$ we have $p(x,y) = p(x)p(y)$; so $X,Y$ are independent.
+
+    \item Define $f(\lambda)$ as:
+    \begin{align*}
+        f(\lambda) &= H(\lambda p + (1 - \lambda ) q) - \lambda H(p) - (1-\lambda)H(q)\\
+        &=-\sum_{x} (\lambda p(x) + (1-\lambda)q(x))\log [\lambda p(x) + (1-\lambda)q(x)] + \lambda\sum_x p(x)\log p(x) + (1 - \lambda) \sum_x q(x) \log q(x)\\
+        \therefore f'(\lambda) &= H(q) - H(p) - \sum_x (p(x)-q(x))\log [\lambda p + (1-\lambda) q] - \sum_x (p(x) - q(x))\\
+        \therefore f''(\lambda) &= -\sum_x ((p(x) - q(x))^2\cdot\frac{1}{\lambda p(x) + (1-\lambda)q(x)} \le 0
+    \end{align*}
+    with equality iff $p(x) = q(x)$ for all $x$. So $f$ is concave, and $f(0) = 0$, $f(1) = 0$ hence $f(\lambda) \ge 0$ for all $ 0 < \lambda < 1$.
+\end{enumerate}
+
+\textbf{Exercise 4}. The inequality (1) was derived using Jensen's inequality, for which equality holds iff the function $\varphi$ in question is linear or the inputs are all equal; $\log$ is not linear hence equality holds in (1) iff $q(x) = p(x)$ for all $x$.
+
+(2) is proved similarly using Jensen; let $P$ denote the r.v. that takes values $p(x)$ each with probability $p(x)$. Then we have:
+\begin{align*}
+    H(X) &= -\sum_{x\in J_X} p(x)\log p(x)\\
+    &= \sum_{x\in J_X} \log \frac{1}{p(x)}\\
+    &= \E[\log \frac{1}{P}]\\
+    &\le \log \E\frac{1}{P} = \log |J_X|
+\end{align*}
+so again by Jensen we have equality iff the values that $P$ takes are constant, \it{i.e.} each $x \in J_X$ occurs with equal probability. Hence we have equality in (2) iff $X$ is uniform.
+
+\textbf{Exercise 5}. We have already seen that
+\begin{align*}
+    I(X:Y) \coloneqq H(X) + H(Y) - H(X,Y) = D(\{p_{X,Y}(x,y)\}||\{p_X(x)p_Y(y)\})
+\end{align*}
+Moreover, it can be seen that:
+\begin{align*}
+    H(Y|X) &\coloneqq \sum_{x\in J} p_X(x) H(Y|X = x)\\
+    &= - \sum_{x\in J}p_X(x)\sum_{y\in J}p_{Y|X}(y|x)\log p_{Y|X}(y|x)\\
+    &= - \sum_{x,y\in J}p(x,y)\log p(y|x)\\
+    &= - \sum_{x,y\in J} p(x)p(y|x)\log \frac{p(y|x)p(x)}{p(x)}\\
+    &= - D(\{p(x,y)\}_{x,y\in J} || \{p(x)/|J|\}_{x,y\in J}) + \sum_{x,y}p(x)p(y|x)\log |J|\\
+    &= \log |J| - D(\{p(x,y)\}_{x,y\in J} || \{p(x)/|J|\}_{x,y\in J})\\
+    &= - D(\{p(x,y)\}_{x,y\in J}|| \{p(x)\}_{x,y\in J})
+\end{align*}
+where we remark that the latter function on $x,y$ in the relative entropy is not a probability distribution.
+
+\textbf{Exercise 6}.\ 
+\begin{enumerate}
+    \item We know that $H(X|Y) = H(X,Y) - H(Y)$, and $I(X:Y) = H(X) + H(Y) - H(X,Y)$. It is then easy to see that $I(X:Y) = H(X) - H(X|Y)$.
+    \item If $X,Y$ are independent then $H(X|Y) = H(X)$, so $I(X:Y) = H(X) - H(X|Y) = H(X) - H(X) = 0$.
+\end{enumerate}
+
+\textbf{Exercise 7}.\ 
+\begin{enumerate}
+    \item I believe that by `equal' here it is mean that $P(X = x | Y = x) = 1$ for all $x$, but this isn't generally how I would interpret equal; I would say they are equal if they are i.i.d, for instance, or if they have the same distribution but are not independent (and this could split into a variety of cases).
+    
+    In this case we have $I(X:Y) = H(X) - H(X|Y) = -\sum_x p(x)\log p(x) - \sum_{x} p(x)H(X| Y = x)$. $H(X| Y = x) = \sum_{x'}p(x'|x)\log p(x'|x) = 0$. So $I(X:Y) = H(X)$.
+
+    \item $I(X:Y) = H(X)  - H(X|Y)$. Therefore:
+    \begin{align*}
+        I(X:Y) &= -\frac{1}{2}\log 2^{-1} - \frac{1}{2}\log 2^{-1} - H(X|Y)\\
+        &= 1 - p(Y=0)H(X|Y = 0) - p(Y=1)H(X| Y = 1)\\
+    \end{align*}
+
+    Note that $p(Y=0) = p(Y= 0 | X = 1) p(X=1) + p(Y= 0 | X = 0) p(X = 0) = \frac{1}{2}(1-p) + \frac{1}{2}p = \frac{1}{2}$. In particular, $p(x|y) = p(y|x)$.
+
+    So $H(X | Y = 1) = -p(1|1) \log p(1|1) - p(0|1)\log p(0 | 1) = -p\log p - (1-p)\log (1-p) = h(p)$. Similarly $H(X|Y = 0) = h(p)$. So $I(X:Y) = 1 - \frac{1}{2}h(p) - \frac{1}{2}h(p) = 1 - h(p)$.
+\end{enumerate}
+
+\textbf{Exercise 8}. WLOG say $p(0) = 1-\eps$. Then we have:
+\begin{align*}
+    H(X) &= -\sum_{x\in J}p(x)\log p(x)\\
+    &= -(1-\eps) \log (1-\eps) -\sum_{x\ne 0}p(x) \log p(x)
+\end{align*}
+
+Now consider the function $f(x) = x \log(x)$. This function is convex:
+\begin{align*}
+    f(x) &= x\log (x)\\
+    \implies f'(x) &= \log (x) + \frac{1}{\log_\e(2)}\\
+    \implies f''(x) &= \frac{1}{x\log_\e(2)}
+\end{align*}
+so $f$ is convex for $0 < x < 1$. So given $t_i$ and $x_i$ such that $\sum t_i = 1$, we have that $f(\sum t_i x_i) \le \sum t_i f(x_i)$. Setting $t_i = \frac{1}{m-1}$ and $x_i = p(x)$ then gives:
+\begin{align*}
+    f(\sum p(x) / (m-1)) &\le \frac{1}{m-1}\sum p(x)\log p(x)\\
+    \implies (m-1)f(\eps /(m-1)) &\le \sum p(x) \log p(x)\\
+    \implies \eps \log (\eps/(m-1)) &\le \sum p(x)\log p(x)\\
+    \therefore H(X) &\le - (1-\eps)\log (1-\eps) - \eps \log (\eps /(m-1))\\
+    &= h(\eps) + \eps\log(m-1)
+\end{align*}
+which is the desired inequality.
+
+\textbf{Exercise 9}. Let $q_j$ be the probability distribution given by $\{p(x_{i+j-1}|y_j)\}_{i}$, and let $Q = \sum_{j=1}^{m}p(y_j)q_j$ be the distribution given by their weighted sum.
+
+Then $\P(Q = 1) = \sum_{j=1}^{m}p(y_j)p(x_j|y_j) = \sum_{j=1}^{m}p(x_j,y_j) = 1 - \eps$. Hence we can apply (8) to the random variable $Q$ to see that $H(Q) \le h(\eps) + \eps \log (m-1)$.
+
+However, since $H$ is itself concave, we have that:
+\begin{align*}
+    H(Q) &= H(\sum_{j=1}^{m}p(y_j)q_j)\\
+    &\ge \sum_{j=1}^{m}p(y_j)H(q_j)
+\end{align*}
+Note that $q_j$ has identical entropy to $X|Y = y_j$; the probabilities are the same, they just apply to different values that the variable can take; this has no impact on entropy.
+
+Hence $H(X|Y)  = \sum_{j=1}^{m}p(y_j)H(q_j) \le H(Q) \le h(\eps) + \eps \log (m-1)$, as required.
+
+\textbf{Exercise 10}. We can express $H(Y,Z,X) - H(X,Y,Z) = 0$ as:
+\begin{align*}
+    0 =& H(Y) + H(Z|Y) + H(X| Y,Z)\\
+    -&(H(X) + H(Y|X) + H(Z|X,Y))
+\end{align*}
+But $H(Z|X,Y) = \sum_{x,y}p(x,y)H(Z|X=x,Y=y) = \sum_{x,y}p(x,y)H(Z|Y=y) = \sum_{y}p(y)H(Z|Y=y) = H(Z|Y)$. So the above simplifies to:
+\begin{align*}
+    H(Y) - H(Y|X) + H(X|Y,Z) - H(X) = 0
+\end{align*}
+and $I(X:Y) = H(Y) - H(Y|X)$, $I(X:Z) = H(X) - H(X|Z)$, so we have that 
+\begin{align*}
+    I(X:Y) - I(X:Z) &= H(X|Z) - H(X|Y,Z)\\
+    & = I(X:Y|Z) \ge 0
+\end{align*}
+since the mutual information between any two r.v.s is non-negative, as can be seen here:
+\begin{align*}
+    H(X|Z) - H(X|Y,Z) & = -\sum_{x,y,z} p(x,y,z)\log \frac{p(x,z)p(y,z)}{p(z)p(x,y,z)}\\
+    & = \E\left[ -\log \frac{p(x,z)p(y,z)}{p(x,y,z)p(z)}   \right]
+\end{align*}
+\it{i.e.} is the expectation of the negative logarithm of the random variable that takes the value $p(x,z)p(y,z)/(p(z)p(x,y,z))$ with probability $p(x,y,z)$. Then, by Jensen:
+\begin{align*}
+    H(X|Z) - h(X|Y,Z) & \ge -\log \E \left[  \frac{p(x,z)p(y,z)}{p(z)p(x,y,z)}  \right]\\
+    & = -\log \left(  \sum_{x,y,z}\frac{p(x,z)p(y,z)}{p(z)}  \right)\\
+    &= - \log \left (\sum_{y,z}p(y,z)\sum_{x}p(x|z)\right)\\
+    & = -\log \left( \sum_{y,z}p(y,z)\right)\\
+    &= 0
+\end{align*}
+
+\textbf{Exercise 11}.
+
+
+
+\end{document}

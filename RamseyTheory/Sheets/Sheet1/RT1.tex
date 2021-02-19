@@ -1,0 +1,43 @@
+\documentclass[10pt]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+\usepackage{graphicx}
+
+\newcommand{\hj}{\textrm{HJ}}
+
+\title{Ramsey Theory: Example Sheet 1}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+\maketitle
+
+1. Let $f : [n] \ra [m]\cup\{\ast\}$ such that $f^{-1}(\{\ast\})\ne\emptyset$. We can identify $f$ with a combinatorial line by $I = \{i : f(i) = \ast\}$ and for $i\not\in I$, $x_i = f(i)$; similarly, given a combintorial line $L$ there is a unique such $f$ that represents it.
+
+So the number of combinatorial lines in $[m]^n$ is just the number of such $f$s, which equals ($\#\{f:[n]\ra [m]\cup\{\ast\}\} - \# \{f:[n]\ra [m]\}) = (m+1)^n - m^n$.\ \\
+
+2. Induction on $k$. Base case: $\hj(2,1) = 1$ since the single combinatorial line must be monochrome, and the empty set has a $1$-colouring with no monochromatic line.
+
+Now assume that $\hj(2,k-1) = k-1$. Observe that $(0,0,\dots,0)\in [2]^k$ forms a combinatorial line with any other point, so $[2]^k \backslash \{(0,\dots,0)\}$ must be $k-1$-coloured. Hence $[2]^{k-1}\times\{1\}$ is $(k-1)$-coloured. The colouring on $[2]^{k-1}\times \{1\}$ induces a colouring on $[2]^{k-1}$, which has a monochromatic combinatorial line $L = \{\underline{x}_1,\underline{x}_2\}$, and so $\{\underline{x}_11,\underline{x}_21\}$ is a monochromatic combinatorial line in $[2]^{k}$. Hence $\hj(2,k) \le k$.
+
+Moreover, $\hj(2,k) > k-1$; we can $k$-colour $[2]^{k-1}$ by $c(x_1,\dots,x_{k-1}) = x_1 + \dots + x_{k-1}$, where the colours are the set $\{0,\dots,k-1\}$. This contains no monochromatic line. Hence $\hj(2,k) = k$ for all $k$.
+
+3. $2$-colour $A^{(4)}$ by giving $B\subset A$ the colour red if any of the points lies within the triangle formed by the other three, and blue otherwise. This is unambiguous since no three points are colinear.
+
+Then by Ramsey's Theorem there exists a monochromatic set $C$ of size $k = 2021$. $C$ is then clearly convex, but this is surprisingly difficult to actually prove.
+
+4. Suppose that this is true, and let $c_n : \N^{(n)}\ra [2]$ be the $2$-colouring whereby $A$ is red if $n \in A$, and blue otherwise. If $M \subset \N$ is infinite and monochromatic under $c_n$, then it cannot contain $n$ since then its colour must be red, but there of course exists $A\subset M\backslash \{n\}$ with $|A| = n$, and then $c_n(A)$ is blue.
+
+So let $c = \bigcup c_n$ be the $2$-colouring of $\bigcup \N^{(n)}$. Then there exists an infinite $M\subset \N$ such that, for each $r$, $c$ is constant on $M^{(r)}$. But for each $r$, $c\restriction M^{(r)} = c_r$, and since $c_r$ is constant on $M$ we conclude that $r \not \in M$. But $r$ was arbitrary, so $M$ is empty, contradiction.
+
+10. With choice: false. Wellorder $\R$ ($<_\alpha$) and colour $\{a,b\}$ red if their order in the wellorder agrees with their natural order in $\R$. A monochromatic subset is then $M = \{a_i : i \in I\}$ with $a_i < a_j$ for $i < j$ such that either of the following holds:
+\begin{itemize}
+    \item for all $i < j$, $a_i <_\alpha a_j$, or
+    \item for all $i < j$, $a_j <_\alpha a_j$
+\end{itemize}
+But then if $I$ is uncountable, then in the first case $M$ is well-ordered, and in the second case $-M$ is wellordered; in either case we have an uncountable wellordered subset of $\R$. Contradiction.
+
+Without choice: it is consistent in ZF that there are countable pairwise disjiont sets $A_n$ such that $\bigcup_{n\in\N}A_n$ is uncountable. Then $2$-colour the edges of $\bigcup A_n$ by making $\{a,b\}$ red if they lie in the same $A_n$, and blue otherwise. We end up with a countable infinite of red islands, with the edges between all islands being blue. This has no uncountable monochromatic subset.
+
+\end{document}

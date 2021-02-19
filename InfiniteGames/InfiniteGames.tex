@@ -6,8 +6,12 @@
 \newcommand{\II}{\textrm{II}}
 \newcommand{\om}{\omega}
 \newcommand{\lom}{{<\omega}}
-
 \newcommand{\lh}{\ell h}
+\renewcommand{\ac}{\textrm{AC}}
+\newcommand{\bosig}{\bm{\Sigma}}
+\newcommand{\bopi}{\bm{\Pi}}
+\newcommand{\bodel}{\bm{\Delta}}
+\usepackage{bm}
 
 \newcommand{\game}{
     \begin{center}
@@ -624,22 +628,232 @@ Compare with out proof of the existence of a non-determined set from Lecture 4 (
     \underline{Claim}: If $\hat{\ell}(\emptyset) = \I$, then player I has a winning quasistrategy; otherwise, $\hat{\ell}(\emptyset) = \II$ and player II has a winning q.s.
 
     Given this, the proof is complete.
+
+    \marginpar{Lecture 6}
+
+    \underline{Subclaim 1}: If $\hat{\ell}(\emptyset) = \I$, define
+    \begin{align*}
+        Q_\I \coloneqq \{s \in \om^\lom; \hat{\ell}(s) = \I\}
+    \end{align*}
+    and if $\hat{\ell}(\emptyset) = \II$, define $Q_\II$ similarly.l
+
+    Then $Q_\I/Q_\II$ is a I/II-quasistrategic tree.
+
+    [Need to show:
+    \begin{enumerate}
+        \item if $\hat{\ell}(s) = \I$ and $\lh(s)$ is even then there is $m$ such that $\hat{\ell}(sm) = \I$]
+        \item if $\hat{\ell}(s) = \I$ and $\lh(s)$ is odd then for all $m$, $\hat{\ell}(sm) = \I$
+        \item if $\hat{\ell}(s) = \II$ and $\lh(s)$ is even then for all $m$, $\hat{\ell}(sm) = \II$
+        \item if $\hat{\ell}(s) = \II $ and $\lh(s)$ is odd then there is $m$ such that $\hat{\ell}(sm) = \II$
+    \end{enumerate}
+
+    We had $\ell_\alpha = \ell_{\alpha+1} = (\ell_\alpha)^+$, so 3 and 4 follow immediately from the recursion definition of $\ell^+$.
+
+    Similarly, if $\hat{\ell}(s) = \I$ and $\lh(s)$ is even then $s\not\in \textrm{dom}(\ell_\alpha)$. This implies there is an $m$ such that $sm \not\in \textrm{dom}(\ell_\alpha)$, so $\hat{\ell}(sm) = \I$. 2 is similar.]
+
+    \underline{Subclaim 2}: If $\hat{\ell}(\emptyset) = \I$, then $Q_\I$ is a w.q.s for $\I$.
+
+    [Need to show that $[Q_\I] \subset A$. So fix some $x \in [Q_\I]$. So for all $x$,
+    \begin{align*}
+        x\restriction u \in Q_\I &\implies \hat{\ell}(x\restriction u) = \I\\
+        &\implies \hat{\ell}(x\restriction u)\ne \II\\
+        &\implies \ell(x\restriction u)\not\in \II\\
+        &\implies x\restriction u \in T
+    \end{align*}
+    So $x \in A$.]
+
+
+\begin{remark*}: What we have done so far hasn't really needed trees/closed sets. Instead, we could let $$\ell :M^\lom \ra \{\II\}$$ be any partial labelling. Do the transfinite recursion $\ell_{\alpha+1} \coloneqq (\ell_\alpha)^+$, $\ell_0 \coloneqq \ell,\dots$, find fixed point $\ell_\alpha$; define $\hat{\ell}$, define $Q_\I$. Then $\Q_\I$ is a q.s. that avoids all $s \in \textrm{dom}(\ell)$.
+\end{remark*}
+
+For player II, it is not always the case that $Q_\II$ is winning [\it{c.f.} Example 12 on ES\#1] since you could stay on labels II without ever leaving the tree. So, we need to work slightly harder and find a sub-quasistrategy that is in fact winning.
+
+Recall the age function:
+\begin{align*}
+    &\textrm{age}:Q_\II \ra \alpha + 1\\
+    &\textrm{age}(s) \coloneqq \textrm{the least }\beta\textrm{ such that } s \in \textrm{dom}(\ell_{\beta})
+\end{align*}
+This means:
+\begin{align*}
+    \textrm{age}(s) =  0 &\iff s \in \textrm{dom}(\ell_0) = \textrm{dom}(\ell)\\
+    &\iff s\not\in T
+\end{align*}
+
+\underline{Subclaim 3}: If $\hat{\ell}(s) = \II$ and $\lh(s)$ is even, then if $\textrm{age}(s) = 0$ or for all $m$, $\textrm{age}(sm) < \textrm{age}(s)$. If $\hat{\ell}(s) = \II$ and $\lh(s)$ is odd then either $\textrm{age}(s) = 0$ or there is $m$ such that $\textrm{age}(sm) < \textrm{age}(s)$.
+
+[This follows directly from the recursive construction step.]
+
+Now define $\hat{Q}_\II \subset Q_\II$ by:
+\begin{itemize}
+    \item $\emptyset \in \hat{Q}_{\II}$
+    \item $sm \in \hat{Q}_\II :\iff \textrm{age}(sm) = 0\textrm{ or }sm \in Q_\II \textrm{ and }\textrm{age}(sm) < \textrm{age}(s)$
+\end{itemize}
+
+Informatlly, playing by $\hat{Q}_\II$ means: ``play into positions labelled II reducing the age if you can''.
+
+If $\hat{\ell}(\emptyset) = \II$, then by Subclaim 3 $\hat{Q}_\II$ is a q.s.
+
+\underline{Subclaim 4}: If $\hat{\ell}(\emptyset) = \II$, then $\hat{Q}_\II$ is winning for II: $[\hat{Q}_\II]\cap A = \emptyset$.
+
+[Suppose $x \in [\hat{Q}_\II]$. Consider $a_n \coloneqq \textrm{age}(x\restriction n)$. This is a decreasing sequence of ordinals until it hits 0 by construction of $\hat{Q}_\II$. Since no infinite, strictly decreasing sequence of ordinals exists, we find $k$ such that $a_k = \textrm{age}(x\restriction k) = 0$. This implies $x\restriction k \not \in T$, hence $x\not\in A$.]
+
+This finishes the claim, and hence concludes the entire proof.
 \end{proof}
 
-\marginpar{Lecture 6}
+\begin{remark*}
+    If $M$ is wellorderable (\it{e.g.} $M = \N$), then GST says that every closed subset of $M^\om$ is determined, and also that every complement of a closed set is determined. [Follows directly from the proof.]
+\end{remark*}
 
+Recall our motto/hope from the end of lecture 2: if a set is \it{nice} or \it{simple}, then it is determined. If by `nice' we mean closed, then this is just GST.
 
+\underline{Next goal}: Define a topology on $M^\lom$.
 
+Let's focus on the case $M = \N$, or even $M = 2 = \{0,1\}$.
 
+\begin{defin*}[Baire Space]
+    If $x,y \in \om^\om$, we can define
+    \begin{align*}
+        d(x,y) \coloneqq \left\lbrace \begin{array}{cc} 0\quad & \textrm{ if }x = y\\ 2^{-m} & \quad \textrm{ if }x\restriction m = y\restriction m\textrm{ and }x(m)\ne y(m) \end{array}\right.
+    \end{align*}
+    which is a metric on $\om^\om$.
 
+    What are the open balls for this metric? Let $\eps = 2^{-n}$:
+    \begin{align*}
+        B_\eps(x) &= \{y\in \om^\om : d(x,y) < \eps\}\\
+        &= \{y; y\restriction (n+1) = x \restriction (n+1)\}
+    \end{align*}
+    In particular, the open balls are determined by finite sequences.
 
+    If $s \in \om^\om$, write:
+    \begin{align*}
+        [s]\coloneqq \{x \in \om^\om ;s \subset x\}
+    \end{align*}
+    So $B_{2^{-n}}(x) = [x\restriction (n+1)]$. Thus the topology of the metric space is generated by the basic open sets $\{[s];s \in \om^\om\}$.
 
+    This topological space on $\om^\om$ is called \undf{Baire space}. If we restrict to $2^\om$, then it is called \undf{Cantor space}.
+\end{defin*}
 
+If you think of $\om^\om$ as $$\prod_{i\in \om}Y_i$$ with $Y_i = \om$, and $2^\om$ as $$\prod_{i\in \om}Y_i$$ with $Y_i = 2 = \{0,1\}$, then Baire space is just the product topology on $\prod_{i\in \om}X_i$ with the discrete topology on $\om$, and Cantor space is the product topology on $\prod_{i\in \om}Y_i$ with the discrete topology on 2.
 
+Tychonoff implies that Cantor space is compact, but Baire space is not. Indeed, the latter can even by seen with Tychonoff:
+\begin{align*}
+    \om^\om = \bigcup_{m\in \om}[<m>]
+\end{align*}
+Since $[<m>] = \{x;x(0)=m\}$, this union is disjoint so this open cover clearly has no finite subcover, and tells us that Baire space is (very) disconnected.
 
+Next time, we show that $A = [T] \subset \om^\om \iff A$ is closed in Baire space.
 
+\marginpar{Lecture 7}
 
+We now study the Baire space and Cantor space in detail. Firstly, consider convergence:
 
+\begin{align*}
+    x_n \ra x &\iff \forall \eps\ \exists N\ \forall x > N\ d(x_n,x) < \eps\\
+    &\iff \forall m\ \exists N \ \forall n>N\ d(x_n,x) < 2^{-m} \\
+    &\iff \forall m\ \exists N\ \forall n > N\ x_n\restriction m  = x\restriction m
+\end{align*}
+If $A\subset \om^\om$, we can define
+\begin{align*}
+    T_A \coloneqq \{x\restriction n; x \in A, n \in \N\}
+\end{align*}
+\underline{Observe}: $A \subset [T_A]$, since $x \in A \implies x\restriction n \in T_A\textrm{ for all }n\implies x \in [T_A]$.
 
+\begin{remark*}[Proposition]\emph{
+$[T_A]$ is the closure of $A$, \it{i.e.} $\{x;\exists(x_n)\textrm{ with }x_n\in A\textrm{ and }x_n\ra x\}$
+}
+\end{remark*}
+\begin{proof}
+    Suppose $x_n \in A$ and $x_n\ra x$. By our characterisation of convergence, this means that $x\restriction k = x_n\restriction k$ for some $n$, so $x\restriction k \in T_A$. Since $k$ was arbitrary, we have that $x \in [T_A]$.
 
+    Conversely, suppose that $x \in [T_A]$. For every $k \in \N$, $x\restriction k \in T_A$, so there is some $x_k \in A$ such that $x\restriction k = x_k\restriction k$. Then again by the characterisation of convergence, we have that $x_k \ra x$. So $x$ is in the closure of $A$.
+\end{proof}
+\begin{remark*}[Corollary]
+    $A\subset \om^\om$ is closed $\iff (\exists T)(A = [T])$ (we know that $T\coloneqq T_A$ does it).
+
+    This is sometimes known as the \undf{tree representation theorem for closed sets}.
+\end{remark*}
+
+Some more topological properties:
+
+Basic open sets are $[s] = [T_s]$, where $T_s \coloneqq \{t;s\subset t\textrm{ of }t\subset s\}$. So basic open sets are closed; we call these \undf{clopen}. Spaces like this are called \undf{zero-dimensional}
+
+If $x \in \om^\om$, then $\{x\} = [T_x]$, with $T_x \coloneqq \{x\restriction n;n\in \N\}$. So singletons are closed, and not open.
+
+We can easily see that this set is \undf{Hausdorff}: if $x \ne y$, find $n$ such that $x\restriction n \ne y \restriction n$. Then $x \in [x\restriction n]$, $y \in [y\restriction n]$, but $[x\restriction n]\cap[y\restriction n] = \emptyset$.
+
+\underline{Continuous Functions}: [proof on ES\#2] If $g:\om^\lom \ra \om^\lom$ such that:
+\begin{enumerate}
+    \item $g$ is order-preserving, \it{i.e.} $s\subset t \ra g(s)\subset g(t)$
+    \item $g$ is ``unbounded'', \it{i.e.} if $x \in \om^\om$, then $\lh(g(x\restriction n))\ra\infty$
+\end{enumerate}
+then define $$\hat{g}(x) \coloneqq \bigcup_{n\in \N}g(x\restriction n)$$ which is a function $\om^\om$.
+
+\begin{remark*}[Proposition]
+    $f:\om^\om$ is continuous iff there is $g:\om^\lom \ra \om^\lom$ with 1 \& 2 satisfied such that $f = \hat{g}$
+\end{remark*}
+
+The \undf{rule of thumb} here is that $f$ is continuous iff in order to determine $f(x)(k)$ you only need $x\restriction n$ for some finite $n$.
+
+Now consider functions from $(\om^\om)^2$ to $\om^\om$ and vice versa and $\om^\om$ to $\om^\om$:
+\begin{itemize}
+    \item $x \mapsto x_\I$
+    \item $x \mapsto x_{\II}$
+    \item $(x,y)\mapsto x\ast y$
+    \item $x \mapsto (x_\I,x_\II)$
+\end{itemize}
+These are all continuous. Moreover, we see that $(\om^\om)^2$ and $(\om^\om)$ are homeomorphic by $(x,y)\mapsto x\ast y$ with inverse $x\mapsto (x_\I,x_\II)$. This is unusual, and this phenomenon may explain the name \it{zero-dimensional}. [Similarly, $(\om^\om)^k \cong (\om^\om)^\ell$ for any $k,\ell > 0$]. 
+
+\begin{theorem*}
+    Baire space is homeomorphic to $\R\backslash \Q$.
+\end{theorem*}
+[The proof uses continued fractions: if $x \in \R\backslash \Q$, then there is a sequence $a_i \in \Z^\om$ such that $x = [0;a_0,a_1,a_2,\dots]$.]
+
+So while topologically quite different from $\R$, Baire space is set-theoretically very close to $\R$: many set theoretic properties/proofs depend only on cardinality, and we have only removed a countable (dense) subset.
+
+\begin{remark*}[Example]
+    ES\#1 (4) has choice principles $\textrm{AC}_X(Y)$. These are invariant under replacing $X$ or $Y$ with $X',Y'$ such that $X$ is in bijection with $X'$ and $Y$ is in bijection with $Y'$.
+
+    In particular,
+    \begin{align*}
+        \textrm{AC}_\om(\R) &\iff \ac_\om(\om^\om)\\
+        &\iff \ac_\om(2^\om)\\
+        &\iff \ac_\om(X)
+    \end{align*}
+    where $X$ is any set in bijection with $\R$.
+\end{remark*}
+
+In set theory, we often refer to elements of $2^\om$ or $\om^\om$ as ``reals'' and abuse the notation by sometimes writing $\R \coloneqq \om^\om$.
+
+We now repeate our motto/hope: if $A$ is ``simple'', then $A$ is determined.
+
+To make precise what `simple' means, we need a complexity hierarchy on Baire space:
+
+\begin{defin*}[Borel Hierarchy]
+    Let $X$ be any topological space. We then define \undf{[boldface] sigma zero one} as
+    \begin{align*}
+        \bm{\Sigma}_{0}^{1}\coloneqq \{A\subset X; A\textrm{ is open in }X\}
+    \end{align*}
+    Then if $\bm{\Sigma}^0_\alpha$ is defined, we define
+    \begin{align*}
+        \bm{\Pi}^0_\alpha \coloneqq \{X\backslash A; A \in \bm{\Sigma}^0_\alpha \}
+    \end{align*}
+    If $\alpha$ is an ordinal and for all $\gamma < \alpha$, $\bopi^0_\gamma$ is defined, then
+    \begin{align*}
+        \bosig^0_\alpha \coloneqq \{A; \exists (A_n)\textrm{ such that }\forall n\ A_n\in \bigcup_{\gamma<\alpha}\bopi^0_\gamma\textrm{ and }A = \bigcup_{n\in\N}A_n\}
+    \end{align*}
+    We also have
+    \begin{align*}
+        \bodel^0_\alpha \coloneqq \bosig^0_\alpha \cap \bopi^0_\alpha
+    \end{align*}
+
+    So we get the $\bosig$s from countable unions, and the $\bopi$s from complements.
+\end{defin*}
+
+\underline{Properties}: By definition, $\bodel ^0_\alpha \subset \bosig^0_\alpha,\bopi^0_\alpha$.
+
+Moreover, by definition $\alpha \le \beta \implies \bosig^0_\alpha \subset \bosig^0_\beta$. This also gives us that $\bopi^0_\alpha \subset \bopi^0_\beta$.
+
+To see the full structure of the hierarchy, we need to show that for $\alpha < \beta$, $\bopi^0_\alpha \subset \bosig^0_\beta$ (equivalently, $\bosig^0_\alpha \subset \bopi^0_\beta$). This follows from the definition of $\sigma^0_\beta$ by letting $A_n\coloneqq A$, so $\bigcup_{n\in \N}A_n = A$.
+
+\underline{Question}: When does the Borel hierarchy terminate? This will, of course, depend on the topological space.
 \end{document}

@@ -1,0 +1,27 @@
+\documentclass[10pt]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+\usepackage{graphicx}
+
+\newcommand{\hj}{\textrm{HJ}}
+
+\title{Ramsey Theory: Example Sheet 1}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+\maketitle
+
+1. Let $f : [n] \ra [m]\cup\{\ast\}$ such that $f^{-1}(\{\ast\})\ne\emptyset$. We can identify $f$ with a combinatorial line by $I = \{i : f(i) = \ast\}$ and for $i\not\in I$, $x_i = f(i)$; similarly, given a combintorial line $L$ there is a unique such $f$ that represents it.
+
+So the number of combinatorial lines in $[m]^n$ is just the number of such $f$s, which equals ($\#\{f:[n]\ra [m]\cup\{\ast\}\} - \# \{f:[n]\ra [m]\}) = (m+1)^n - m^n$.\ \\
+\ \\
+
+4. Suppose that this is true, and let $c_n : \N^{(n)}\ra [2]$ be the $2$-colouring whereby $A$ is red if $n \in A$, and blue otherwise. If $M \subset \N$ is infinite and monochromatic under $c_n$, then it cannot contain $n$ since then its colour must be red, but there of course exists $A\subset M\backslash \{n\}$ with $|A| = n$, and then $c_n(A)$ is blue.
+
+So let $c = \bigcup c_n$ be the $2$-colouring of $\bigcup \N^{(n)}$. Then there exists an infinite $M\subset \N$ such that, for each $r$, $c$ is constant on $M^{(r)}$. But for each $r$, $c\restriction M^{(r)} = c_r$, and since $c_r$ is constant on $M$ we conclude that $r \not \in M$. But $r$ was arbitrary, so $M$ is empty, contradiction.
+
+10. With choice: false. Wellorder $\R$ ($<_\alpha$) and colour $\{a,b\}$ red if their order in the wellorder agrees with their natural order in $\R$. A monochromatic subset is then $M = \{a_i : i \in I\}$ with $a_i < a_j$ for $i < j$ such that either 
+
+\end{document}
