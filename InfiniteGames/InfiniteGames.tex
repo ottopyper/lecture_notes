@@ -11,6 +11,11 @@
 \newcommand{\bosig}{\bm{\Sigma}}
 \newcommand{\bopi}{\bm{\Pi}}
 \newcommand{\bodel}{\bm{\Delta}}
+\newcommand{\bg}{{\breve \Gamma}}
+\newcommand{\br}[1]{{\breve #1}}
+\newcommand{\Det}{\textrm{Det}}
+\newcommand{\eomg}{\exists^{\om^\om}\Gamma}
+\newcommand{\eom}{\exists^{\om^\om}}
 \usepackage{bm}
 
 \newcommand{\game}{
@@ -856,4 +861,379 @@ Moreover, by definition $\alpha \le \beta \implies \bosig^0_\alpha \subset \bosi
 To see the full structure of the hierarchy, we need to show that for $\alpha < \beta$, $\bopi^0_\alpha \subset \bosig^0_\beta$ (equivalently, $\bosig^0_\alpha \subset \bopi^0_\beta$). This follows from the definition of $\sigma^0_\beta$ by letting $A_n\coloneqq A$, so $\bigcup_{n\in \N}A_n = A$.
 
 \underline{Question}: When does the Borel hierarchy terminate? This will, of course, depend on the topological space.
+
+\marginpar{Lecture 8}
+
+\begin{defin*}[$G_\delta$ space]
+    A topological space is called a \undf{$G_\delta$ space} if $\bopi^0_1 \subseteq \bopi^0_2$. That is to say, `every closed set is a $G_\delta$ set'.
+\end{defin*}
+
+\underline{Note}: every metric space is a $G_\delta$ space.
+
+For Cantor and Baire space, we proved that there is a countable topology base of clopen sets, and this implies being in $G_\delta$.
+
+\begin{remark*}[Proposition]
+    If $X$ has a countable, clopen topology base then $X$ is $G_\delta$.
+\end{remark*}
+\begin{proof}
+    Let $F\subset X$ be closed, and let $G = X\backslash F$; $G$ is open. For every $x \in G$, find $B_x$ in the topology base such that $x \in B_x\subset G$. Since $B_x$ is clopen, $X\backslash B_x$ is also open.
+
+    Now consider $\{B_x ; x \in G\}$. This is countable, since the basis is countable, so write it as $\{B_n; n\in \N\}$. Then $F = \bigcap_{n\in\N}X\backslash B_n \in \bopi_2^0$.
+
+    Note that since countability implies wellorderability, no choice is needed.
+\end{proof}
+
+This is slightly irrelevant to what we wanted to do, but it felt like it was worth covering.
+
+In principle, the Borel Hierarchy is defined on arbitary spaces, but it of course cannot go on forever; it must terminate on some ordinal, and this may differ between spaces.
+
+\underline{Question}: By the Axiom of Replacement, the Borel Hierarchy termiantes at some ordinal $\alpha$ [\it{i.e.}, $\bosig_\alpha^0 = \bopi_\alpha^0$]; what can we say about $\alpha$?
+
+The upper bound that we get by just using Replacement is pretty bad.
+
+\begin{remark*}[Observations]\ 
+    \begin{enumerate}
+    \item If $X$ is discrete, then every subset of $X$ is clopen, so $$\bodel_1^0 = \bosig_1^0 = \bopi_1^0$$
+    \item If singletons are closed and $X$ is countable, then $$\bodel_2^0 = \bosig_2^0 = \bopi_2^0$$
+    
+    [If $A = \{x; x \in A\}$ is countable, then $A = \bigcup_{x\in A}\{x\}$] 
+    \end{enumerate}
+\end{remark*}
+
+We can obtain a better upper bound than by the cardinality of $X$.
+
+\begin{remark*}[Proposition (ZFC)]
+    \emph{
+    For arbitrary $X$, $\bodel_{\aleph_1} = \bosig_{\aleph_1} = \bopi_{\aleph_1}$.
+    }
+\end{remark*}
+\begin{proof}
+    It is enough to show that $$ \bosig_{\aleph_1}^0 = \bigcup_{\alpha < \aleph_1} \bopi_{\alpha}^0$$
+    The $\supseteq$ inclusion is clear. For the other direction, consider the following.
+
+    If $A \in \bosig_{\aleph_1}^0$, there are $A_n$ such that $A = \bigcup_{n\in\N}A_n$ and $\alpha_n < \aleph_1$ such that $A_n \in \bopi_{\alpha_n}^0$. Since $\aleph_1$ is a regular cardinal, every countable subset $A \subset \aleph_1$ is bounded, \it{i.e.} there is $\beta < \aleph_1$ such that $A\subset \beta$.
+
+    So we then look at the countable subset $\{\alpha_n ; n \in \N\}\subset \aleph_1$, and find for it a countable bound $\beta < \aleph_1$. Then $\{\alpha_n ; n\in\N\} \subset \beta$. Then for all $n$, $A_n \in \bigcup_{\alpha < \beta}\bopi_\alpha^0$. Hence $A \in \bosig_{\beta+1}^0\subset \bopi_{\beta+2}^0$. But $\beta+2$ is still countable, so $A$ is in the union as in the claim.
+
+    The AC required was in showing that $\aleph_1$ is regular.
+\end{proof}
+
+Hence the height of the Borel hierarchy (in ZFC) is $1 \le \beta \le \aleph_1$.
+
+\begin{theorem*}[ZFC]
+    If $X$ is Cantor space, Baire space or $\R$, then the height of the Borel hierarchy is $\aleph_1$.
+
+    [This is not just the case for these spaces; in general, this holds if $X$ is an uncountable Polish space.]
+\end{theorem*}
+
+This means that if $\alpha < \aleph_1$, then $\bosig_{\alpha}^0 \ne \bopi_{\alpha}^0$. The proof of the theorem uses the \undf{method of universal sets}.
+
+\begin{defin*}[Pointclass]
+    A \undf{pointclass} is an operation that assigns to each topological space $X$ a set of subsets of $X$.
+\end{defin*}
+\begin{remark*}[Examples]\ 
+    \begin{itemize}
+        \item ``open''/$\bosig_1^0$
+        \item ``closed''/$\bopi_1^0$
+        \item $\bosig_\alpha^0/\bopi_\alpha^0/\bodel_\alpha^0$
+    \end{itemize}
+\end{remark*}
+If $\Gamma$ is a pointclass, we define ${\breve \Gamma}$ by $$\bg(X) \coloneqq \{X\backslash A; A \in \bg(X)\}$$ called the \undf{dual pointclass} of $\Gamma$, pronounced ``Gamma dual'', and $\Delta_\Gamma$ by $$\Delta_\Gamma(X)\coloneqq \Gamma(X) \cap \bg (X)$$ called the \undf{ambiguous pointclass} of $\Gamma$.
+
+For example, $\bopi_\alpha^0$ is $\br{\bosig_\alpha^0}$, and $\bodel_\alpha^0$ is  $\Delta_{\bosig_{\alpha}^0}$ (and $\Delta_{\bopi_\alpha^0}$).
+
+\subsection*{Closure Properties of Pointclasses}
+
+\begin{center}
+    \begin{tabular}{cc|c}
+        & YES & NO\\
+        closed under finite unions & $\bosig_\alpha^0,\bopi_\alpha^0,\bodel_\alpha^0$& \\
+        closed under finite intersections &$\bosig_\alpha^0,\bopi_\alpha^0,\bodel_\alpha^0$ & \\
+        closed under countable unions & $\bosig_{\alpha}^0$ & $\bopi_\alpha^0,\bodel_\alpha^0$ \\
+        closed under countable intersections &$\bopi_\alpha^0$ &$\bosig_\alpha^0,\bodel_\alpha^0$ \\
+        closed under complements &$\bodel_\alpha^0$ &$\bosig_{\alpha}^0,\bopi_\alpha^0$ \\
+    \end{tabular}
+\end{center}
+Here, `no' means `if the space is Baire space and $\alpha$ is countable then no' (\it{i.e.} correctly chosen $\alpha$ and space $X$).
+
+These properties are entirely local; we have another closure property that links the meaning of pointclasses in different spaces.
+
+We say that $\Gamma$ is \undf{closed under continuous pre-images} if whenever $f : X \ra Y$ is continuous and $A \in \Gamma(Y)$, then $f^{-1}[A] \in \Gamma(X)$. This property is also called \undf{boldface}; this is silly because the notion has been named after the notation used. A simple inductive argument shows that this is consistent with the `boldface' notation we have been using for the Borel classes $\bosig_\alpha^0$, $\bopi_\alpha^0$, $\bodel_\alpha^0$.
+
+Similarly, $\Gamma$ is \undf{closed under continuous images} if whenever $f : X \ra Y$ is continuous and $A \in \Gamma(X)$ then $f[A] \in \Gamma(Y)$.
+
+We're going to talk more about continuous images in Lectures 9 \& 10.
+
+By restricting our focus to boldface pointclasses, we eliminate any pathological issues whereby pointclasses among different spaces do not correspond in any way.
+
+\begin{defin*}[]
+    Let $X,Y$ be topological spaces, and $\Gamma$ a pointclass. A set $U \subset X \times Y$ is called \undf{$X$-universal for $\Gamma(Y)$} if:
+    \begin{enumerate}
+        \item $U \in \Gamma(X\times Y)$ (under the product topology)
+        \item For every $A \in \Gamma(Y)$, there is some $x \in X$ such that $U_x = A$, where $U_x = \{y \in Y ; (x,y)\in U\}$ is the `section of $U$ at $x$'.
+    \end{enumerate}
+\end{defin*}
+
+\begin{remark*}[Lemma]
+    \emph
+    {
+        Suppose $U$ is $X$-universal for $\Gamma(X)$ and $\Gamma$ is boldface. Then $\Gamma(X) \ne \bg(X)$ (\undf{non-selfdual}).
+    }
+\end{remark*}
+\begin{proof}
+    Consider $X\times X\backslash U \in \bg(X\times X)$, and consider $x\mapsto (x,x)$ the diagonal map $X \ra X \times X$, which is continuous. Let $D\coloneqq \{x;(x,x)\not\in U\} \in \bg(X)$.
+
+    Assume that $\Gamma(X) = \bg(X)$. Then find $d \in X$ such that $D = U_d$. Then
+    \begin{align*}
+        d \in D &\iff (d,d) \in U\\
+        &\iff d \in U_d\\
+        &\iff d\not\in D
+    \end{align*}
+    which is a contradiction.
+\end{proof}
+This is once again a standard diagonalisation proof that one often encounters in Logic \& Set Theory, \it{e.g.} uncountability of the reals, the halting problem, \it{etc}...
+
+In Lecture 9, will prove that for $\alpha < \aleph_1$, $\bosig_\alpha^0$ has an $\om^\om$-universal set. Then by the Lemma, this implies our theorem.
+
+\marginpar{Lecture 9}
+
+We will use AC fairly liberally, but keeping track of our uses of it when we are done.
+
+\begin{proof} (Proof of Theorem).
+    
+    Proof by induction:
+    \begin{itemize}
+        \item Induction base $\bosig_1^0$
+        \item Complementation step $\bosig \ra \bopi$
+        \item Countable union step $\bopi \ra \bosig$
+    \end{itemize}
+    This will be done in three lemmas.
+
+    \begin{remark*}[Lemma 1]\emph{
+        There is an $\om^\om$-universal set for $\bosig_1^0(\om^\om$)
+    }   
+    \end{remark*}
+
+    \underline{Proof of Lemma 1}: an open set is an arbitrary union of basic open sets. Since there are only countably many basic open sets, we can say this is in fact a countable union. So we can write $$P = \bigcup_{i\in I}[s_i]$$ where $I$ is a countable index set.
+
+    Let $\{s_i ; i \in \N\}$ be your favourite enumeration of $\om^\lom$. Thus $\{[s_i];i\in\N\}$ is an enumeration of the basic open sets. Then define $$U\coloneqq \{(x,y); \exists i \in \N, (x(i)\ne 0)\land (s_i\subset y)\}$$
+
+    This is univeral for $\bosig_1^0(\om^\om)$:
+    \begin{enumerate}
+        \item $U$ is open: if $(x,y)\in U$ then there is $i\in \N$ with $x(i)\ne 0$ and $s_i\subset y$. Define $t = x\restriction (i+1)$. Then $[t,s_i]\subset U$. Note that we haven't exactly defined basic open sets on Baire space squared, but the notation is intuitive/obvious.
+        \item If $P$ is open, then let
+        \begin{align*}
+            x(i)\coloneqq \left\lbrace \begin{array}{cc} 1 & \textrm{ if }[s_i]\subset P\\ 0 & \textrm{ if }[s_i]\not\subset P\end{array}\right.
+        \end{align*}
+        Then $P = \bigcup_{x(i)\ne 0}[s_i]$. Thus $P = U_x$.
+    \end{enumerate}
+    Wo we are done. \qedhere
+
+    \begin{remark*}[Lemma 2]\emph{
+        If $U\subset X\times X$ is $X$-universal for $\Gamma(X)$, then $X\times X \backslash U$ is $X$-universal for $\bg(X)$.
+    }
+    \end{remark*}
+    \underline{Proof of Lemma 2}: Obvious.
+
+    \begin{remark*}[Lemma 3]\emph{
+        Let $\lambda < \om_1$. Suppose that for each $\alpha < \lambda$, there is an $\om^\om$-universal set $U_\alpha$ for $\bopi_\alpha^0(\om^\om)$. Then there is an $\om^\om$-universal set for $\bosig_\lambda^0$.
+    }
+    \end{remark*}
+    \underline{Proof of Lemma 3}:
+
+    If $lambda$ is a successor ordinal, \it{i.e.} $\lambda = \mu + 1$, then let $\alpha_n \coloneqq \mu$ for all $n$. If $\lambda$ is a limit, pick a sequence $\alpha_n$ such that $\bigcup \alpha_n = \lambda$.
+
+    Observe that if $A = \bigcup_{n\in\N}A_n$, where $A_n \in \bigcup_{\alpha < \lambda}\bopi_\alpha^0$, then I find (by ``postponing if necessary'') a sequence $A_n'\in \bopi_{\alpha_n}^0$ such that $$\bigcup_{n\in\N}A_n = \bigcup_{n\in\N}A_n'\qquad (\ast)$$
+
+    To simplify notation, write $U_n \coloneqq U_{\alpha_n}$.
+
+    \underline{Encoding countable sequences of $\om^\om$ by an element of $\om^\om$}:
+
+    Take your favourite bijection $\lceil \cdot , \dot \rceil:\om\times \om \ra \om$. If $x \in \om^\om$ and $n \in \N$, define $(x)_n \in \om^\om$ by $(x)_n(m) \coloneqq x(\lceil n,m\rceil)$. Then $x\mapsto ((x)_n;n\in\N)$ is a bijection between $\om^\om$ and $(\om^\om)^\om$.
+    
+    Note also that the map $x\mapsto (x)_n$ is continuous, because we only require a finite amount of information to determine what $x$ at $n$ is, and by our earlier characterisation this means we have continuity.
+
+    Now define $$U\coloneqq \{(x,y);\exists n((x)_n,y)\in U_n\}$$
+
+    \underline{Claim}: $U$ is $\om^\om$-universal for $\bosig_\lambda^0$.
+    \begin{itemize}
+        \item $\overline{U}_n\coloneqq \{(x,y);((x)_n,y)\in U_n\}$ is the pre-image of $U_n$ under the continuous map $x,y\mapsto ((x)_n,y)$, so it's in $\bopi_{\alpha_n}^0$ [closure of the Borel classes under continuous pre-images]. But $U = \bigcup_{n\in\N}\overline{U}_n$, so $U$ is $\sigma_{\lambda}^0$.
+        \item Let $A$ be $\sigma_\lambda^0$. By ($\ast$), we find $A_n \in \bopi_{\alpha_n}^0$ such that $A = \bigcup_{n\in\N}A_n$. By universality of $U_n$, we find $x_n$ such that $A_n = (U_n)_{x_n}$. Now fold up the sequence $(x_n;n\in \om)$ into a single element of $\om^\om$ such that $(x)_n = x_n$ for all $n$. We do this by defining $x(\lceil n,m\rceil)\coloneqq x_n(m)$.
+        
+        Here's the situation:
+        \begin{enumerate}
+            \item $A_n = (U_n)_{x_n}$ 
+            \item $(x)_n = x_n$ 
+            \item $A = \bigcup_{n\in\N}A_n$
+            \item $U = \{(x,y);\exists n ((x)_n,y)\in U_n\}$
+        \end{enumerate}
+
+        \underline{Claim}: $U_x = A$:
+        \begin{align*}
+            y \in A &\xLeftrightarrow{3} \exists n\ y\in A_n\\
+            &\xLeftrightarrow{1}\exists n\ y \in (U_n)_{x_n}\\
+            &\xLeftrightarrow{ } \exists n\ (x_n,y)\in U_n\\
+            &\xLeftrightarrow{2} \exists n\ ((x)_n,y)\in U_n\\
+            &\xLeftrightarrow{4} (x,y)\in U\\
+            &\xLeftrightarrow y \in U_x
+        \end{align*}
+    \end{itemize}
+\end{proof}
+
+\begin{remark*}[Corollary] \textbf{Borel Hierarchy Theorem}
+\end{remark*}
+\begin{proof}
+    This is an inductive proof using L1 - L3. [Recursive definition of a $\om^\om$-universal set for $\bosig_{\lambda}^0$ for each $\lambda < \om_1$.]
+\end{proof}
+
+\begin{remark*}
+    Let's check how much choice we used.
+
+    \underline{Lemma 1} is a ZF theorem.
+
+    \underline{Lemma 2} is a ZF theorem.
+
+    \underline{Lemma 3}: $\lambda \mapsto $ pick $\alpha_n$ such that $\bigcup \alpha_n = \lambda$; if $\lambda$ fixed, no choice is needed. However, after declaring that there \it{exists} a universal set $U_n$ for each $n$, we then picked a concrete example of one for each $n$ to play around with. So this needed choice. Perhaps it would have been more prudent to simply formulate Lemma 3 by just assuming that there exists a choice function \it{only where we need it} for the universal sets. Then we don't need to use the more general Axiom of Choice.
+
+    We also made another choice in the presentation of $A_n$; if $A \in \bosig_\lambda^0$, then $$S_A\coloneqq \{(A_n)_n; A = \bigcup_{n\in\N}A_n\}\ne\emptyset$$ for every such $A$, so we use a choice function for this family too.
+
+    But we are still not done; while we didn't need choice for $\lambda$ fixed in Lemma 3, we have to use Lemma 3 infinitely many times in the proof of the corollary; so we need choice to pick for each limit $\lambda < \om_1$ a sequence $\alpha_n$ in order to apply L3.
+\end{remark*}
+
+Back to games.
+
+\underline{Notation}: if $\Gamma$ is a pointclass, write $\Det(\Gamma)$ for ``$\forall A \in \Gamma(\om^\om)$, $A$ is determined''.
+
+G-S proved $\Det(\bopi_1^0)$. The proof also implies $\Det(\bosig_1^0)$.
+
+ES\#1 (11): in general, the class of determined sets is not closed under complementation.
+
+ES\#1 (10): if a pointclass $\Gamma$ is closed under the operation $A\mapsto \{mx;x\in A\}$, then $\Det(\Gamma) \implies \Det(\bg)$. Note that Borel pointclasses are closed under this operation.
+
+Wolfe (1955) proved $\Det(\bosig_2^0)$; Davis (1964) proved $\Det(\bosig_3^0)$; Paris (1972) proved $\Det(\bosig_4^0)$.
+
+Friedman proved that you cannot prove $\Det(\bosig_5^0)$ without using iterations of the power set axiom. This paved the way for Martin (1975) to prove that \it{all} Borel sets are determined.
+
+\marginpar{Lecture 10}
+
+The Borel sets, from the point of view of the ordinary analyst, look extremely complicated already. So while they are not all the sets, you might expect that all `reasonable' (for some definition of reasonable) sets \it{are} Borel, so a proof that every Borel set has some property is in practice equivalent to proving that all sets have that property. But this might not be the case, which begs that question: what \it{is} the size of the set of Borel sets?
+
+Denote the set of all Borel sets by $\mathcal{B}$. Clearly then $|\mathcal{B}| \le 2^{2^{\aleph_0}}$, but we can show that it is in fact much smaller:
+
+\begin{theorem*}\textbf{(ZFC)}
+    $$|\mathcal{B}| = 2^{\aleph_0} < 2^{2^{\aleph_0}}$$
+\end{theorem*}
+\begin{proof}
+    Since $\{x\}\in \mathcal{B}$ for every $x \in \om^\om$, $x\mapsto \{x\}$ is an injectino from $\om^\om$ into $\mathcal{B}$. So $2^{\aleph_0} \le |\mathcal{B}|$.
+
+    \underline{Upper Bound}: Proof by induction.
+
+    We prove that $|\bosig_\alpha^0| = 2^{\aleph_0}$ for all $\alpha$. This then implies the Theorem:
+
+    $$ |\mathcal{B}| = \left|\bigcup_{\alpha < \om_1} \bosig_{\alpha}^0 \right| \le \aleph_1 \cdot 2^{\aleph_0} = 2^{\aleph_0}$$
+
+    \underline{Base case}: for $\bosig_{1}^{0}$, every open set is of the form $$\bigcup_{i\in I}[s_i]$$ where $I\subset \N$ and $s_i$ is our enumeration of $\om^\lom$. So $I\mapsto \bigcup_{i\in I}[s_i]$ is a surjection from $\mathcal{P}\N$ onto $\bosig_{1}^{0}$. Hence $|\bosig_1^0| \le 2^{\aleph_0}$.
+
+    Going from $\bosig \ra \bopi$ is easy , since $A\mapsto \om^\om \backslash A$ is a bijection between $\bosig_\alpha^0$ and $\bopi_\alpha^0$, hence $|\bosig_\alpha^0| = |\bopi_\alpha^0|$.
+
+    From $\bopi \ra \bosig$: Suppose for each $\alpha < \lambda$, we have $|\bopi_\alpha^0| \le 2^{\aleph_0}$. Using AC, pick surjections $s_\alpha : \om^\om \twoheadrightarrow \bopi_\alpha^0$. Define surjection $S$ by
+    \begin{align*}
+        S : \lambda^\om \times \om^\om &\ra \bosig_\lambda ^0 \\
+        ((\alpha_i;i\in \om),x)&\mapsto \bigcup_{i\in \N}S_{\alpha_i}((x)_i)
+    \end{align*}
+    This clearly is a surjection. Since $\lambda$ is countable, $|\lambda^\om| = 2^{\aleph_0}$. So $|\lambda^\om \times \om^\om| = 2^{\aleph_0}$.
+\end{proof}
+
+\begin{remark*}
+    We used AC in this proof, and that is not avoidable; consider the \undf{Feferman-Levy Model $\M$}, which models the theory `ZF + ``$\R$ is a countable union of countable sets'''.
+
+    In the FL model, $\R = \bigcup_{n\in\N}A_n$. So if $X \subset \R$, then $X = \bigcup_{n\in\N} A_n\cap X$. Since $A_n\cap X \subset A_n$, this is still countable. Hence, in this model, every subset of the reals is a countable union of countable sets. Now, all countable sets are Borel since they are a countable union of closed sets. But the Borel sets are closed under countable unions, so this means that \it{every} set is Borel. In particular, $|\mathcal{B}| = \mathcal{P}\R$. So we needed AC after all.
+\end{remark*}
+
+So the Borel sets are in fact only a very small part of the collection of all sets in Baire space. What else is out there?
+
+\undf{The famous mistake of Henri Lebesgue}.
+
+Measures are defined on $\sigma$-algebras $\mathcal{A}$. In general, $\mathcal{A} \ne \mathcal{P}\R$. [Involves AC; Vitali set is a non-Lebesgue-measurable set that can be constructed AC.]
+
+The smallest $\sigma$-algebra, namely the Borel $\sigma$-algebra (the smallest one containing the open sets), is the minimal setting for measures, and Lebesgue made an argument for this:
+
+\begin{remark*}[Lebesgue]
+    \emph{
+        ``All sets we care about are Borel.''
+    }
+\end{remark*}
+
+He believed that if $f:\R \ra \R$ is continuous and if $A\subset \R$ is Borel, then $f[A]$ is Borel. However, this is in fact FALSE.
+
+The mistake was spotted in 1917, when when Suslin proved that there are non-Borel sets which are continuous images of Borel sets - these are called \undf{analytic sets}. We can in fact prove this. We don't even need the continuous functions to be complicated at all (projection).
+
+\begin{defin*}[Projection]
+    Let $A\subset X^{n+1}$. Then we call $$B = \{(x_1,\dots,x_n); \exists x \in X (x,x_1,\dots,x_n)\in A\}$$ the \undf{projection} of $A$. Write $pA = B$.
+
+    The map $$\pi : (x,x_1,\dots,x_n) \mapsto (x_1,\dots,x_n)$$ is clearly continuous, so $pA = \pi[A]$, and thus projections are indeed special cases of continuous images.
+\end{defin*}
+
+\begin{defin*}
+    Let $\Gamma$ be a pointclass. We define $\exists^{\om^\om} \Gamma$ a pointclass by:
+    \begin{align*}
+        \exists^{\om^\om}\Gamma(X) \coloneqq \{pA; A \in \Gamma(\om^\om\times X)\}
+    \end{align*}
+
+    We say $\Gamma$ is \undf{closed under projections} if $\eomg \subset \Gamma$.
+\end{defin*}
+
+Suslin's Theorem now says: ``the pointclass BOREL is not closed under projections''.
+
+\begin{defin*}[The Projective Hierarchy]
+    We start by defining $\bopi_0^1(\om^\om) = \bopi_1^0(\om^\om)$. [Note that if $X \ne \om^\om$, this won't necessarily be the right starting point; we might want to use $\bopi^0_2$ instead.]
+
+    We then define 
+    \begin{align*}
+        \bosig_{n+1}^1 &\coloneqq \eom \bopi_n^1\\
+        \bopi_{n+1}^1 &\coloneqq \breve{\bosig}_{n+1}^1
+    \end{align*}
+
+    $\bosig_1^1$ is called the \undf{analytic sets}, and $\bopi_1^1$ is called the $\undf{co-analytic sets}$.
+
+    We also define
+    \begin{align*}
+        \bodel_n^1(X) \coloneqq \bosig_n^1 (X) \cap \bopi_n^1(X)
+    \end{align*}
+\end{defin*}
+
+Lebesgue believed that all of these were contained in $\mathcal{B}$; he was wrong. We already have the technique to prove this, which is the technique of universal sets.
+
+\begin{theorem*}
+    The projective hierarchy does not collapse.
+\end{theorem*}
+\begin{proof}
+    Using the technique of universal sets. we know that $\bopi_0^1 = \bopi_1^0$ has a universal set. We know that if $\bosig_n^1$ has a universal set, then $\bopi_n^1$ has a universal set. So all that is left to show is that if $V$ is universal for $\bopi_n^1$, then we can find $U$ universal for $\bosig_{n+1}^1$.
+
+    Let $V\subset \om^\om \times \om^\om \times (\om^\om)^k$ be universal fotr $\bopi_n^1$. Define $$U \coloneqq \{(0,\vec{x})\in \om^\om \times (\om^\om)^k; \exists v \in \om^\om (u,v,\vec{x}) \in V\}$$
+    It is clear that $U \in \bosig_{n+1}^1(\om^\om \times (\om^\om)^k)$, and the same $x$ that is the code for the set $A$ [in $V$] is the code for $pA$ in $U$.
+\end{proof}
+
+\begin{remark*}[Proposition]
+\emph{
+    Every Borel set is $\bosig_1^1$
+}    
+\end{remark*}
+\begin{proof}
+    (ES\#2)
+\end{proof}
+
+\begin{remark*}[Corollary]
+    \emph{
+        Suslin's Theorem: there is a $\bosig_1^1$ set that is not Borel.
+    }
+\end{remark*}
+
+\underline{Question}: Does $\Det(\bosig_1^1)$ hold? Perhaps $\bosig_2^1$, or $\bosig_3^1$ \it{etc...}? These questions are much more interesting set-theoretically. These are not ZFC theorems, but are closely connected to:
+\begin{enumerate}
+    \item Large Carindal Axioms
+    \item Definability of wellorders of $\om^\om$
+\end{enumerate}
+These are the two topics that will cover the remainder of this course.
+
 \end{document}

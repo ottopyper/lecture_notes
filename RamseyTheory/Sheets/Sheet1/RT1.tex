@@ -31,6 +31,12 @@ Then by Ramsey's Theorem there exists a monochromatic set $C$ of size $k = 2021$
 
 So let $c = \bigcup c_n$ be the $2$-colouring of $\bigcup \N^{(n)}$. Then there exists an infinite $M\subset \N$ such that, for each $r$, $c$ is constant on $M^{(r)}$. But for each $r$, $c\restriction M^{(r)} = c_r$, and since $c_r$ is constant on $M$ we conclude that $r \not \in M$. But $r$ was arbitrary, so $M$ is empty, contradiction.
 
+5. For $u,v \in \{0,1\}^\N$, let $d(u,v) = 2^{-m}$, where $m$ is the least $n\ge 0$ such that $u\restriction n \ne v \restriction n$. $d$ is then a metric on $\{0,1\}^\N$, with the same induced topology. Hence it will suffice to show this space is sequentially compact.
+
+Let $(x_n)_{n\in\N}$ be a sequence of points in $\{0,1\}^\N$. There must be some $a_1 \in \{0,1\}$ such that $x_n\restriction 1 = a_1$ for infinitely many $n$. Call this set $A_1$. Repeat within $A_1$ to find $a_2$ and hence $A_2$, and continue ad infinitum.
+
+We obtain a sequence $(a_k)_{k\ge 1}$ whose concatenation $a$ is an element of $\{0,1\}^\N$. Then for all $m\in \N$, there exists an $n(m)\in\N$ with $x_n\restriction m = a\restriction m$. So these $x_n$ converge to $a$; hence the space is sequentially compact, and hence is compact.
+
 10. With choice: false. Wellorder $\R$ ($<_\alpha$) and colour $\{a,b\}$ red if their order in the wellorder agrees with their natural order in $\R$. A monochromatic subset is then $M = \{a_i : i \in I\}$ with $a_i < a_j$ for $i < j$ such that either of the following holds:
 \begin{itemize}
     \item for all $i < j$, $a_i <_\alpha a_j$, or
