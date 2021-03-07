@@ -1,0 +1,37 @@
+\documentclass[]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+\newcommand{\av}{\textrm{av}}
+\newcommand{\un}{\underline{u}^{(n)}}
+\newcommand{\ten}{T_\eps^{(n)}}
+\newcommand{\aen}{A_\eps^{(n)}}
+\renewcommand{\H}{\mathcal{H}}
+
+\title{Quantum Information Theory: Sheet 2}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+\maketitle
+
+\textbf{Exercise 1}.
+
+\begin{enumerate}
+    \item For any $v$ we have $\langle v|Av\rangle  \ge 0$, and in particular real. So $\langle v|Av \rangle = (\langle v | Av \rangle)^\ast = \langle Av|v\rangle = \langle v | A^\dagger v\rangle$. Hence for all $v$ we have $\langle v | (A - A^\dagger)v\rangle = 0$. $(A-A^\dagger)$ is skew-Hermitian and hence normal, hence diagonalisable. So in some basis it is diagonal, and using the above relation we see that all the elements on the diagonal are zero. So $(A - A^\dagger)$ is zero in this basis and hence every basis. Thus $A = A^\dagger$.
+    
+    \item $\mathbb{F}\ket{ij} = \ket{ji}$, which defines its action on an orthonormal basis for $\H_A\otimes \H_B$. Hence we can represent $\mathbb{F}$ as: $$\mathbb{F} = \sum_{i,j}\ket{ji}\bra{ij}$$
+    
+    Let $v = \sum_{i,j}a_{ij}\ket{ij}$ be an eigenvector with eigenvalue $\lambda$. Then $\mathbb{F}v = \lambda v = \sum_{i,j}a_{ij}\ket{ji} = \sum_{i,j}a_{ji}\ket{ij} = \sum_{i,j}\lambda a_{ij}\ket{ij}$. So we must have $a_{ji} = \lambda a_{ij}$ for each $i,j$, and so $a_{ji} = \lambda^2 a_{ji}$. Since $v$ is non-zero, there must be some non-zero $a_{ij}$. Hence $\lambda^2 = 1$, and $\lambda = \pm 1$.
+
+    To calculate their multiplicities we can consier the degrees of freedom of the vector elements. Let $\lambda = 1$, and consider the matrix given by $A_{ij} = a_{ij}$. Since $a_{ij} = a_{ji}$, this must be symmetric, and the diagonal is unconstratined. So there are $d$ + $(d-1)d/2 = d(d+1)/2$ degrees of freedom, hence this is the multiplicity.
+
+    So the multiplicity of $\lambda = -1$ is $d(d-1)/2$, which we can also see by remarking that in this case the diagonal elements $a_{ii}$ must all be zero, and then the upper right of the matrix is determined entirely by the lower left, which has $d(d-1)/2$ free elements.
+
+    Slightly more rigorously, the `degrees of freedom' correspond to basis vectors in the eigenspace.
+
+    We form the operator $\Omega = \ket{\Omega}\bra{\Omega} = \sum_{i,j}\ket{j}\bra{i}\otimes\ket{j}\bra{i}$, and what we want is $\mathbb{F} = \sum_{i,j}$
+\end{enumerate}
+
+
+\end{document}

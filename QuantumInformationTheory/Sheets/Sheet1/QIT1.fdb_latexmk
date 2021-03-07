@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1613616578 "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumInformationTheory/Sheets/Sheet1/QIT1.tex" "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumInformationTheory/Sheets/Sheet1/QIT1.pdf" "QIT1" 1613616578
-  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumInformationTheory/Sheets/Sheet1/QIT1.aux" 1613616578 112 c869e8664d73af3174a90402c189606e ""
-  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumInformationTheory/Sheets/Sheet1/QIT1.tex" 1613616578 9796 533ebd50dd301a40e461d802644d76ed ""
+["pdflatex"] 1614859112 "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumInformationTheory/Sheets/Sheet1/QIT1.tex" "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumInformationTheory/Sheets/Sheet1/QIT1.pdf" "QIT1" 1614859113
+  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumInformationTheory/Sheets/Sheet1/QIT1.aux" 1614859113 112 c869e8664d73af3174a90402c189606e ""
+  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumInformationTheory/Sheets/Sheet1/QIT1.tex" 1614859112 10722 6aeabae874455fb2e28f1838c51763b5 ""
   "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex" 1611849397 3940 9a74851e88de6fc36cdebac02cf17364 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1607249373 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1607249373 1004 54797486969f23fa377b128694d548df ""
@@ -152,11 +152,11 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1607249373 33301 a3134070eacafb10b1f371612ce2650d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1613519600 4885835 225b430335ea75120e4d14f95280dfb9 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1613519584 2635854 5d9ab43b0c042351852e2de5acb80a5f ""
-  "QIT1.aux" 1613616578 112 c869e8664d73af3174a90402c189606e "pdflatex"
-  "QIT1.tex" 1613616578 9796 533ebd50dd301a40e461d802644d76ed ""
+  "QIT1.aux" 1614859113 112 c869e8664d73af3174a90402c189606e "pdflatex"
+  "QIT1.tex" 1614859112 10722 6aeabae874455fb2e28f1838c51763b5 ""
   (generated)
-  "QIT1.aux"
-  "QIT1.log"
-  "QIT1.pdf"
   "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumInformationTheory/Sheets/Sheet1/QIT1.pdf"
   "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumInformationTheory/Sheets/Sheet1/QIT1.log"
+  "QIT1.pdf"
+  "QIT1.aux"
+  "QIT1.log"

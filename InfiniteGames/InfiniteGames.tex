@@ -16,6 +16,10 @@
 \newcommand{\Det}{\textrm{Det}}
 \newcommand{\eomg}{\exists^{\om^\om}\Gamma}
 \newcommand{\eom}{\exists^{\om^\om}}
+\newcommand{\psp}{\textrm{PSP}}
+\newcommand{\rk}{\textrm{rk}}
+\newcommand{\fld}{\textrm{fld}}
+
 \usepackage{bm}
 
 \newcommand{\game}{
@@ -23,6 +27,15 @@
         \begin{tabular}{c|ccccccc}
             I & $m_0$ & & $m_2$ & & $m_4 $& & $\dots $\\ \hline
             II & & $m_1$ & & $m_3 $& &$ m_5$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+}
+
+\newcommand{\gamec}[2]{
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $#1_0$ & & $#1_1$ & & $#1_2 $& & $\dots $\\ \hline
+            II & & $#2_0$ & & $#2_1 $& &$ #2_2$ & $\dots$ 
         \end{tabular}
     \end{center}
 }
@@ -1235,5 +1248,228 @@ Lebesgue believed that all of these were contained in $\mathcal{B}$; he was wron
     \item Definability of wellorders of $\om^\om$
 \end{enumerate}
 These are the two topics that will cover the remainder of this course.
+
+\marginpar{Lecture 11}
+
+\section*{Applications of Infinite Games}
+
+\subsection*{The Continuum Problem}
+
+The first, and arguably the most significant application, is to the famous Continuum Hypothesis: $2^{\aleph_0} = \aleph_1$.
+
+In ZFC, there is an equivalent formulation of the problem, which is that every uncountable set of reals $(A\subset \om^\om)$ is in bijection with the set of all reals. $(\ast\ast)$
+
+Note that the first formulation implies that $\om^\om$ is wellordered, whereas the second one does not. So we may think of the second formulation as the choice-free version of CH.
+
+\begin{defin*}[Perfect Set Property]
+    We say that a set $A\subset \om^\om$ has the \undf{perfect set property} if it is either countable or there is a perfect tree $T$ such that $[T]\subset A$
+\end{defin*}
+\begin{remark*}
+    Since every perfect set $[T]$ has size $2^{\aleph_0}$, having the perfect set property implies not being a counterexample to $(\ast\ast)$.
+\end{remark*}
+\begin{theorem*}[Cantor-Bendixson]
+    Every uncountable closed set of reals contains a non-empty perfect subset.
+
+    Equivalently, every closed set has the perfect set propety.
+\end{theorem*}
+\begin{proof}[Sketch.]
+    Take $A\subset \om^\om$, remove isolated points to obtain $A' = \{x\in A;x\textrm{ is not isolated}\}$, also known as the \undf{Cantor-Bendixson derivative}. But removing isolated points might create new isolated points, so we need to repeat this:
+
+    $A_0 = A$, $A_{\alpha+1} = (A_\alpha)'$, $A_\lambda \coloneqq \bigcap_{\alpha < \lambda}A_{\alpha}$. Since $\om^\om$ is second countable, each $A_{\alpha+1} \backslash A_\alpha$ is countable. There is then a fixed point $A_\beta = A_{\beta+1}$, with $\beta < \aleph_1$.
+    
+    \underline{Case 1}: $A_\beta = \emptyset$. Then $A$ was countable.
+
+    \underline{Case 2}: $A_\beta \ne \emptyset $ and is perfect.
+\end{proof}
+This was one of the first proofs requiring a transfinite recursion, and as such was very important for the development of ordinals and set theory.
+
+\begin{defin*}
+    If $\Gamma$ is a pointclass, write $\psp(\Gamma)$ to mean ``for every $A \in \Gamma$, $A$ has the p.s.p.''
+\end{defin*}
+
+Cantor-Bendixson now says $\psp(\bopi_1^0)$.
+
+\begin{defin*}
+    Write $\psp$ for ``every set has the p.s.p.''
+\end{defin*}
+
+\underline{Observation}: $\psp \implies \textrm{CH}$. [In the case of $(\ast\ast)$.]
+
+\begin{theorem*}[Bernstein]
+    $$\ac \implies \neg\psp$$
+\end{theorem*}
+[So, this approach is not going to solve the Continuum Problem, unless you are willing to give up AC.]
+
+We already saw the proof of this theorem when we constructed a non-determined set using AC; just replace the notion of `strategic tree' with `perfect tree'.
+
+\begin{theorem*}[Hausdorff]
+    PSP(Borel)
+\end{theorem*}
+
+We are going to prove Hausdorff's Theorem from Borel determinacy, using games.
+
+\begin{theorem*}
+    If $\Gamma$ is a boldface pointclass, then $\Det(\Gamma)\implies \psp(\Gamma)$.
+\end{theorem*}
+\begin{proof}
+    For technical simplicity, we do this on Cantor space.
+
+    So fix $A\subset 2^\om$. We define the \undf{asymmetric game $G^\ast(A)$} played with moves in $2^{\lom}$ by player I and moves in $2$ by player II:
+
+    \gamec{s}{b}
+
+    If $z = (s_0,b_0,s_1,b_2,\dots) \in (2^\lom \cup 2)^\om$, we form $z^\ast = s_0b_0s_1b_1\dots \in 2^\om$ by concatenation. We then say player I wins if $z^\ast \in A$.
+
+    \underline{Notation}: a \it{position} in the game has the form $p = (s_0,b_0,\dots,s_n/b_n)$ (depending on the parity of $n$). If $\tau$ is a strategy for II and $(s_0,\dots,s_n)$ is a sequence of elements of $2^\lom$, then $t\ast \tau$ is the position obtained by playing $\tau$ against $t$.
+
+    If $p = (s_0,b_0,\dots,s_n,b_n),s\in 2^\lom$, $\tau$ is a strategy for II, write $ps\tau$ for the position obtained by playing $s$ \& $\tau$.
+
+    \underline{Claim}: If $A \in \Gamma$ and $\Det(\Gamma)$ holds then $G^\ast(A)$ is determined.
+
+    \underline{Proof}: Find $A^\ast \subset \om^\om$ such that $G(A^\ast)$ and $G^\ast(A)$ are the same game and $A^\ast$ is a continuous pre-image of $A$.
+
+    Fix your favourite bijection $\pi : 2^\lom \ra \om$, and define for $x \in \om^\om$:
+    \begin{align*}
+        x^\pi(n) \coloneqq \left\lbrace \begin{array}{cc}\pi(x(n))&\textrm{ if }n\textrm{ is even}\\ x(n)\mod 2&\textrm{ if }n\textrm{ is odd}\end{array}\right.
+    \end{align*}
+    Then $x^\pi$ is a run of $G^\ast(A)$. Define $A^\ast \coloneqq \{x\in\om^\om;(x^\pi)^\ast \in A\}$. Then $A^\ast$ is the preimage of the map $x\mapsto (x^\pi)^\ast$ of $A$. But this map is continuous, since we need only finite information to determine $x^\pi(n)$ from $x$. \qedsymbol
+
+    We now continue the proof with some claims.
+
+    \underline{Claim 1}: If player I has a winning strategy in $G^\ast(A)$, then $A$ contains a perfect subset.
+
+    \underline{Proof of Claim 1}: By construction, a strategic tree for $G^\ast(A)$ is a perfect tree on $2$. \qedsymbol
+
+    \underline{Claim 2}: If II has a winning strategy, then $A$ is countable.
+
+    Let $p$ be a position, $x \in 2^\om$ and $\tau$ any strategy for II in $G^\ast(A)$. We say that $p$ is \undf{$\tau$-decisive for $x$} if, for $p = (s_0,b_0,\dots,s_n,b_n)$, $p^\ast = s_0b_0\dots s_nb_n \in 2^\lom$, we have $p^\ast \subset x$ but for all $ s \in 2^\lom$, $(ps\tau)^\ast \not\subset x$.
+    [So $p$ is the `maximal' position consistent with $\tau$ \& $x$.] \qedsymbol
+
+    \underline{Subclaim 2a}: If $\tau$ is winning for II, then for each $x\in A$ there is a $\tau$-decisive position $p$ for $x$.
+
+    \underline{Proof of Subclaim 2a}: Suppose not. Then for every $p$ we find $s$ such that $ps\tau^\ast \subset x$. Recursively define a sequence $s = (s_i;i\in \N)$ such that $s_{i+1}$ is the witness that $(s_0,\dots,s_i)\ast \tau$ is not $\tau$-decisive. Then $s\ast \tau$ is a sequence that is entirely consistent with $\tau$, and $(s\ast \tau)^\ast = x \in A$. So $\tau$ is not winning. \qedsymbol
+
+    \underline{Subclaim 2b}: Every position $p$ is $\tau$-decisive for at most one $x \in 2^\om$.
+
+    \marginpar{Lecture 12}
+
+    \underline{Proof of Subclaim 2b}: Let $p$ be $\tau$-decisive for $x$ and show that every $x(k)$ is determined uniquely by $p$ and $\tau$.
+
+    By definition $p^\ast \subset x$. If $\ell \coloneqq \lh(p^\ast)$ and $ k < \ell$, then $x(k) = p^\ast(k)$, so determined by $p$.
+
+    Consider now $x(\ell + n)$, where $n\in\N$. We determine this recursively:
+    \begin{itemize}
+        \item $x(\ell + 0) = x(\ell)$. If $s_0 \coloneqq \emptyset$, then $ps_0\tau^\ast \not\subset x$. $\lh(ps_0\tau^\ast) = \ell + 1$. So $ps_0\tau^\ast(\ell)\ne x(\ell)$. Thus $x(\ell) = 1 - ps_0\tau^\ast(\ell)$ [since we are in Cantor space].
+        
+        This determines $x(\ell)$ by just $p,\tau$.
+
+        \item Assume we know $x(\ell + 0),\dots,x(\ell + n - 1)$ and determine $x(\ell + n)$.
+        
+        Let $s_n\coloneqq (x(\ell + 0),\dots,x(\ell + n - 1))$. So $\lh(s_n) = n$. Consider $ps_n\tau$. By decisiveness, we have $ps_n\tau^\ast\not\subset x$, of length $\ell + n + 1$. So by choice of $s_n$, we must have that $ps_n\tau^\ast(\ell + n)\ne x(\ell + n)$. Hence $x(\ell + n) = 1 - ps_n\tau^\ast(\ell + n)$.
+
+        So, once more, $x(\ell + n)$ is determined just by $p$ and $\tau$. \qedsymbol
+    \end{itemize}
+
+    This concludes Subclaim 2b, hence Claim 2, and hence the theorem.
+\end{proof}
+
+\begin{remark*}[Corollary]
+    \emph{
+        ZFC $\proves$PSP(Borel)
+    [Our proof is modulo Borel Determinacy, which we did not prove.]}
+    \emph{Moreover}:
+    \begin{itemize}
+        \item $\Det(\bopi_1^1) \implies \psp(\bopi_1^1)$
+        \item $\Det(\bopi_n^1) \implies \psp(\bopi_n^1)$
+    \end{itemize}
+\end{remark*}
+
+This yields necessary conditions for axioms of determinacy in the projective hierarchy: if $\Det(\bopi_2^1)$, then we can't have $\bopi_2^1$ sets violating CH.
+
+These conditions are non-trivial:
+
+\begin{theorem*}[G{\"o}del-Addison]
+    There is a model of ZFC + $\neg \psp(\bopi_1^1)$
+\end{theorem*}
+\begin{remark*}
+    This is \undf{G{\"o}del's Construcible Universe}, usually denoted by $\mathbf{L}$. The reason for this is that $\mathbf{L}$ has a $\bodel_2^1$ wellorder of $\om^\om$.
+
+    What does that even mean?
+    
+    If $\le$ is a wellorder of $\om^\om$, then it is a binary relation on $\om^\om$, so $\le \subset \om^\om\times\om^\om$.
+
+    Therefore, it is perfectly reasonable to ask whether $\le \in \bodel^1_2((\om^\om)^2)$
+\end{remark*}
+
+Our next goal:
+
+\begin{theorem*}
+    If there is a $\bodel_n^1$ wellorder of $\om^\om$, then there is a set in $\bopi^1_n$ without the perfect set property.
+\end{theorem*}
+
+\begin{remark*}
+    This is not optimal, as the G{\"o}del-Addison theorem shows.
+\end{remark*}
+
+Proving this theorem will require:
+\begin{enumerate}
+    \item a structural analysis of $\bopi^1_1$
+    \item a relation between $\bopi^1_1$ and the ordinal $\om_1$
+\end{enumerate}
+
+\subsection*{Structure Theory of Co-Analytic Sets}
+
+Tree representation theorem for closed sets:
+
+$ A \in \bopi^0_1 \iff $ there is a tree $T$ such that $A = [T]$. ($\ast$)
+
+The pointclass $\bosig^1_1$ was defined in terms of projections and closed sets. In particular,
+\begin{align*}
+A \in \bosig^1_1&\iff \exists C\in \bopi^0_1 \textrm{ s.t. } A = pC\\
+&\xLeftrightarrow{(\ast)} \exists T\textrm{ tree s.t. }A = p[T]
+\end{align*}
+
+Let's slightly reformulate this. If $T$ is a tree on $\om \times \om$ and $x \in \om^\om$, we can define
+\begin{align*}
+    T_x\coloneqq \left\lbrace s; (s,x\restriction \lh(s))\in T\right\rbrace
+\end{align*}
+Then $A$ is $\bosig^1_1$ if and only if: $\exists T \textrm{ tree s.t. } x \in A \iff [T_x]\ne \emptyset$.
+
+\begin{defin*}
+    A tree $T$ is called \undf{illfounded} if $[T] \ne \emptyset$ and \undf{wellfounded} if $[T] = \emptyset$.
+
+    With some axiom of choice, this is equivalent to $(T,\supseteq)$ being ill/wellfounded. So we can reformulate this as
+    \begin{align*}
+        A \in \bosig^1_1 \iff \exists T\textrm{ tree s.t. }\forall x(x\in A \iff T_x\textrm{ is illfounded})\\
+        A \in \bopi^1_1 \iff \exists T\textrm{ tree s.t.}\forall x(x\in A \iff T_x\textrm{ is wellfounded})
+    \end{align*}
+
+    This is \undf{tree representation of analytic and co-analytic sets}.
+\end{defin*}
+
+\underline{Coding trees on $\om$ or $\om\times\om$ as elements of Baire space}:
+
+Pick your favourite bijection between $\om\ra \om^\lom$ and write $\{s_i;i\in \om\} = \om^\lom$. Define $R$ by $iRj$ iff $s_i\supseteq s_j$. Then $F_T\coloneqq \{i;s_i \in T\}$. Then $(T,\supseteq)\cong (F_T,R)$. In particular, $T$ is wellfounded $\iff (F_T,R)$ is wellfounded.
+
+One of the benefits of wellfounded relations is that we can define rank functions on them. If I have a wellrounded relation $R$ on $F$, I can recursively define a rank function:
+\begin{itemize}
+    \item $i\in F$: let rk$(i)\coloneqq \sup \{\rk(j)+1;jRi\}$
+\end{itemize}
+By the recursion theorem, if $R$ is wellfounded, then $\rk$ is a function assigning an ordinal to each element of $F$: $\{\rk(i);i\in F\}$ is an ordinal. But the $i$s in question are natural numbers, so this must be a countable ordinal.
+
+We now identify our relation on subsets of $\om$ with elements of Baire space:
+$$ \lceil n,m\rceil :\om\times\om\ra\om$$
+your favourite bijcetion; $x \in \om^\om$. Define:
+\begin{align*}
+    \fld(x)&\coloneqq \{i;x(\lceil i,i\rceil) \ne 0\}\\
+    R_x &\coloneqq \{(i,j); x(\lceil i,j\rceil)\ne 0\}
+\end{align*}
+Then $(\fld(x),R_x)$ is a reflexive relation.
+
+If $(A,R)$ is any such structure, \it{i.e.} $A\subset \om$, $R\subset A\times A$ reflexive, then define
+\begin{align*}
+    x_A(\lceil i,j\rceil)\coloneqq \left\lbrace \begin{array}{cc} 1 & \textrm{ if }i,j\in A,iRj\\ 0 & \textrm{ o/w}\end{array}\right.
+\end{align*}
+Then $\fld(x_A) = A$, and $iRj\iff iR_{x_A}j$.
 
 \end{document}

@@ -5,6 +5,10 @@
 \usepackage{graphicx}
 
 \newcommand{\hj}{\textrm{HJ}}
+\newcommand{\wnfc}{\textrm{W}\N\textrm{FC}}
+\newcommand{\fs}{\textrm{FS}}
+\newcommand{\fp}{\textrm{FP}}
+
 
 \title{Ramsey Theory}
 \author{Lectures by Imre Leader}
@@ -526,5 +530,327 @@ Can we guarantee a homothetic copy of $S$ that is monochromatic? For instance, i
 \end{remark*}
 
 \marginpar{Lecture 7}
+
+\section{Partition Regular Equations}
+
+This follows on from the concrete elements of Chapter 1.
+
+\subsection*{Rado's Theorem}
+
+Schur says: $\wnfc$ (``whenever the naturals are finitely coloured''), there exists monochromatic $x,y,z$ with $x + y = z$.
+
+Strengthened VDW says: $\wnfc$ there exists monochromatic $x_1,x_2,y_1,y_2,\dots,y_m$ such that $y_1 = x_1 + x_2, y_2 = x_1 + 2x_2,\dots,y_m = x_1 + mx_2$.
+
+Let $A$ be an $m\times n$ matrix with rational entries. We say $A$ is \undf{partition regular} if $\wnfc$ there exists a monochromatic $x \in \N^n$ with $Ax = 0$.
+
+\begin{remark*}[Examples]\ 
+    \begin{enumerate}
+        \item Schur states that $(1,1,-1)$ is PR, as this asserts that $\wnfc$ there exists monochromatic $x,y,z$ such that $(1,1,-1) (x,y,z)^T = 0$
+        \item Strengthened VDW says:
+        \begin{align*}
+            \left(\begin{array}{cccccccc}
+                1 & 1 & -1 & 0 & 0 & 0 & \dots & 0\\
+                1 & 2 & 0 & -1 & 0 & 0 & \dots & 0\\
+                1 & 3 & 0 & 0 & -1 & 0 & \dots & 0\\
+                \vdots & & & & & & \ddots & \\
+                1 & m & 0 & 0 & 0 & 0 &\dots & -1\\
+            \end{array}\right)
+        \end{align*}
+        is partition regular.
+
+        \item How about some other examples, say $(2,3,-5)$? This is partition regular. That statement asserts that $\wnfc$ we can find $x,y,z$ monochromatic such that $2x + 3y - 5z = 0$. Indeed, this is easy; just take $x = y = z$.
+        
+        \item But what about $(2,3,-6)$? This doesn't have an immediate solution like the above.
+    \end{enumerate}
+\end{remark*}
+
+\begin{remark*}[Notes]\ 
+    \begin{enumerate}
+        \item We have that $A$ is PR $\iff$ $\lambda A$ PR, for any $\lambda \in \Q \backslash \{0\}$. So we could assume that all entries of $A$ are integers. We will find that this is sometimes helpful.
+        \item We can also say `the system of equations $Ax = 0$ is PR'.
+        \item Not all matrices are PR. For example, $(1,-2)$ is not PR. Indeed, if it is PR then this asserts that $\wnfc$ there exists $x\in \N$ with $x$ and $2x$ the same colour; this is clearly false. For instance, $2$-colour $\N$ by $c(x) = \max\{n:2^n |x\} \mod 2$.
+    \end{enumerate}
+\end{remark*}
+
+\begin{defin*}
+    Let $A$ as before be an $m\times n$ rational matrix, with columns $c^{(1)},\dots,c^{(n)}\in\Q^m$:
+    \begin{align*}
+        A = \left( \begin{array}{cccc}
+            \uparrow & \uparrow & & \uparrow\\
+            c^{(1)} & c^{(2)} & \dots & c^{(n)}\\
+            \downarrow & \downarrow & & \downarrow
+        \end{array}\right)
+    \end{align*}
+
+    Say $A$ has the \undf{columns property} if there exists a partition $B_1\cup\dots\cup B_r$ of $[n]$ such that:
+    \begin{itemize}
+        \item $\sum_{i\in B_1}c^{(i)} = \underline{0}$
+        \item $\sum_{i\in B_s}c^{(i)} \in \langle c^{(i)} : i \in B_1\cup\dots \cup B_{s-1}\rangle$, for each $s = 2,\dots,r$ ($\langle \rangle$ denotes linear span, say over $\R$).
+    \end{itemize}
+\end{defin*}
+
+\begin{remark*}[Examples]\ 
+    \begin{enumerate}
+        \item $(1,1,-1)$ has the columns property; $B_1 = \{1,3\}$, $B_2 = \{2\}$.
+        \item $(2,3,-5)$: $B_1 = \{1,2,3\}$, so this has CP.
+        \item $(1,-2)$ does \it{not} have CP since no subset of the columns sums to zero.
+        [And $(1,-\lambda)$ has CP $\iff \lambda = 1$. Also, $(1, -\lambda)$ is PR $\iff \lambda = 1$]
+        \item Recall our VdW matrix:
+        \begin{align*}
+            \left(\begin{array}{cccccccc}
+                1 & 1 & -1 & 0 & 0 & 0 & \dots & 0\\
+                1 & 2 & 0 & -1 & 0 & 0 & \dots & 0\\
+                1 & 3 & 0 & 0 & -1 & 0 & \dots & 0\\
+                \vdots & & & & & & \ddots & \\
+                1 & m & 0 & 0 & 0 & 0 &\dots & -1\\
+            \end{array}\right)
+        \end{align*}
+        Does this have CP? Notice that $B_1 = \{1,3,\dots,n+2\}$ is a good start, and then $B_2 = \{2\}$ finishes it off since the $B_1$-columns span the whole space.
+    \end{enumerate}
+\end{remark*}
+
+\begin{remark*}
+    Could also have used linear span over $\Q$ (if a rational vector is a real linear combination of other rational vectors, then it is also a rational L.C. of them). It doesn't much matter which we use.
+\end{remark*}
+
+Of course, it is looking a lot like we might have CP$\iff$PR, and indeed this is Rado's Theorem; our next aim in the course.
+
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item This us a finite-time check for PR, which is a significant improvement over the previous infinite-time check we had (go through all the colourings).
+        \item This theorem has a very unique property in mathematics, namely that \it{neither} direction of this is obvious.
+    \end{enumerate}
+\end{remark*}
+
+For clarity, we will start with Rado for a \it{single} equation, \it{i.e.} $m = 1$. Note that $(a_1,\dots,a_n)$ has CP $\iff$ some (non-empty) subset of the (non-zero) $a_i$ sums to zero, or all the $a_i = 0$.
+
+In other words, our task is, given non-zero $a_1,\dots,a_n\in \Q$: show that the equation $a_1x_1+\dots + a_nx_n = 0$ is PR $\iff$ $\sum_{i\in I}a_i = 0$ for some non-empty $I\subset [n]$.
+
+\underline{Note}: Still, in this case, it is completely non-obvious in either direction. Which direction is harder? $\implies$ is going infinite to finite; we might expect to find a clever colouring that proves the RHS must hold. On the other hand, $\impliedby$ appears harder, as we go from finite to infinite.
+
+Fix a prime $p$. Write $d(x)$ for the last non-zero digit in the base $p$ expansion of $x$. \it{I.e.} if $x = d_rp^r + d_{r-1}p^{r-1}+\dots + d_1p^1+d_0$, $(0\le d_i < p\ \forall i)$, then $d(x) = d_{L(X)}$, where $L(x) = \min\{i;d_i\ne 0\}$.
+
+\it{E.g.} if $x$ is $10002070430000$ in base $p$, then $L(x) = 4$ and $d(x) = 3$.
+
+This is a colouring of $\N$ with $p-1$ colours.
+
+\begin{prop}
+    Let $a_1,\dots,a_n\in \A\backslash \{0\}$ such that $(a_1,\dots,a_n)$ PR. Then $\sum_{i\in I}a_i = 0$ for some $\emptyset\ne I\subset [n]$.
+\end{prop}
+\begin{proof}
+    Multiplying up, we may assume wlog that $\forall i (a_i \in \Z)$. Fix a large prime $p$ - say $p > \sum |a_i|$ - and $(p-1)$-colour $\N$ as above.
+
+    We then have monochromatic $x_1,\dots,x_n$ with $a_1x_1+\dots + a_nx_n = 0$ - say $x_1,\dots,x_n$ all have colour $d$. Let $L = \min\{L(x_1),\dots,L(x_n)\}$, and put $I = \{i:L(x_i) = L\}$. Considering $\sum a_i x_i$ evaluated in base $p$, we have $\sum_{i\in I}a_i d \equiv 0 \mod p$.
+
+    Thus $\sum_{i\in I}a_i \equiv 0\mod p$, since $p$ prime. But since $p$ was large, we in fact have $\sum_{i\in I}a_i = 0$.
+\end{proof}
+
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item Instead of picking one cunning prime, we can run this for all $p$ and obtain $I_p\subset [n]$ such that $\sum_{i\in I_p} \equiv 0\mod p$. Since there are only finitely many subsets, there must be some $I$ such that $\sum_{i\in I}a_i\equiv 0\mod p$ for infinitely many $p$. So $\sum_{i\in I}a_i = 0$. In the proof of the whole theorem, we will have to use this approach rather than the `pick a good $p$ approach'.
+        \item We looked at the \it{end} in base $p$; can also do the \it{start} in base $p$. But this is much harder and more fiddly.
+        \item Apart from the above, no other proof of Proposition 2.1 is known! This is because it is so difficult to find colourings that `mesh' well with addition.
+    \end{enumerate}
+\end{remark*}
+
+\underline{Other direction}: Start with the first non-trivial case, namely $(1,\lambda,-1)$.
+
+\begin{lemma}
+    Let $\lambda \in \Q$. $\wnfc$ there exists monochromatic $x,y,z$ with $ x + \lambda y = z$.
+\end{lemma}
+\begin{proof}
+    This is trivial if $\lambda = 0$, and if $\lambda < 0$, rewrite as $z - \lambda y = x$. So wlog assume $\lambda > 0$. Write $\lambda = r/s$, for $r,s\in\N$.
+
+    \underline{Task}: $\forall k\exists n$ such that whenever $[n]J$ is $k$-coloured there exists monochromatic $x,y,z$ with $ x + (r/s)y = z$. We proceed by induction on $k$.
+
+    $k = 1$: trivial; $n = \max (s,r+1), x = 1, y=s,z=r+1$.
+
+    Given $n$ suitable for $k-1$, we'll show that $sW(nr+1,k)$ is suitable for $k$.
+
+    Indeed, given a $k$-colouring of $[sW(nr+1,k)]$: inside $[W(nr+1,k)]$ we have a monochromatic AP of length $nr+1$, say $a,a+d,a+2d,\dots,a+(nr)d$ are all red. Now if any $isd$, $1\le i\le n$ is red, then we are done: take $x = a, y = isd, z = a + ird$. Note that we may have $s > r$, which is why we took $s$ copies of $W(nr+1,k)$ - just to be sure all the above actually have colours. So wlog $\{sd,2sd,\dots,nsd\}$ is $(k-1)$-coloured, so done by choice of $n$.
+\end{proof}
+
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item Very similar to proof of strengthened VdW.
+        \item For general $\lambda$, seems not to follow just from Ramsey's Theorem - unlike the case $\lambda = 1$.
+    \end{enumerate}
+\end{remark*}
+
+\begin{theorem}[Rado for a single equation]
+    Let $a_1,\dots,a_n \in \Q\backslash \{0\}$. Then $(a_1,\dots,a_n)$ PR $\iff$ $\sum_{i\in I}a_i = 0$ for some non-empty $I\subset [n]$.    
+\end{theorem}
+\begin{proof}
+    \underline{$\implies$}: Prop 2.1.
+
+    \underline{$\impliedby$}: Fix some $i_0 \in I$. For suitable $x,y,z$ we'll put
+    \begin{align*}
+        x_i = \left\lbrace \begin{array}{cc} x\ &\textrm{ if }i = i_0\\ z\ &\textrm{ if }i\in I \backslash \{i_0\}\\ y\ &\textrm{ if }i\not\in I \end{array}\right.
+    \end{align*}
+
+So need $x,y,z$ monochromatic and:
+\begin{align*}
+    a_{i_0}x + \left(\sum_{i\in I\backslash \{i_0\}}a_i\right)z + \left(\sum_{i\not\in I}a_i\right) y = 0\\
+    \iff a_{i_0}x - a_{i_0}z + \left(\sum_{i\not\in I}a_i\right)y = 0\\
+    \iff x - z + \frac{1}{a_{i_0}}\left(\sum_{i\not\in I}a_i\right)y = 0 
+\end{align*}
+So done by Lemma 2.2.
+\end{proof}
+
+There's an interesting open problem here:
+
+\begin{remark*}[Rado's Boundedness Conjecture (1930)]
+    \emph{
+        Suppose that the $m\times n$ matrix $A$ is not PR. So, for some $k$ there exists a bad (no monochromatic solution) $k$-colouring of $\N$. Can we bound $k$, in terms of $m,n$?
+    }
+    \emph{
+        In other words, is there a function $k = k(m,n)$ such that for any $m\times n$ matrix $A$, we have: PR for $k(m,n)$ colours $\implies$ PR for any number of colours?
+    }
+\end{remark*}
+
+This is known for $1\times 3$ - but even here it is a very hard problem. It turns out that (Fox \& Kleitman, 2006) 24 colours suffice. But this is open even for $1\times 4$.
+
+\begin{prop}
+    Let $A$ be an $m\times n$ rational matrix that is PR. Then $A$ has CP.
+\end{prop}
+\begin{proof}
+    wlog all entries of $A$ are integers. Let columns of $A$ be $c^{(1)},\dots,c^{(n)}\in \Z^m$.
+
+    Given a prime $p$, colour $\N$ by giving $x \in \N$ the colour $d(x)$ as before (the last non-zero digit of $x$ when written in base $p$). Then we have a monochromatic solution $x_1,\dots,x_n \in \N$ with $Ax = 0$, \it{i.e.} $\sum x_ic^{(i)} = 0$: say all $x_i$ have colour $d$.
+
+    Partition $[n]$ as $B_1\cup\dots\cup B_r$, where:
+    \begin{itemize}
+        \item $i,j \in B_s \iff L(x_i) = L(x_j)$ (for any $s$)
+        \item $i \in B_s, j \in B_t \iff L(x_i) < L(x_j)$ (for any $s < t$)
+    \end{itemize}
+
+    Infinitely many primes $p$ given the same parition - say for all $p \in P$. Fix $p \in P$ and consider $\sum x_ic^{(i)} = 0$, calculated in base $p$. We have:
+    \begin{itemize}
+        \item $\sum_{i \in B_1}dc^{(i)} \equiv 0\mod p$ (where $u\equiv v \mod p$ means $u_i \equiv v_i \mod p$ for each $i$).
+        \item For each $s \ge 2$: $$p^t\sum_{i \in B_s}dc^{(i)} + \sum_{i \in B_1\cup\dots\cup B_{s-1}}x_ic^{(i)}\equiv 0\mod p^{t+1}$$ for some $t$.
+    \end{itemize}
+
+    From the first of these, we get that $\sum_{i\in B_1}c^{(i)} \equiv 0 \mod p$ (since $d$ is invertible). But this holds for all $p \in P$, $P$ infinite, whence $\sum_{i \in B_1}c^{(i)} = 0$. A good start.
+
+    From the second bullet point, for each $s \ge 2$: $$p^t\sum_{i \in B_s}c^{(i)} + \sum_{i \in B_1\cup\dots B_{s-1}}(d^{-1}x_i)c^{(i)} \equiv 0 \mod p^{t+1}$$ where $d^{-1}$ is the inverse of $d \mod p^{t+1}$.
+
+    \underline{Claim}: $\sum_{i \in B_s}c^{(i)}\in \langle c^{(i)}:i\in B_1\cup\dots B_{s-1}\rangle$.
+
+    \underline{Proof of Claim}: Suppose not. Then there exists $u \in \Z^m$ with $u\cdot c^{(i)} = 0$ for all $i \in B_1\cup\dots B_{s-1}$, but $u\cdot \sum_{i \in B_s}c^{(i)}\ne 0$.
+
+    Dot our equation with $u$:
+    \begin{align*}
+        p^t u\cdot \sum_{i \in B_s}c^{(i)} + 0 \equiv 0\mod p^{t+1}
+    \end{align*}
+
+    So $u\cdot \sum_{i \in B_s}c^{(i)} \equiv 0 \mod p$. This holds for all $p \in P$, so $u\cdot \sum_{i \in B_s}c^{(i)} = 0$, contradiction.\qedsymbol
+
+    This concludes the proof of the claim, and hence the whole proposition.
+\end{proof}
+
+\begin{defin*}[$(m,p,c)$-set]
+    Let $m,p,c \in \N$. A subset $S \subset \N$ is called an \undf{$(m,c,p)$-set} if $\exists x_1,\dots,x_n \in \N$ (the `generators' of $s$) such that:
+    \begin{align*}
+        S = \left\lbrace \sum_{i=1}^{n}\lambda_i x_i : \exists j\textrm{ with }\lambda_i = 0\ \forall i < j, \lambda _j = c, \lambda_i \in [-p,p]\ \forall i > j\right\rbrace
+    \end{align*}
+
+    So $S$ consists of all:
+    \begin{align*}
+        cx_1 + \lambda_2 x_x + \lambda_3 x_3+\dots + \lambda_m x_m&:\lambda_i\in[-p,p]\ \forall i\\
+        cx_2 + \lambda_3x_3 +\dots + \lambda_m x_m &: \lambda_i \in [-p,p]\ \forall i\\
+        cx_{m-1} + \lambda_m x_m &: \lambda_m \in [-p,p]\\
+        cx_m &
+    \end{align*}
+    These are called the \undf{rows} of $S$. So it is like `iterated AP + CD'.
+\end{defin*}
+
+\begin{remark*}[Examples]\ 
+    \begin{enumerate}
+        \item A $(2,p,1)$-set is $$\{x_1-px_2,x_1-(p-1)x_2,\dots,x_1+px_2,x_2\}$$ \it{i.e.} an AP of length $2p+1$ together with its CD.
+        \item A $(2,p,3)$-set is $$\{3x_1-px_2,3x_1-(p-1)x_2,\dots,3x_1+px_2,3x_2\}$$ \it{i.e.} an AP of length $2p+1$ with middle term a multiple of $3$, together with $3$ times its CD.
+    \end{enumerate}
+\end{remark*}
+
+\begin{theorem}
+    Let $m,p,c\in\N$. Then $\wnfc$ there exists a monochromatic $(m,p,c)$-set.
+\end{theorem}
+\begin{proof}
+    Fix $k$, the number of colours.
+
+    \underline{Claim}: $\forall M\exists n$ such that whenever $[n]$ is $k$-coloured, there exists an $(m,p,c)$-set with each row monochromatic.
+
+    [Then done: put $M = km$ and observe that some $m$ rows must be the same colour - yielding a mono $(m,p,c)$-set.]
+
+    \underline{Proof of Claim}: Induction on $M$: $M = 1$ is trivial, since the $(m,p,c)$ set is a single point.
+
+    Given $M > 1$: consider a $k$-colouring of $[n]$, $n$ large (this will mean `large enough for what is chosen later'). Inside $\{c,2c,3c,\dots,\lfloor n/c \rfloor c\}$, we have an AP of length $2d+1$ ($d$ large), say: $$A = \{cx_1 - da, cx_1 - (d-1)a,\dots,cx_1,\dots,cx_1+da\}$$
+
+    Let $t = \lfloor d/(mp)\rfloor$, and consider $\{a,2a,3a,\dots,ta\}$. If $t$ large enough, this set contains (induction hypothesis) an $(M-1,p,c)$-set with all rows monochromatic: say on generators $x_2,\dots,x_M$.
+
+    Then $cx_1 + \lambda_2x_2 + \dots + \lambda_m x_m\in A$ for any $lambda_2,\dots,\lambda_m$ with $|\lambda_i|\le p$ for each $i$, and so the $(M,p,c)$-set on generators $x_1,\dots,x_m$ has all rows monochromatic.
+\end{proof}
+
+The special case $(m,1,1)$ immediately gives the following.
+
+For $x_1,\dots,x_m \in \N$, write $\fs(x_1,\dots,x_m)$ for $\{\sum_{i\in I}x_i:\emptyset\ne I\subset [m]\}$.
+
+\begin{cor}[Finite Sums Theorem/ Folkman's Theorem/ Sanders' Theorem]\ \\
+    $\forall m$, $\wnfc$ there exists $x_1,\dots,x_m$ such that $\fs(x_1,\dots,x_m)$ monochromatic. \qedsymbol
+\end{cor}
+
+\begin{remark*}[Remarks]
+    \begin{enumerate}
+        \item Case $m = 2$ is Schur's Theorem.
+        \item Hence, also $\wnfc$ there exists $x_1,\dots,x_m$ such that FP$(x_1,\dots,x_m)$ is monochromatic (where $\fp(x_1,\dots,x_m) = \{\prod_{i\in I}x_i : \emptyset \ne I\subset [m]\}$) - just look at $\{2^1,2^2,2^3,\dots\}$ and apply finite sums theorem.
+        \item How about $\fs(x_1,\dots,x_m)\cup\fp(x_1,\dots,x_m)$? This is currently unknown, even for the first case $m = 2$: can we always find $x,y,x+y,xy$ monochromatic?
+        
+        The reason why this is difficult is becaue addition and multiplication don't really mesh well together. In our proofs of things like VdW, we often use `scaled up' versions of the induction hypothesis. We can scale up w.r.t. addition and scale up w.r.t multiplication, but not w.r.t. both at the same time (in any obvious way).
+
+        It is known that $\wnfc$ there exists $x,y$ with $x+y,xy$ of the same colour (Moreira, 2017) (apart from $x = y = 2$).
+    \end{enumerate}
+\end{remark*}
+
+\begin{prop}
+    Let the matrix $A$ have the columns property. Then there exists $m,p,c \in \N$ such that every $(m,p,c)$-set contains a solution of $Ax = 0$, \it{i.e.} each entry of $x$ is in the $(m,p,c)$-set.
+\end{prop}
+\begin{proof}
+    Let the columns of $A$ be $c^{(1)},\dots,c^{(n)}$. Have a partition $B_1\cup\dots\cup B_r$ of $[n]$ such that $\forall s$, $\sum_{i\in B_s}c^{(i)} \in \langle c^{(i)}: i \in B_1\cup\dots\cup B_{s-1}\rangle$: say $\sum_{i \in B_s}c^{(i)} = \sum_{i \in B_1\cup\dots\cup B_{s-1}}q_{is}c^{(i)}$, for some $q_{is} \in \Q$.
+
+    Thus $\forall s$ have $\sum_{i=1}^{n}d_{is}c^{(i)} = 0$, where:
+    \begin{align*}
+        d_{is} = \left\lbrace \begin{array}{cl} 0 & \textrm{ if }i\not\in B_1\cup\dots\cup B_s\\
+            1 & \textrm{ if }i\in B_s\\
+            -q_{is}&\textrm{ if }i \in B_1\cup\dots\cup B_{s-1} 
+        \end{array}\right.
+    \end{align*}
+
+    Given $x_1,\dots,x_r \in \N$, define $y_1,\dots,y_n$ by: $y_i = \sum_{s}d_{is}x_s$. Then 
+    \begin{align*}
+        A_y = \sum_{i}c^{(i)}y_i &= \sum_{i}c^{(i)}\sum_{j}d_{is}x_s\\
+        &= \sum_{s}x_s\sum_{i}d_{is}c^{(i)}\\
+        &=0
+    \end{align*}
+
+    So done: take $m =r$, $c = $ LCM of denominators of the $q_{is}$, $p = c\times$ max numerator of the $q_{is}$.
+\end{proof}
+
+\begin{center}
+    \includegraphics[scale=0.8]{together.jpg}
+\end{center}
+
+\begin{theorem}[Rado's Theorem]
+    Let $A$ be a matrix with rational entries. Then $A$ is PR $\iff$ $A$ has CP.
+\end{theorem}
+\begin{proof} We have proven both directions already:
+
+    \underline{$\implies$}: Prop 2.4.
+
+    \underline{$\impliedby$}: Theorem 2.5 \& Prop 2.7.
+\end{proof}
+
+\begin{remark*}[Remarks]\ 
+    \item Having proved Rado, results like VdW, Schur, finite sums \it{etc}... are just trivial CP checks.
+    \item From the proof of Rado, we have: if matrix $A$ is PR for each `last digit base $p$'-colouring, then $A$ is PR for all colourings. No direct proof (\it{i.e.} not via Rado) is known.    
+\end{remark*}
 
 \end{document}

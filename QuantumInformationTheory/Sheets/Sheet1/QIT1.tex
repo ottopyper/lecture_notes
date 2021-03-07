@@ -176,8 +176,20 @@ since the mutual information between any two r.v.s is non-negative, as can be se
     &= 0
 \end{align*}
 
-\textbf{Exercise 11}.
+\textbf{Exercise 11}. Let $p(X=0) = q$, and $p(X=1) = 1-q$. We then calculate $I(X:Y) = H(X) - H(X|Y)$.
 
+Note that $H(X|Y=0) = H(X|Y = 1) = 0$, since the outputs $0$ and $1$ can only arise from inputs $0$ and $1$ respectively.
 
+So $H(X|Y) = p(Y=e)H(X|Y=e) = ph(q)$. Moreover, $H(X)$ is the binary entropy $h(q)$.
+
+Hence $I(X:Y) = (1-p)h(q)$, which is maximised at $q = 1/2$, giving $\mathcal{C} = (1-p) = 2/3$ for $p = 1/3$.
+
+\textbf{Exercise 12}. If $a\ne -1,1$ then the output uniquely identifies the input; $H(X|Y) = 0$, so the capacity is the max of $H(X) = h(q)$, which is achieved at $q = 1/2$, giving capacity 1.
+
+If $a = 1$, then we have exactly the same situation as the above, with $p = 1/2$, $e = 1$, and $2$ is now recognised as 1. So the capacity of this channel is given by the same formula, which is $\max (1-p)h(q)$. $p = 1/2$, so the capacity is $1/2$. Ditto $a = -1$.
+
+\textbf{Exercise 13}. This is trivial.
+
+\textbf{Exercise 14}. 
 
 \end{document}
