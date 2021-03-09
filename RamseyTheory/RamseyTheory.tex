@@ -8,7 +8,13 @@
 \newcommand{\wnfc}{\textrm{W}\N\textrm{FC}}
 \newcommand{\fs}{\textrm{FS}}
 \newcommand{\fp}{\textrm{FP}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\fu}{\forall_\U}
+\newcommand{\for}[1]{\forall_{#1}}
 
+%\usepackage[lite]{mtpro2}
 
 \title{Ramsey Theory}
 \author{Lectures by Imre Leader}
@@ -852,5 +858,211 @@ For $x_1,\dots,x_m \in \N$, write $\fs(x_1,\dots,x_m)$ for $\{\sum_{i\in I}x_i:\
     \item Having proved Rado, results like VdW, Schur, finite sums \it{etc}... are just trivial CP checks.
     \item From the proof of Rado, we have: if matrix $A$ is PR for each `last digit base $p$'-colouring, then $A$ is PR for all colourings. No direct proof (\it{i.e.} not via Rado) is known.    
 \end{remark*}
+
+\begin{theorem}[Consistency Theorem]
+    Let $A,B$ be partition regular matrices. Then $\left(\begin{array}{cc}A & 0\\ 0 & B\end{array}\right)$ is PR.
+
+    [In other words, if we can always solve $Ax = 0$ in one colour class and $By = 0$ in one colour class, then we can solve them both in the same colour class.]
+\end{theorem}
+\begin{proof}
+    Trivial by CP: if $A$ has CP and $B$ has CP, then $\left(\begin{array}{cc}A & 0\\ 0 & B\end{array}\right)$ has CP.
+\end{proof}
+\begin{remark*}[Remarks]\ 
+    \begin{itemize}
+        \item Highly non-obvious from definition of PR.
+        \item This \it{can} be proved directly - harder.
+    \end{itemize}
+\end{remark*}
+
+\begin{theorem}
+    $\wnfc$ there exists a colour class containing a solution to \textbf{every} PR sytem of equations.
+\end{theorem}
+\begin{proof}
+    Suppose not: then we have a partition $D_1\cup\dots D_k$ of $\N$, such that for every $i$ there exists a PR matrix $A_i$ such that $A_ix = 0$ has no solution for $x$ in $D_i$.
+
+    But now let $A = \textrm{diag}(A_1,A_2,\dots,A_k)$. Then $A$ is PR (by Consistency Theorem), but no $D_i$ contains a solution of $Ax = 0$. Contradiction.
+\end{proof}
+
+\begin{remark*}[Rado's Conjecture (1933)]
+    Say $D \subset \N$ is \undf{partition regular} if $D$ contains a solution to every PR system of equations. So Theorem 2.10 says: if $\N = D_1\cup\dots\cup D_k$, then some $D_i$ is PR
+
+    Rado then asked:
+    
+    \emph{
+        If $D$ is PR and $D = D_1\cup\dots\cup D_k$, must some $D_i$ be PR?
+    }
+
+    Proved by Deuber (1975). He introduced $(m,p,c)$-sets, and he proved a fact we know: $D$ is PR $\iff$ for every $m,p,c$, $D$ contains an $(m,p,c)$-set. He showed that $\forall m,p,c,k,\ \exists n,q,d$ such that whenever we $k$-colour an $(n,q,d)$-set there exists a monochromatic $(m,p,c)$-set, thus establishing Rado's Conjecture. This last fact is similar to our proof of Theorem 2.5, but replacing VdW by extended HJ.
+\end{remark*}
+
+\subsection*{Ultrafilters}
+
+For a sequence $x_1,x_2,\dots \in \N$, we write $$\fs(x_1,x_2,\dots) \coloneqq \left\lbrace\sum_{i\in I}s_i : I\subset \N, |I| < \infty, I\ne \emptyset\right\rbrace$$
+
+\underline{Aim}: Prove \textbf{Hinderman's Theorem}: $\wnfc$ there exists $x_1,x_2,\dots$ with $\fs(x_1,x_2,\dots)$ monochromatic.
+
+\underline{Idea}: A \it{filter} is a notion of `large' for subset of $\N$; an \it{ultrafilter} is a more refined such notion.
+
+\begin{defin*}[Filter]
+    A \undf{filter} is a non-empty family $\F \subset \P(\N)$ such that:
+    \begin{enumerate}[label = \roman*)]
+        \item $\emptyset \not\in \F$
+        \item if $A\in \F$ and $A\subset B$ then $B \in \F$ (``closed under supersets'')
+        \item if $A \in \F$ and $B \in \F$ then $A\cap B \in \F$ (``closed under finite intersections'')
+    \end{enumerate}
+\end{defin*}
+\begin{remark*}[Examples]\ 
+    \begin{enumerate}[label = \arabic*)]
+        \item $\{A\subset \N : 1 \in A\}$
+        \item $\{A\subset \N : 1,2\in A\}$
+        \item \it{not} $\{A\subset \N : |A| = \aleph_0\}$ (can find two such sets with finite intersection)
+        \item $\{A\subset \N: |A^c| < \aleph_0\}$ - this is the \undf{cofinite filter}
+        \item $\{A\subset \N: |E\backslash A| < \aleph_0\}$, where $E$ is the set of all even numbers
+    \end{enumerate}
+\end{remark*}
+
+\begin{defin*}[Ultrafilter]
+    An \undf{ultrafilter} is a maximal filter, \it{i.e.} it is contained in no other filter.
+\end{defin*}
+\begin{remark*}[Examples]\
+    Let's take another look at the above examples. 
+    \begin{enumerate}[label = \arabic*)]
+        \item Yes, and for each $x \in \N$, we have $\{A\subset \N : x \in A\}$ the \undf{principal ultrafilter} at $x$, written $\tilde{x}$.
+        \item No, it is contained in 1)
+        \item Not a filter
+        \item No, it is contained in 5)
+        \item Also no, contained in $\{A\subset \N : |M\backslash A| < \aleph_0\}$, where $M$ is the set of all multiples of 4.
+    \end{enumerate}
+\end{remark*}
+
+\begin{prop}
+    A filter $\F$ is an ultrafilter iff for every $A \subset \N$, either $A \in \F$ or $A^c\in \F$.
+\end{prop}
+\begin{proof}
+    \underline{$\impliedby$}: Trivial. Cannot add $A\subset \N$ if $\F$ already contains $A^c$.
+
+    \underline{$\implies$}: Suppose $A,A^c \not\in \F$. Then we must have some $B \in \F$ such that $B\cap A = \emptyset$, since otherwise $\{C\subset \N : C\supseteq A\cap B,\textrm{ some }B\in \F\}$ is a filter that extends $F$. But then $B\cap A = \emptyset$, so $B\subset A^c$, whence $A^c \in \F$. Contradiction.
+\end{proof}
+
+This makes ultrafilters feel a little more tangible.
+
+\begin{remark*}
+    Hence also: for an ultrafilter $\U$, if $A \in \U$ and $A = B\cup C$ then $B \in \U$ or $C \in \U$.
+
+    Indeed, if $B,C\not\in\U$, then $B^c,C^c\in \U$, whence $A^c = B^c \cap C^c \in \U$. Contradiction.
+\end{remark*}
+
+\begin{theorem}
+    Every filter is contained in an ultrafilter.
+\end{theorem}
+\begin{proof}
+    For a filter $\F_0$, we seek a maximal element of $X = \{\F\textrm{ filter}: \F\supseteq \F_0\}$. By Zorn, it is enough to check that any non-empty chain $\{\F_i:i\in I\}$ in $X$ has an upper bound in $X$:
+
+    Let $\F = \bigcup_{i\in I}\F_i$. Trivially $\F_0 \subset \F$; need to show $\F$ is a filter:
+    \begin{enumerate}[label=\roman*)]
+        \item $\emptyset\not\in \F$, as $\emptyset\not\in \F_i$ for all $i$.
+        \item Given $A \in \F$, $B\supseteq A$: have $A \in \F_i$ for some $i$, so $B \in \F_i$.
+        \item Given $A,B\in \F$, have $A \in \F_i,B\in \F_j$, where wlog $\F_i\supset \F_j$. So $A\cap B \in \F_j$.
+    \end{enumerate}
+    So every chain has an upper bound; by Zorn $X$ has a maximal filter extending $\F_0$.
+\end{proof}
+
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item So there exists a non-principal ultrafilter - just take any ultrafilter extending the cofinite filter.
+        \item Conversely, if ultrafilter $\U$ is non-principal, then it must extend the cofinite filter.
+        
+        Indeed, suppose not. Then $A\in \U$ for some finite $A$. Whence $\{x\} \in \U$ for some $x \in A$ (by repeated use of the `$B\cup C$' remark).
+
+        \item Some form of AC \it{is needed} to get a non-principal ultrafilter. Note that this means that if you think you've written down an explicit non-principal ultrafilter, you are wrong (normally you've messed up the intersection property).
+    \end{enumerate}
+\end{remark*}
+
+Write $\beta\N$ for the set of all ultrafilters on $\N$. We can define a topology on $\beta\N$ by taking as basic open sets the sets $C_A = \{\U\in \beta\N : A\in \U\}$, for each $A\subset \N$.
+
+This really is a base for a topology - just need $\bigcup_{A}C_A = \beta\N$, and $C_A\cap C_B$ is open. Certainly $\bigcup_A C_A = \beta\N$, and also $C_A \cap C_B = C_{A\cap B}$ (as $A\cap B \in \U \iff A,B\in \U$).
+
+Thus the open sets are all sets $\bigcup_{i\in I}C_{A_i} = \{\U : A_i \in U,\textrm{ some }i\}$.
+
+The basic closed sets are $\beta\N\backslash C_A = C_{A^c}$. Thus the closed sets are all sets of the form $\bigcap C_{A_i} = \{\U:\ \forall i(A_i\in \U)\}$.
+
+We can view $\N$ as a subset of $\beta\N$, by identifying $n\in \N$ with $\tilde{n} \in \beta\N$. Note that each $\tilde{n}$ is isolated, since $\{\tilde{n}\} = C_{\{n\}}$. Also, $\N$ is dense in $\beta\N$ - indeed, $\tilde{n} \in C_A$ for every $n \in A$.
+
+\begin{theorem}
+    $\beta\N$ is a compact Hausdorff space.
+\end{theorem}
+\begin{proof}
+    \underline{Hausdorff}: Given $\U\ne \V$, there exists some $A \in \U$ with $A\not\in \V$. So $A^c \in \V$. Thus $\U \in C_A, \V \in C_{A^c}$, and $C_A\cap C_{A^c} = \emptyset$.
+
+    \underline{Compact}: Need to show that if $F_i:i\in I$ are closed sets with the finite intersection property (every finite intersection is non-empty) then $\bigcap_{i\in I}F_i\ne\emptyset$.
+
+    wlog each $F_i$ is a basic closed set; say $F_i = C_{A_i}$. Note that the sets $A_i$ themselves have the finite intersection property, as $C_{A_{i_1}}\cap\dots\cap C_{A_{i_n}} = C_{A_{i_1}\cap\dots\cap A_{i_n}}$, whence $A_{i_1}\cap\dots\cap A_{i_n}\ne \emptyset$.
+
+    Define $\F = \{A\subset\N : A\supseteq A_{i_1}\cap\dots\cap A_{i_n},\textrm{ for some }i_1,\dots,i_n\in I\}$. Then $\F$ is a filter; let $\U \in \beta\N$ extend $\F$. So for all $i$, $A_i\in \U$, \it{i.e.} $\U \in C_{A_i}$ for all $i$.
+\end{proof}
+
+So this is a weird space, but it does at least have the warm and reassuring properties of Hausdorfness and compactness.
+
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item \it{or}, we can view an ultrafilter as a function $\P(\N) \ra \{0,1\}$, \it{i.e.} as a point in $\{0,1\}^{\P(\N)}$. So $\beta\N \subset \{0,1\}^{\P(\N)}$. Can check that our topology on $\beta\N$ is (the restriction of) the product topology, and $\beta\N$ is closed in $\{0,1\}^{\P(\N)}$ - whence $\beta\N$ is compact, by Tychonoff.
+        \item Why is $\beta\N$ interesting? It is the biggest compact Hausdorff space in which $\N$ is dense. More precisely, for any compact, Hausdorff $X$ and function $f:\N\ra X$, there exists a unique continuous $\tilde{f}:\beta\N \ra X$ extending $f$. We say that $\beta\N$ it the \it{Stone-Cech compactification} of $\N$.
+    \end{enumerate}
+\end{remark*}
+
+\begin{defin*}[Ultrafilter Quantifiers]
+    For ultrafilter $\U$ and statement $p(x)$, write $\forall_\U xp(x)$, (read as `for most $x$' or `for $\U$-most $x$') if $\{x : p(x)\}\in \U$.
+\end{defin*}
+\begin{remark*}[Examples]\ 
+    \begin{itemize}
+        \item For $\U$ non-principal, have $\forall_\U x : x > 17$.
+        \item For $\U$ principal at $7$, $\forall_\U xp(x) \iff p(7)$.
+    \end{itemize}
+\end{remark*}
+
+Ultrafilter quantifiers behave `perfectly' with respect to logical connectives, as follows:
+
+\begin{prop}
+    Let $\U$ be an ultrafilter, and $p(x),q(x)$ statements.
+    \begin{enumerate}[label = \roman*)]
+        \item $\forall_\U x (p(x)\land q(x)) \iff (\forall_\U x p(x))\land (\forall_\U x q(x))$
+        \item $\forall_\U x (p(x) \lor q(x)) \iff (\forall_\U xp(x))\lor (\forall_\U xq(x))$
+        \item $\neg \forall_\U xp(x) \iff \forall_\U x \neg p(x)$
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    Let $A = \{x : p(x)\}$, and $B = \{x : q(x)\}$.
+
+    So i) says: $A\cap B \in \U \iff A \in \U \land B \in \U$, which is true.
+
+    ii) says: $A\cup B \in \U \iff A\in \U \lor B \in \U$, also true.
+
+    iii) says: $A\not \in \U \iff A^c \in \U$, again true. So done.
+\end{proof}
+
+There is a small price to be paid here.
+
+\begin{remark*}
+    Not true that $\fu x\for{\V}y p(x,y) \iff \for{\V}y \fu xp(x,y)$, even when $\U = \V$.
+
+    For example, let $\U$ be non-principal. Then $\fu x\fu y x < y$, since for every $x\in \N$ we have $\fu y x < y$. But $\fu y \fu x x <y$ is \it{false}, since there is no $y$ for which $\fu x (x<y)$.
+\end{remark*}
+
+\begin{defin*}[Addition on $\beta\N$]
+    For $\U,\V\in \beta\N$, let $\U + \V \coloneqq \{A\subset\N : \fu x\for{\V}y (x+y\in A)\}$.
+
+    Equivalently, $\U+\V = \{A\subset\N : \{x\in \N : \{y \in \N : x + y \in A\} \in \V\}\in \U\}$. This is an absolute nightmare without the quantifiers, which is why we use them.
+\end{defin*}
+
+\begin{remark*}[Example] $\tilde{m} + \tilde{n} = \widetilde{m+n}$.  
+\end{remark*}
+
+Note that $\U + \V$ \it{is} an ultrafilter:
+\begin{itemize}
+    \item $\emptyset\not\in \U + \V$
+    \item if $A \in \U + \V$ and $B \supseteq A$ then $B \in \U + \V$
+    \item if $A,B\in \U + \V$ then $\fu x \for{\V} y (x + y \in A)$ and $\fu x \for{\V} y (x + y \in B)$, \it{i.e.} $\fu x\for{\V} y (x + y \in A \cap B)$ by Prop 2.14(i) twice. So $A\cap B \in \U + \V$.
+    \item if $A\not\in \U + \V$ then $\neg \fu x\for{\V} y (x + y \in A)$, \it{i.e.} $\fu x \for{\V} y (x + y \in A^c)$ by Prop 2.14(iii) twice. So $A^c \in \U + \V$.
+\end{itemize}
 
 \end{document}

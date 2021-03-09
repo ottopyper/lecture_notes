@@ -19,7 +19,13 @@
 \newcommand{\psp}{\textrm{PSP}}
 \newcommand{\rk}{\textrm{rk}}
 \newcommand{\fld}{\textrm{fld}}
+\newcommand{\wf}{\textrm{WF}}
+\newcommand{\hit}{\textrm{ht}}
+\newcommand{\bij}[1]{\lceil #1 \rceil}
+\newcommand{\bog}{\bm{\Gamma}}
 
+%\renewcommand{\ht}{\textrm{ht}}
+%\newcommand{\wf}{\textrm{WF}}
 \usepackage{bm}
 
 \newcommand{\game}{
@@ -1472,4 +1478,110 @@ If $(A,R)$ is any such structure, \it{i.e.} $A\subset \om$, $R\subset A\times A$
 \end{align*}
 Then $\fld(x_A) = A$, and $iRj\iff iR_{x_A}j$.
 
+\marginpar{Lecture 13}
+
+ \begin{defin*}
+     $\wf\subset\om^\om$ is defined to be $$\wf \coloneqq \{x \in \om^\om ; (\fld(x),R_x)\textrm{ is wellfounded}\}$$
+
+     Then the rank function $$\rk : \fld(x) \ra \alpha$$ gives an order-preserving map from $\fld(x)$ into $\alpha =: \hit(\fld(x),R_x)$, the \undf{height} of the relation.
+
+     If $x \in \wf$, $||x|| \coloneqq \hit(\fld(x),R_x)$. This operation $||\cdot || : \wf \ra \omega_1$ is a surjection.
+
+     [Indeed, let $\alpha < \omega_1$. There is some injection $f : \alpha \ra \N$. Define $F\coloneqq f[\alpha]$. Then define $f(\beta) R f(\gamma)$ by $\beta\le \gamma$. Then by construction $(F,R)\simeq (\alpha,\le)$. So if $A\coloneqq (F,R)$ and $x \coloneqq x_A$, then $||x_A|| = \alpha$.]
+
+     Define:
+     \begin{align*}
+         \wf_\alpha &\coloneqq \{x \in \wf; ||x|| = \alpha \}\\
+         \wf_{<\alpha} &\coloneqq \bigcup_{\beta<\alpha}\wf_\beta\\
+         \wf_{\le \alpha} &\coloneqq \bigcup_{\beta\le\alpha}\wf_\beta
+     \end{align*}
+     Thus $\wf$ can be thought of as \undf{stratified} in $\om_1$ may levels.
+ \end{defin*}
+
+ \begin{theorem*}
+     $\wf$ is $\bopi^1_1$.
+ \end{theorem*}
+ \begin{proof}
+     If $A = (F,R)$ is a relation on $\N$, we can define ``$y\in\om^\om$ is an \undf{$A$-descending sequence}'' if $\forall i[(y(i+1)Ry(i))\land(y(i+1)\ne y(i))]$. Then $x\in \wf \iff \forall y\ y$ is not an $(\fld(x),R_x)$-descending sequence, and $x \not\in \wf\iff \exists y\ y$ is a $(\fld(x),R_x)$-descending sequence.
+
+     Hence $ x \not\in \wf \iff \exists y [\forall i\ x(\lceil y(i+1),y(i)\rceil)\ne0\ \land\ y(i+1)\ne y(i)]$.
+
+     Now consider $C\coloneqq \{(y,x); \forall i\ x(\lceil y(i+1),y(i)\rceil)\ne 0\ land\ y(i+1)\ne y(i)\}$. $C$ is closed in $\om^\om\times\om^\om$ (can easily check that these conditions form a tree). So by definition, $\om^\om \backslash \wf$ is $\bosig^1_1$, and hence $\wf$ is $\bopi^1_1$.
+ \end{proof}
+
+\begin{remark*}
+    The general proof technique extracted from this is that if $C$ is $\bopi^1_x(\om^\om\times\om^\om)$ and $x \in A \iff \exists y (y,x)\in C$ then $A$ is $\bosig^1_{n+1}$, and similarly if $C$ is $\bopi^1_n$ and $x \in A \iff \forall y (y,x)\in C$ then $A$ is $\bopi^1_{n+1}$.
+\end{remark*}
+
+Now check the complexity of the sets $\wf_\alpha,\wf_{<\alpha},\wf_{\le\alpha}$. We have $x\in \wf_{<\alpha} \iff x \in \wf$ and there is no order-preserving map from $\alpha$ into $(\fld(x),R_x)$; define $$N_\alpha \coloneqq \{x; \textrm{ there is no o.p. map from }\alpha \textrm{ into } (\fld(x),R_x)\}$$
+
+Fix some $a \in \om^\om$ such that $(\fld(a),R_a)\cong (\alpha,\le)$. [We saw that this exists.] Hence we have that
+\begin{align*}
+    N_\alpha =&\{x;\textrm{ there is no o.p. map from }(\fld(a),R_a)\textrm{ into }(\fld(x),R_x)\}\\
+    =& \big\{x; \forall y\textrm{ it is not the case that: }\\
+    &[\forall i\ a(\lceil i,i\rceil)\ne 0 \implies x(\lceil y(i),y(i)\rceil)\ne 0\textrm{ and }\forall i,j\ a(\lceil i,j\rceil)\ne0 \implies x(\lceil y(i),y(j)\rceil)\ne 0]\big\}
+\end{align*}
+So $N_\alpha$ is $\bopi^1_1$, and since $\wf_{<\alpha} = \wf \cap N_\alpha$, we thus have that $\wf_{<\alpha}$ is $\bopi^1_1$. Similarly, $\wf_{\le \alpha},\wf_\alpha$ are $\bopi^1_1$.
+
+$\wf_{\le\alpha}$ is also $\bosig^1_1$: $\wf_{\le\alpha} = \{x; (\fld(x),R_x)\textrm{ o.p. maps into }(\fld(a),R_a)\}$. We can write this as:
+\begin{align*}
+    x \in \wf_{\le\alpha} &\iff \exists y[\forall i,j x(\bij{i,j})\ne 0\implies a(\bij{y(i),y(j)})\ne 0]
+\end{align*}
+and again we see the bit in square brackets defines a closed set of $x$s, and hence $\wf_{\le\alpha}$ is $\bosig^1_1$.
+
+\underline{Summary}: For every $\alpha < \om_1$, $\wf_\alpha,\wf_{<\alpha},\wf_{\le\alpha}$ are $\bodel^1_1$.
+
+On ES\#2, we show that $\bodel^1_1 = \textrm{Borel}$.
+
+\begin{remark*}[Corollary]
+    \emph{
+        $\wf$ can be written as a union of $\om_1$ many Borel sets: $$\wf = \bigcup_{\alpha < \om_1}\wf_\alpha$$
+    }
+\end{remark*}
+
+\begin{defin*}[$\bog$-complete]
+    Let $\bog$ be a boldface pointclass. A set $A\subset\om^\om$ is called \undf{$\bog$-hard} if for all $B \in \bog(\om^\om)$ there is a continuous function $f : \om^\om \ra \om^\om$ such that $B = f^{-1}[A]$. $A$ is \undf{$\bog$-complete} if it is $\bog$-hard and $A \in \bog(\om^\om)$.
+\end{defin*}
+
+\begin{theorem*}
+    $\wf$ is $\bopi^1_1$-complete.
+\end{theorem*}
+\begin{proof}
+    Tree representation theorem says: if $B$ is $\bopi^1_1$, then there is a tree $T$ such that $\forall x\ x\in B\iff T_x$ is wellfounded. This almost has the form that we want, but we're talking about trees instead of elements of $\om^\om$. So we map $x\mapsto c_{T_x} \in \om^\om$ such that:
+    \begin{align*}
+        c_{T_x}(\bij{i,j}) \coloneqq \left\lbrace \begin{array}{cl} 1 & \textrm{ if }s_i,s_j\in T_x\textrm{ and } s_i\supseteq s_j\\ 0 & \textrm{ o/w}\end{array}\right.
+    \end{align*}
+    Consider $x\mapsto c_{T_x}$ and check that it is continuous. Given $i,j$, how much information about $x$ do I need to determine whether $c_{T_x}(\bij{i,j}) = 0$ or $1$? Note that whether $s_i\supseteq s_j$ or not does not depend on $x$ at all. What does $s_i \in T_x$ mean? It means $(s_i,x\restriction \lh(s_i))\in T$.
+
+    So if we know $x\restriction \max(\lh(s_i),\lh(s_j))$, then we can calculate $c_{T_x}(\bij{i,j})$. So $x\mapsto c_{T_x}$ is a continuous function. So we have:
+    \begin{align*}
+        x \in B &\iff [T_x]\ne\emptyset\\
+        &\iff T_x\textrm{ is wellfounded}\\
+        &\iff c_{T_x}\in \wf
+    \end{align*}
+    So $B$ is the continuous preimage of $\wf$.
+\end{proof}
+
+\begin{remark*}[Corollary]
+    \emph{
+        $\wf$ is not $\bosig^1_1$
+    }
+\end{remark*}
+\begin{proof}
+    We know that $\bosig^1_1 \ne \bosig^1_1$. However, if $B \in \bopi^1_1$ arbitrary, by completeness of $\wf$ if $\wf$ is $\bosig^1_1$ then $B$ is $\bosig^1_1$. Contradiction.
+\end{proof}
+
+\begin{remark*}[Corollary]
+    \emph{
+        Every $\bopi^1_1$ set is an $\om_1$-union of Borel sets.
+    }
+\end{remark*}
+\begin{proof}
+    If $B \in \bopi^1_1$, find $f$ such that $B = f^{-1}[\wf]$. So:
+    \begin{align*}
+        B &= f^{-1}\left[ \bigcup_{\alpha < \om_1}\wf_\alpha\right]\\
+        &=\bigcup_{\alpha<\om_1}f^{-1}[\wf_\alpha]        
+    \end{align*}
+    and each $f^{-1}[\wf_\alpha]$ is Borel.
+\end{proof}
 \end{document}

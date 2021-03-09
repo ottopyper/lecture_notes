@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1614791154 "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.tex" "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.pdf" "InfiniteGames" 1614791154
-  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.aux" 1614791154 746 20ea43660034185d44cbad8b72e5e27f ""
-  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.tex" 1614791153 83705 7f04665ad229a89220a256f20d1c04ad ""
+["pdflatex"] 1615299452 "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.tex" "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.pdf" "InfiniteGames" 1615318457
+  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.aux" 1615299453 746 6de246eede3f95cd6da8fd9795c680ec ""
+  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.tex" 1615318457 90186 7a8f438002c1a0ca05029dfede96a4f6 ""
   "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex" 1611849397 3940 9a74851e88de6fc36cdebac02cf17364 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1607249373 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1607249373 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -178,11 +178,11 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1607249373 33301 a3134070eacafb10b1f371612ce2650d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1613519600 4885835 225b430335ea75120e4d14f95280dfb9 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1613519584 2635854 5d9ab43b0c042351852e2de5acb80a5f ""
-  "InfiniteGames.aux" 1614791154 746 20ea43660034185d44cbad8b72e5e27f "pdflatex"
-  "InfiniteGames.tex" 1614791153 83705 7f04665ad229a89220a256f20d1c04ad ""
+  "InfiniteGames.aux" 1615299453 746 6de246eede3f95cd6da8fd9795c680ec "pdflatex"
+  "InfiniteGames.tex" 1615318457 90186 7a8f438002c1a0ca05029dfede96a4f6 ""
   (generated)
-  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.pdf"
   "InfiniteGames.pdf"
   "InfiniteGames.aux"
   "InfiniteGames.log"
   "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.log"
+  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.pdf"
