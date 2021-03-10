@@ -2,6 +2,9 @@
 
 \input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
 
+\usepackage[cmtip,all]{xy}
+\newcommand{\longsquiggly}{\xymatrix{{}\ar@{<~>}[r]&{}}}
+
 \newcommand{\I}{\textrm{I}}
 \newcommand{\II}{\textrm{II}}
 \newcommand{\om}{\omega}
@@ -23,6 +26,14 @@
 \newcommand{\hit}{\textrm{ht}}
 \newcommand{\bij}[1]{\lceil #1 \rceil}
 \newcommand{\bog}{\bm{\Gamma}}
+\newcommand{\op}{\textrm{OP}}
+\newcommand{\zfc}{\textrm{ZFC}}
+\newcommand{\cons}{\textrm{Cons}}
+\newcommand{\ic}{\textrm{IC}}
+\newcommand{\ad}{\textrm{AD}}
+\newcommand{\zf}{\textrm{ZF}}
+\newcommand{\tri}{\mathop{\triangle}}
+\newcommand{\aux}{\textrm{aux}}
 
 %\renewcommand{\ht}{\textrm{ht}}
 %\newcommand{\wf}{\textrm{WF}}
@@ -1584,4 +1595,503 @@ On ES\#2, we show that $\bodel^1_1 = \textrm{Borel}$.
     \end{align*}
     and each $f^{-1}[\wf_\alpha]$ is Borel.
 \end{proof}
+
+\marginpar{Lecture 14}
+
+\begin{remark*}[Proposition (Weak CH for $\bopi^1_1$ sets)]
+    \emph{
+        If $A \in \bopi^1_1$, then $|A|$ is either $\le \aleph_0$, or $\aleph_1$, or $2^{\aleph_0}$.
+    }
+\end{remark*}
+\begin{proof}
+    By our analysis, we know $$A = \bigcup_{\alpha < \om_1}A_\alpha$$ where $A_\alpha$ is Borel. By Borel determinacy \& the characterisation of PSP in terms of games, we know that $A_\alpha$ has the p.s.p for each $\alpha$. So for each $\alpha$, $A_\alpha$ is countable or there is a $T_\alpha$ perfect such that $[T_\alpha] \subset A_\alpha$.
+
+    \underline{Case 1}: There is some $\alpha$ such that $[T_\alpha]\subset A_\alpha \subset A$, so $A$ contains a perfect subset and hence $|A| = 2^{\aleph_0}$.
+
+    \underline{Case 2}: $A_\alpha$ countable for all $\alpha$. So then $|A| \le \aleph_1 \cdot \aleph_0 = \aleph_1$.
+\end{proof}
+
+\begin{theorem*}[Boundedness Lemma]
+    If $A\subset \wf$ such that $A$ is $\bosig^1_1$, then there is a bound $\alpha < \om_1$ such that: $$A\subset \wf_{<\alpha}$$
+\end{theorem*}
+\begin{proof}
+    Let us write $\op(y,x,z)$ for ``$y$ is an order-preserving map from $(\fld(x),R_x)$ to $(\fld(z),R_z)$''. In the proof last lecture we saw that this is a closed set.
+
+    [This allows us to express $||x|| = ||z||$, then this is just $\exists y \exists y' (\op(y,x,z)\land\op(y',z,x))$. $\op(y,x,z)\land \op(y',z,x)$ is closed, so under the $\exists$ quantifiers the set is $\bosig^1_1$.]
+
+    We prove boundedness by contradiction. Assume $A \in \bosig^1_1, A\subset \wf$ unbounded $(\ast)$ and show that $\wf \in \bosig^1_1$.
+
+    Under the assumption $(\ast)$, we have: 
+    \begin{align*}{}
+        x \in \wf \iff \underbrace{\exists a \exists y\underbrace{(\underbrace{a\in A}_{\bosig^1_1} \land \exists y\ \underbrace{\op(y,x,a)}_{\bopi^0_1})}_{\bosig^1_1}}_{\bosig^1_1}
+    \end{align*}
+    since $\bosig^1_1$ is closed under existential quantifiers. This contradicts the $\bopi^1_1$-completeness of $\wf$.
+\end{proof}
+
+\begin{defin*}
+    $C\subset \wf$ is called a \undf{set of unique codes} if for all $\alpha \in \om_1$, $|C\cap \wf_\alpha| = 1$.
+\end{defin*}
+
+Clearly, if $C$ is a s.u.c. then $|C| = \aleph_1$. Also clearly, $\ac$ implies the existence of s.u.c.: $$\{\wf_{\alpha};\alpha \in \om_1\}$$ is a family of non-empty sets, and a choice function for this family a s.u.c. as the range.
+
+So the fragment of choice needed here is $\ac_{\om_1}(\om^\om)$.
+
+\begin{theorem*}
+    If $C$ is a s.u.c., it cannot have the p.s.p.
+\end{theorem*}
+\begin{proof}
+    Since $C$ is uncountable, if it has the p.s.p. it must contain some $[T]\subset C$, with $T$ perfect. So we have $[T]\subset C\subset \wf$, and thus $[T]$ is a $\bosig^1_1$ subset of $\wf$. By boundedness, we find $\alpha < \om_1$ such that $[T]\subset \wf_{<\alpha}\cap C$; but $|\wf_{<\alpha}\cap C| = |\alpha| \le \aleph_0$, but $|[T]| = 2^{\aleph_0}$ is uncountable.
+\end{proof}
+
+\begin{theorem*}
+    If there is a $\bodel^1_1$ wellorder of $\om^\om$, then there is a $\bopi^1_n$ set without the perfect set property.
+\end{theorem*}
+\begin{proof}
+    Produce a set of unique codes. In each $\wf_\alpha$, there is a $<$-least element if $<$ is the $\bodel^1_n$-wellorder. Then the set
+    \begin{align*}
+        C\coloneqq \{x;\exists \alpha < \om_1 \textrm{ s.t. }x\textrm{ is the }<\textrm{-least element of }\wf_\alpha\}
+    \end{align*}
+    is an s.u.c. and thus doesn't have the p.s.p.
+
+    We need to analyse the definition of $C$ a bit better. What does it mean to be in $C$?
+
+    $x \in \wf$ and if $z \in \wf$ and $||x|| = ||z||$, then $x\le z$ in the $\bodel^1_n$ wellorder. But recall our characterisation of $||x|| = ||z||$. So we combine this into one formula and analyse the complexity:
+    \begin{align*}
+        x \in C \iff & \underbrace{\underbrace{x \in \wf}_{\bopi^1_1} \land \underbrace{\forall z (\underbrace{\underbrace{\exists y\exists y' [\underbrace{\op(y,x,z)\land\op(y',z,x)}_{\bopi^0_1}}_{\bosig^1_1}\implies \underbrace{x\le z}_{\bodel^1_n}]}_{\cup \textrm{ of } \bopi^1_1,\bodel^1_n\textrm{ which is }\bopi^1_1\textrm{ or }\bodel^1_n\textrm{ if }n\ge2})}_{\bopi^1_n}}_{\bopi^1_n}
+    \end{align*}
+    So $C$ is a s.u.c. which is $\bopi^1_n$.
+\end{proof}
+
+\subsection*{Close connection between Games, Wellorders, and Large Cardinals}
+We have some (somewhat, \it{n.b.} not equivalent) correspondent notions:
+
+\begin{center}
+    \begin{tabular}{ccccc}\\
+        \textbf{Large Cardinals} & &\textbf{Determinacy} & &\textbf{Definable Wellorders}\\ 
+        &   &  & & \\
+        $\omega$ many Woodin cardinals $+$ measurable above &$\longsquiggly$ & $\Det(\textrm{Definable})$  & $\longsquiggly$ & no definable wellorders\\
+        $\omega$ many Woodin cardinals & $\longsquiggly$ & $\Det(\textrm{Proj})$ & $\longsquiggly$ & no projective wellorder\\
+        &   & $\vdots$ & & \\
+        $n$ Woodin cardinals $+$ a measurable above them & $\longsquiggly$ & $\Det(\bopi^1_{n+1})$ & $\longsquiggly$ & no $\bodel^1_{n+2}$ wellorders\\
+            &   & $\vdots$ & & \\
+         $\kappa < \lambda$, $\kappa$ Woodin, $\lambda$ measurable &$\longsquiggly$ & $\Det(\bopi^1_2)$ & $\longsquiggly$ & no $\bodel^1_3$ wellorders \\
+        measurable cardinal & $\longsquiggly$ & $\Det(\bopi^1_1)$ & $\longsquiggly$ & no $\bodel^1_2$ wellorders \\
+        ZFC && $\Det(\bodel^1_1)$ && -
+    \end{tabular}
+\end{center}
+
+The results of the first two columns and all but the first two rows are the famous \it{Martin-Steel Theorem of projective determinacy} (1985).
+
+\marginpar{Lecture 15}
+
+The remainder of this course will be devoted to exploring these interactions.
+
+\subsection*{Large Cardinals}
+\begin{remark*}[Imprecise Definition]
+    Let $\Phi$ be a property of cardinals. We write $\Phi C$ for $\exists x \Phi(x)$.
+
+    $\Phi$ is going to be the \it{large cardinal property}, and $\Phi C$ is going to be the \it{large cardinal axiom}.
+
+    We say that $\Phi$ is an LCP if:
+    \begin{enumerate}[label = (\roman*)]
+        \item $\Phi(\kappa)$ implies that $\kappa$ is ``large'' in some sense
+        \item $\Phi C \proves \textrm{Cons}(\textrm{ZFC})$ (so $\Phi C$ cannot be proven in ZFC)
+    \end{enumerate}
+\end{remark*}
+
+\underline{Comments}:\ 
+    \begin{enumerate}[label=(\roman*)]
+        \item G{\"o}del's Incompleteness Theorem says if $\zfc \proves \Phi C$ and $\zfc + \Phi C \proves \textrm{Cons(ZFC)}$ then ZFC is inconsistent. So, under reasonable assumptions, it means $\zfc \not\proves \Phi C$.
+        \item G{\"o}del's Completeness Theorem tells us that Cons(ZFC) is equivalent to $\exists M (M\models \zfc)$. The model property is what we will be using.
+    \end{enumerate}
+
+If $\Phi,\Psi$ are two LCPs, we can say \underline{$\Phi C < \Psi C$} if $\zfc + \Psi C \proves \textrm{Cons}(\zfc+\Phi C)$, and $\Phi C,\Psi C$ are \undf{equiconsistent} if $\zfc + \cons(\zfc + \Phi C) \iff \zfc + \cons(\zfc + \Psi C)$.
+
+\begin{defin*}[Inaccessible Cardinal]
+    A cardinal  is called \undf{inaccessible} if it is \it{regular} and a \it{strong limit}.
+
+    [A cardinal $\kappa$ is a strong limit if for all $\lambda < \kappa$, $2^\lambda < \kappa$.]
+
+    We write $I$ for the property of being inaccessible. Then as before, $IC$ is the statement $\exists x I(x)$ asserting that there exists an inaccessible cardinal.
+\end{defin*}
+\begin{remark*}
+    $\kappa$ is a limit $\iff$ $\forall \lambda < \kappa (\lambda^+ < \kappa)$.
+\end{remark*}
+\begin{remark*}
+    Under GCH, $[\forall \lambda (\lambda^+ = 2^\lambda)]$ we have $\kappa$ is a limit $\iff \kappa$ is a strong limit.
+\end{remark*}
+
+We now show that $IC$ is indeed a large cardinal axiom, by checking properties (1) and (2).
+\begin{enumerate}[label = (\roman*)]
+    \item Clearly, if $I(\kappa)$ then $\aleph_1,\aleph_2,\aleph_3 < \kappa $ trivially since these are successor cardinals. Also $\aleph_{\omega},\aleph_{\om_1},\aleph_{\om_2} < \kappa$ since these limit cardinals are not regular. Furthermore, we know there are ordinals $\alpha$ such that $\alpha = \aleph_\alpha$. Let $lambda$ be the least of these. This is pretty massive, but they not regular either since in showing its existence we show it has countable cofinaltiy. So we even have $\lambda < \kappa$.
+    
+    So these are pretty big (though this is currently an imprecise notion).
+
+    \item Need to show $\zfc + IC \proves \cons(\zfc)$, which we do by the following theorem:
+    
+    \begin{theorem*}
+        If $\kappa$ is inaccessible, then $V_\kappa \models \zfc$
+    \end{theorem*}
+    \begin{proof}
+        In L\&ST 2019/20, ES\#4 (9): if $\lambda$ is any limit larger than $\omega$, then $V_\lambda$ models all $\zfc$ axioms, minus Replacement ($\zfc - $Replacement is sometimes known as \it{Zermelo Set Theory}).
+
+        So all we need to show is that $V_\kappa$ models Replacement.
+
+        \begin{remark*}[Lemma 1]
+            If $\kappa$ is inaccessible, then $\forall \alpha < \kappa$, $|V_\alpha| < \kappa$.
+        \end{remark*}
+        \begin{proof}
+            This is an induction on $\alpha$. $\alpha = 0$ is obvious, $\alpha$ successor done by strong limit, $\alpha$ limit done by regularity.
+        \end{proof}
+
+        \begin{remark*}[Lemma 2]
+            Let $\kappa$ be inaccessible. Then TFAE:
+            \begin{enumerate}[label=(\roman*)]
+                \item $x \in V_\kappa$
+                \item $x\subset V_\kappa$ and $|X| < \kappa$
+            \end{enumerate}
+        \end{remark*}
+        \begin{proof} \underline{(i)$\implies$(ii)}:
+            $x \in V_\kappa \implies x\subset V_\kappa$ [transitivity of $V_\kappa$]
+            
+            $x \in V_\kappa = \bigcup_{\alpha < \kappa}V_\alpha \implies $ there is $\alpha < \kappa$ such that $x \in V_\alpha$, so $x \subset V_\alpha$. Then $|x| \le |V_\alpha| < \kappa$ by L1.
+
+            \underline{(ii)$\implies$(i)}: Suppose $x\subset V_\kappa$. For every $y \in x$, define $\alpha_y = \rho(y)$, the rank of $y$ ($y \in V_{\alpha_y+1}\backslash V_{\alpha_y}$). Let $A\coloneqq \{\alpha_y+1; y \in x\}$. Clearly $|A| \le |x| < \kappa$. Hence, by regularity of $\kappa$, $\bigcup A =:\alpha < \kappa$. But then for all $y \in x$, $y \in V_\alpha$, so $x \subset V_\alpha$. Hence $x \in V_{\alpha+1}\subset V_\kappa$.
+        \end{proof}
+
+        Now we can show something even stronger than Replacement:
+
+        Take any function $F: V_\kappa \ra V_\kappa$ and show that if $x \in V_\kappa$, then $F[x] \in V_\kappa$.
+
+        If $x \in V_\kappa$, then by L2 we know that $|x| <\kappa$, but then $|F[x]|\le |x| < \kappa$, and clearly $F[x]\subset V_\kappa$. Hence by L2 $F[x] \in V_\kappa$.
+
+        So this holds for all functions, including those defined by formulae.
+    \end{proof}
+\end{enumerate}
+
+\underline{Next goal}: If there is a family of models with nice wellorders of $\om^\om$ and $\psp(\bopi^1_n)$ holds, then there is a model of $\zfc + IC$. This will require a bit of work; we need to make precise the notion of `nice'.
+
+\begin{defin*}[Inner Model,]\ 
+    \begin{enumerate}
+        \item $M$ is an \undf{inner model} if it is a transitive class containing all ordinals and a model of $\zfc$.
+        
+        Alternatively, suppose $(V,\in)\models \zfc$ is a set model. Then $M\subset V$ is called an \undf{inner model} if it contains all of the ordinals of $V$ and is transitive in $V$ and $(M,\in)\models \zfc$. [\it{c.f.} ES\#3]
+
+        \item A formula $\phi$ \undf{defines} an inner model if $x \in M \iff \phi(x)$.
+        
+        \item A formula $\mu$ is called a \undf{canonical model family} if the following classes are inner models: $M = \{w;\phi(\emptyset,w)\}$, $M_x \coloneqq \{w;\phi(x,w)\}$ for each $x \in \om^\om$, with the properties:
+        \begin{enumerate}[label = (\alph*)]
+            \item $\forall x (M\subset M_x)$
+            \item $\forall x (x \in M_x)$
+            \item $M\models \textrm{GCH}$
+        \end{enumerate}
+
+        We call $M$ the \undf{root}.
+
+        \item If $\mu$ is a canonical model family, we say that $\mu$ is \undf{$\bodel^1_n$-wellordered} if for each $x$, there is a wellordering $<_x$ of $\om^\om \cap M_x$ such that $\{(u,v); u,v\in M_x \land u <_x v\}$ is $\bodel^1_n$.
+    \end{enumerate}
+\end{defin*}
+
+\marginpar{Lecture 16}
+
+This lecture is devoted to proving a theorem which, while of little practical use to us, will help to demonstrate the techniques of relating the various concepts that we are interested in.
+
+\subsection*{Preserving of basic features in Inner Models}
+
+The main thing about inner models that we assumed was that, for $M\subset V$, $M$ is transitive. Suppose $M,V\models \zfc$.
+
+We have (ES\#3), for $x,y,f \in M$:
+\begin{itemize}    
+    \item $M\models f : x\ra y \iff V\models f : x \ra y$
+    \item $M\models f:x\ra y $ is surjective $\iff$ $V\models f:x \ra y$ is surjective
+    \item $M\models x,y$ are ordinals, $f : x \ra y$, $f$ cofinal $\iff$ $V\models x,y$ are ordinals, $f : x \ra y$, $f$ cofinal
+\end{itemize}
+
+\underline{Consequence}:
+\begin{itemize}
+    \item $V\models \kappa$ is a cardinal $\implies$ $M\models \kappa$ is a cardinal
+    \item $V\models \kappa$ regular $\implies$ $M\models \kappa$ is regular
+\end{itemize}
+Note that this consequence is not in general reversible; regularity of a cardinal in $M$ doesn't necessarily imply regularity in $V$. For example, there are possibly other cardinals in $M$, as well as those inherited from $V$. So perhaps the models disagree on what the label `$\aleph_0$' refers to; we can distinguish this by $\aleph_\alpha^M$ (and $\aleph_\alpha^V$).
+
+If we write ``$\aleph_1$ is a cardinal'', this is technically not a first order formula of set theory; what we mean by this is ``the first uncountable ordinal is a cardinal''. It is important to understand that when we say that $\kappa$ is regular in $V$ and then look at its properties in $M$, we refer in $M$ to that exact object, no the cardinal with those properties. For instance, if we have $V\models \aleph_2$ regular, then the conseqeunce ``$M\models \aleph_2$ regular'' means that the exact same set theoretic object is still regular in $M$, not that the second uncountable cardinal is also regular in $M$.
+
+If we mean $\aleph_n$ to be interpreted by a formula in $M$, we write $\aleph_n^M$. If we mean the object interpreted in $V$, we write $\aleph_n = \aleph_n^V$. In general, $\aleph_n^M < \aleph_n^V$ is possible.
+
+We have another transfer between $M$ and $V$: $$M\models x \in \wf \implies V \models x \in \wf$$
+which is proved on ES\#3 also.
+\begin{align*}
+    M\models \alpha\textrm{ is countable} \iff & \exists x (||x|| = \alpha \ \& \ x \in \wf\cap M)\\
+    \iff & \wf_\alpha \cap M \ne \emptyset 
+\end{align*}
+In this situation, this means that $\aleph_1^M < \aleph_1$, so in $V$, $\wf_{\aleph_1^M}\ne \emptyset$. But $M \models \aleph_1^M$ is not countable (clearly), hence $\wf_{\aleph_1^M}\cap M = \emptyset$.
+
+\underline{Summary}: $\aleph_1^M = \min \{\alpha ; \wf_\alpha \cap M = \emptyset\}$. 
+
+Let $\mu$ be a canonical model family, with models $M,M_x$. Since $M\subset M_x$, we have that $\aleph_1^M\le \aleph_1^{M_x}\le \aleph_1$. 
+
+Here comes the `weird' theorem:
+
+\begin{theorem*}
+    Suppose there is a $\bodel^1_n$-wellordered canonical model family and $\Det(\bopi^1_n)$. Then there is an inner model of $\zfc + \ic$.
+\end{theorem*}
+\begin{proof}
+    We fix models $M,M_x$ from the canonical model family $\mu$.
+
+    \begin{defin*}[Weak set of unique codes]
+        $C\subset \wf$ is called a \undf{weak set of unique codes} if for all $\alpha$, $|\wf_\alpha \cap C| \le 1$.
+    \end{defin*}
+
+    We get from our general theorem about s.u.c. that  if $C$ is a wsuc, then $C$ is uncountable $\iff$ $C$ does not have the psp.
+
+    By assumption, we know that $\{(u,v);u,v,\in M_x\textrm{ and }u<_x v\}$ is $\bodel^1_n$. The proof of ``$\bodel^1_n$-wellordering $\implies$ suc that is $\bopi^1_n$'' shows here that there is a wsuc $C_x$ that is $\bopi^1_n$. Then $C_x \cap \wf_\alpha = \emptyset \iff \alpha < \aleph_1^{M_x}$.
+
+    Clearly $|C_x| = |\aleph_1^{M_x}|$, so $C_x$ has the psp $\iff$ $\aleph_1^{M_x} < \aleph_1$. BY $\Det(\bopi^1_n)$, we get $\psp(\bopi^1_n)$ by asymmetric game. So for each $x$, $C_x$ has the psp, so $\forall x (\aleph_1^{M_x} < \aleph_1)$. Also, if $\alpha < \aleph_1$ then there is some $x \in \wf_\alpha$. But then $x\in M_x$, which implies $\wf_\alpha\cap M_x \ne \emptyset$, and hence $\aleph_1^{M_x} > \alpha$. So $M_x$ has lots of cardinals that are not cardinals in $V$.
+
+    To see this, consider $\alpha \coloneqq \aleph_1^{M_z}$. Find $x$ such that $||x|| = \alpha$. Then $\aleph_1^{M_x} > \alpha$, but then by the above argument (independent of $z$) we have that $\aleph_1^{M_z} < \aleph_1^{M_x} < \aleph_1$. This argument shows that for each $\alpha < \aleph_1$, there is some $x$ such that $\alpha < \aleph_1^{M_x} < \aleph_1$. In particular, the ordinals that look like $\aleph_1$ in these models are unbounded in $\aleph_1$.
+
+    \underline{Claim}: $M\models \aleph_1^V$ inaccessible.
+
+    \underline{Proof of Claim}: Since $M\subset M_x$, we have $\aleph_1^M \le \aleph_1^{M_x} < \aleph_1^V$. Regularity is preserved by inner models, hence $M$ believes $\aleph_1^V$ is regular.
+
+    Since $M \models \textrm{GCH}$, strong limit is equivalent to limit. So we just need to show that if $\kappa < \aleph_1$ cardinal, $\lambda$ is an ordinal such that $M\models \lambda = \kappa^+$ (cardinal successor), then $\lambda < \aleph_1$. Once this is shown, then $\aleph_1^V$ is a limit in $M$, hence strong limit, and also regular hence inaccessible.
+
+    Let $x \in \wf_\kappa$, which exists in $V$ since $\kappa < \aleph_1$. As we had before, $x \in M_x \implies \aleph_1^{M_x} > \kappa$. Since $M\subset M_x$, $\aleph_1^{M_x}$ is a cardinal in $M$, and by assumption is the smallest cardinal $>\kappa$ in $M$.
+
+    This implies $\lambda \le \aleph_1^{M_x} < \aleph_1$. Hence $\lambda < \aleph_1$. \qedsymbol
+
+    This completes the proof of the claim, and hence the theorem.
+\end{proof}
+
+\underline{Next}: We move up from inaccessible cardinals to \it{measurable cardinals}. The remainder of the course will focus on the relationship between determinacy and large cardinals at this level. We will prove the following:
+
+\begin{remark*}[Theorem 1]
+    If there is a measurable cardinal, then $\Det(\bopi^1_1)$.
+\end{remark*}
+\begin{remark*}[Theorem 2]
+    If $\zf + \ad$, $\aleph_1$ is a measurable cardinal.
+\end{remark*}
+
+\marginpar{Lecture 17}
+
+\subsection*{Measurable Cardinals}
+
+Let $\kappa$ be an uncountable cardinal. We say that $F\subset \P(\kappa)$ is a \undf{filter on $\kappa$} if:
+\begin{enumerate}[label = (\alph*)]
+    \item $\kappa\in F,\emptyset\not\in F$
+    \item $A,B\in F \implies A\cap B \in F$
+    \item $A\in F, B\supseteq A\implies B \in F$
+\end{enumerate}
+A filter $F$ is called an \undf{ultrafilter} if for every $A\subset \kappa$, either $A \in F$ or $\kappa\backslash A \ in F$.
+
+A filter $F$ is called \undf{$\lambda$-complete} if for every $\gamma < \lambda$ and every family $\{A_\alpha ;\alpha < \gamma\}\subset F$, we have $\bigcap_{\alpha < \gamma} A_\alpha \in F$, \it{i.e.} closed under intersections of length less than $\lambda$.
+
+\begin{remark*}
+    If $\lambda = \aleph_0$, then this means closure under finite intersections (which follows anyway from (b)).
+
+    If $\lambda = \aleph_1$, this means closure under countable intersections, often called \undf{$\sigma$-completeness}
+\end{remark*}
+
+If $\alpha \in \kappa$, then $U_\alpha \coloneqq \{X\subset \kappa : \alpha \in X\}$ is an ultrafilter wchich is $\lambda$-complete for all $\lambda$. We call these \undf{principal ultrafilters}, and those not of this form we call \undf{non-principal ultrafilters}.
+
+So, if $U$ is a non-principal ultrafilter, then for all $\alpha \in \kappa$, $\{\alpha\}\not\in U$. Therefore, if it is $\lambda$-complete and $A\subset \kappa$ with $|A| < \lambda$, then $A \not\in U$, since it is a length $< \lambda$ union of things not in $U$, and hence is not in $U$ by a recharacterisation of $\lambda$-completeness.
+
+\begin{remark*}[Fact]
+    $\zfc$ proves that the set of ultrafilters on $\kappa$ has cardinality $2^{2^\kappa}$. Of these, exactly $\kappa$ many are principal.
+\end{remark*}
+
+\begin{defin*}[Measurable Cardinal]
+    A cardinal $\kappa$ is called \undf{measurable} if there is a $\kappa$-complete non-principal ultrafilter on $\kappa$. [In particular, for such a $U$, all elements of $U$ have cardinality $\kappa$.]
+\end{defin*}
+
+At first glance, this is a rather combinatorial property, and it is not obvious at all that this is in fact a large cardinal property.
+
+\begin{theorem*} [ZFC]
+    Every measurable cardinal is inaccessible.
+\end{theorem*}
+We highlight ZFC because we will later see that $\zf + \ad \implies \aleph_1$ is measurable, and clearly $\aleph_1$ is not inaccessible. So this proof needs AC.
+\begin{proof}
+    We need to show regular \& strong limit. Fix $U$ a $\kappa$-complete non-principal ultrafilter on $\kappa$.
+
+    \underline{Regular}: Suppose not. So there is some sequence $(\gamma_\alpha; \alpha < \lambda)$ with $\lambda < \kappa$ and $\gamma_\alpha < \kappa$ such that $\kappa = \bigcup_{\alpha < \lambda}\gamma_\alpha$. By choice of $U$, $\gamma_\alpha \not\in U$ since it is an initial segment and $\kappa$ is a cardinal (hence initial ordinal) so $|\gamma_\alpha| < \kappa$.
+
+    By $\kappa$-completeness, $\bigcup_{\alpha < \lambda}\gamma_\alpha \not\in U$, contradicting the filter property $\kappa \in U$.
+
+    Note that so far this is a ZF theorem.
+
+    \underline{Strong Limit}: We need to show that if $\lambda < \kappa$, then $2^\lambda \not\ge \kappa$; equivalently in ZFC, we show $2^\lambda < \kappa$. We do this by assuming that there is an injection $f : \kappa \ra 2^\lambda$ and derive a contradiction. Note that we can identify $2^\lambda$ with $S = \{g; g : \lambda \ra 2\}$. So wlog say $f : \kappa \xhookrightarrow{} S$. So for $\alpha \in \kappa$, $f(\alpha): \lambda \ra 2$.
+
+    For fixed $\gamma < \lambda$, we consider $A^0_\gamma = \{\alpha; f(\alpha)(\gamma) = 0\}$ and $A^1_\gamma = \{\alpha ; f(\alpha)(\gamma) = 1\}$. Clearly $A^0_\gamma \cup A^1_\gamma = \kappa$, and  $A^0_\gamma \cap A^1_\gamma = \emptyset$. Thus exactly one of the two is in $U$.
+
+    Let $i_\gamma \in \{0,1\}$ be such that $A^{i_\gamma}_\gamma \in U$. Then the family $A^{i_\gamma}_\gamma;\gamma \in \lambda\}\subset U$, and thus by $\kappa$-completeness we have $\bigcap_{\gamma < \lambda}A^{i_\gamma}_\gamma \in U$.
+
+    We now claim that $\left|\bigcap_{\gamma < \lambda}A^{i_\gamma}_\gamma \right| \le 1$, in contradiction to the non-principality of $U$.
+
+    Suppose $\alpha \in \bigcap_{\gamma < \lambda}A^{i_\gamma}_\gamma$. Consider $f(\alpha)$. Then $f(\alpha)(\gamma) = i_\gamma$, so there is only one function $f$ such that for all $\alpha,\alpha' \in \bigcap_{\gamma < \lambda}A^{i_\gamma}_\gamma$, $f = f(\alpha) = f(\alpha')$. But $f$ is injective, so there can only be one such element; hence $\left|\bigcap_{\gamma < \lambda}A^{i_\gamma}_\gamma\right| \le 1$.
+\end{proof}
+
+\begin{remark*}
+    The use of AC is in the setup of the proof, which requires that $2^\lambda$ is wellorderable.
+\end{remark*}
+
+\begin{defin*}[Erd\H{o}s-Rado Arrow Notation]
+    Let $\kappa,\lambda,\mu$ be cardinals and $n \in \N$. We write $[X]^n$ for the set of $n$-element subsets of $X$. A function $c : [X^n] \ra \mu$ is called a \undf{$\mu$-colouring}.
+
+    If $c$ is a $\mu$-colouring, we call $H\subset X$ \undf{$c$-homogeneous} or \undf{$c$-monochromatic} if there is some $ \alpha \in \mu$ such that $\forall s \in [H]^n$, $c(s) = \alpha$.
+
+    Now we write $$\kappa \rightarrow (\lambda)^n_\mu$$ (pronounced $\kappa$ ``arrows'' $(\lambda)^n_\mu$) for ``every $\mu$-colouring of $[\kappa]^n$ has a homogeneous subset $H$ of cardinality $\lambda$''.
+\end{defin*}
+
+\begin{defin*}[Weakly Compact Cardinal]
+    A cardinal $\kappa$ is called \undf{weakly compact} if $\kappa \rightarrow (\kappa)^2_2$.
+\end{defin*}
+\begin{remark*}[Facts]\ 
+    \begin{enumerate}[label = (\arabic*)]
+        \item Every weakly compact cardinal is inaccessible [ES\#3].
+        \item Every measurable cardinal is weakly compact [proof next time].
+    \end{enumerate}
+\end{remark*}
+
+\begin{defin*}
+    We write $[X]^\lom$ for the set of all finite subsets of $X$. A function $c : [X]^\lom \ra\mu$ is called a \undf{$\mu$-colouring}.
+
+    If $n \in \N$, $H\subset X$ we call $H$ \undf{$n$-$c$-homogeneous} if there is $\alpha \in \mu$ such that for all $s \in [H]^n$, $c(s) = \alpha$.
+
+    We then write $$\kappa \rightarrow (\lambda)^\lom_\mu$$ if every $\mu$-colouring has an $n$-$c$-homogeneous set of size $\lambda$ for every $n \in \N$.
+\end{defin*}
+
+\begin{theorem*}[Rowbottom's Theorem]
+    If $\kappa$ is measurable and there is a countable set $$\{c_k;k \in \N\}$$ of $\gamma$-colourings (where $\gamma < \kappa$), then there is a set $H$ of cardinality $\kappa$ [actually in the ultrafilter $U$] such that $H$ is $n$-$c_k$-homogeneous for all $n,k\in \N$ simultaneously.
+\end{theorem*}
+This theorem will again be discussed on ES\#3.
+
+\marginpar{Lecture 18}
+
+Proof of Fact (1) is on Example Sheet \#3 (29). We're going to see a weak version of Fact (1).
+
+\begin{remark*}[Proposition (ZFC)]
+    $\aleph_1$ is not weakly compact.
+\end{remark*}
+\begin{proof}
+    By AC, we have suc $C\subset \wf$ with $|C| = \aleph_1$. So write $$ C = \{x_\alpha ; \alpha < \om_1\}$$ with $||x_\alpha || = \alpha$. Consider the lexicographic order on $\om^\om$:
+    \begin{align*}
+        x <_L y \iff x\restriction n = y \restriction n\textrm{ and }x(n) < y(n)\textrm{ [$n$ unique]}
+    \end{align*}
+
+    If $(y_\alpha; \alpha < \gamma)$ is any increasing sequence in the order $<_L$, then we can isolate the elements of the sequence by the following basic open sets:
+    \begin{align*}
+        y_\alpha \restriction n = y_{\alpha+1}\restriction n\\
+        y_\alpha(n) < y_{\alpha+1}(n)
+    \end{align*}
+    Take $s_\alpha \coloneqq y_\alpha \restriction n+1$. Then $[s_\alpha]\ni y_\alpha$ but for no other element $y_\beta$ do we have $y_\beta \in [s_\alpha]$. Since there aer only countably many basic open sets, we see that $\gamma$ must be a countable ordinal.
+
+    Define $c : [\aleph_1]^2 \ra 2$ by
+    \begin{align*}
+        c(\alpha,\beta) = \left\lbrace \begin{array}{cl}1 & \textrm{ if }<_L,<\textrm{ agree on }\alpha,\beta\\ 0 & \textrm{ o/w} \end{array}\right.
+    \end{align*}
+    If $H$ has cardinality $\aleph_1$ and is $c$-homogeneous for colour $1$, then it defines a $<_L$-increasing sequence in $C$; otherwise, if it's $c$-homogeneous for colour $0$, then it defines a $<_L$-decreasing sequence [note that the above argument works for $>$ as well as $<$]. Both are a contradiction.
+\end{proof}
+
+Now (2): Every measurable cardinal is weakly compact.
+
+\begin{remark*}
+    Example (30) gives a proof of (2) without additional assumptions. We are going to see a slightly different proof that makes another assumption.
+\end{remark*}
+
+\begin{defin*}
+    If $X_\alpha \subset \kappa$ are subsets of $\kappa$ for $\alpha < \kappa$, we call the set $$
+    \tri_{\alpha < \kappa}X_\alpha \coloneqq \{\gamma < \kappa; \gamma \in \bigcap_{\alpha <\gamma}X_\alpha$$ the \undf{diagonal intersection}.
+\end{defin*}
+\begin{defin*}[Normal Ultrafilter]
+    An ultrafilter $U$ is called \undf{normal} if it is closed under diagonal intersections.
+\end{defin*}
+\begin{remark*}[Proposition]
+    \emph{
+        If $U$ is an ultrafilter on $\kappa$ such that all elements of $U$ have size $\kappa$ and $U$ is normal, then $U$ is $\kappa$-complete.
+    }
+\end{remark*}
+\begin{proof}
+    Let $X_\alpha (\alpha < \lambda)$ be in $U$. Want to show that $\bigcap_{\alpha < \lambda}X_\alpha \in U$. We define:
+    \begin{align*}
+        Y_\alpha \coloneqq \left\lbrace \begin{array}{cl}X_\alpha & \alpha < \lambda \\ \kappa & \alpha \ge \lambda \end{array}\right.
+    \end{align*}
+    Every $Y_\alpha \in U$, so $\tri_{\alpha < \kappa}Y_\alpha \in U$ by normality. Since $\lambda < \kappa$, we have $\lambda \not\in U$, so $\kappa\backslash \lambda \in U$, so $Y\coloneqq (\tri_{\alpha < \lambda}Y_\alpha)\backslash \lambda \in U$.
+
+    Let $\eta \in Y$. Then $\eta > \lambda$, and $\eta \in \bigcap_{\alpha < \eta}Y_\alpha \subset \bigcap_{\alpha < \lambda}Y_\alpha = \bigcap_{\alpha < \lambda}X_\alpha$. So $Y\subset \bigcap_{\alpha < \lambda}X_\alpha$, and hence $\bigcap_{\alpha < \lambda}X_\alpha \in U$.
+\end{proof}
+\begin{remark*}[Fact (ZFC)]
+    If $\kappa$ is measurable, then there is a normal ultrafilter on $\kappa$. [Proof omitted.]
+\end{remark*}
+\begin{theorem*}[ZFC]
+    Measurable cardinals are weakly compact.
+\end{theorem*}
+\begin{proof}
+    Let $U$ be a normal $\kappa$-complete ultrafilter on $\kappa$. Let $c : [\kappa]^2 \ra 2$ be any $2$-colouring. If $\alpha \in \kappa$, we write
+    \begin{align*}
+        c_\alpha(\beta) \coloneqq \left\lbrace \begin{array}{cl}c(\alpha,\beta) & \alpha \ne \beta\\ 0 & \alpha = \beta \end{array}\right.
+    \end{align*}
+    Then we define:
+    \begin{align*}
+        X^0_\alpha &\coloneqq \{\beta ; c_\alpha(\beta) = 0\}\\
+        X^1_\alpha &\coloneqq \{\beta ; c_\alpha(\beta) = 1\}
+    \end{align*}
+    There is $i_\alpha \in \{0,1\}$ such that $X^{i_\alpha}_\alpha \in U$. Then let $I_0 \coloneqq \{\alpha; i_\alpha = 0\}$, and $I_1 = \{\alpha; i_\alpha = 1\}$. Then exactly one of $I_0$,$I_1 \in U$; wlog $I_0 \in U$.
+
+    Define:
+    \begin{align*}
+        X_\alpha \coloneqq \left\lbrace \begin{array}{cl}X^0_\alpha & \textrm{ if }\alpha \in I_0 \\ \kappa & \textrm{ o/w} \end{array}\right.
+    \end{align*}
+    By assumption, all $X_\alpha \in U$. Thus $\tri_{\alpha < \kappa}X_\alpha \in U$. And $H\coloneqq I_0 \cap \tri_{\alpha < \kappa}X_\alpha \in U$. If we can show that $H$ is $c$-homogeneous for colour $0$, we are done [since $|H| = \kappa$].
+
+    Let $\alpha < \beta$ , $\alpha,\beta \in H$. Hence $\alpha,\beta \in I_0$, and $X_\alpha = X^0_\alpha,X_\beta = X^0_\beta$. Moreover, $\beta \in \tri_{\delta < \kappa}X_\delta = \{\gamma;\gamma \in \bigcap_{\delta < \gamma}X_\delta\}$, and so $\beta \in \bigcap_{\delta < \beta}X_\delta$. This means that $c_\alpha(\beta) = 0$, which by definition means $c(\alpha,\beta) = 0$.
+
+    Hence for arbitrary $\alpha,\beta\in H$, $(\alpha,\beta)$ has colour zero as required.
+\end{proof}
+
+\subsection*{Tree Representations}
+
+We proved that:
+\begin{enumerate}[label = (\Roman*)]
+    \item $C$ closed $\iff$ there is a tree $T$ on $\omega$ such that $C = [T]$
+    \item $A$ analytic $\iff$ there is $T$ tree on $\om\times\om$ such that $A = p[T]$.
+\end{enumerate}
+We also saw that tree representations of type (I) are important for determinacy proofs:
+
+Gale-Stewart (even without AC): if $T$ is a tree on a wellordered set $X$, then $A\subset X^\om$ with $A = [T]$ is determined.
+
+\underline{Question}: Can we lift a determinacy argument for tree representations of type (I) to type (II)?
+
+\begin{defin*}
+    Let $\kappa$ be a cardinal, and $T$ be a tree on $\kappa \times \omega$. [Note that $\kappa\times \om$ is wellordered.] We define $p[T] \coloneqq \{x \in \om^\om; \exists y \in \kappa^\om (y,x) \in [T]\}$. 
+\end{defin*}
+\begin{remark*}
+    This is the same as before, but with general $\kappa$ instead of just $\kappa = \omega$. Indeed, if $\kappa = \aleph_0$, then thi sis exactly the analytic sets [follows from our tree representation of type (II)].
+\end{remark*}
+\begin{defin*}
+    If $\kappa$ is a cardinal and $A\subset \om^\om$, we say $A$ is \undf{$\kappa$-Suslin} if there is a tree $T$ on $\kappa \times \om$ such that $A = p[T]$.
+\end{defin*}
+By the remark, being $\aleph_0$-Suslin is equivalent to being analytic.
+
+\underline{Hope}: Prove a Gale-Stewart type theorem for $\kappa$-Suslin sets.
+
+How might this work? The technique here is that of\dots
+
+\subsection*{Auxiliary Games}
+\begin{defin*}[Auxiliary Game]
+    If $A$ is $\kappa$-Suslin, say $A = p[T]$ for some $T$ on $\kappa \times \omega$, we define the \undf{auxiliary game} $G_\textrm{aux}(T)$ as follows:
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $\alpha_0,x_0$ & & $\alpha_1,x_2$ & & $\alpha_2,x_4 $& & $\dots $\\ \hline
+            II & & $x_1$ & & $x_3 $& &$ x_5$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+    with $\alpha_i \in \kappa,x_i \in \om$. We write $y(i) = \alpha_i,x(i) =x_i$. Then we have $y  \in \kappa^\om,x \in \om^\om$. Player I wins if $(y,x) \in [T]$.
+\end{defin*}
+
+We consider the relationship between the games $G(A)$ and $G_\aux(T)$.
+
+Suppose player I wins $G_\aux(T)$ by $\sigma$. Then when playing $G(A)$, player I secretly plays another game of $G_\aux(A)$ and uses $\sigma$ in that game to produce their move back in $G(A)$. This produces a run $x$ such that $(y,x) \in [T]$ for some $y\in \kappa^\om$. Hence this produces a winning strategy $\sigma^\ast$ for $G(A)$.
+
+What about the other direction? Say, if player II wins in $G_\aux(T)$? Not quite as simple.
+
 \end{document}

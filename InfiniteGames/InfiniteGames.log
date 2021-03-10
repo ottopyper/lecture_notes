@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.2.16)  9 MAR 2021 14:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.2.16)  10 MAR 2021 23:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -411,7 +411,80 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 130.
 \xmathstrut@dim=\dimen275
 )
 \c@theorem=\count296
-) (/usr/share/texmf-dist/tex/latex/tools/bm.sty
+) (/usr/share/texmf-dist/tex/generic/xypic/xy.sty (/usr/share/texmf-dist/tex/generic/xypic/xy.tex Bootstrap'ing: catcodes, docmode, (/usr/share/texmf-dist/tex/generic/xypic/xyrecat.tex) (/usr/share/texmf-dist/tex/generic/xypic/xyidioms.tex)
+
+ Xy-pic version 3.8.9 <2013/10/06>
+ Copyright (c) 1991-2013 by Kristoffer H. Rose <krisrose@tug.org> and others
+ Xy-pic is free software: see the User's Guide for details.
+
+Loading kernel: messages; fonts; allocations: state,
+\X@c=\dimen276
+\Y@c=\dimen277
+\U@c=\dimen278
+\D@c=\dimen279
+\L@c=\dimen280
+\R@c=\dimen281
+\Edge@c=\toks44
+\X@p=\dimen282
+\Y@p=\dimen283
+\U@p=\dimen284
+\D@p=\dimen285
+\L@p=\dimen286
+\R@p=\dimen287
+\Edge@p=\toks45
+\X@origin=\dimen288
+\Y@origin=\dimen289
+\X@xbase=\dimen290
+\Y@xbase=\dimen291
+\X@ybase=\dimen292
+\Y@ybase=\dimen293
+\X@min=\dimen294
+\Y@min=\dimen295
+\X@max=\dimen296
+\Y@max=\dimen297
+\lastobjectbox@=\box62
+\zerodotbox@=\box63
+\almostz@=\dimen298
+ direction,
+\d@X=\dimen299
+\d@Y=\dimen300
+\K@=\count297
+\KK@=\count298
+\Direction=\count299
+\K@dXdY=\dimen301
+\K@dYdX=\dimen302
+\xyread@=\read4
+\xywrite@=\write4
+\csp@=\count300
+\quotPTK@=\dimen303
+ utility macros; pictures: \xy, positions,
+\swaptoks@@=\toks46
+\connectobjectbox@@=\box64
+ objects,
+\styletoks@=\toks47
+ decorations; kernel objects: directionals, circles, text; options; algorithms: directions, edges, connections;  Xy-pic loaded)
+Package: xy 2013/10/06 Xy-pic version 3.8.9
+ (/usr/share/texmf-dist/tex/generic/xypic/xycmtip.tex  Xy-pic option: Computer Modern tip extension v.3.7 (/usr/share/texmf-dist/tex/generic/xypic/xytips.tex  Xy-pic option: More Tips extension v.3.11 loaded) loaded) (/usr/share/texmf-dist/tex/generic/xypic/xyall.tex  Xy-pic option: All features v.3.8 (/usr/share/texmf-dist/tex/generic/xypic/xycurve.tex  Xy-pic option: Curve and Spline extension v.3.12 curve,
+\crv@cnt@=\count301
+\crvpts@=\toks48
+\splinebox@=\box65
+\splineval@=\dimen304
+\splinedepth@=\dimen305
+\splinetol@=\dimen306
+\splinelength@=\dimen307
+ circles,
+\L@=\dimen308
+ loaded) (/usr/share/texmf-dist/tex/generic/xypic/xyframe.tex  Xy-pic option: Frame and Bracket extension v.3.14 loaded) (/usr/share/texmf-dist/tex/generic/xypic/xyline.tex  Xy-pic option: Line styles extension v.3.10
+\xylinethick@=\dimen309
+ loaded) (/usr/share/texmf-dist/tex/generic/xypic/xyrotate.tex  Xy-pic option: Rotate and Scale extension v.3.8 loaded) (/usr/share/texmf-dist/tex/generic/xypic/xycolor.tex  Xy-pic option: Colour extension v.3.11 loaded) (/usr/share/texmf-dist/tex/generic/xypic/xymatrix.tex  Xy-pic option: Matrix feature v.3.14
+\Row=\count302
+\Col=\count303
+\queue@=\toks49
+\queue@@=\toks50
+\qcount@=\count304
+\qcount@@=\count305
+\matrixsize@=\count306
+ loaded) (/usr/share/texmf-dist/tex/generic/xypic/xyarrow.tex  Xy-pic option: Arrow and Path feature v.3.9 path, \ar, loaded) (/usr/share/texmf-dist/tex/generic/xypic/xygraph.tex  Xy-pic option: Graph feature v.3.11 loaded) loaded) (/usr/share/texmf-dist/tex/generic/xypic/xypdf.tex  Xy-pic option: PDF driver v.1.9 Xy-pic pdf driver: `color' extension support (/usr/share/texmf-dist/tex/generic/xypic/xypdf-co.tex loaded) Xy-pic pdf driver: `curve' extension support (/usr/share/texmf-dist/tex/generic/xypic/xypdf-cu.tex loaded) Xy-pic pdf driver: `frame' extension support (/usr/share/texmf-dist/tex/generic/xypic/xypdf-fr.tex loaded) Xy-pic pdf driver: `line' extension support (/usr/share/texmf-dist/tex/generic/xypic/xypdf-li.tex loaded) Xy-pic pdf driver: `rotate' extension support (/usr/share/texmf-dist/tex/generic/xypic/xypdf-ro.tex loaded) loaded)) (/usr/share/texmf-dist/tex/latex/tools/bm.sty
 Package: bm 2019/07/24 v1.2d Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup6
 \symboldletters=\mathgroup7
@@ -420,36 +493,36 @@ LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
 LaTeX Info: Redefining \bm on input line 209.
 ) (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count297
-\l__pdf_internal_box=\box62
+\l__kernel_color_stack_int=\count307
+\l__pdf_internal_box=\box66
 ) (/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
  (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count298
-\scratchdimen=\dimen276
-\scratchbox=\box63
-\nofMPsegments=\count299
-\nofMParguments=\count300
-\everyMPshowfont=\toks44
-\MPscratchCnt=\count301
-\MPscratchDim=\dimen277
-\MPnumerator=\count302
-\makeMPintoPDFobject=\count303
-\everyMPtoPDFconversion=\toks45
+\scratchcounter=\count308
+\scratchdimen=\dimen310
+\scratchbox=\box67
+\nofMPsegments=\count309
+\nofMParguments=\count310
+\everyMPshowfont=\toks51
+\MPscratchCnt=\count311
+\MPscratchDim=\dimen311
+\MPnumerator=\count312
+\makeMPintoPDFobject=\count313
+\everyMPtoPDFconversion=\toks52
 ) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -490,44 +563,56 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 54.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 64.
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 54.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 64.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
+Package xypdf Info: Line width: 0.39998pt on input line 64.
+ [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 111--112
+Underfull \hbox (badness 10000) in paragraph at lines 122--123
 
  []
 
 [2] [3] [4] [5] [6] [7]
-Underfull \hbox (badness 10000) in paragraph at lines 449--451
+Underfull \hbox (badness 10000) in paragraph at lines 460--462
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 452--454
+Underfull \hbox (badness 10000) in paragraph at lines 463--465
 
  []
 
-[8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] (/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.aux) ) 
+[8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31] <xymatrix 2x1 44> <xymatrix 2x1 44> <xymatrix 2x1 44> <xymatrix 2x1 44> <xymatrix 2x1 44> <xymatrix 2x1 44> <xymatrix 2x1 44> <xymatrix 2x1 44> <xymatrix 2x1 44> <xymatrix 2x1 44>
+Overfull \hbox (72.19801pt too wide) in paragraph at lines 1669--1681
+ [] 
+ []
+
+[32]
+Overfull \hbox (4.36456pt too wide) in paragraph at lines 1726--1727
+[]\OT1/cmr/m/n/10 Clearly, if $\OML/cmm/m/it/10 I\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^T\OT1/cmr/m/n/10 )$ then $\OMS/cmsy/m/n/10 @[]\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 @[]\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 @[] \OML/cmm/m/it/10 < ^^T$ \OT1/cmr/m/n/10 triv-ially since these are suc-ces-sor car-di-nals. Also $\OMS/cmsy/m/n/10 @[]\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 @[]\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 @[] \OML/cmm/m/it/10 <
+ []
+
+[33] [34] [35] [36] [37] [38] [39] [40] (/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.aux) ) 
 Here is how much of TeX's memory you used:
- 15795 strings out of 479383
- 297155 string characters out of 5875830
- 604795 words of memory out of 5000000
- 32594 multiletter control sequences out of 15000+600000
- 418660 words of font info for 81 fonts, out of 8000000 for 9000
+ 18467 strings out of 479383
+ 329447 string characters out of 5875830
+ 692347 words of memory out of 5000000
+ 35195 multiletter control sequences out of 15000+600000
+ 420109 words of font info for 90 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,16n,87p,670b,403s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on /home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.pdf (30 pages, 356764 bytes).
+ 84i,45n,87p,3349b,410s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/xypic/xycmat10.pfb></usr/share/texmf-dist/fonts/type1/public/xypic/xycmbt10.pfb>
+Output written on /home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/InfiniteGames/InfiniteGames.pdf (40 pages, 410468 bytes).
 PDF statistics:
- 193 PDF objects out of 1000 (max. 8388607)
- 137 compressed objects within 2 object streams
+ 235 PDF objects out of 1000 (max. 8388607)
+ 167 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
