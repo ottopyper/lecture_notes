@@ -1,0 +1,125 @@
+\documentclass[]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+\newcommand{\I}{\textrm{I}}
+\newcommand{\II}{\textrm{II}}
+\newcommand{\om}{\omega}
+\newcommand{\lom}{{<\omega}}
+\newcommand{\lh}{\ell h}
+\renewcommand{\ac}{\textrm{AC}}
+\newcommand{\bosig}{\bm{\Sigma}}
+\newcommand{\bopi}{\bm{\Pi}}
+\newcommand{\bodel}{\bm{\Delta}}
+\newcommand{\dom}{\textrm{dom}}
+\usepackage{bm}
+
+\newcommand{\game}{
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $m_0$ & & $m_2$ & & $m_4 $& & $\dots $\\ \hline
+            II & & $m_1$ & & $m_3 $& &$ m_5$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+}
+
+\title{Infinite Games: Example Sheet 2}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{enumerate}[label = (\arabic*)]
+\setcounter{enumi}{13}
+\item \begin{enumerate}[label = (\roman*)]
+    \item Suppose $f : \om^\om \ra \om^\om$ is continuous. We construct a coherent $c: \om^\lom \ra \om^\lom$ defined inductively as follows:
+    \begin{itemize}
+        \item $c(\emptyset) = \emptyset$
+        \item Let $s \in \om^\om$ and $m \in \om$, and suppose $c(s)$ is defined. If there exists some $m'$ such that $x \in [sm] \implies f(x) \in [c(s)m']$ then let $c(sm) = c(s)m'$. Otherwise, let $c(sm) = c(s)$.
+    \end{itemize}
+
+    This construction can be done for any $f$ and always gives $c$ increasing; we will show that continuity of $f$ implies boundedness of $c$:
+
+    Suppose $c$ is not unbounded. Then there exists some $x$ for which $c(x\restriction n) = c(x\restriction N)$, of length $M$, for all $n\ge N$ for some $N \in \om$. Thus for each $n \ge N$ there exists some $y_n \in \om^\om$ such that $x\restriction n =y_n \restriction n$ but $f(x)\restriction M+1\ne f(y_n)\restriction M+1$. But then $y_n \ra x$, and so $f(y_n) \ra f(x)$, contradiction.
+
+    Lastly, we have that $f = f_c$. Indeed, for any $x \in \om^\om$, $c(x\restriction n)\subset f(x)$ for all $n$, and hence $\bigcup c(x\restriction n) \subset f(x)$, but the union lies in $\om^\om$ and so they are equal. Hence $f = f_c$.
+
+    \item We have a coherent $c$ such that $f = f_c$; let $x_n \ra x \in \om^\om$. Suppose for contradiction that there is some $M$ for which $f(x_n)\restriction M \ne f(x) \restriction M$ for infinitely many $n$.
+    
+    Since $c$ is unbounded, there is some $M' \in \om$ such that $\bigcup_{m\in M'}c(x\restriction m)$ has length $M$. But now since $c$ is increasing, if $x_n \restriction M' = x\restriction M'$ then $f(x)\restriction M = f(x')\restriction M$; this must happen eventually for all $x_n$, since $x_n \ra x$. Contradiction.
+    \end{enumerate}
+    \item \underline{(i)$\implies$(ii)}: Suppose player I has played string $x_n$ and player II has played string $y_n$, which has pass-concatenation $y_n^\ast$, and assume that $x \in [x_n] \implies f(x) \in [y_n^\ast]$. Now suppose player I plays $m \in \om^\om$. Either we have some $m'$ such that $x \in [x_nm]\implies f(x) \in [y_n^\ast m]$, in which case II plays $m'$, or no such $m'$ exists, in which case player II passes. Such an $m'$ must eventually exist by continuity of $f$ (same as above).
+    
+    Perhaps more precisely: $f = f_c$ for some $c$. Define $\tau$ for player II as follows. Suppose player I has played a sequence $x = x_0x_1\dots x_n$ and player II has played $y = y_0y_1\dots y_{n-1}$. If there exists $m\in \om^\om$ such that $y^\ast m\subset c(x)$, then $\tau(x_0y_0\dots x_n) = m$. Otherwise $\tau(x_0y_0\dots x_n) = \textrm{pass}$.
+
+    Then at each stage we have $y^\ast \subset c(x)$, so taking the union we see that the run $y'^\ast$ of player II lies in the union of all the $c(x)$s, which equals $f(x')$ for $x'$ the run of player I.
+    
+    \underline{(ii)$\implies$(i)}: Suppose player II has a winning strategy $\tau$. Define $c$ coherent by letting $c(s)$ be the pass-concatenation of $\tau(s_i):i \le \lh(s)$. Suppose player I produces $x$, player II produces $y$. Then for each $n$, we have $c(x\restriction n) = (y\restriction n)^\ast$. Then $f_c(x) = \bigcup c(x\restriction n) = \bigcup (y\restriction n)^\ast = y^\ast  = f(x)$. So $f = f_c$.
+    
+    If we do not require the possibility of pass moves, we still have that (ii)$\implies$(i) by the argument above, but the other direction is more complicated.
+
+    Suppose player I starts by playing $m$. Then player II must play the start of a sequence inside $f([m])$. Suppose the earlier condition stated does not hold. Then $\forall m' \exists x (x \in [m]\land f(x)\not\in [m'])$. So if player II plays $m'$, then player I picks such a run $x$ such that $x\restriction 1 = m$ but $f(x)\not \in [m']$. Then player I wins.
+
+    Indeed, if there is \it{any} position $s$ for which this is the case, that is, if player I has played $s$ and player II $t$ and there is some $m$ such that for all $m'$, there exists $x \in [sm] $ such that $f(x)\not \in [tm']$, then player I wins.
+
+    So in order for II to be able to win, we have this more strict condition on $f$, which is that $f = f_c$ for some coherent $c$ satisfying $\lh(c(s)) \ge \lh(s)$. Equivalently, there is some coherent $c$ with $\lh(c(s)) = \lh(s)$ for all $s$.
+
+    \item $\bosig^2_0(\Q)$ is the collection of sets which are countable unions of closed sets, \it{i.e.} every $A\subset \Q$ since singletons are closed. So $\bopi^2_0(\Q) = \P\Q$ also, hence $\bodel^0_2(\Q) = \P\Q$.
+    
+    Let $B\subset \Q$ be dense with dense complement. Now suppose that there is some $A \in \bodel^0_2$ such that $A\cap \Q = B$. We must have $A = \bigcap_{n\in \N}A_n = \bigcup_{n\in\N}B_n$ for open sets $A_n$ and closed sets $B_n$.
+
+    We have $B \subset A_n$ for each $n$. Consider $A_n^c$. This is nowhere dense: if it is dense in some interval $(a,b)$, then there is some $q \in B$ that lies within the interval, and hence some $\eps$ such that $(q-\eps,q+\eps) \subset A_n \cap (a,b)$. So $A_n^c$ not dense in $(q-\eps,q+\eps)$. So $A^c$ is meagre.
+
+    We have $A^c = \bigcap_{n\in\N}B_n^c$, $B_n^c$ open also. But $B^c$ dense, so applying exactly the same argument as above gives that $A$ is meagre. Hence $A \cup A^c$ is meagre, but $\A \cup A^c = \R$, which is not meagre by the Baire Category Theorem.
+
+    \item We can write $F = \bigcup_{n\in\N}F_n$, where $F_n = [-n,n] \cap F$ is closed and bounded, hence has a sequentially closed image, which is thus closed in a metric space. Hence $f[F] = \bigcup f[F_n]$ is a countable union of closed sets, hence is $\bosig^0_2$.
+    
+    \item Base case: need to show $\bosig^1_1$ closed under countable union (intersection is easy).
+    
+    Let $A_n$ be a family of analytic sets, such that $A_n = pB_n$ for $B_n \in \bopi^0_1(\om^\om\times\om^\om)$. Define $C_n = \{(nx,y):(x,y) \in B_n\}$. Then $C_n$ is closed, since convergent sequences in $C_n$ clearly inherit from convergent sequences in $B_n$. But now $\bigcup C_n$ is closed because a sequence can only converge if the first letter is eventually constant, meaning the sequence must get stuck in exactly one of the disjoint $C_n$s. Then $\bigcup A_n = p\bigcup C_n$ is analytic.
+
+    Now suppose $\bopi^1_n$ is closed under countable union. Then if $A_n$ is a family of $\bosig^1_{n+1}$ sets, $A_n = pB_n$, $\bigcup A_n = \bigcup pB_n = p\bigcup B_n \in \bosig^1_{n+1}$. Exact same argument for countable intersection. The $\bosig \ra \bopi$ case is clear, and similarly for $\bodel$s.
+
+    We have $\bopi^0_1 = \bopi^1_0 \subset \bodel^1_1$, hence $\bosig^0_1 \subset \bodel^1_1$ also. It is then easy to see inductively that every Borel class is a subset of $\bodel^1_1$.
+
+    In (17), we found that $\bosig^1_1(\R) \subset \bosig^0_2(\R)$. Hence $\bodel^1_1 \subset\neq \bosig^1_1 \subset \bosig^0_2$, so not every Borel set is $\bodel^1_1$ in $\R$. The problem here, morally, is that in $\R$ bounded and closed $\iff$ compact; continuous images of compact sets are compact, which are closed in metric spaces. But $\om^\om$ does not have the property that closed and bounded $\implies$ compact, so this issue does not occur (indeed, every set is bounded, the entire space itself is closed and not compact).
+
+    \item Hmm\dots
+    
+    \item $A_n,B_m$ are Borel separable by $C_{nm}$. Then $A_n$ and $\bigcup B_n$ are Borel separable by $D_n \coloneqq \bigcap_{m}C_{nm}$, since Borel sets are closed under countable intersection (they all lie in some $\bopi^0_\alpha$, say, with $\alpha$ countable since $\om_1$ regular).
+    
+    Then $\bigcup A_n,\bigcup B_n$ are separable by $\bigcup_{n} D_n$, which is again Borel.
+
+    \item The first part is done in stages, by building up a sequence of inseparable trees to find a sequence that must lie in their intersection.
+    
+    Given this, we already have Borel $\subset \bodel^1_1$ and need to show that $A\subset \bodel^1_1 \implies A$ is Borel. But $A,A^c$ are both analytic, hence Borel separable - but the only separating set is $A$. Hence $A$ is Borel.
+    
+    \item Suppose that $R$ is Lebesgue-measurable, and let $x \in A$. Let $A^{<x} = \{y : yRx\}$. $A^{<x}$ has order-type less than $\kappa$, and since $\kappa$ is initial we must then have that $A^{<x}$ has strictly smaller cardinality than $\kappa$ and is hence null.
+    
+    Thus $A^{>x}$ is not null for any $x$, since otherwise $A^{\le x} = A\backslash A^{>x}$ is a smaller non-null set. So $\{x : A^{>x}\textrm{ not null}\} = A$, which is not null.
+
+    So then $N\coloneqq \{x : A^{<x}\textrm{ not null}\}$ is also not null. But $A^{<x}$ is null for all $x$, so this set is empty and hence null. Contradiction.
+
+    \item \begin{enumerate}[label = (\roman*)]
+        \item \underline{$\impliedby$}: If such a $p$ exists, then player I plays $p$, and $[p]\backslash A = \bigcup_{n\in \om}A_n$, for $A_n$ all nowhere dense. In particular then, for all $q \in \om^<\lom$, there exists $x_1 \in [pq]$ such that $x_1$ cannot be approached from within $A_1$. Thus there is some $m$ for which $[x_1\restriction m] \cap A_1 = \emptyset$. Player I then plays to any position $\owns x_1\restriction m$, and then $[x_1\restriction m] \backslash A \subset \bigcup_{n>1}A_n$.
+        
+        Player I then repeats this process, eliminating the losing runs in set $A_n$ on move $n+1$. So if $x$ is the run and player I has lost, then $ x \in A_m$ for some $m$ - but this cannot be the case by player I's strategy.
+
+        Note that specifying the strategy entirely here has used choice.
+
+        \underline{$\implies$} Suppose player I has a winning strategy $\sigma$, and let $p = \sigma(\emptyset)$. Consider the game $G^{\ast\ast}(A_p^c)$. The second player of this game has a winning strategy by following $\sigma$ in the first game, hence by (ii) $A_p^c$ is meagre.
+
+        $A_p^c = \{x : px \not\in A\} = \bigcup{A_n}$, $A_n$ nowhere dense. Then $pA_n \coloneqq \{px : x \in A_n\}$ is also nowhere dense, hence $\bigcup pA_n = pA_p^c = \{px : px \not \in A\} = [p]\backslash A$ is meagre.
+
+        \item \underline{$\impliedby$}: If $A$ is meagre, then $A = \bigcup A_n$, $A_n$ nowhere dense. Suppose player I plays $p$. Then by the same process as in (i), player II can ensure the run does not lie in $A_n$ for any $n$; so player II has a winning strategy.
+        
+        \underline{$\implies$}: Suppose player II has a winning strategy $\tau$, and that $A$ is not meagre. Then if $A = \bigcup_{n\in \om}A_n$, there must be some $A_n$ that is somewhere dense. That is to say, $A_n$ is dense in some $[p]$, $p \in \om^\lom$.
+
+        Then $A = \bigcup_n [n] \cap A$, so wlog say $[n]\cap A$ is somewhere dense in $[n]$. Then there is some $p\owns n$ such that $A$ is dense in $[p]$. Then $A$ is dense in $[pq]$ for any $q$.
+    \end{enumerate}
+
+    \item not too bad, I think the answer is $\ac_{X^\lom}(X)$
+    \item just a bit fiddly
+\end{enumerate}
+
+\end{document}
