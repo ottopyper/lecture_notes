@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.2.16)  8 MAR 2021 17:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.3.29)  31 MAR 2021 17:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -416,20 +416,20 @@ File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count297
 \l__pdf_internal_box=\box62
 ) (/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/RamseyTheory/RamseyTheory.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
  (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count298
@@ -483,11 +483,11 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 24.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 27.
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 24.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 27.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
@@ -498,33 +498,32 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <together.jpg, id=37, 511.9125pt x 284.56313pt>
 File: together.jpg Graphic file (type jpg)
 <use together.jpg>
-Package pdftex.def Info: together.jpg  used on input line 225.
+Package pdftex.def Info: together.jpg  used on input line 228.
 (pdftex.def)             Requested size: 409.53056pt x 227.6508pt.
- [5]
-
-Package amsmath Warning: Foreign command \atopwithdelims;
-(amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 239.
-
-[6 </home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/RamseyTheory/together.jpg>] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
+ [5] [6 </home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/RamseyTheory/together.jpg>] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
 File: together.jpg Graphic file (type jpg)
 <use together.jpg>
-Package pdftex.def Info: together.jpg  used on input line 844.
+Package pdftex.def Info: together.jpg  used on input line 847.
 (pdftex.def)             Requested size: 409.53056pt x 227.6508pt.
- [18] [19] [20] [21] [22] (/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/RamseyTheory/RamseyTheory.aux) ) 
+ [18] [19] [20] [21] [22] [23]
+Overfull \hbox (13.08209pt too wide) in paragraph at lines 1136--1137
+[][]\OT1/cmr/bx/n/10 Theorem 2.16: (Hind-man's The-o-rem) [][]$[]\U/msb/m/n/10 N[]$ \OT1/cmr/m/it/10 there ex-ists $\OML/cmm/m/it/10 x[]; x[] [] $ \OT1/cmr/m/it/10 with $[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; x[]; [] \OT1/cmr/m/n/10 )$ \OT1/cmr/m/it/10 monochro-
+ []
+
+[24] [25] [26] [27] [28] [29] [30] (/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/RamseyTheory/RamseyTheory.aux) ) 
 Here is how much of TeX's memory you used:
- 15692 strings out of 479383
- 296149 string characters out of 5875830
- 606100 words of memory out of 5000000
- 32503 multiletter control sequences out of 15000+600000
+ 15696 strings out of 479383
+ 296161 string characters out of 5875830
+ 606124 words of memory out of 5000000
+ 32507 multiletter control sequences out of 15000+600000
  413031 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,16n,87p,767b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 84i,38n,87p,773b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on /home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/RamseyTheory/RamseyTheory.pdf (22 pages, 333356 bytes).
+Output written on /home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/RamseyTheory/RamseyTheory.pdf (30 pages, 375818 bytes).
 PDF statistics:
- 161 PDF objects out of 1000 (max. 8388607)
- 114 compressed objects within 2 object streams
+ 186 PDF objects out of 1000 (max. 8388607)
+ 131 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

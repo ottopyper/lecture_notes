@@ -34,7 +34,12 @@
 \newcommand{\zf}{\textrm{ZF}}
 \newcommand{\tri}{\mathop{\triangle}}
 \newcommand{\aux}{\textrm{aux}}
-
+\newcommand{\lkb}{<_{\textrm{KB}}}
+\newcommand{\dom}{\textrm{dom}}
+\newcommand{\led}{\le_{\mathrm{D}}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\cone}{\textrm{Cone}}
+\newcommand{\cd}{\textrm{code}}
 %\renewcommand{\ht}{\textrm{ht}}
 %\newcommand{\wf}{\textrm{WF}}
 \usepackage{bm}
@@ -53,6 +58,15 @@
         \begin{tabular}{c|ccccccc}
             I & $#1_0$ & & $#1_1$ & & $#1_2 $& & $\dots $\\ \hline
             II & & $#2_0$ & & $#2_1 $& &$ #2_2$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+}
+
+\newcommand{\gamed}[1]{
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $#1_0$ & & $#1_2$ & & $#1_4 $& & $\dots $\\ \hline
+            II & & $#1_1$ & & $#1_3 $& &$ #1_5$ & $\dots$ 
         \end{tabular}
     \end{center}
 }
@@ -1468,7 +1482,7 @@ Then $A$ is $\bosig^1_1$ if and only if: $\exists T \textrm{ tree s.t. } x \in A
 
 Pick your favourite bijection between $\om\ra \om^\lom$ and write $\{s_i;i\in \om\} = \om^\lom$. Define $R$ by $iRj$ iff $s_i\supseteq s_j$. Then $F_T\coloneqq \{i;s_i \in T\}$. Then $(T,\supseteq)\cong (F_T,R)$. In particular, $T$ is wellfounded $\iff (F_T,R)$ is wellfounded.
 
-One of the benefits of wellfounded relations is that we can define rank functions on them. If I have a wellrounded relation $R$ on $F$, I can recursively define a rank function:
+One of the benefits of wellfounded relations is that we can define rank functions on them. If I have a wellfounded relation $R$ on $F$, I can recursively define a rank function:
 \begin{itemize}
     \item $i\in F$: let rk$(i)\coloneqq \sup \{\rk(j)+1;jRi\}$
 \end{itemize}
@@ -2093,5 +2107,535 @@ We consider the relationship between the games $G(A)$ and $G_\aux(T)$.
 Suppose player I wins $G_\aux(T)$ by $\sigma$. Then when playing $G(A)$, player I secretly plays another game of $G_\aux(A)$ and uses $\sigma$ in that game to produce their move back in $G(A)$. This produces a run $x$ such that $(y,x) \in [T]$ for some $y\in \kappa^\om$. Hence this produces a winning strategy $\sigma^\ast$ for $G(A)$.
 
 What about the other direction? Say, if player II wins in $G_\aux(T)$? Not quite as simple.
+
+\marginpar{Lecture 19}
+
+We are looking to show $\Det(\bopi^1_1)$.
+
+\underline{Rough idea}: Fix $\kappa$ measurable. Then:
+\begin{enumerate}[label = (\alph*)]
+    \item show that every $\bopi^1_1$ set is $\kappa$-Suslin
+    \item Use measurability to prove the translation for player II
+    \item Use determinacy of $G_\aux (T)$ to get determinacy of $G(A)$
+\end{enumerate}
+Is it possible that this is an accurate description? The answer is no: if every set is $\kappa$-Suslin (for $\kappa$ measurable) is determined, then this proof would give much more, namely AD. This cannot be the case.
+
+Indeed, suppose that if $A$ is $\kappa$-Suslin and $\kappa$ is measurable then $A$ is determined ($\ast$). Observe that if $\lambda < \kappa$ and $A$ is $\lambda$-Suslin then $A$ is $\kappa$-Suslin. Also, every set $A$ is $2^{\aleph_0}$-Suslin [ES\#3].
+
+If $\kappa$ is measurable, then $2^{\aleph_0} < \kappa$, so every set is $\kappa$-Suslin. So if ($\ast$) is true in this abstract form, then every set is determined. We conclude: it can't be just the fact that $A$ is $\kappa$-Suslin, but we must require some properties of the tree $T$ that witnesses $A = p[T]$.
+
+We will use our structure theory for $\bopi^1_1$ sets in order to define a tree on $\kappa\times \omega$ for $\bopi^1_1$ sets.
+
+\begin{remark*}[Roadmap]
+    If $A \in \bopi^1_1$, there is a tree $T$ on $\om\times\om$ such that:
+    \begin{align*}
+        x \in A &\iff T_x \textrm{ is wellfounded}\\
+        &\iff (T_x,\supsetneq)\textrm{ is wellfounded}\\
+        &\iff \textrm{ there is an order-preserving map from }(T_x,\supsetneq)\textrm{ into }(\om_1,<)
+    \end{align*}
+    If we code $T_x$ by some bijection $\om^\lom \xleftrightarrow{} \om$ then the o.p. map is essentially an element of $\om_1^\om$.
+
+    \underline{FIND}: tree $\hat{T}\subset (\om_1\times\om)^\lom$ such that if $(y,x)\in [\hat{T}]$, then $y$ is an order-preserving map from $T_x$ into $\om_1$ [up to coding]. Then: $x \in A \iff \exists y((y,x)\in[\hat{T}])$. We can give an informal definition of $\hat{T}$: $(u,s)\in \hat{T}$ where $v \in \om_1^\lom,s\in\om^\lom$ if and only if $u$ is consistent with being an initial segment of an order-preserving map from $T_x$ into $\om_1$. [where $x$ is any extension of $s$].
+\end{remark*}
+
+\begin{theorem*}[Shoenfield]
+    Every $\bopi^1_1$ set is $\kappa$-Suslin (for every $\kappa \ge \om_1$).
+\end{theorem*}
+\begin{proof}
+    Fix $A$ $\bopi^1_1$, and fix $T$ such that $x \in A \iff T_x$ is wellfounded. Also fix $i \mapsto s_i$ a bijection between $\om$ and $\om^\lom$, with the property that if $s_i\subset s_j$ then $i\le j$. [This in particular implies that $\lh(s_i)\le i$.] Recall that $T_x = \{t \in \om^\lom; (t,x\restriction \lh(t))\in T\}$. Define $T_s \coloneqq \{t \in \om^\lom; (t,s\restriction \lh(t))\in T\}$. $T_s$ is then a tree that has finitely many levels; if $t\in T_s$ then $\lh(t)\le \lh(s)$. But of course $T_s$ could still be an infinite set.
+
+    Write $K_x \coloneqq \{i \in \om; s_i \in T_x\}$, and $K_s \coloneqq \{i\in \om; i\le \lh(s)\textrm{ and }s_i \in T_s\}$. Then $K_s$ is \it{finite}! Note that we have $T_x = \{s_i;i\in K_x\}$, but in general $T_s\supsetneqq \{s_i;i\in K_s\}$, but $K_x = \bigcup_{n\in\N}K_{x\restriction n}$.
+
+    Observe that $M \coloneqq \{p;p\textrm{ is a partial function }\om\ra\kappa\textrm{ with finite domain}\}$ has cardinality $\kappa$, so it is sufficient to provide a tree $\hat{T}$ on $M\times \om$ with the desired properties (rather than on $\kappa\times\om$). We can define a linear order on $\kappa^\lom$ that extends the order $\supsetneqq$, known as the \undf{Kleene-Brouwer order}:
+    \begin{align*}
+        s\lkb t :\iff& t\supsetneqq s\textrm{ or there is }i \in \dom(s)\cap\dom(t)\textrm{ such that }\\
+        &s(i)\ne t(i);\textrm{ let }i\textrm{ be least such AND }s(i) < t(i)
+    \end{align*}
+    It is strict extension if it applies and lexicographic otherwise. Intuitively, consider $x_s : \om\ra \kappa$ defined by
+    \begin{align*}
+        x_s(i) \coloneqq \left\lbrace \begin{array}{cl}s(i) & i\in\dom(s)\\ \infty &\textrm{o/w} \end{array}\right.
+    \end{align*}
+    and order these lexicographically. Clearly, $\lkb$ extends $\supsetneqq$ and is total.
+
+    \underline{Fact}: If $T$ is a tree then $(T,\supsetneqq)$ is wellfounded $\iff$ $(T,\lkb)$ is a wellorder [ES\#3].
+
+    Let's put all this together. Define $\hat{T} \subset (M\times\om)^\lom$. If $u \in M^\lom$ and $s \in \om^\lom$, we say that $u$ is \undf{coherent with $s$} if:
+    \begin{enumerate}[label = (\arabic*)]
+        \item $\lh(u)\le\lh(s)$
+        \item $i < \lh(u)\implies \dom(u(i)) = K_{s\restriction i}$
+        \item $i < \lh(u) \implies u(i) : (K_{s\restriction i},\lkb)\ra \kappa$ is order-preserving
+        \item $i\le j \implies u(i)\subset u(j)$
+    \end{enumerate}
+    Then $\hat{T}\coloneqq \{(s,u);u\textrm{ is coherent with }s\}$ is the \undf{Shoenfield tree}.
+
+    \underline{Claim}: $A = p[\hat{T}]$.
+
+    \underline{$\subset$}: Suppose $x \in A$. By assumption, $T_x$is wellfounded, so $(T_x,\lkb)$ is a wellorder so there is an order-preserving function $g: (T_x,\lkb)\ra(\kappa,K)$. Translate into $K_x$ by $h:(K_x,<_x)\ra(\kappa,<)$ where $i<_xj :\iff s_i \lkb s_j$. This is order-preserving.
+
+    Define $u(i)\coloneqq h\restriction K_{x\restriction i}$. Then clearly conditions (2), (3), and (4) are true. So for every $i$, $(u\restriction i,x\restriction i)\in \hat{T}$. So $(u,x)\in [\hat{T}]$. So $x \in p[\hat{T}]$.
+
+    \marginpar{Lecture 20}
+
+    \underline{$\supseteq$}: Let $x \in p[\hat{T}]$. We have the characterisation:
+    \begin{align*}
+        x \in p[\hat{T}] \iff & \textrm{ there is }u\textrm{ s.t. }(u,x)\in[\hat{T}]\\
+        \iff&\textrm{ there is }u\textrm{ s.t. }\forall n\ (u\restriction n,x\restriction n)\in\hat{T}\\
+        \iff&\textrm{ there is }u\textrm{ s.t. }\forall n\ u\restriction n\textrm{ is coherent with }x\restriction n
+    \end{align*}
+    This means $u(i) : K_{x\restriction i}\ra \kappa$ order-preserving (properties (1)/(2)), and $u(i)\subset u(j)$ for $i\le j$ (property (3)).
+
+    By (3), define $\hat{u} : K_x \ra \kappa$ by $\hat{u} = \bigcup_{i\in\N}u(i)$. If $\hat{u}$ is order-preserving from $(K_x,\lkb)$ into $(\kappa,<)$, then $T_x$ is wellfounded and thus $x \in A$. So, we're left to show that $|hat{u}$ is order-preserving.
+
+    Suppose not. Then there aer $i,j\in K_x$ such that $s_i \lkb s_j$ but $\hat{u}(i)\not<\hat{u}(j)$. [Since $K_x = \bigcup_{n\in\N}K_{x\restriction n}$, there is $n\in\N$ such that $i,j \in K_{x\restriction n}$.] But $u(n)$ was order-preserving, so $s_i \lkb s_j \iff u(n)(i) < u(n)(j)$, but by definition of $\hat{u}$ this is a contradiction.
+
+    Thus $\hat{u}$ is order-preserving, and so $x \in A$.
+\end{proof}
+
+\begin{theorem*}[Martin, 1969/70]
+    If there is a measurable cardinal, then all $\bopi^1_1$ sets are determined.
+\end{theorem*}
+\begin{defin*}
+    Recall: $\kappa$ is measurable $\iff$ there is $U$ a $\kappa$-complete, non-principal ultrafilter on $\kappa$.
+\end{defin*}
+\begin{theorem*}[ZFC, proof omitted]
+    If $\kappa$ is measurable, then there is a normal $\kappa$-complete non-principal ultrafilter on $\kappa$.
+\end{theorem*}
+
+\begin{theorem*}[Rowbottom, ES\#3]
+    If $U$ is normal on $\kappa$ and $\gamma < \kappa$ and $c_n : [\kappa]^\lom \ra \gamma$ a colouring for each $n$, then there is a set $H\in U$ such that for all $n,k\in\N$, $c_n\restriction [H]^k$ is constant.
+\end{theorem*}
+
+We say $\kappa$ \undf{satisfies Rowbottom's Theorem} if for all $\gamma < \kappa$, $c_n:[\kappa]^\lom \ra \gamma$ there is $H$ with $|H| = \kappa$ such that for all $n,k\in\N$, $c_n\restriction [H]^k$ is constant.
+
+\begin{remark*}[Summary]
+    ZFC implies that measurable cardinals satisfy Rowbottom's Theorem.
+\end{remark*}
+
+\begin{theorem*}[Martin]
+    If $\kappa$ satisfies Rowbottom's Theorem, then all $\bopi^1_1$ sets are determined.
+\end{theorem*}
+\begin{proof}
+    Fix $A\in \bopi^1_1$. By Shoenfield, we have tree $\hat{T}$ on $M\times\om$ such that $A = p[\hat{T}]$.
+
+    We know that if you compare $G(A)$ and $G_\aux(\hat{T})$, we get:
+    \begin{itemize}
+        \item $G_\aux(\hat{T})$ is determined [Gale-Stewart]
+        \item winning strategies of player I transfer from $G_\aux(\hat{T})$ to $G(A)$
+    \end{itemize}
+    So we still need to show that if player II has a winning strategy in $G_\aux(\hat{T})$, then player II has a winning strategy in $G(A)$ ($\ast$).
+
+    Our game looks like:
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $u_0,x_0$ & & $u_1,x_2$ & & $u_2,x_4 $& & $\dots $\\ \hline
+            II & & $x_1$ & & $x_3 $& &$ x_5$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+
+    We can assume that $u_0$ is played such that player I does not lose immediately. So $u:K_{x\restriction 0} \ra \kappa$ order-preserving, and $K_{x\restriction 0} = K_\emptyset = \{i\le 0; s_i \in T_{x\restriction 0}\} = \{0\}$. So $u_0$ just picks out a point in $\kappa$.
+
+    Going one step further, we have $u_1 : K_{x\restriction 1} \ra \kappa$, and $K_{x\restriction 1} = K_{\langle x_0 \rangle} = \{i \le 1; s_i \in T_{x\restriction 1}\}$, which is either the set $\{0\}$ or $\{0,1\}$; the latter occurs $\iff$ $s_1 \in T_{x_0}$. So we can identify $u_1$ \it{either} with a single element of $\kappa$, \it{or} a $2$-element subset of $\kappa$, where the lower element is the image of the element that is least with respect to $\lkb$.
+
+    Let's formalise this. Let $k_s \coloneqq |K_s|$ and $Q \in [\kappa]^{k_s}$. Then $Q$ determines a unique order-preserving map
+    \begin{align*}
+        w_Q :(K_s,\lkb)\ra (Q,<)
+    \end{align*}
+    Define $u^{s,Q}(i) \coloneqq w\restriction K_{s\restriction i}$. Then $u^{s,Q}$ is coherent with $s$. This allows us to tranaslate a position in the original game
+    \gamec{x}{x}
+    into a (legal) position in the auxiliary game:
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $u^{s,Q}(0),x_0$ & & $u^{s,Q}(1),x_2$ & & $u^{s,Q}(2),x_4 $& & $\dots $\\ \hline
+            II & & $x_1$ & & $x_3 $& &$ x_5$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+    We call this entire position $s^Q_\ast$, and it is a position in $M^\lom \times \om^\lom$.
+
+    Define a colouring $c_s:[\kappa]^{k_s} \ra \om$ by, for $Q \in [\kappa]^{k_s}$, $c_s(Q) = \tau(s^Q_\ast)$, where $\tau$ is our winning strategy for player II in $G_\aux(\hat{T})$. This is a family of countably many colourings, so by Rowbottom we find $H\subset \kappa$, $|H| = \kappa$ such that $c_s\restriction [H]^{k_s}$ is constant. [\it{i.e.} if $Q,Q'\in [H]^{k_s}$, then $c_s(Q) = c_s(Q')$, so $\tau(s^Q_\ast) = \tau(s^{Q'}_\ast)$. In words, if player II fills in the gaps by \it{any} $Q \in [H]^{k_s}$, then the answer of $\tau$ does not depend on the precise choice of $Q$.]
+
+    So, let $Q_{H,s} \coloneqq$ the first $k_s$ many elements of $H$. Define strategy $\tau_H$ in the game $G(A)$ for player II:
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $u^{s,Q_{H,s}}(0),x_0$ & & $u^{s,Q_{H,s}}(1),x_2$ & & $u^{s,Q_{H,s}}(2),x_4 $& & $\dots $\\ \hline
+            II & & $x_1$ & & $x_3 $& &$ x_5$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+    by having player II fill in the auxiliary moves for player I as above, where $\tau_H(s)\coloneqq \tau(s^{Q_{H,s}}_\ast)$.
+
+    \underline{Claim}: If $\tau$ was winning in $G_\aux(T)$, then $\tau_H$ is winning in $G(A)$.
+
+    \marginpar{Lecture 21}
+
+    \underline{Proof of Claim}: Suppose not. So there is a $\sigma$ for player I such that $x \coloneqq \sigma \ast \tau_H \in A \iff T_x$ is wellfounded $\iff$ ther is an order-preserving map $g : (K_x,<_x) \ra (H,<)$ [since $H$ is uncountable].
+
+    Consider $u_i \coloneqq g\restriction K_{x\restriction i}$. Then
+    
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $u_0,x_0$ & & $u_1,x_2$ & & $u_2,x_4 $& & $\dots $\\ \hline
+            II & & $x_1$ & & $x_3 $& &$ x_5$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+
+    is a run of $G_\aux(\hat{T})$, producing $(g,x)\in [\hat{T}]$. In particular, this run is a win for player I in the auxiliary game. We'll show that this is a run according to the strategy $\tau$ - but $\tau$ was a winning strategy for player II in $G_\aux(\hat{T})$, contradiction.
+
+    Let $s = (x_0,x_2,\dots,x_{2n}) = x\restriction 2n+1$, and write $s^g_\ast$ for $(u_0,x_0,x_1,u_1,x_2,x_3,u_2,x_4,x_5,\dots,u_n,x_{2n})$. We need to show that $\tau(s^g_\ast) = x_{2n+1}$. We have:
+    \begin{align*}
+        x_{2n+1} &= \tau_H(x\restriction 2n+1)\textrm{ by chioce of }x\\
+        &= \tau(s^{Q_{s,H}}_\ast)\textrm{ by definition of }\tau_H\\
+        &= \tau(s^g_\ast)
+    \end{align*}
+    by the fact that range$(g)\subset H$, and $H$ is homogeneous.
+
+    This proves the claim, and hence the theorem.
+\end{proof}
+
+\begin{remark*}
+    Note that we did not need that $H$ has size $\kappa$, only that it is uncountable. We don't need the full strength of Rowbottom's Theorem, but only:
+    
+    ``For every countable collection $c_n:[\kappa]^\lom \ra \om$ there is an uncountable simultaneously homogeneous set $H$''.
+
+    \underline{Compare}: $\om_1$-Erd\H{o}s Cardinals.
+
+    This is part of the story as to why we can't have a converse to Martin's Theorem.
+
+    The precise strength of analytic determinacy is called \undf{zero sharp}. Zero Sharp is an unusual large cardinal axiom which doesn't talk about large cardinals, but rather about a real number which codes truth functions for inner models.
+
+    For large cardinal notions of this type, we can have real equivalences:
+
+    \begin{theorem*}[ZFC]
+        $\det(\bosig^1_1)\iff$ for all $x \in \om^\om$, the object $x^{\#}$ exists.
+    \end{theorem*}
+\end{remark*}
+
+Our final goal for this course is to prove:
+
+\begin{theorem*}[Solovay]
+    If $\ad$ holds, then $\aleph_1$ is a measurable cardinal.
+\end{theorem*}
+
+[This implies that there is an inner model $M$ such that $M\models \zfc +$ there is a measurable cardinal. This requires techniques we didn't do in this course.]
+
+\underline{Note}: ``being measurable'' only implies ``being large'' if it implies inaccessibility. But recall the proof of ``measurable $\implies$ inaccessible'' - this required that $2^\lambda$ [$\lambda < \kappa$] is wellorderable. In our setting above $2^{\aleph_0}$ is clearly not wellorerable (since if it is, we can find a non-determined set).
+
+Working in ZFC + AD means that we have to be very cautious about almost everything that we have done so far. The most important fragment of AC that we used in our account of descriptive set theory was $\ac_\om(\R)$, equivalently $\ac_\om(\om^\om)$. In fact, everything we've done on Borel and projective sets [with the exception of Martin's Borel determinacy] can be done in ZF + $\ac_\om(\R)$.
+
+Recall ES\#1 (4): $\zf + \ac_\om(\R)\implies \aleph_1$ is regular, and the proof of $\bosig^0_{\om_1} = \bopi^0_{\om_1}$ used exactly that.
+
+\begin{remark*}[Proposition]
+    \emph{
+        $\ad\implies\ac_\om(\om^\om)$
+    }
+\end{remark*}
+\begin{proof}
+    Suppose $(X_n;n\in\N)$ is a sequence of non-empty subsets of $\om^\om$. Consider the game:
+    \gamec{x}{x}
+    and say that player II wins if $x_\II\in X_{x_0}$.
+
+    Player I cannot have a winning strategy; the $x_i;i\ge 1$ have no effect, so winning strategy would essentially just be a natural number $x_0$. If $y \in X_{x_0}$ and $\tau_y$ is the blindfolded strategy ``play $y$'', then $x_0 \ast \tau_y$ is a win for player II.
+
+    So, by AD, player II has a winning strategy $\tau$. Consider $(k\ast \tau)_\II\in X_k$. Then $k\mapsto (k\ast\tau)_\II$ is a choice function for $(X_n;n\in\N)$.
+\end{proof}
+\begin{remark*}
+    This proof generalises to $\ad_M \implies \ac_M(M^\om)$, where $\ad_M$ is the assertion that for all $A \subset M^\om$, the game $G(A)$ is determined.
+
+    In particular, $\ad_\R \implies \ac_\R(\R)$. $\ac_\R(\R)$ is the uniformisation principle, ES\#1 (5).
+\end{remark*}
+
+\begin{remark*}
+    What about ultrafilters?
+
+    If $X$ is any set and $a \in X$, then $\{A\subset X;a \in A\}$ is a principal (and therefore $\kappa$-complete for all $\kappa$) ultrafilter - this is true in ZF without choice.
+
+    But the proof that arbitrary filterson $X$ can be extended to ultrafilters is an application of Zorn's Lemma, so not in general a ZF-theorem.
+
+    \underline{Question}: Is there a non-principal ultrafilter on $\N$?
+
+    The answer is in fact no. The theorem we will prove next time is:
+
+    \begin{theorem*}
+        $\ad\implies$ there are no non-principal ultrafilters on $\N$.
+    \end{theorem*}
+
+    This implies that every ultrafilter is $\aleph_1$-complete. So we are left with showing that there exists a non-principal ultrafilter on $\aleph_1$.
+\end{remark*}
+
+\marginpar{Lecture 22}
+
+\underline{Zorn's Lemma}
+\begin{itemize}
+    \item If $F$ contains the complements of the singletons, then $U\supseteq F$ ultra cannot be principal
+    \item So if $F\coloneqq\{A\subset X; X\backslash A\textrm{ is finite}\}$ is the \undf{Frechet filter (cofinite filter)}, then $U$ is a non-principal ultrafilter
+\end{itemize}
+
+Suppose $\pi:X\ra Y$ any map and $F$ is a filter on $X$, we can define $\pi_\ast F\coloneqq \{A\subset Y; f^{-1}[A]\in F\}$, the \undf{image filter}. Indeed, it is a filter:
+
+\begin{itemize}
+    \item $f^{-1}[\emptyset] = \emptyset \not\in F$
+    \item $f^{-1}[Y] = X\in F$
+    \item $f^{-1}[A\cap B] = f^{-1}[A] \cap f^{-1}[B]$
+    \item $A\subset B\implies f^{-1}[A]\subset f^{-1}[B]$
+\end{itemize}
+
+Furthermore:
+\begin{itemize}
+    \item If $F$ was ultra, then $\pi_\ast F$ is ultra since $f^{-1}[X\backslash A] = Y\backslash f^{-1}[A]$
+    \item If $F$ was $\lambda$-complete, then so is $\pi_\ast F$, since $f^{-1}[\bigcap_{\alpha < \gamma}X_\alpha] = \bigcap_{\alpha < \gamma}f^{-1}[X_\alpha]$
+\end{itemize}
+
+In general, non-principality is \it{not} preserved by images:
+
+If $\pi$ is a constant function $\pi(x) = a\in Y$, all $x \in X$, then $\pi_\ast F = \{A\subset Y;\pi^{-1}[A]\in F\}$, and $\pi^{-1}[A]$ is either $X$ or $\emptyset$, depending on whether or not $a \in A$, so $\pi_\ast F = \{A\subset Y;a \in A\}$.
+
+\begin{remark*}
+    The main obstacle later is to show that non-principality of images of ultrafilters.
+\end{remark*}
+
+\begin{remark*}[Lemma]
+    \emph{
+        If there is an ultrafilter $U$ on $X$ that is not $\aleph_1$-complete, then there is a non-principal ultrafilter on $\N$.
+    }
+\end{remark*}
+\begin{proof}
+    By assumption, $U$ is not $\aleph_1$-complete, so we can write $X = \bigcup_{n\in\N}x_n$ such that the $X_n$ are pairwise disjoint and $X_n \not\in U$ for all $n\in\N$.
+
+    We then take $\pi : X \ra \N$ by $x\mapsto n$ if $n\in X_n$. By our general theory of image filters, we get that $\pi_\ast U$ is an ultrafilter on $\N$.
+
+    \underline{Claim}: $\pi_\ast U$ is non-principal.
+
+    \underline{Proof of Claim}: Suppose not. Then there exists $\{k\}\in \pi_\ast U$. So $\pi^{-1}[\{k\}] \in U$, hence $X_k \in U$, contradiction.
+\end{proof}
+\begin{remark*}[Corollay]
+    \emph{
+        ZF + there is no non-principal ultrafilter on $\N$ $\implies$ every ultrafilter is $\aleph_1$-complete.
+    }
+\end{remark*}
+We can combine this with our next theorem:
+\begin{theorem*}
+    AD $\implies$ there is no non-principal ultrafilter on $\N$.
+\end{theorem*}
+From which we can draw the conclusion that:
+\begin{remark*}[Corollary]
+    \emph{
+        AD $\implies$ every ultrafilter is $\aleph_1$-complete.
+    }
+\end{remark*}
+\begin{proof}
+    We will be using the technique of \undf{strategy stealing}: assume I/II has a winning strategy, and use it to define a winning strategy for II/I.
+
+    So assume $U$ is a non-principal ultrafilter on $\N$ and define a non-determined game as follows:
+
+    We call the game $G_U$. Moves are $s \in [\N]^\lom$ [use definable bijection between $\N$ and $[\N]^\lom$ to see that $\ad$ implies the determinacy of games like this].
+
+    \gamed{s}
+
+    We have an additional rule: $s_n$ has to be disjoint from $\bigcup_{i < n}s_i$. If you are the first one to break the rule, you lose.
+    
+    The game produces sets $A_\I \coloneqq \bigcup_{i\in\N}s_{2i}$ and $A_\II \coloneqq \bigcup_{i\in\N}s_{2i+1}$. If no breaks the rule, then $A_\I \cap A_\II = \emptyset$ and say player I wins if $A_\I \in U$. Note that if $\II$ wins, it means that $\N\backslash A_\I \in U$, but not necessarily that $A_\II \in U$.
+
+    \underline{Case 1}: Suppose player II wins $G_U$ by a strategy $\tau$. Let player I steal that strategy. We again use the method of auxiliary games.
+
+    An initial attempt might be for player I to pretend that II has played $\emptyset$ in the back room, and play $\tau$ against that, so $\tau(\emptyset) = s_0$, and so on. Then in the original game we have sets $A_\I$, $A_\II$ and in the back room we have $A_\I^\ast$ and $A_\II^\ast$. Then we have:
+
+    $A_\I = \bigcup_{i\in\N}s_{2i} = \bigcup_{i\in\N}s_{2i} = A^\ast_\II$, and $A_\II = \bigcup_{i\in\N}s_{2i+1} = \emptyset \cup \bigcup_{i\in\N}s_{2i+1} = A^\ast_\I$. Since $\tau$ is winning for $\II$, we have that $A_\I^\ast \not\in U$, but we do not in general have that $A^\ast_\II \in U$.
+
+    Second attempt: pretend II has played $\emptyset$, and $\tau$ gives $\tau(\emptyset) = s_0$. Player I then plays $s_0^\ast = s_0 \cup\{1\}$. Player II responds with $s_1$, and then we find $s_2 = \tau(\emptyset,s_0,s_1)$, and define $s_2^\ast$ as:
+
+    \begin{align*}
+        s_2^\ast \coloneqq \left\lbrace \begin{array}{cl}s_2\backslash \{0\} & 1 \in s_0 \cup s_1\\ (s_2\backslash \{0\})\cup \{1\} & 1\not\in s_0\cup s_1\\ \end{array}\right.
+    \end{align*}
+    and in general, we have:
+    \begin{align*}
+        s_{2n}^\ast \coloneqq \left\lbrace \begin{array}{ll}s_{2n}\backslash \{0,\dots,n-1\} & n \in \bigcup_{k<2n}s_k\\ (s_{2n}\backslash \{0,\dots,n-1\})\cup \{n\} & n\not\in \bigcup_{k<2n}s_k\\ \end{array}\right.
+    \end{align*}
+
+    Now $A_\I \cup A_\II = \N$, so $A_\I = \N\backslash A_\II$. Again, since $\tau$ is winning, $A^\ast_\I \not\in U$, but $A^\ast_\I = A_\II$. Together these imply that $A_I \in U$. Hence this is a winning strategy for player I.
+
+    To summarise: if player II has a winning strategy, then we can modify it to a winning strategy for player I. So II does not have a winning strategy. Note even in ZFC player II cannot win this game.
+
+    \underline{Case 2}: If $\sigma$ is a winning strategy for player I in $G_U$, construct a winning strategy for II. Once more, we use the method of auxiliary games.
+
+    Suppose player I leads with $s_0$. In the back room, $\sigma$ tells II to play $\sigma(\emptyset) = s_1$ (which is independent of $s_0$). But this might overlap, so we define $s_1^\ast = s_1\backslash s_0$ and II plays that against I in the real game. II gets back the move $s_2$ from I. We then have $\sigma(s_1,s_2) = s_3$, and define $\sigma^\ast_3 \coloneqq s_3 \backslash s_0$. Indeed, we in general have $s^\ast_{2i+1}\coloneqq s_{2i+1}\backslash s_0$.
+
+    Then $A_\II = \bigcup_{i\in\N}s_{2i+1}^\ast = \left(\bigcup_{i\in\N}s_{2i+1}\right)\backslash s_0 = A^\ast_\I \backslash s_0$. Since $\tau$ is winning, $A^\ast_\I \in U$. By non-principality, of $U$, $A_\II \in U$. So $A_\I\not\in U$. Thus II was in $G_U$.
+\end{proof}
+
+\marginpar{Lecture 23}
+
+Still need to show that there is a non-principal ultrafilter on $\aleph_1$.
+
+\underline{Basic idea}: Have an ultrafilter $U$ on $X$ and function $f:X\ra\aleph_1$ and consider $f_\ast U$, which is an ultrafilter on $\aleph_1$. Filter properties get transferred \it{except} for non-principality, so we will need to do extra work to show this.
+
+Our first idea is to consider $f : \wf \ra \aleph_1$, $x\mapsto ||x||$. If we could use $\ad$ to define a game on $\wf$ such that it defines an ultrafilter $U$ on $\wf$ and $f_\ast U$ is non-principal, we would be done.
+
+This is Solovay's original idea, and will be proven on ES\#4.
+
+We're instead going to see a slightly different proof, due to Tony Martin.
+
+Consider $V_{\om+1}$, the $(\om+1)^\th$ level of the von Neumann hierarchy: $\P V_\om$. Elements of $V_{\om+1}$ are:
+\begin{enumerate}
+    \item If $x \in \om^\om$, then $x \in V_{\om+1}$ since elements of $x$ are pairs $(n,m)\in \om\times\om$, which set theoretically is $\{\{n\},\{n,m\}\}$ which has rank $\le \max(n+2,m+2)\in\N$. Hence if $p \in x$, then $p \in V_\om$ so $x \in \P V_\om = V_{\om+1}$.
+    \item Similarly $\om^\lom$, but also \it{strategies}. A strategy $\sigma : \om^\lom \ra \om$ has elements $p \in \sigma$ of the form $p = (s,u)$, with $s,u \in V_\om$. So by the same argument $p \in V_\om$ and hence $\sigma \in \P V_\om = V_{\om+1}$.
+\end{enumerate}
+
+\begin{defin*}
+    Let $x,y\in V_{\om+1}$. Define $x\led y$ if there is a formula $\phi$ such that $(V_{\om+1},\in)\models \phi(w,y) \iff w \in x$. That is to say, \undf{$x$ is definable from $y$}.
+\end{defin*}
+\begin{remark*}[Properties]\ 
+    \begin{enumerate}
+        \item $\led$ is reflexive: $x\led x$ by $\phi(w,z)\coloneqq w\in z$
+        \item $\led$ is transitive: $x\led y$ and $y\led z$, witnessed by formulae $\phi,\psi$ respectively.
+        
+        Then $w \in y \iff V_{\om+1}\models \phi(w,y)$, and $w \in y \iff V_{\om+1}\models \psi(w,z)$.
+
+        Our formula is then $\exists u\forall v(v\in u \leftrightarrow \psi(v,z))\land \phi(w,u)$. This formula defines $x$ from $z$. Hence $x\led z$.
+
+        \item If $x \in V_{\om+1}$, then $\{y \in V_{\om+1};y\led x\}$ is countable, since there are only countably many formulae witnessing $\led$.
+        \item This means that $\led$ has no largest element.
+        \item If $x$ is definable without parameters, \it{i.e.} $w \in x \iff V_{\om+1} \models \phi(w)$, then for any $y$, $x\led y$. Thus these objects are all minimal in $\led$.
+        \item $\led$ is \it{not} antisymmetric: if $x,y$ are both definable without parameters, but $x\ne y$, then by 5. $x\led y$ and $y\led x$ but $x\ne y$. For example, $\emptyset,\{\emptyset\}\in V_{\om+1}$:
+        \begin{itemize}
+            \item $w \in \emptyset \iff V_{\om+1}\models w\ne w$
+            \item $w \in \{\emptyset\} \iff V_{\om+1}\models \forall v(v\not\in w)$
+        \end{itemize}
+    \end{enumerate}
+\end{remark*}
+
+\begin{defin*}[Preorder]
+    A relation $\le$ on $X$ is called a \undf{preorder} if $\le$ is reflexive and transitive.
+
+    If $\le$ is a preorder, then $x \equiv y :\iff (x\le y)\land (y\le x)$ is an equivalence relation. Consider $Q \coloneqq X/\equiv$ and define $\le$ on $Q$ by $[x]_\equiv \le [y]_\equiv :\iff x\le y$.
+
+    We need to check that this is well-defined:
+
+    If $x\equiv x',y\equiv y',x\le y$, then we have $x'\le x \le y\le y'$ so by transitivity $x'\le y'$.
+\end{defin*}
+
+
+Applied to $\led$, we have that $(V_{\om+1}/\equiv_D,\led)$ is a partial order. We saw that $\om^\om \subset V_{\om+1}$, so restricting to Baire space we have $\mathcal{D}_D \coloneqq (\om^\om/\equiv_D,\led)$, the partical order of \undf{definability degrees}.
+
+[$x\led y \iff $ there is $\phi$ such that $w\in x\iff V_{\om+1}\models \phi(w,y)$. If $x,y\in\om^\om$, this makes sense.]
+
+If $x,y\in\om^\om$, we define $x\ast y(k)$ by:
+\begin{align*}
+    x\ast y(k)\coloneqq \left\lbrace \begin{array}{cl}x(n) & 2n = k\\ y(n) & 2n+1 = k \end{array}\right.
+\end{align*}
+If $\sigma_x,\sigma_y$ are the blindfolded strategies for $x,y$, then $\sigma_x\ast \sigma_y = x\ast y$. Also recall the inverses of interleaving, $x\mapsto x_\I$ and $x\mapsto x_\II$. For every $x$, $x_\I \led x$ and $x_\II \led x$ since they are definable subsequences.
+
+Thus $x\led x\ast y$ and $y\led x\ast y$. In fact we will see that $x\ast y$ is the least upper bound of $x$ and $y$ in $\led$.
+
+\begin{thmenv*}[Proposition]
+If $x,y\in \om^\om$ and $z$ is such that $x\led z$ and $y\led z$ then $x\ast y\led z$.
+\end{thmenv*}
+\begin{proof}
+    We have:
+    \begin{enumerate}[label=(\arabic*)]
+        \item $w\in x \iff V_{\om+1}\models \phi(w,z)$
+        \item $w \in y \iff V_{\om+1}\models \psi(w,z)$
+    \end{enumerate}
+    Now we have:
+    \begin{align*}
+        w = (n,\ell) \in x\ast y \iff& [\exists n,\ell [\phi((n,\ell),z)\land w = (2n,\ell)]]\\
+        \lor& [\exists n,\ell [\psi((n,\ell),z)\land w = (2n+1,\ell)]]
+    \end{align*}
+    and the RHS is the formula we require.
+\end{proof}
+
+The operation $x,y\mapsto x\ast y$ is also known as the \undf{Turing Join} of $x$ and $y$.
+
+Consider the structure of $(\D_D,\led)$. It has a least element (the equivalence class of definable sets), but no largest element: For some $x$ in the order we have that $\{y;y\led x\}$ is countable. On the other end, we have $\{y; x\led y\}$ - what do we know about this? It isn't necessarily the complement, but we can deduce some information.
+
+Consider $\{y\in \om^\om;x\led y\}$, the \undf{cone of $x$}. If $z\ne z' \in \om^\om$, we get that $x\led x\ast z$ and $x\led x\ast z'$ and $x\ast z \ne x \ast z'$, so $|\cone(x)| = 2^{\aleph_0}$.
+
+This idea gives rise to the following definition:
+
+\begin{defin*}[Cone Filter]
+    We define the \undf{cone filter $F_D$} on $\om^\om$ by $A \in F_D$ $\iff$ there is an $x \in \om^\om$ such that $\cone(x) \subset A$.
+
+    Let's check the filter properties.
+
+    \begin{itemize}
+        \item Clearly $\emptyset \not\in F_D$.
+        \item Clearly $\om^\om \in F_D$.
+        \item If $A \in F_D$ and $B \supseteq A$ then $B \in F_D$.
+        \item Let $A,B \in F_D$. Then there are $x,y$ such that $\cone(x) \subset A$ and $\cone(y) \subset B$. Define $z \coloneqq x \ast y$.
+        
+        \underline{Claim}: $\cone(z)\subset A\cap B$.
+
+        \underline{Proof of Claim}: Let $w \in \om^\om$.
+        \begin{align*}
+            z\led w \implies &x\led z \led w\\
+            \implies & w \in \cone(x)\\
+            \implies &w \in A\\
+            \textrm{and } z\led w \implies&y\led z \led w\\
+            \implies & w \in \cone(y)\\
+            \implies & w \in B
+        \end{align*}
+        So $w \in \cone(z) \implies w \in A \cap B$. So $\cone(z) \subset A\cap B$.
+    \end{itemize}
+
+    \textbf{Summary}: $F_D$ is a filter on $\om^\om$.
+\end{defin*}
+
+\marginpar{Lecture 24}
+
+If $Z\subset \D_D$, then $\bigcup Z \subset \om^\om$. The set $\bigcup Z$ is \undf{$\equiv_D$-invariant}, \it{i.e.} if $x \in \bigcup Z$ and $y \equiv_D x$ then $y \in \bigcup Z$. Being $\equiv_D$-invariant just means being a union of $\equiv_D$-equivalence classes.
+
+The operation $Z \mapsto \bigcup Z$ can be reversed (on the $\equiv_D$-invariant sets) by $A\mapsto \{d\in \D_D;d\subset A\}$. Thus subsets of $\D_D$ are $\equiv_D$-invariant sets in disguise; we will go back and forth between these two notions, so it is important to understand this similarity.
+
+\subsubsection*{Relationship Between Strategies \& $ \bm{\D_D}$}
+
+Take your favourite definable bijection $\pi : \om\ra \om^\lom$. Then we can code strategies. If $\sigma$ is a strategy, then write $\cd(\sigma) : \om \ra \om$, $n\mapsto \sigma(\pi(n))$. Then $\cd(\sigma)\in\om^\om$ and we have that $\sigma \equiv_D \cd(\sigma)$. If we play $\sigma$ against $\tau$, we get $\sigma \ast \tau \led \cd(\sigma)\ast\cd(\tau)$ since the latter contains all the information about the former.
+
+For example, $\sigma \ast x$: this is the unique element $z\in \om^\om$ such that for all $k$, $z(2k+1) = x(k)$ and $z(2k) = \cd(\sigma)(\pi^{-1}(z\restriction 2k))$. This formula then witnesses that $\sigma \ast x \led \cd(\sigma) \ast x$. [In general, $\sigma \ast x \not\equiv_D \cd(\sigma)\ast x$.]
+
+\begin{thmenv*}[Martin's Lemma]
+    Suppose $A$ is $\equiv_D$-invariant. Then:
+    \begin{enumerate}[label = (\roman*)]
+        \item if player I wins $G(A)$, then $A \in F_D$
+        \item if player II wins $G(A)$, then $\om^\om \backslash A \in F_D$
+    \end{enumerate}
+\end{thmenv*}
+
+\begin{thmenv*}[Corollary]
+    $\ad\implies$ the filter on $\D_D$ defined by $Z \in U_M \iff \bigcup Z \in F_D$ (the \undf{Martin Measure}) is an ultrafilter.
+\end{thmenv*}
+
+So we are left to prove Martin's Lemma.
+
+\begin{proof}
+    We're just going to see the case of player I. Please check that the case for player II is the same argument.
+    
+    Suppose $A\subset \om^\om$ is $\equiv_D$-invariant and $\sigma$ is winning for player I in $G(A)$. Let $c\coloneqq \cd(\sigma)$ and let's \underline{claim}: $\cone(c)\subset A$.
+
+    \underline{Proof of claim}: Take any $x \in \cone(c) = \{y \in \om^\om ; c \led y\}$, so $c\led x$. Note that whenever $a\led b$, then $a\ast b \equiv_D b$ [since we proved that $a \ast b$ is the least upper bound]. So we have that $c\led x \equiv_D c\ast x =\cd(\sigma)\ast x$. We had $\sigma\ast x \led \cd(\sigma)\ast x = c\ast x$. But clearly $x\led \sigma\ast x$, so we have equality throughout, and in particular $\sigma \ast x \equiv_D x$. But $\sigma$ was winning, so $\sigma \ast x \in A$, and $\sigma \ast x \equiv_D x$, so $x \in A$ also as $A$ was $\equiv_D$-invariant. \qedsymbol
+
+    This concludes the claim and hence the proof.
+\end{proof}
+
+We are now poised to tackle:
+
+\begin{theorem*}[Solovay]
+    If $\ad$ holds, then $\aleph_1$ is a measurable cardinal.
+\end{theorem*}
+\begin{proof}
+    We have established that $U_M$ is an ultrafilter on $\D_D$.
+    
+    \underline{Idea}: give a function $f:\D_D \ra \aleph_1$ such that $f_\ast U_M$ is a non-principal ultrafilter on $\aleph_1$. It is clear that no matter what $f$ is, $f_\ast U_M$ is going to be an $\aleph_1$-complete ultrafilter. So the crucial part is to find $f$ such that $f_\ast U_M$ is non-principal.
+
+    \underline{Important}: if $d = [x] \in \D_D$, then $d$ is a countable set of elements of $\om^\om$. We make the definition $W_x \coloneqq \{\alpha; \exists y(y\led x \land y \in \wf_\alpha)\}$. This is a countable set. Clearly if $x\equiv_D x'$, then $W_x = W_{x'}$. So let $W_D \coloneqq W_x$ for any $x \in d$. By $\ac_\om(\R)$, $\aleph_1$ is regular, thus $\alpha_d \coloneqq \sup W_d < \om_1$. Define similarly $\alpha_x \coloneqq \sup W_x$.
+
+    Define $f : \D_D \ra \aleph_1$, $d\mapsto \alpha_d$. Then $f_\ast U_M$ is an $\aleph_1$-complete ultrafilter on $\aleph_1$.
+
+    \underline{Claim}: $f_\ast U_M$ is not principal.
+
+    \underline{Proof of Claim}: Suppose it is. Then $\{\gamma\} \in f_\ast U_M$ for some $\gamma$. We have:
+    \begin{align*}
+        \{\gamma\} \in f_\ast U_M &\iff \{d \in \D_D;\alpha_d = \gamma\} \in U_M\\
+        &\iff \{x \in \om^\om;\alpha_x = \gamma\}\in F_D\\
+        &\iff \textrm{ there is }z\textrm{ such that }\cone(z)\subset \{x\in\om^\om;\alpha_x = \gamma\}
+    \end{align*}
+    Consider some $y \in \wf_{\gamma+1}$. Clearly $y \not\in \{x \in \om^\om;\alpha_x = \gamma\}$. Now $z\ast y \in \cone(z)$, but $y \led z\ast y$, so $\gamma+1 \in W_{z\ast y}$, so $\alpha_{z\ast y} \ne \gamma$. This is a contradiction.
+\end{proof}
 
 \end{document}

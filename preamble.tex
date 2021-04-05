@@ -46,6 +46,22 @@
 \thmname{#1}\if\relax\detokenize{#2}\relax:\else\thmnumber{ #2}:\fi\if\relax\detokenize{#3}\relax\else\thmnote{ (#3)}\fi
 }
 
+\newtheoremstyle{thmenv*}
+{%space above
+}{%space below
+}{%body font
+\color{thmcolour}\em
+}{%indent amount
+-0em
+}{%head font
+\bfseries\color{thmcolour}
+}{%head punct
+}{%after head space
+1em
+}{%head spec
+\if\relax\detokenize{#3}\relax\thmname{#1}:\else\thmname{#3}:\fi
+}
+
 \newtheoremstyle{ex}
 {%space above
 }{%space below
@@ -109,6 +125,10 @@
 %if named, include name
 \thmname{#1}\if\relax\detokenize{#2}\relax:\else\thmnumber{ #2}:\fi\if\relax\detokenize{#3}\relax\else\thmnote{ (#3)}\fi
 }
+
+
+\theoremstyle{thmenv*}
+\newtheorem*{thmenv*}{Theorem}
 
 \theoremstyle{custhm}
 \newtheorem{theorem}{Theorem}[section]

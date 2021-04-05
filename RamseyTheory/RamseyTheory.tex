@@ -13,7 +13,10 @@
 \newcommand{\V}{\mathcal{V}}
 \newcommand{\fu}{\forall_\U}
 \newcommand{\for}[1]{\forall_{#1}}
-
+\newcommand{\om}{\omega}
+\newcommand{\bom}{{(\omega)}}
+\newcommand{\blom}{{(<\omega)}}
+\newcommand{\lom}{{<\om}}
 %\usepackage[lite]{mtpro2}
 
 \title{Ramsey Theory}
@@ -236,7 +239,7 @@ Another option  here is that we can colour $ij$ with colour $j$ ($i<j$) - then e
 
 \begin{remark*}[Remarks]\ 
     \begin{enumerate}
-        \item We could use just one colouring, by colouring a $4$-set $ijkl$ with the partition of $[4]^{(2)}$ induced by $c$ on $\{i,j,k,l\}$. The number of colours is then the number such partitions, which is ${4\choose 2} = 6$. We didn't do this because it seems a bit magical and out of the blue, and slightly obscures what's going on. There are also lots of symbols, making it a bit unpleasant.
+        \item We could use just one colouring, by colouring a $4$-set $ijkl$ with the partition of $[4]^{(2)}$ induced by $c$ on $\{i,j,k,l\}$. The number of colours is then the number such partitions, which is $\left( \begin{array}{c}4 \\ 2\end{array}\right) = 6$. We didn't do this because it seems a bit magical and out of the blue, and slightly obscures what's going on. There are also lots of symbols, making it a bit unpleasant.
         
         \item Similarly, if $c:\N^{(r)}\ra X$ is an arbitrary colouring, we get an infinite $M\subset \N$ and a set $I\subset [r]$ such that $\forall x_1,\dots,x_r,y_1,\dots,y_r\in M^{(r)}$ we have $c(x_1,\dots,x_r) = c(y_1,\dots,y_r) \iff x_i=y_i\ \forall i\in I$, where $I$ is an index set. These $2^r$ coloursing are called the \undf{canonical} colourings of the $r$-sets.
         
@@ -1063,6 +1066,400 @@ Note that $\U + \V$ \it{is} an ultrafilter:
     \item if $A \in \U + \V$ and $B \supseteq A$ then $B \in \U + \V$
     \item if $A,B\in \U + \V$ then $\fu x \for{\V} y (x + y \in A)$ and $\fu x \for{\V} y (x + y \in B)$, \it{i.e.} $\fu x\for{\V} y (x + y \in A \cap B)$ by Prop 2.14(i) twice. So $A\cap B \in \U + \V$.
     \item if $A\not\in \U + \V$ then $\neg \fu x\for{\V} y (x + y \in A)$, \it{i.e.} $\fu x \for{\V} y (x + y \in A^c)$ by Prop 2.14(iii) twice. So $A^c \in \U + \V$.
+\end{itemize}
+
+Note also that $+:\beta\N \times \beta\N$ is associative. Indeed:
+\begin{align*}
+    \U + (\mathcal{V}+\mathcal{W}) &= \{A\subset \N: \fu x\for{\V}y\for{\mathcal{W}}z\ x+(y+z)\in A\} = (\U + \V)+\mathcal{W}
+\end{align*}
+Also, $+$ is left-continuous, meaning that for fixed $\V$ the map $\U\mapsto \U + \V$ is continuous. Indeed, for a basic open set $C_A$:
+\begin{align*}
+    \U + \V \in C_A &\iff A \in \U + \V\\
+    &\iff \fu x\for{\V}y (x+y\in A)\\
+    &\iff \{x : \for{\V}y(x+y\in A)\}\in U\\
+    &\iff \U \in C_{x:\for{\V}y(x+y\in A)}
+\end{align*}
+\begin{remark*}
+    In fact, $+$ is \it{not} commutative, and not right-continuous.
+\end{remark*}
+
+We seek a $\U$ with $\U + \U = \U$, which we call an \undf{idempotent}. Of course, such a $\U$ cannot be principal, because $\tilde{n} + \tilde{n} = \widetilde{2n}\ne \tilde{n}$. It turns out that this is exactly what we need, and moreover that we now have exactly enough to find one.
+
+\begin{lemma}[Idempotent Lemma]
+    $$\exists \U \in \beta\N\textrm{ with }\U + \U = \U$$
+\end{lemma}
+
+\underline{Note}: What we will use is: $\beta\N$ compact, Hausdorff, non-empty, and $+$ is associative and left-continuous.
+
+\begin{proof}
+    The idea is to go for a minimal $M\subset \beta\N$ with $M+M\subset M$, and hope $M$ is a singleton.
+
+    \underline{Claim}: There exists minimal compact non-empty $M\subset \beta\N$ with $M+M\subset M$.
+
+    \underline{Proof of Claim}: There certainly exists a compact non-empty $M$ with $M+M\subset M$, \it{e.g.} $\beta\N$.
+
+    So, by Zorn, it is enough to show that if $M_i:i\in I$ form a chain of such sets then $M = \bigcap_{i\in I}M_i$ is also such a set.
+
+    \underline{$M$ compact}: $M$ is an intersection of closed sets, so it is closed. And in a compact Hausdorff space, compact is the same as closed.
+
+    \underline{$M$ non-empty}: The $M_i$ are closed sets with the finite intersection property, so $\bigcap M_i\ne\emptyset$ as $\beta\N$ compact.
+
+    \underline{$M+M\subset M$}: Given $x,y\in M$, have $x,y\in M_i$ for all $i$, so $x+y \in M_i$ for all $i$, and thus $x + y \in M$. \qedsymbol
+
+    Fix such a minimal set $M$, and fix $x \in M$. Remember that we're hoping $M = \{x\}$.
+
+    \underline{Claim}: $M+x = M$.
+    
+    \underline{Proof of Claim}: Have $M+x \subset M$, non-empty. Also, $M+x$ compact, since it is the continuous image of the compact set $M$. Also, $(M+x) + (M+x) = (M+x+M)+x \subset M+x$. Hence $M+x = M$, by minimality of $M$. \qedsymbol
+
+    Thus there exists $y \in M$ such that $y + x = x$. Let $N = \{y \in M: y + x = x\}$.
+
+    \underline{Claim}: $N = M$.
+
+    \underline{Proof of Claim}: Certainly, $N\ne \emptyset$. Also, $N$ is compact since it is the inverse image of $\{x\}$ under a continous function (add $x$ on the right).
+
+    Also, if $y,z \in N$ then $y + z \in N$: $(y+z)+x = y+(z+x) = y + x = y$. So $N+N\subset N$. Thus $N = M$ (by minimality of $M$).
+
+    So $x \in N$, \it{i.e.} $x + x = x$.
+\end{proof}
+
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item So $M = \{x\}$.
+        \item We've found a $1$-point subgroup under $+$ (not whole space not a group). Does $\beta\N$ contain any non-trivial finite subgroups? \it{E.g.} $\U$ with $\U + \U \ne \U$ but $\U + \U + \U = \U$. This is the \undf{finite subgroup problem}. In fact, the answer is \it{no} (Zelenyuk, 1996).
+    \end{enumerate}
+\end{remark*}
+
+We finally arrive at:
+
+\begin{theorem}[Hindman's Theorem]
+    $\wnfc$ there exists $x_1,x_2\dots$ with $\fs(x_1,x_2,\dots)$ monochromatic.
+\end{theorem}
+\begin{proof}
+    Fix an idempotent $\U \in \beta\N$. [$\U$ will be ``making lots of passes and choices for us''.]
+
+    Given a finite colouring of $\N$, let $A$ be the colour class in $\U$. Have $\fu y (y \in A)$. So $\fu x \fu y (x+y\in A)$ since $\U$ idempotent. So $\fu x\fu y\fs(x,y)\subset A$ by Prop 14.
+
+    Fix $x_1$ with $\fu y \fs(x_1,y)\subset A$.
+
+    Inductively, suppose we have chosen $x_1,\dots,x_n$ such that $\fu y \fs(x_1,\dots,x_n,y)\subset A$. So for each $z \in \fs(x_1,\dots,x_n)$, have $\fu y (z+y\in A)$. So $\fu x \fu y (x + z + y \in A)$ (since $\U$ idempotent).
+
+    Hence $\fu x \fu y \fs(x_1,\dots,x_n,x,y)\subset A$ (by Prop 14). Let $x_{n+1}$ be such an $x$. Then we have $\fu y \fs(x_1,\dots,x_n,x_{n+1},y)\subset A$. This completes the induction, and hence the proof.
+\end{proof}
+
+\begin{remark*}[Remarks]\ 
+    \begin{enumerate}
+        \item Very few examples of infinite PR systems are known. Moreover, no Rado-type $\iff$ theorem is known.
+        \item Consistency \it{fails} for infinite PR systems. For example, $\wnfc$ there exists $x_1,x_2,\dots$ with $$\fs_{1,2}(x_1,x_2,\dots) = \left\{\sum_{i\in I}x_i + 2\sum_{i\in J}x_i:I,J\textrm{ finite, non-empty, and }\max I < \min J\right\}$$ monochromatic - a case of the `Milliken-Taylor Theorem'. But it was proved (1995) that this system is \it{inconsistent} with Hindman. That is to say, there is some colouring of $\N$ such that, while in one colour class you have all the regular finite sums, and in another colour class you finite all these other finite sums, but you can't guarantee that there is a single colour class containing them both.
+        \item It follows trivially from Hindman's Theorem that $\wnfc$ there exists $x_1,x_2,\dots$ such that all $x_i$, and all $x_i + x_j$ ($i\ne j$) have the same colour. [\it{i.e.} $\fs_{\le 2}(x_1,\dots)$ monochromatic.] Is there a proof of this that does not go via Hindman? This is currently unknown. [Officially: is there a set $S\subset \N$ such that W$S$FC there exists such a system, but false for Hindman system?]
+    \end{enumerate}
+\end{remark*}
+
+\marginpar{Lecture 13}
+
+\section{Infinite Ramsey Theory}
+
+We know that whenever $\N^{(r)}$ is $2$-coloured ($r = 1,2,\dots$) then there exists an infinite monochromatic set $M$.
+
+What if we $2$-colour the \it{infinite} subsets instead? Can we still find an infinite $M$, all of whose infinite subsets are the same colour?
+
+\underline{Notation}: For an infinite set $M\subset \N$, write $M^{(\om)} = \{L\subset M: L\textrm{ infinite}\}$.
+
+So our question is: if we $2$-colour $\N^{(\om)}$ (\it{i.e.} have $c : \N^{(\om)} \ra \{1,2\}$), must there be an infinite monochromatic $M$ (\it{i.e.} $M \in \N^\bom $ such that $c$ constant on $M^\bom$)?
+
+For instance, colour $M = \{a_1,a_2,\dots\}$ \it{red} if $\sum_n \frac{1}{a_n}$ converges, and blue otherwise.
+
+The answer here is yes: if a sequence converges, so does any subsequence, so just take any red set \it{e.g.} $\{1,2,4,8,\dots\}$.
+
+If this is true in general, then it is a strengthening of our usual Ramsey; sadly though, it is not.
+
+\begin{prop}
+    There is  $2$-colouring of $\N^\bom$ for which no $M\subset \N^\bom$ is monochromatic.
+\end{prop}
+\begin{proof}
+    We are looking for a colouring such that for any infinite $M$, there is an infinite subset of $M$ of a different colour.
+
+    In fact, we will find a much stronger colouring; we will find a $c$ such that $\forall M \in \N^\bom\ \forall x \in M\ c(M)\ne c(M-\{x\})$ \it{i.e.} the colour of a set changes every time we remove a single point.
+
+    Define relation $\sim$ on $\N^\bom$ by $L\sim M$ if $L\triangle M$ is finite. This is clearly an equivalence relation; let the equivalence classes be $E_i:i\in I$. In each $E_i$, pick a representative (or `reference set') $M_i \in E_i$. For any $M \in \N^\bom$, say $M\in E_i$, colour $M$ \it{red} if $|M\Delta M_i|$ even, and \it{blue} if $|M\Delta M_i|$ is odd.
+\end{proof}
+\begin{remark*}
+    We used the axiom of choice (to fix the $M_i$).
+\end{remark*}
+
+A $2$-colouring of $\N^\bom$ corresponds to a partition $Y\cup Y^c = \N^\om$, some $Y\subset \N^\bom$. Say $Y \in \N^\bom$ is \undf{Ramsey} if $\exists M \in \N^\bom$ with $M^\bom\subset Y$ or $M^\bom\subset Y^c$. So Prop 1. says that not all sets $Y$ are Ramsey.
+
+\underline{Question}: Which sets are Ramsey? Are `nice' sets Ramsey?
+
+Observe that $\N^\bom \subset \P(\N) \xleftrightarrow{} \{0,1\}^\N$, so we have the product topology on $\N^\bom$. In particular, we have a metric given by
+\begin{align*}
+    d(L,M) = \left\lbrace \begin{array}{cl} 0 & L=M \\ \frac{1}{\min L\Delta M} & L\ne M \end{array}\right.
+\end{align*}
+
+So a basic open neighbourhood of $M \in \N^\bom$ is $\{L : A\textrm{ is an initial segment of }L\}$, each finite initial segment $A$ of $M$.
+
+A base of open sets is $\{L : A \textrm{ is an initial segment of }L\}$, each finite $A\subset \N$.
+
+\begin{remark*}
+    We have that $\N^\bom \xleftrightarrow{} (0,1]\subset \R$ (by binary expansion, unique if insisting on infinite 1s as we are). This is `nearly' a homemomorphism: it only fails at dyadic rationals. For example, consider the sequence:
+    \begin{align*}
+        &0.11101010101\dots\\
+        &0.111001001001001\dots\\
+        &0.1110001000100010001\dots\\
+        &\vdots
+    \end{align*}
+    This tends to $0.11011111\dots$ in $\R$, but does not converge to that sequence in $\N^\bom$.
+
+    So it only fails at a countable set, which as we shall see will not matter to us very much.
+
+    The topology on $\N^\bom$ is the \undf{product topology}, also called the \undf{usual topology}, or the \undf{$\tau$-topology}.
+\end{remark*}
+
+\underline{First Aim}: Open sets are Ramsey.
+
+\underline{Eventual Aim}: Borel sets are Ramsey.
+
+\underline{Reminder}: In a topological space $X$, the \undf{Borel sets} are the smallest family of subsets of $X$ that include the open sets and are closed under complement and countable union.
+
+For instance, in $\R$: open sets, closed sets, countable sets (counable union of singletons, which are closed), any countable union of countable intersections of open sets, \it{etc}... are all Borel. Some more examples include just about any set we ever describe explicitly:
+
+Take a complex power series $\sum a_n z^n$. The set $\{z \in \C : \sum a_n z^n\textrm{ converges}\}$ is Borel. Indeed, it is the set: 
+\begin{align*}
+    \bigg\lbrace z \in \C : \underbrace{(\forall \eps > 0)\underbrace{(\exists N )\underbrace{(\forall m,n\ge N) \underbrace{\left( \left|\sum_{i=m}^na_iz^i\right|\le \eps\right)}_{\textrm{closed}}}_{\textrm{closed}}}_{\textrm{countable union of closed sets}}}_{\textrm{ctble }\cap\textrm{ of ctble unions of closed sets}}  \bigg\rbrace
+\end{align*}
+
+\begin{remark*}[Sociology]
+    Write $M^{\blom}$ for $\{A \subset M : A\textrm{ finite}\}$, any $M \in \N^\bom$. For $A \in \N^\blom$, $M \in \N^\bom$ write $$(A,M)^\bom = \lef\lbrace L \in \N^\bom : A\textrm{ an initial segment of }L,\ L - A \subset M\right\rbrace$$
+    which means ``start as $A$, then carry on in $M$''.
+
+    For fixed $Y \subset \N^\bom$, and $M \in \N^\bom$, $A \in \N^\blom$, say $M$ \undf{accepts} $A$ (into $Y$) if $(A,M)^\bom \subset Y$, and say $M$ \undf{rejects} $A$ if no $L \in M^\bom$ accepts $A$.
+
+    \underline{Notes}:\ 
+    \begin{enumerate}
+        \item If $M$ accepts $A$, then also any $L \in M^\bom$ accepts $A$.
+        \item If $M$ rejects $A$, then also any $L \in M^\bom$ accepts $A$.
+        \item If $M$ accepts $A$, then $M$ accepts any $A\cup B$, where $B \in M^\blom$, $\min B > \max A$.
+        \item $M$ need not accept or reject $A$.
+    \end{enumerate}
+\end{remark*}
+
+\begin{lemma}[Galvin-Prikry Lemma]
+    Let $Y \subset \N^\bom$. Then there exists $M \in \N^\bom$ such that either:
+    \begin{enumerate}[label = \roman*)]
+        \item $M$ accepts $\emptyset$, or
+        \item $M$ rejects all of its finite subsets.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Suppose no $M \in \N^\bom$ accepts $\emptyset$, \it{i.e.} $\N$ rejects $\emptyset$. We will inductively construct infinite sets $M_1\supset M_2 \supset M_3 \supset\dots$ and points $a_1 < a_2 < a_3 <\dots$ with $a_i \in M_i$ for all $i$ such that $M_i$ rejects all subsets of $\{a_1,a_2,\dots,a_{i-1}\}$.
+
+    [Then done: $\{a_1,a_2,\dots\}$ rejects all of its finite subsets.]
+
+    Put $M_1 = \N$ ($M_1$ rejects all subsets of $\emptyset$).
+
+    Having chosen $M_1\supset M_2\supset M_k$ and $a_1 < \dots < a_{k-1}$ suitably, we seek $M_{k+1}\subset M_k$ and $a_k \in M_k$, $a_k > a_{k-1}$, such that $M_{k+1}$ rejects all subsets of $\{a_1,\dots,a_{k}\}$.
+
+    Suppose for contradiction that this cannot be done.
+
+    Fix $b_1\in M_k$, $b_1 > a_{k-1}$, and try $a_k = b_1, M_{k+1} = M_k$. We must have some $N_1 \subset M_k$ accepting some subset of $\{a_1,\dots,a_{k-1},b_1$. That subset must be of the form $E_1 \cup \{b_1\}$ for some $E_1 \subset \{a_1,\dots,a_{k-1}\}$, since $M_k$ rejects all subsets of $\{a_1,\dots,a_{k-1}\}$.
+
+    Now fix $b_2 \in N_1$, $b_2 > b_1$, and try $a_k = b_2$, $M_{k+1} = N_1$. Again we must have some $N_2 \subset N_1$ accepting some $E_2 \cup \{b_2\}$, for some $E_2 \subset \{a_1,\dots,a_{k-1}\}$.
+
+    Keep going: we obtain sets $M_k \supset N_1 \supset N_2\supset \dots$ and $a_{k-1} < b_1 < b_2 < \dots $ with:
+    \begin{itemize}
+        \item $b_{i+1} \in N_i$ for all $i$
+        \item $N_i$ accepts $E_i \cup \{b_i\}$, for some $E_i \subset \{a_1,\dots,a_{k-1}\}$
+    \end{itemize}
+    So by passing to a subsequence, we may assume $E_i = E$ for all $i$, some $E\subset \{a_1,\dots,a_{k-1}\}$. Thus $\{b_1,b_2,\dots\}$ accepts $E$, contradicting the fact that $M_k$ rejects $E$, one of its finite subsets.
+\end{proof}
+
+\begin{theorem}
+    Let $Y \subset \N^\bom$ be open. Then $Y$ is Ramsey.
+\end{theorem}
+\begin{proof}
+    Choose infinite $M$ as given by Galvin-Prikry. If $M$ accepts $\emptyset$, then we are done since $M^\bom\subset Y$.
+
+    So we may assume that $M$ rejects all of its finite subsets.
+
+    \underline{Claim}: $M^\bom \subset Y^c$.
+
+    \underline{Proof of Claim}: Suppose not. Then there is some $L \subset M$ with $L \in Y$. Since $Y$ is open, we have $(A,\N)^\bom\subset Y$ for some finite initial segment $A$ of $L$. In particular, $(A,M)^\bom \subset Y$, \it{i.e.} $M$ accepts $A$, contradicting the fact that $M$ rejects $A$.
+\end{proof}
+
+Notice that in this proof there is a lot of overkill, and that we must actually be able to prove a much stronger statement.
+
+\begin{remark*}
+    $Y$ is Ramsey $\iff$ $Y^c$ Ramsey, so we can also view Theorem 3 as saying closed sets are Ramsey.
+\end{remark*}
+
+\begin{defin*}
+    The \undf{$\ast$-topology} or \undf{Ellentuck topology} or \undf{Mathias topology} on $\N^\bom$ has basic open sets $(A,M)^\bom$, each $A \in \N^\blom$, $M \in \N^\bom$. Note that this \it{is} a base for a topology:
+    \begin{itemize}
+        \item $\N^\bom = (\emptyset,\N)^\bom$, so the union of all $(A,M)^\bom = \N^\bom$
+        \item $(A,M)^\bom\cap (A',M')^\bom = (A\cup A',M\cap M')^\bom$ or $\emptyset$
+    \end{itemize}
+    This toplogy is \it{stronger} than the $\tau$-topology, \it{i.e.} there are more open sets here.
+\end{defin*}
+
+\begin{theorem*}[3.3']
+    Let $Y \in \N^\bom$ be $\ast$-open. Then $Y$ is Ramsey.
+\end{theorem*}
+\begin{proof}
+    Choose infinite $M$ as given by Galvin-Prikry. If $M$ accepts $\emptyset$ then done: $M^\bom \subset Y$. So we may assume $M$ rejects all of its finite subsets.
+
+    \underline{Claim}: $M^\bom \subset Y^c$.
+    
+    \underline{Proof of Claim}: Suppose not. Some $L\subset M$ has $L \in Y$. Since $Y$ is $\ast$-open, have $(A,L)^\bom \subset Y$, for some finite initial segment $A$ of $L$. In other words, $L$ accepts $A$, contradicting the fact that $M$ rejects $A$.
+\end{proof}
+
+This is of course the same proof, but now it's not overkill; it's exactly the right strength, and this is a good indicator that we've done the right thing by strengthening the topology in this way.
+
+\begin{remark*}
+    So $\ast$-closed sets are Ramsey.
+\end{remark*}
+
+We say that $Y\subset \N^\bom$ is \undf{completely Ramsey} if for all $A \in \N^\blom$ there exists $L \in M^\bom$ such that $(A,L)^\bom\subset Y$ or $(A,L)^\bom \subset Y^c$. Note that this is at least as strong as being Ramsey, and in fact it is trivially a strictly stronger notion, as we shall now see.
+
+Indeed, let $Y$ be the non-Ramsey set from Prop. 1, and put $Z = Y \cup \{M \in \N^\bom : 1 \not\in M\}$. Then $Z$ is Ramsey; $M^\bom \subset Z$ for \it{any} $M$ with $1\not\in M$. However, $Z$ is not completely Ramsey, \it{e.g.} there is no $L \in \N^\bom$ with $(\{1\},L)^\bom \subset Z$ or $(\{1\},L)^\bom \subset Z^c$.
+
+\marginpar{Lecture 15}
+
+\begin{theorem}
+    Let $Y\subset \N^\bom$ be $\ast$-open. Then $Y$ is completely Ramsey.
+\end{theorem}
+\begin{proof}
+    Given $(A,M)^\bom$, seek $L \subset M$ such that $(A,L)^\bom \subset Y$ or $Y^c$. Now `view $(A,M)^\bom$ as a copy of $\N^\bom$', as follows:
+
+    wlog $\max A < \min M$. Write $M = \{m_1,m_2,\dots\}$ where $m_i < m_j$ for $i < j$. Define $f : \N^\bom \ra (A,M)^\bom$, where $L\mapsto A\cup \{m_i : i \in L\}$. Then $f$ is a homemomorphism (in the $\ast$-topology).
+
+    Let $Y' = \{L \in \N^\bom : f(L) \in Y\}$. Then $Y'$ is $\ast$-open, since it is the inverse image of an open set under a continuous function. So $Y'$ is Ramsey, \it{i.e.} there exists $L \in \N^\bom$ such that $L^\bom \subset Y'$ or $Y'^c$. Thus $f(L^\bom)\subset Y$ or $Y^c$, \it{i.e.} $(A,\{m_i:i\in L\})^\bom \subset Y$ or $Y^c$.
+\end{proof}
+
+\begin{remark*}
+    So $\ast$-closed sets are completely Ramsey (CR).
+\end{remark*}
+
+Having dealt with the `locally big' sets, namely the $\ast$-open sets, we now turn to the `locally small' sets, namely the nowhere dense sets.
+
+\underline{Recall}: A subset $Y$ of topological space $X$ is called \undf{nowhere dense} if it is not dense in any (non-empty) open set, \it{i.e.} $\bar{Y}$ has empty interior, \it{i.e.} for any (non-empty) open set $O\subset X$, there exists a non-empty open $O'\subset O$ with $O' \cap Y = \emptyset$.
+
+\begin{remark*}[Examples]\
+    In $\R$: 
+    \begin{itemize}
+        \item $\N$ is ND
+        \item $(1,1/2,1/3,1/4\dots)$  is ND
+        \item $(1,1/2,1/3,1/4\dots)\cup\{0\}$ is ND
+        \item $\Q \cap (0,1)$ is \it{not} ND
+    \end{itemize}
+\end{remark*}
+
+\begin{prop}
+    Let $Y\subset \N^\bom$. Then $Y$ is $\ast$-ND $\iff\ \forall A \in \N^\bom,M\in\N^\bom\ \exists L\in M^\bom$ with $(A,L)^\bom\subset Y^c$.
+
+    In particular, $\ast$-ND sets are CR.
+\end{prop}
+\begin{proof} We have two directions.
+
+    \underline{LHS says}: Inside every $(A,M)^\bom$, we can find $(B,L)^\bom\subset Y^c$.
+
+    \underline{RHS says}: Inside every $(A,M)^\bom$, we can find $(A,L)^\bom\subset Y^c$.
+
+    So certainly RHS $\implies$ LHS.
+
+    For LHS $\implies$ RHS, given $(A,M)^\bom$: Have that $\bar{Y}$ has no interior. Now, $\bar{Y}$ is CR (by Theorem 4), so there exists $L \in M^\bom$ with $(A,L)^\bom \subset \bar{Y}$ or $\bar{Y}^c$. Cannot have that $(A,L)^\bom\subset \bar{Y}$ (as $\bar{Y}$ has no interior), so $(A,L)^\bom \subset \bar{Y}^c \subset Y^c$.
+\end{proof}
+
+Say a subset $Y$ of topological space $X$ is \undf{meagre} if $Y = \bigcup_{n=1}^{\infty} Y_n$, with each $Y_n$ nowhere dense.
+
+For instance, any nowhere dense set is trivially meagre. In $\R$, $\Q$ is meagre. Note that this shows that meagre sets can still be dense.
+
+One often thinks of meagre sets as being `small' - \it{e.g.} Baire Category Theorem states that if $X$ is a (non-empty) complete metric space, then $X$ itself is not meagre.
+
+\begin{theorem}
+    Let $Y\subset \N^\bom$ be $\ast$-meagre. Then for all $A \in \N^\bom$, $M \in \N^\bom$ there exists $L \in M^\bom$ with $(A,L)^\bom \subset Y^c$.
+
+    In particular, $Y$ is $\ast$-ND.
+\end{theorem}
+\begin{proof}
+    Let $Y = \bigcup_{n=1}^\infty Y_n$, each $Y_n$ $\ast$-ND.
+
+    Given $(A,M)^\bom$: Choose $M_1 \subset M$ with $(A,M_1)^\bom \subset Y_1^c$, which we can do by Prop. 5. Pick $x_1 \in M_1$, $x_1 > \max A$. Now apply Prop. 5 to get $M_2'\subset M_1$ with $(A,M_2')^\bom\subset Y_2^c$, and again to get $M_2 \subset M_2'$ with $(A\cup\{x_1\},M_2)^\bom \subset Y_2^c$.
+
+    Now pick $x_2 \in M_2$, $x_2 > x_1$. Apply Prop. 5 four times to get $M_3 \subset M_2$ with $(A,M_3)^\bom,(A\cup\{x_1\},M_3)^\bom,(A\cup\{x_2\},M_3)^\bom,(A\cup\{x_1,x_2\},M_3)^\bom\subset Y_3^c$.
+
+    Continue: we obtain $M\supset M_2 \supset M_2\supset \dots$ and $\max A < x_1 < x_2 <\dots$ with $x_n \in M_n$ for all $n$, and $(A\cup F,M_n)^\bom\subset Y_n^c$ for every $F \subset \{x_1,x_2,\dots,x_{n-1}\}$. Hence $(A,\{x_1,x_2,\dots\})^\bom \subset Y_n^c$ for every $n$, so $\subset Y^c$.
+\end{proof}
+
+\marginpar{Lecture 16}
+
+\begin{defin*}[Baire Set]
+    A subset $Y$ of a topological space $X$ is called \undf{Baire}, or \undf{has the property of Baire}, if $Y = O \Delta M$, for some $O$ open and $M$ meagre. We can think of this as ``nearly open''.
+\end{defin*}
+\begin{remark*}[Examples]\ 
+    \begin{enumerate}
+        \item Every open set is Baire.
+        \item Every closed set is Baire: given $Y$ closed, write $Y = \mathring{Y} \Delta (Y - \mathring{Y})$. Have $\mathring{Y}$ open, and $Y-\mathring{Y}$ ND because it is closed and contains no (non-empty) open set.
+    \end{enumerate}
+    In fact, the Baire sets form a \undf{$\sigma$-algebra}, \it{i.e.} they are closed under complements and countable unions. Indeed:
+    \begin{itemize}
+        \item Given $Y$ Baire, say $Y = O\Delta M$, some open $O$ and meagre $M$. Have $Y^c = O^c \Delta M$. But $O^c$ is closed, so Baire: write $O^c = O' \Delta M'$, some open $O'$ and meagre $M'$. Thus $Y^c = O' \Delta (M\Delta M')$, and $M\Delta M'$ is also meagre.
+        \item Given $Y_1,Y_2,\dots$ Baire, say $Y_i = O_i \Delta M_i$, where $O_i$ is open and $M_i$ is meagre. Thus $\bigcup_i Y_i = \left(\bigcup_i O_i\right) \Delta M$, for some $M\subset \bigcup_i M_i$, and so $M$ is meagre.
+    \end{itemize}
+    So, for example, all Borel sets are Baire. [Can think of the Baire sets as being `like measurable sets'. Interestingly, it turns out that there is no way to explicity construct a subset of $\R$ which is not Baire; this requires AC, unlike for Borel sets.]
+\end{remark*}
+
+\begin{theorem}
+    Let $Y\subset \N^\bom$. Then $Y$ is $\ast$-Baire $\iff$ $Y$ is completely Ramsey.
+\end{theorem}
+\begin{proof}
+    \underline{$\implies$}: Have $Y = W\Delta Z$, some open $W$, meagre $Z$. Given $(A,M)^\bom$, there exists $L \subset M$ with $(A,L)^\bom \subset W$ or $W^c$, since open sets are CR (Thm. 4), and there exists $N\subset L$ with $(A,L)^\bom \subset Z^c$ (Thm. 6). So either $(A,L)^\bom \subset Z^c\cap W\subset Y$ or $(A,L)^\bom \subset Z^c \cap W^c \subset Y^c$.
+
+    \underline{$\impliedby$}: Given $Y$ CR, write $Y = \mathring{Y} \Delta (Y - \mathring{Y})$. Have $\mathring{Y}$ open, so it is enough to show that $Y - \mathring{Y}$ is nowhere dense.
+
+    Given $(A,M)^\bom$, have $L \subset M$ with $(A,L)^\bom \subset Y$ or $Y^c$ (as $Y$ is CR).
+    
+    \underline{If $(A,L)^\bom \subset Y$} then $(A,L)^\bom \subset \mathring{Y}$, so $(A,L)^\bom$ is disjiont from $Y - \mathring{Y}$.
+
+    \underline{If $(A,L)^\bom \subset Y^c$} then certainly $(A,L)^\bom$ is disjiont from $Y - \mathring{Y}$.
+\end{proof}
+
+\begin{remark*}
+    Why do we bother with Theorem 6, if there's no difference between meagre and nowhere dense?
+
+    Without Thm 6, Thm 7 would read ``CR $\iff$ open $\Delta$ ND''. However, we would then \it{not} know that the CR sets form a $\sigma$-algebra, and hence it wouldn't help us show that Borel sets are CR.
+\end{remark*}
+
+\begin{cor}
+    Let $Y \subset \N^\bom$ be $\tau$-Borel. Then $Y$ is Ramsey.
+\end{cor}
+\begin{proof}
+    Have $Y$ $\tau$-Borel, so certainly $Y$ is $\ast$-Borel. Thus $Y$ is $\ast$-Baire, and so $Y$ is CR by Thm 7.
+\end{proof}
+
+\begin{remark*}
+    $2$-colour $\N^\bom$ by giving $M$ colour \it{red} if $\sum_{m\in M} \frac{1}{\pi^m}$ is rational, and blue otherwise. Writing this set out with quantifiers makes it clearly Borel, so there exists $M\subset \N$ such that $M^\bom$ is monochromatically red or monochromatically blue. In fact, it is easy to see that we cannot have $M^\bom$ red. Hence there exists $M\subset \N^\bom$ such that for every $L \in M^\bom$, $\sum_{n\in L}\pi^{-n}$ is irrational.
+\end{remark*}
+
+\subsection*{What next?}
+
+\underline{Chapter 1}:\ 
+\begin{itemize}
+    \item Bounds on VdW/HJ.
+    \item Density versions, \it{e.g.} Szemeredi.
+    \item Euclidean Ramsey Theory - in $\R^n$, not $\Z^n$.
+\end{itemize}
+
+\underline{Chapter 2}:\ 
+\begin{itemize}
+    \item Bounds, \it{e.g.} Rado's Boundedness Conjecture.
+    \item Infinite systems (often via properties of $\beta\N$).
+    \item Other spaces, \it{e.g.} $\Q$.
+\end{itemize}
+
+\underline{Chapter 3}:\ 
+\begin{itemize}
+    \item Applications to Banach spaces.
+    \item Generalised notions of `CR'.
 \end{itemize}
 
 \end{document}
