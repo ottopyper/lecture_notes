@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.2.16)  25 FEB 2021 08:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.3.29)  5 APR 2021 21:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -499,15 +499,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--19
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/RamseyTheory/Sheets/Sheet1/RT1.aux) ) 
 Here is how much of TeX's memory you used:
- 15663 strings out of 479383
- 295839 string characters out of 5875830
- 598027 words of memory out of 5000000
- 32481 multiletter control sequences out of 15000+600000
+ 15667 strings out of 479383
+ 295881 string characters out of 5875830
+ 598146 words of memory out of 5000000
+ 32485 multiletter control sequences out of 15000+600000
  410408 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,6n,87p,673b,212s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on /home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/RamseyTheory/Sheets/Sheet1/RT1.pdf (2 pages, 119401 bytes).
+Output written on /home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/RamseyTheory/Sheets/Sheet1/RT1.pdf (2 pages, 119413 bytes).
 PDF statistics:
  67 PDF objects out of 1000 (max. 8388607)
  49 compressed objects within 1 object stream
