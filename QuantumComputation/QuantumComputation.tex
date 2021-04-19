@@ -1,6 +1,6 @@
 \documentclass[]{article}
 
-
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -16,9 +16,9 @@
 \usepackage[english]{babel}
 
 \usepackage{mathtools}
-\DeclarePairedDelimiter\bra{\langle}{\rvert}
-\DeclarePairedDelimiter\ket{\lvert}{\rangle}
-\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+%\DeclarePairedDelimiter\bra{\langle}{\rvert}
+%\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+%\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
 
 \definecolor{thmcolour}{rgb}{0,0,0}
 \definecolor{defcolour}{rgb}{0,0,0}
@@ -28,114 +28,114 @@
 \pagecolor{backgroundcolour}
 \color{textcolour}
 
-\newtheoremstyle{custhm}
-{%space above
-	1em
-}{%space below
-	1em
-}{%body font
-	\color{thmcolour}\itshape
-}{%indent amount
-	-0em
-}{%head font
-	\bfseries\color{thmcolour}
-}{%head punct
-}{%after head space
-	1em
-}{%head spec
-\thmname{#1}\if\relax\detokenize{#2}\relax: \else\thmnumber{ #2}: \fi\if\relax\detokenize{#3}\relax\else\thmnote{(#3)}\fi
-}
+% \newtheoremstyle{custhm}
+% {%space above
+% 	1em
+% }{%space below
+% 	1em
+% }{%body font
+% 	\color{thmcolour}\itshape
+% }{%indent amount
+% 	-0em
+% }{%head font
+% 	\bfseries\color{thmcolour}
+% }{%head punct
+% }{%after head space
+% 	1em
+% }{%head spec
+% \thmname{#1}\if\relax\detokenize{#2}\relax: \else\thmnumber{ #2}: \fi\if\relax\detokenize{#3}\relax\else\thmnote{(#3)}\fi
+% }
 
-\newtheoremstyle{remark}
-{%space above
-}{%space below
-}{% body font
-}{%indent amount	-0em
-}{%head font
-\bfseries
-}{%head punct
-}{%after head space
-0em
-}{%head spec
-\if\relax\detokenize{#3}\relax\thmname{#1}: \else\thmname{#3}: \fi
-}
+% \newtheoremstyle{remark}
+% {%space above
+% }{%space below
+% }{% body font
+% }{%indent amount	-0em
+% }{%head font
+% \bfseries
+% }{%head punct
+% }{%after head space
+% 0em
+% }{%head spec
+% \if\relax\detokenize{#3}\relax\thmname{#1}: \else\thmname{#3}: \fi
+% }
 
-\newtheoremstyle{cusdef}
-{%space above
-	1em
-}{%space below
-	1em
-}{%body font
-	\color{defcolour}
-}{%indent amount
-	-0em
-}{%head font
-	\bfseries\color{defcolour}
-}{%head punct
-}{%after head space
-	1em
-}{%head spec
-	%if numbered, include number
-	%if named, include name
-	\thmname{#1}
-	\if\relax\detokenize{#2}\relax:
-	\else\thmnumber{ #2}:\fi
-	\if\relax\detokenize{#3}\relax
-	\else\thmnote{ (#3)}\fi
-}
+% \newtheoremstyle{cusdef}
+% {%space above
+% 	1em
+% }{%space below
+% 	1em
+% }{%body font
+% 	\color{defcolour}
+% }{%indent amount
+% 	-0em
+% }{%head font
+% 	\bfseries\color{defcolour}
+% }{%head punct
+% }{%after head space
+% 	1em
+% }{%head spec
+% 	%if numbered, include number
+% 	%if named, include name
+% 	\thmname{#1}
+% 	\if\relax\detokenize{#2}\relax:
+% 	\else\thmnumber{ #2}:\fi
+% 	\if\relax\detokenize{#3}\relax
+% 	\else\thmnote{ (#3)}\fi
+% }
 
-\theoremstyle{custhm}
-\newtheorem{theorem}{Theorem}[section]
-\theoremstyle{cusdef}
-\newtheorem{defin}[theorem]{Definition}
-\theoremstyle{custhm}
-\newtheorem{lemma}[theorem]{Lemma}
-\theoremstyle{custhm}
-\newtheorem{cor}[theorem]{Corollary}
+% \theoremstyle{custhm}
+% \newtheorem{theorem}{Theorem}[section]
+% \theoremstyle{cusdef}
+% \newtheorem{defin}[theorem]{Definition}
+% \theoremstyle{custhm}
+% \newtheorem{lemma}[theorem]{Lemma}
+% \theoremstyle{custhm}
+% \newtheorem{cor}[theorem]{Corollary}
 
-\theoremstyle{custhm}
-\newtheorem{prop}[theorem]{Proposition}
+% \theoremstyle{custhm}
+% \newtheorem{prop}[theorem]{Proposition}
 
-\theoremstyle{custhm}
-\newtheorem*{theorem*}{Theorem}
+% \theoremstyle{custhm}
+% \newtheorem*{theorem*}{Theorem}
 
-\theoremstyle{cusdef}
-\newtheorem*{defin*}{Definition}
+% \theoremstyle{cusdef}
+% \newtheorem*{defin*}{Definition}
 
-\theoremstyle{remark}
-\newtheorem*{remark*}{Remark}
+% \theoremstyle{remark}
+% \newtheorem*{remark*}{Remark}
 
 
 %\marginpar{to describe which lecture it is}
 
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\e}{\mathrm{e}}
-\newcommand{\ra}{\rightarrow}
-\newcommand{\lef}{\left(}
-\newcommand{\res}{\right)}
-\newcommand{\ie}{\textit{i.e. }}
-\newcommand{\eps}{\varepsilon}
-\newcommand{\E}{\mathbb{E}}
-\newcommand{\suminf}{\sum_{n=0}^{\infty}}
-\newcommand{\suminfa}[1]{\sum_{#1=0}^{\infty}}
-\renewcommand{\P}{\mathbb{P}}
-\newcommand{\undf}[1]{\textit{\textbf{#1}}}
+%\newcommand{\N}{\mathbb{N}}
+%\newcommand{\Z}{\mathbb{Z}}
+%\newcommand{\Q}{\mathbb{Q}}
+%\newcommand{\R}{\mathbb{R}}
+%\newcommand{\C}{\mathbb{C}}
+%\newcommand{\e}{\mathrm{e}}
+%\newcommand{\ra}{\rightarrow}
+%\newcommand{\lef}{\left(}
+%\newcommand{\res}{\right)}
+%\newcommand{\ie}{\textit{i.e. }}
+%\newcommand{\eps}{\varepsilon}
+%\newcommand{\E}{\mathbb{E}}
+%\newcommand{\suminf}{\sum_{n=0}^{\infty}}
+%\newcommand{\suminfa}[1]{\sum_{#1=0}^{\infty}}
+%\renewcommand{\P}{\mathbb{P}}
+%\newcommand{\undf}[1]{\textit{\textbf{#1}}}
 \renewcommand{\L}{\mathcal{L}}
 \renewcommand{\it}[1]{\textit{#1}}
-\newcommand{\M}{\mathcal{M}}
+%\newcommand{\M}{\mathcal{M}}
 \renewcommand{\phi}{\varphi}
-\newcommand{\proves}{\vdash}
-\newcommand{\lra}{\leftrightarrow}
+%\newcommand{\proves}{\vdash}
+%\newcommand{\lra}{\leftrightarrow}
 \renewcommand{\value}{|\cdot|}
 \newcommand{\val}[1]{\left|#1\right|}
 \newcommand{\valk}{(K,|\cdot|)}
 \renewcommand{\bar}{\overline}
 \renewcommand{\O}{\mathcal{O}}
-\newcommand{\A}{\mathcal{A}}
+%\newcommand{\A}{\mathcal{A}}
 \newcommand{\qft}{\textrm{QFT}}
 
 \newcommand{\poly}{\textrm{poly}}
@@ -1011,7 +1011,7 @@ Note that not all $H$s can be efficiently simulated, but some important physical
 	$H$ is $k$-local ($k$ fixed constant) on $n$ qubits if $$H = \sum_{j=1}^{m} H_j$$ where each $H_j$ is a Hermitian matrix acting on at most $k$ qubits (not necessarilyh continguous), \textit{i.e.} each $$H_j = \tilde{H}_j \otimes I$$, where $\tilde{H}_j$ acts on some $k$ qubits and $I$ is the identity on the rest.
 \end{defin*}
 
-So this is still an exponentially large matrix, but it is a description of constant size. So we must have $m\le {n\choose k} = O(n^k) = \poly(n)$ terms in $H$, each with constant size description. So the whole Hamiltonian can be specified with $\poly(n)$ size; generally though this is not the case since there are exponentially many degrees of freedom.
+So this is still an exponentially large matrix, but it is a description of constant size. So we must have $m\le \binom{n}{k} = O(n^k) = \poly(n)$ terms in $H$, each with constant size description. So the whole Hamiltonian can be specified with $\poly(n)$ size; generally though this is not the case since there are exponentially many degrees of freedom.
 
 \begin{remark*}[Examples]\ 
 	\begin{enumerate}[label=\arabic*)]
@@ -1047,9 +1047,9 @@ In particular, this means that all $S$-products of length $O(\log^c(1/\eps)$) wi
 
 We'll also need a lemma about accumulation of error (\it{c.f.} ES3):
 
-\begin{lemma}[Lemma A]
+\begin{thmenv*}[Lemma A]
 	Let $\{U_i\}$ be sets of $m$ unitary operators with $||U_i-V_i||\le \eps$  for all $i = 1,\dots,n$. Then $||U_m\dots U_1-V_m\dots V_1|| \le m\eps$, \it{i.e.} errors accumulate only \underline{linearly}
-\end{lemma}
+\end{thmenv*}
 \begin{proof}
 	Easy induction.
 \end{proof}
@@ -1057,4 +1057,503 @@ We'll also need a lemma about accumulation of error (\it{c.f.} ES3):
 \subsection{Hamiltonian Simulation for local Hamiltonians}
 
 \underline{Warm-up}: the (easy) commuting case.
+
+\marginpar{Lecture 11}
+
+\begin{thmenv*}[Proposition]
+Let $H = \sum_{j=1}^m H_j$ be any $k$-local Hamiltonian with $H_j$'s commuting. Then for any $t$, $\e^{-iHt}$ can be approximated to within $\eps$ by a circuit with $O(m\poly(\log(m/\eps))$ gates for any given universal set.
+\end{thmenv*}
+\begin{remark*}[Note]
+	As $m = \binom{n}{k} = O(n^k)$, this is $\poly(n,\log 1/\eps)$ too, and $\log(1/\eps) = $ number of bits of precision in the approximation.
+\end{remark*}
+\begin{proof}
+	The $H_j$s commute, so $\e^{-i\sum_j H_j t} = \prod_{j=1}^{m}(\e^{-iH_jt})$, and each $\e^{-iH_jt}$ is a $k$-qubit gate. Then by Solovay-Kitaev (SK), each $\e^{-iH_jt}$ can be approximated to within $\eps/m$ with $O(\poly(\log m/\eps))$ gates. Then by Lemma A, the full product $\prod_{j=1}^{m}$ is approximated to within $m(\eps/m) = \eps$, using a total of $O(m\poly(\log m/\eps))$ gates.
+\end{proof}
+
+Now for the full non-commuting case:
+
+\begin{remark*}[Notation]
+	For any matrix $X$, write $X + O(\eps)$ for any $X + E$ with $||E|| = O(\eps)$.
+\end{remark*}
+
+\begin{thmenv*}[Lemma B (Lie-Trotter Product Formula)]
+	Let $A,B$ be matrices with $||A||,||B|| \le K$, with $K < 1$ suitably small. Then $\e^{-iA}\e^{-iB} = \e^{-i(A+B)} + O(K^2)$.
+\end{thmenv*}
+\begin{proof}
+	Recall that:
+	\begin{align*}
+		\e^{-iA} &= I - iA + \sum_{k=2}^{\infty}\frac{(-iA)^k}{k!}\\
+		&= I - iA + (iA)^2\sum_{k=0}^{\infty}\frac{(-iA)^k}{(k+2)!}
+	\end{align*}
+	and in fact we have, by the triangle inequality:
+	\begin{align*}
+		\left|\left|\sum_{k=0}^{\infty}\frac{(-iA)^k}{(k+2)!}\right|\right| & \le \sum_{k=0}^{\infty}\frac{||(-iA)||^k}{k!}\\
+		&= e^{||A||} \le e^K < e
+	\end{align*}
+	Therefore $\e^{-iA} = I - iA + O(K^2)$. $(\ast)$ So:
+	\begin{align*}
+		\e^{-iA}\e^{-iB} &= (I - iA + O(K^2))(I - iB + O(K^2))\\
+		&= I - i(A+B) + O(K^2)\\
+		&= \e^{-i(A+B)} + O(K^2)
+	\end{align*}
+\end{proof}
+	Now we apply this repeatedly to accumulate the sum of our matrices $H_1,\dots,H_n$ in the exponent.
+\begin{itemize}
+	\item \underline{Note}: If each $||H_i|| < K$ then $||H_1 + \dots + H_\ell|| < \ell K$, and we'll want this to be $<1$ for all $\ell \le m$. So for now, we'll assume $K < 1/m$ in order to have Lie-Trotter at all stages.
+	\item Also take $t = 1$ for now (will do general $t$ later).
+\end{itemize}
+
+Given these, consider:
+\begin{align*}
+	\e^{-iH_1}\e^{-iH_2}\dots\e^{-iH_m} &= \left[ \e^{-i(H_1+H_2)} + O(K^2)\right] \e^{-iH_3}\dots \e^{-iH_m}
+\end{align*}
+Note now that $||H_1 + H_2|| < 2k$, and note also that the error generated at each state says the same with further unitary $U$s; $||AU|| = ||A||$. So it can be pulled through the remainder of the product:
+\begin{align*}
+	&= \e^{-i(H_1+H_2)}\e^{-iH_3}\dots\e^{-iH_m}+O(K^2)\\
+	&= \left[\e^{-i(H_1+H_2+H_3)} + O((2K)^2)\right]\e^{-iH_4}\dots\e^{-iH_m}+O(K^2)\\
+	&\ \ \vdots\\
+	&= \e^{-i(H_1+H_2+\dots+H_m)}+O(K^2) + O((2K)^2) + \dots + O([(m-1)K]^2)\\
+	&= \e^{-i(H_1 + H_2 +\dots + H_m)} + O(m^3K^2)
+\end{align*}
+We write this error as $Cm^3K^2$, and refer to it as ERR1.
+
+Now for general finite $||H_j||$s and $t$ values:
+
+$||H_jt||<Kt$ can be \it{large}, so introduce $N$ (which will be large-ish, chosen later) and note $H_jt/N$ has norm $\tilde{K} = ||H_jt/N|| < Kt/N$ $(\ast)$, which can be suitably \it{small}. \it{i.e.} we divide $t$ up into (small) $1/N$ intervals, and $U = \e^{i(H_1+\dots +H_m)t} = \left[\e^{i(H_1t/N+\dots +H_mt/N)}\right]^N$.
+
+We want the final error for $U$ to be $<\eps$, so by Lemma A we want error for $[\dots]$ to be $< \eps /N$ \it{i.e.} from (ERR1) and $(\ast)$, we want $Cm^3\tilde{K}^2 < \eps /N$. So $Cm^3K^2t^2/N^2 < \eps /N$, and in particular $N\ge Cm^3K^2t^2/\eps$ (ERR2). If $N$ is this large, then $$||\e^{-iH_1t/N}\e^{-iH_2t/N}\dots\e^{-iH_mt/N} - \e^{-i(H_1+\dots+H_m)t/N}|| < \eps/N$$ Then by Lemma A again, $$||(\e^{-iH_1t/N}\dots\e^{-iH_mt/N})^N - \e^{-i(H_1+\dots+H_m)t}|| < \eps$$ The product on the left is $Nm$ gates of the form $\e^{-iH_jt/N}$, where $N$ is given by (ERR2), so the circuit size is $O(m^4(Kt)^2/\eps)$.
+
+Recall for $n$ qubits and $k$-local Hamiltonians $m = O(n^k)$, so circuit size overall is $O(n^{4k}(Kt)^2/\eps) = O(n^{4k},t^2,1/\eps)$.
+
+
+\begin{itemize}
+	\item We have circuit $\mathcal{C}$ of size $|\mathcal{C}| = O(m^4 (Kt)^2/\eps)$ gates of the form $\e^{-iH_jt/N}$ approximating $U = \e^{iHt}$ to $O(\eps)$. If we want to use a standard universal set, then lemma A implies each of these $\e^{-iH_jt/N}$ gates needs to be approximated to $O(\eps/|\mathcal{C}|)$ to maintain overall $O(\eps)$ error for $U$. So by SK thm we need $O(\log^c(|\mathcal{C}|/\eps))$ gates from the universal set for each, \it{i.e.} get an extra (very modest!) multiplicative factor of $O(\log^c(m^4(Kt)^2)/\eps^2))$ in $|\mathcal{C}|$.
+	
+	\item For fixed $n,\eps$ and variable $t$, the quantum process $\e^{-iHt}$ runs for time $t$, but the quantum circuit simulation above runs for time $O(t^2)$. By refining the Lie-Trotter Lemma, it can be shown that this can be improved to $O(t^{1+\delta})$ for any $\delta > 0$.
+\end{itemize}
+
+\marginpar{Lecture 12}
+
+\subsection*{Harrow Hassidim Lloyd (HHL) Quantum Algorithm for Systems of Linear Equations (2009)}
+
+We'll want to solve a linear system $A\underline{x} = \underline{b}$, $\underline{b},\underline{x} \in \C^N$ where dimension $N$ is potentially very large.
+
+\begin{itemize}
+	\item Write $N = 2^n$ (or $2^n$ least power of $2$ greater than $N$)
+	\item Rather than outputting the full solution $\underline{x}$ itself (would take at least $O(N)$ time), instead we compute (suitably approximations to) the value of properties of the solution $\underline{x}$, such as quadratic expressions $\underline{x}^\dagger M\underline{x}$, \it{e.g.} total weight of some subset of components
+\end{itemize}
+
+Very large systems of such equations are important in applications
+
+\begin{itemize}
+	\item data mining/machine learning on data sets of very large size (terabytes/petabytes)
+	\item numerical solutions of PDEs - discretisation techniques (finite element methods) lead to linear systems of size far larger than the original problem description
+\end{itemize}
+
+The best known classical techniques take $\poly(N)$ time to solve such problems - this is true generally even to just compute properties of the solution as described above; in fact no better method is known than first computing the whole solution itself.
+
+\textbf{Important parameters (both classical and quantum algorithms)}
+
+\begin{itemize}
+	\item system size $N$
+	\item the desired approximation tolerance $\eps$
+	\item the condition $\kappa$ of the matrix $A$j, defined as the ratio of the largest to smallest eigenvalue size: $$\kappa = \left|\frac{\lambda_{\max}}{\lambda_{\min}}\right|$$
+	Note that $\kappa = \infty$ if $A$ is not invertible. The condition number provides a measure of how close $A$ is to being non-invertible. If we rescale $A$ to have $\lambda_{\max}= 1$, then $|\lambda_{\min}| = 1\kappa$ and numerical computation of $A^{-1}$ becomes less stable with increasing $\kappa$, needing more significant digits of computation and correspondingly longer runtime.
+\end{itemize}
+
+\subsubsection*{Preliminary requirement for the HHL algorithm}
+
+\underline{Aim}: to compute $\eps$-approximation to properties of the solution of $N$-dimensional system $Ax = b$ in time $\poly(\log N) = \poly(n)$. We'll take the property to be a quadratic expression of the form $\mu = x^\dagger M x$.
+
+\underline{Immediate issue:} how the defining ingredients $A,b$ are actually given \it{e.g.} if simply written out as components, then it takes $\poly(N)$ time just to write them before starting!
+
+Thus we need a different presentation, but one that is still available in important applications.
+
+The $\poly(\log N)$ runtime will be achieved usingo only $O(\log N)$ qubits, and it will never be required in the algorithm to write down all of $A,b$ or $x$.
+
+\underline{List of starting requirements}:
+
+For the matrix $A$:
+
+\begin{enumerate}
+	\item We will require that $A$ is Hermitian.
+	
+	\underline{Remark}: If it is not, just double the size of the system (no effect on time complexity), and solve
+	\begin{align*}
+		\left( \begin{array}{cc} 0 & A^\dagger \\ A & 0 \end{array}\right)\left(\begin{array}{c} x \\ y \end{array}\right) = \left( \begin{array}{c}0 \\ b \end{array}\right)
+	\end{align*}
+	which is $A^\dagger y = 0$ and $Ax = b$, so $y = 0$ (since $A$ invertible).
+
+	\item We will require that the condition number $\kappa$ of $A$ is ``suitably small'', in particular that $\kappa$ is bounded by $\poly(n)$ with increasing $N\sim 2^n$. Such matrices/linear systems are called \undf{well-conditioned}. We will also assume for convenience that $A$ (and RHS $b$) has been rescaled to have $\lambda_{\max} = 1$, so all sizes of eigenvalues lie in $[1/\kappa,1] = [1/\poly(n),1]$.
+	
+	\item We will need to implement Hamiltonian simulation for $\e^{iAt_0}$ (with suitable $t_0$, see later). Correspondingly, we require that $\e^{iAt_0}$ can be implemented in time (circuit size) $\poly(n,t_0)$.
+	
+	\underline{Remark}: Any class of (Hermitian, well-conditioned) matrices $A$ having this property will do for HHL. This is the only place that the presentation of $A$ features in HHL.
+\end{enumerate}
+
+In the literature, a particular class (that's still broadly applicable) is often described. These are matrices that are \undf{row-sparse} and \undf{row-computable}, defined as follows:
+
+\begin{enumerate}[label = (\roman*)]
+	\item $A$ is \undf{row-sparse} if each row contains at most $\poly(n)$ non-zero entries (amongst its $N \sim 2^n$ entries). More generally, $A$ is \undf{row $s$-sparse} if each row now contains at most $s$ non-zero entries. [Note that no $s$ implies $s = \poly(n)$.]
+	\item An $s$-sparse matrix $A$ is called \undf{row-computable} if the entries of $A$ can be efficiently computed in the following sense (instead of, say, being given inefficiently as a list of $N^2$ values):
+	
+	There is a (classical) $O(s)$-time computation which given any row index $i$, $1\le i\le N$ and integer $k$, $1\le k \le N$ outputs the $k^{\th}$ non-zero entry $A_{ij}$ of row $i$, and its column location $j$. \it{I.e.} $C(i,k) = (j,A_j)$. If $k$ exceeds the number of non-zero entries, we can set $C(i,k) = (i,0)$ as a flag that there are none left.
+\end{enumerate}
+
+
+\begin{theorem*}[Hamilton Simulation Property]
+	Let $A$ be row $s$-sparse and row computable. Then $\e^{iAt_0}$ can be implemented up to error $\eps$ by a quantum circuit of size $O(\log N \cdot s^2 \cdot t_0)$ (where we have omitted factors of $t_0$ and $1/\eps$ that scale better than any power $\alpha > 0$, however small).
+
+	Thus for row sparse matrices (\it{i.e.} $s = O(\poly n)$) the cirucit size is $O(\poly(\log N)\cdot t_0)$.
+\end{theorem*}
+\begin{proof}
+	Beyond the scope of the course. \it{c.f.} D. Berry, G. Ahokas \it{et al.}.
+\end{proof}
+\begin{remark*}
+	The requirements (i) and (ii) will not feature in the HHL algorithm itself; they are quoted here \it{only} to guarantee efficient implementability of the Hamiltonian Simulation for $\e^{iAt_0}$.
+\end{remark*}
+
+\begin{remark*}
+	The matrices $A$ arising in finite element methods for numerical PDE solutions are row sparse \& row computable.
+\end{remark*}
+
+For the RHS vector $b$:
+
+
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item we will require that $b = (b_1,\dots,b_N)$ has $|b_1|^2 + \dots + |b_N|^2 = 1$ and that the ($\log N$)-qubit state $\sum b_i\ket{i}$ can be \it{efficiently} produced \it{i.e.} in time $\poly(n)$ on a quantum computer.
+\end{enumerate}
+
+\begin{remark*}
+	If $b$ is not normalised, assume that $|b|^2 = \sum_{i=1}^{N}|b_i|^2$ can be efficiently computed, \& then we use the normalised version $\hat{b}$ of $b$. Finally at the end we rescale the output value using the already-computed $|b|^2$.
+\end{remark*}
+
+\begin{enumerate}
+	\setcounter{enumi}{4}
+	\item Require that $M$ is Hermitian \& the corresponding quantum measurement on $n = \log N$ qubits is implementable in $\poly(n)$ time on a quantum computer. If $m$ not Hermitian, $M = K + iL$, $K = (M+M^\dagger)/2$, $L = (M-M^\dagger)/2$, and then just do HHL for $K$ and $L$ separately.
+\end{enumerate}
+
+\marginpar{Lecture 13}
+
+HHL will produce a state $\ket{\hat{x}} = ``x$ normalised'' to accuracy $\eps$ and then estimate $\mu = x^\dagger M x$, $M$ Hermitian, also to accuracy $\eps$ (by measurement of $M$ on it, mean value = $\mu$).
+
+The best known classical general purpose algorithm to achieve the above runs in time $O(N\cdot s\sqrt{\kappa} \log(1/\eps))$.
+
+HHL will output state within $\eps$ of $\ket{\hat{x}}$ in time $O(\log N \cdot s^2 \kappa^2 \cdot 1/\eps)$ and similar time to get $\mu$ to accuracy within $\eps$.
+
+In the regime that $\eps = \frac{1}{\poly(\log N)}$ and all other conditions, the classical time is $O(\poly(N))$, and the HHL quantum time is $O(\poly(\log N))$, \it{an exponential speed-up}.
+
+\begin{remark*}[The HHL Algorithm]
+	For clarity, we first assume the ingredients PE, HamSim can be executed error-free, and we will \it{afterwards} give a discussion of errors and runtime.
+
+	\begin{itemize}
+		\item Assume $|\lambda_{\max}| = 1$ and condition number $\kappa$ is known (or an upper bound known), so all sizes of eigenvalues lie within $[1/\kappa,1]$.
+		
+		Work in $N$-dimensional space, $n = \log N$ qubits. Computational basis $\{\ket{i}:i = 0,\dots,N-1\}$.
+
+		Let the eigenvectors and corresponding eigenvalues of $A$ be denoted $\lambda_j$ and $\ket{u_j}$ respectively, $j = 0,1,\dots,N-1$.
+
+		Begin by implementing RHS state $\ket{b}$, and consider it in the eigenbasis $$\ket{b} = \sum_{i=0}^{N-1}b_i\ket{i} = \sum_{j=0}^{N-1}\beta_j\ket{u_j}$$ and then $$\ket{x} = A^{-1}\ket{b} = \sum_{j=0}^{N-1}\beta_j \frac{1}{\lambda_j}\ket{u_j}$$ - note here that $\ket{x}$ is not necessarily normalised here.
+
+		This transformation is linear, but not unitary so cannot be implemented directly as a quantum operation. To instead achieve it probabilistically, we'll use PE for $U = \e^{iA}$ with the latter exponential (\& needed powers of C-U in PE) being implemented by HamSim. Then a so-called post-selected process (\it{cf} Sheet 1 Q6) will achieve our desired non-unitary transformation:
+
+		\item PE with HamSim (all assumed to work perfectly) give:
+		\begin{align*}
+			\ket{b}\ket{0}\xrightarrow{U_{\textrm{PE}}} \sum \beta_j \ket{u_j}\ket{\lambda_j}
+		\end{align*}
+		which we denote $(\ast)$. Here we do \it{not} do final measurement in PE, only the unitary part.
+
+		\item Next adjoin an extra ancilla \it{qubit} $\ket{0}$, and apply the following controlled rotation C-rotn on it, controlled by $\ket{\lambda_j}$ register.
+		
+		C-rot:
+		\begin{align*}
+			\ket{\lambda_j}\ket{0} & \mapsto \ket{\lambda_j} [\cos \theta_j \ket{0} + \sin\theta_j \ket{1}]\\
+			&= \sqrt{1 - \frac{c^2}{\lambda_j^2}}\ket{\lambda_j}\ket{0} + \frac{c}{\lambda_j}\ket{\lambda_j}\ket{1}
+		\end{align*}
+		Here:
+		\begin{itemize}
+			\item $c$ is chosen to have $c\le \min_j |\lambda_j|$ (so we take $c = \frac{1}{\kappa}$ for definiteness)
+			\item the angle of rotation $\theta_j \in (-\pi/2,\pi/2)$ given by $$\theta_j = \arcsin \frac{c}{\lambda_j}$$ determined by content of $\ket{\lambda_j}$ register.
+		\end{itemize}
+		Note: C-rot is a \it{fixed} operation on $n+1$ qubits that in fact can be implemented by a $\poly(n)$ sized circuit of $1$ and $2$-qubit gates (see Sheet 3 Q3) (for any $\lambda$ with $|\lambda < \eps|$).
+
+		Apply C-rot to $(\ast)$ results in the state:
+
+		\begin{align*}
+			\ket{\psi_0} = \sum_{j=0}^{N-1}\beta_j\sqrt{1 - \frac{c^2}{\lambda_j^2}} \ket{u_j}\ket{\lambda_j}\ket{0} + \beta_j \frac{c}{\lambda_j}\ket{u_j}\ket{\lambda_j}\ket{1}
+		\end{align*}
+		from which we \it{want} the part associated to the ancilla state $\ket{1}$.
+
+		\item (Post selection step) we measure the ancilla in the computational basis, hoping to get result 1. What is the probability that this happens? We will see result 1 with prob $p$ given by:
+		
+		\begin{align*}
+			p &= \left| \left| \sum_{j}\beta_j \frac{c}{\lambda_j}\ket{u_j}\ket{\lambda_j}\right|\right|^2 = \sum_{j}\left|\beta_j\frac{c}{\lambda_j}\right|^2\\
+			&= \frac{1}{\kappa^2}\sum_j \left| \frac{\beta_j}{\lambda_j}\right|^2 \ge \frac{1}{\kappa^2}
+		\end{align*}
+		where the last inequality comes from the fact that $\sum |\beta_j^2| = 1$ and $\frac{1}{\lambda_j} \ge 1$ since $|\lambda_j| \in [1/\kappa,1]$.
+
+		In that case, the post-measurement state will be:
+
+		\begin{align*}
+			\ket{\Upsilon} &= \frac{1}{\sqrt{p}}c\sum_{j=0}^{N-1}\frac{\beta_j}{\lambda_j}\ket{u_j}\ket{\lambda_j}
+		\end{align*}
+		To mitigate the probability $p$, and obtain $\ket{\Upsilon}$ with any fixed (high) level of probabilty $1 - \eta$ ($\eta > 0$ small) we can repeat the whole process $\log(1/\eta)/p = O(\kappa^2)$ times, and outcome 1 will occur at least once with probability greater than $1 - \eta$. [This follow from the basic probability lemma: If a single trial has success probability $p$ and we repeat the trial $M$ times independently, then for any $0 < 1 - \eta < 1$, the probability of at least one succesful trial in $M$ exceeds $1-\eta$ if $M \ge -\log(\eta)/p$.]
+
+		\begin{remark*}[Remark (Amplitude Amplification)]
+			The $O(\kappa^2)$ repetitions above can be improved to $O(\kappa)$ bu use of AA, instead of repeated measurements.
+		\end{remark*}
+
+		\item Having obtained the state:
+		\begin{align*}
+			\ket{\Upsilon} &= \frac{1}{\sqrt{p}}c\sum_{j=0}^{N-1}\frac{\beta_j}{\lambda_j}\ket{u_j}\ket{\lambda_j}
+		\end{align*}
+		we run PE in reverse to ``uncompute'' or ``erase'' the $\ket{\lambda_j}$ register, resetting it to $\ket{0}$ (and discarding it) and obtain:
+
+		\begin{align*}
+			\ket{\hat{x}} &= \frac{c}{\sqrt{p}}\sum_{j=0}^{N-1}\frac{\beta_j}{\lambda_j}\ket{u_j} = \frac{1}{\sqrt{p}}\ket{x}
+		\end{align*}
+		\it{i.e.} normalised version of $\ket{x}$.
+
+		\item Finally, we perform a measurement of observable $M$ on (copies of) $\ket{\hat{x}}$ [the copies are obtained by just running the whole process multiple times] to estimate its mean value, $$\frac{c^2}{p}\langle x | M | x \rangle = \frac{c^2}{p}\mu$$ via empirical mean of its values.
+		
+		According to the Chernoff-Hoeffding bound (see notes), $O(\log(1/\eta)/\xi^2)$ measurements of $M$ will suffice to estimate the mean $\mu c^2/p$ to any desired accuracy $\xi$, with any desired success probability $1 - \eta$.
+
+		We know $c$. For $p$, we can similarly estimate the probability $p$ (in the post selection step) to any accuracy $\xi$ by applying the Chernoff-Hoeffding bound to the ancilla measurement outcome, 0 or 1, its mean value being $0p_0 + 1p_1 = p$, our $p$ that we want. Using these estimated values of $c^2/p \langle x|M x\rangle$ and $p$ (and $c = \frac{1}{\kappa}$) we obtain our value of $\mu = \langle x | M | x\rangle$.
+	\end{itemize}
+\end{remark*}
+
+\begin{remark*}[Remarks about run time \& approximation errors]
+	[Non-examinable; messy to do rigorously. For a full analysis: original HHL paper `Phys. Rev. Lett. vol 103, 150502 (2009)'.]
+
+	\begin{itemize}
+		\item we assume we can make the RHS vector state $\ket{b}$ exactly
+		\item similarly the controlled rotation C-rot is a fixed unitary \& can be implemented efficiently - we assume it is exact too (ES3 Q3)
+		\item Consider now the \underline{phase estimation} required. The PE algorithm for a unitary $U$ \& $n$ qubit lines gives estimate of $\lambda$ up to $n$ bits of precision. We denote it by $\lambda'$ and assume for now that it is the closest $n$-bit approximation to $\lambda$. \it{I.e.} we get $\lambda$ up to additive error $\eta  = 1/2^n$. The PE process uses Hamiltonian Simulation that requires execution of controlled $U,U^2,\dots,U^{2^{n-1}}$. If $U = \e^{iA}$, then $C-U = \e^{i\tilde{A}}$, where
+		\begin{align*}
+			\tilde{A} = \left[\begin{array}{ccccccc}
+				0 & \dots & 0 & \vline & & & \\
+				&&&\vline & &0 &\\
+				0 & \dots & 0 & \vline & &&\\
+				\hline & 0 & &\vline & & A & \end{array}\right]
+		\end{align*}
+		is double the dimension of $A$, and is $s$-sparse/row-computable if $A$ was. note that $C-U = \left[\begin{array}{ccc} I & \vline & 0 \\ \hline 0 &\vline & U\end{array}\right]$. Thus we need to implement $\e^{i\tilde{A}t}$ for $t = 1,2,4,\dots,2^{n-1}$, which is done using HamSim for $s$-sparse matrices with circuit sizes $O(\log N \cdot t \cdot s^2)$, so total circuit size is $O(\log N \cdot t_0 \cdot s^2)$, with $t_0 = 1 + 2 + \dots + 2^{n-1} \approx 2^n = 1/\eta$.
+
+		After the controlled rotation C-rot using the $\lambda'$s produced and measurement in post-selection step, we denote the final state produced by:
+
+		\begin{align*}
+			\ket{\hat{x}'} &= \frac{1}{D'} \sum \beta_j\frac{c}{\lambda_j'}\ket{u_j}\\
+			\textrm{where }D' &= \sqrt{p'} = \sqrt{\sum_{j}|\beta_j|^2 \frac{c^2}{\lambda_j'^2}}
+		\end{align*}
+		and we write $\ket{\hat{x}},X,p$ for the corresponding expressions with (unexact) $\lambda'$s replaced by the true value $\lambda$s.
+
+		Our requirement is that $\ket{\hat{x}}$ be within $\eps$ of the eaxct state $\ket{\hat{x}}$ and need to choose a correspondingly suitably large $t_0 = \frac{1}{\eta}$ \it{i.e.} suitably good accuracy of $\lambda'$s vs. $\lambda$s.
+
+		To establish dependence of $t_0$ (or accuracy $\eta = 1/t_0$ in $\lambda$) on a desired final error tolerance $\eps$, we use two facts:
+
+		\begin{enumerate}[label = (\alph*)]
+			\item If $\lambda$ has additive error $\delta(\lambda) = \eta$ then $\frac{1}{\lambda}$ has $\delta(1/\lambda) \sim \frac{1}{\lambda^2}\delta(\lambda)$ so $1/\lambda$ has relative error $\delta(1/\lambda)/(1/\lambda) = \eta/\lambda$.
+			
+			\item If $A',B'$ approximate $A,B$ to relative error $\xi$ then $A'/B'$ approximates $A/B$ to relative error $\xi$ too:
+			\begin{align*}
+				\frac{A'}{B'} = \frac{A(1 + O(\xi))}{B(1 + O(\xi))} = \frac{A}{B}(1 + O(\xi))
+			\end{align*}
+		\end{enumerate}
+		%
+		Now by (a), $1/\lambda_j'$ approximates $1/\lambda_j$ to relative error $\delta(1/\lambda)/(1/\lambda) = O(\eta/\lambda_j) = O(\kappa\eta)$ as $1/\lambda_j \le \kappa$.
+
+		Also similarly $D'$ approximates $D$ to relative error $O(\kappa\eta)$ too as $D$ is homogeneous of degree 1 in in $1/\lambda_j'$s. Then by (b) with $A' = \frac{\beta_j c}{\lambda_j'}$ and $B' = D'$ we see that amplitudes of $\ket{\hat{x}'}$ approximate those of $\ket{\hat{x}}$ up to multiplicative error $O(\kappa\eta)$ so:
+		\begin{align*}
+			||\ket{\hat{x}'} - \ket{\hat{x}}|| &= ||(1 + O(\kappa\eta))\ket{\hat{x}} - \ket{\hat{x}}||\\
+			&= O(\kappa\eta) \textrm{ (want $\eps$)}
+		\end{align*}
+
+		Thus for given $\eps$ we choose $\kappa\eta = \eps$ \it{i.e.} $\eta = \eps/\kappa$, $t_0 = 1/\eta$ so we get $t_0 = \kappa/\eps$, and the PE step (run once) has run time $O(\log N tt_0 s^2) = O(\log N (\kappa/\eps)s^2)$.
+
+		In HHL algorithm, to obtain $\hat{x}$ with high probability we use amplitude amplification which requires repeating the PE process $O(\kappa)$ times.
+
+		So the final total run time is $O(\log N \cdot \kappa^2 s^2 \eps^{-1})$ \it{i.e.} $O(\poly(\log N),\eps^{-1})$ for $s,\kappa = O(\poly(\log N))$.
+	\end{itemize}
+\end{remark*}
+
+\begin{remark*}[Further comments on error \& run time]\ 
+	\begin{itemize}
+		\item In above, have assumed the PE process (with $n$ qubit lines) outputs the closest $n$-bit approximation $\lambda'$ to $\lambda$, whereas in fact it outputs a superposition of all $\lambda_k = \lambda' \pm k/2^n$ (peaked around $k = 0$), which introduces a further source of error that has so far been completely ignored.
+		
+		To mitigate this, we use Thm. PE(b) \it{i.e.} use more qubit lines in PE, to get the best $n$-bit $\lambda'$ with high probability.
+
+		Analysis is omitted; see original paper for details. But can show that this does not increase the above complexity/runtime limit of the HHL algorithm.
+
+		In HHL paper, an ``improved PE algorithm'' is used, with a non-uniform initial superposition on qubit lines, giving a better concentration around the best $\lambda'$ above.
+
+		\item In the HHL algorithm, the PE step is the source of the worst accuracy ($\eps$)-dependence being $O(1/\eps)$. This was subsequently improved (in 2013) in D. Berry, A. Childs, R. Cleve, ...., R. Somma arxiv: 1312.1414, improving $O(1/\eps)$ exponentially to $O(\log(1/\eps))$. The technieque involves replacing the PE process by a different method altogether, the so-called method of ``linear combination of unitaries''.
+		
+		See ES3 Q5 for basic idea involved.
+
+		It is in fact quite a general method, and can be used to improve the $\eps$-dependence of HamSim too, again in a dramatic, exponential way.
+	\end{itemize}
+\end{remark*}
+
+\subsection*{Clifford Computations \& Classical Simulation of Quantum Computing}
+
+\underline{Question}: What is the ``key quantum effect or resource'' giving quantum computing its benefit over classical computing?
+
+It's worth noting that it is currently in fact unproven whether QC is in fact faster than CC; \it{c.f.} P vs NP. But as things stand it is faster.
+
+To formalise the comparison of classical vs quantum computing we introduce the precise mathematical notion of \undf{classical simulation of quantum computation}:
+\begin{itemize}
+	\item description of a quantum circuit $C$ \it{i.e.} list of $1$ and $2$-aubit gates on $n$ qubits, of size $N = \poly(n)$
+	\item description of input, say $\ket{i_1\dots i_n}$ or $\ket{\alpha_1}\dots\ket{\alpha_n}$ - general \it{product} state
+	\item nominated output line(s) [say just one (1st line) for yes/no answer]
+\end{itemize}
+Note that the full description is of size $\poly(n)$ classically.
+
+\underline{Want}: by classical means only:
+
+\textbf{Weak simulation}: sample the output distribution (using classical computer, that can make classical random choices too - \it{e.g.} ``toss a fair coin'' will suffice)
+
+\textbf{Strong simulation}: \it{calculate} output probabilities $p_0$ and $p_1$ [see ES3 for multiline case]
+
+Moreover, we want to do it \it{efficiently} \it{i.e.} in \it{classical} $\poly(n)$ time \it{i.e.} ``efficient classical simulation''.
+
+In that case: we would have no quantum computational benefits over classical (up to some polynomial-time overhead, which we don't really care about).
+
+\underline{Note}: the quantum process itself gives only a weak simultion (``self-simulation''), \it{i.e.} sample of output distribution. So a strong simulation is asking for \underline{much} more.
+
+A ``direct'' strong classical simulation is always possible, but not generally efficient: the action of successive gates is just linear algebra, and clearly can calculate all evolving amplitudes \it{etc.}, \underline{but}: linear algebra develops in $2^n$-dimensional space, so it takes exponential time to do matrix multiplications \it{etc.}
+
+However: \it{if} it is promised that the state is a pdouct state $\ket{\alpha_1}\dots\ket{\alpha_n}$ at \it{every} stage, then we get an \it{efficient} strong simulation, since each step involves one or two qubits in a known state \it{eg.} $\ket{\alpha_i},\ket{\alpha_j}$ separate from all others.
+
+\begin{remark*}[Example]
+	2 qubit gate $U$ on qubits 1 \& 2 of $$\ket{\psi} = \sum c_{i_1\dots i_n}\ket{i_1\dots i_n}$$ with amplitudes of $U\ket{\psi}\sim \tilde{c}_{i_1\dots i_n}$ given by $$\tilde{c}_{i_1\dots i_n} = \underbrace{\sum_{k_1,k_2=0}^{1} U_{i_1i_2}^{k_2 k_2}}_{\textrm{$4\times4$ product}}c_{k_1k_2\underbrace{i_3\dots i_n}_{\textrm{exp. choices}}}$$
+	But if $\ket{\psi}$ a product, then $c_{i_1\dots i_n} = a_{i_1}b_{i_2}\dots d_{i_n}$ factorises and $$\tilde{c}_{i_1\dots i_n} = \left(\sum_{0}^{1}U^{k_1k_2}_{i_1i_2}a_{k_1}b_{k_2}\right)c_{i_3}\dots d_{i_n}$$, so just update the 2 qubits and factorise the answer back into $\tilde{a}_{i_1}\tilde{b}_{i_2}$ (by product state promise).
+\end{remark*}
+
+Note also that ``product state'' = ``abscence of entanglement'', and it is sometimes thus claimed that entanglement is the key resource for quantum computational benefits over classical. BUT: the above shows only that no entanglement $\implies$ no qcomp benefit, but it says nothing of the converse. So entanglement is \underline{necessary}, but \it{not} sufficient and there is more to do here.
+
+Notably, consider:
+
+\subsubsection*{Clifford Computation}
+
+\textbf{Preliminary Definitions}:
+
+The \undf{$n$-qubit Pauli group} $\mathcal{P}_n = \{\pm1,\pm i p_1\otimes\dots \otimes P_n : \textrm{ each }P_i\textrm{ is }I,X,Y,Z\}$ is a finite subgroup of $U(2^n)$.
+
+A \undf{Clifford operation} $C$ on $n$ qubits is any unitary that \underline{conjugates} Paulis to Paulis. \it{i.e.} for all $P \in \mathcal{P}_n\ CPC^\dagger = \tilde{P}$ is in $\mathcal{P}_n$ too. The collection of all such operations forms the \undf{Clifford group}, which is the normaliser group of the subgroup $\mathcal{P}_n$ in $U(2^n)$.
+
+These two groups are important in many applications:
+\begin{enumerate}[label = \arabic*)]
+	\item theory of quantum error correction (``stabiliser codes'') \& fault-tolerant quantum computation
+	\item insights into quantum computing power
+	\item have very elegant mathematical properties
+\end{enumerate}
+
+\begin{remark*}[Examples]\ 
+	\begin{enumerate}
+		\item all Paulis are Cliffords (clearly)
+		\item $H$ is Clifford
+		\item $S = \left(\begin{array}{cc} 1 & 0\\ 0 & i\end{array}\right) = \pi/2$ phase gate is Clifford
+		\item $CX$ (2 qubit gate) is Clifford
+		\item also have $Z = S^2, X = HZH$ and so $\textrm{SWAP}_{12} = CX_{12}CX_{21}CX_{12}, CZ_{12} = H_x(CX)_{12}H_2$ are Cliffords
+	\end{enumerate}
+\end{remark*}
+
+In fact there is a full explicit characterisation of Cliffords (proof omitted):
+
+\begin{theorem*}
+	$C$ on $n$ qubits is Clifford if and only if $C$ is a cirucit of $H,S$ and $CX$ gates.
+\end{theorem*}
+
+\undf{Clifford computations}: circuits that involve only Clifford gates. They have very special classical simulation properties (\it{cf.} below).
+
+\underline{Note}: we can generate much entanglement using Clifford operations. \it{eg.} $$\ket{0}_1\ket{0}_2 \xrightarrow{H_1} (\ket{0} + \ket{1})\ket{0} \xrightarrow{CX_{12}}\ket{0}\ket{0} + \ket{1}\ket{1}$$ and similarly we can make $$\frac{1}{\sqrt{2}}(\ket{0\dots 0} + \ket{1\dots 1})$$ the ``cat state''.
+
+\begin{theorem*}[Gottesman-Knill Theorem (variant)]
+	Let $C$ be any Clifford circuit on $n$ qubits, size $N = \poly(n)$ (say given as a cirucit of $H,S$ and $CX$ gates) with input any product state $\ket{a_1}\dots\ket{a_n}$ and output a measurement on the first qubit line (or any other line).
+
+	Then the output can always be classically strongly efficiently simulated (ans so weakly too).
+\end{theorem*}
+
+There are many different proofs of this using a variety of techniques - we will give one here.
+
+\begin{remark*}
+	An alternative proof uses the so-called \it{stabiliser formalism} (introduced for quantum error correction theory) and this was the origin of the GK Theorem. See \it{e.g.} Nielsen \& Chuang Ch. 10.5.
+\end{remark*}
+\marginpar{Lecture 16}
+\begin{proof}
+	Write $Z_1 = Z\otimes I \otimes \dots \otimes I$. Recall $Z = \ket{0}\bra{0} - \ket{1}\bra{1}$.
+
+	So $Z_1 = \Pi_0 - \Pi_1$ with $\Pi_{0,1}$ being $n$-qubit projections to $1^{\textrm{st}}$ qubit being $0,1$ respectively.
+
+	So $p_0 - p_1 = \langle \psi_{\textrm{final}}|z_1|\psi_{\textrm{final}}\rangle = \langle \psi_{\textrm{in}}|C^\dagger Z_1C|\psi_{\textrm{in}}$ since $\ket{\psi_{\textrm{final}}} = C\ket{\psi_{\textrm{in}}}$. Now if $C = C_N\dots C_2C_1$ (each $C_i$ is $H,S,CX$) we get $p_0 - p_1 = \langle \psi_{\textrm{in}}|C_1^\dagger \dots C_N^\dagger Z_1 C_N\dots C_1 | \psi_{\textrm{in}}\rangle$. By the defining property of Cliffords, we finally get that $$p_0 - p_1 = \langle \psi_{\textrm{in}}|\tilde{P}_1\otimes\dots\otimes\tilde{P}_n|\psi_{\textrm{in}}\rangle\quad (\ast)$$ where each $\tilde{P}$ is a Pauli.
+
+	All update rules for Pauli products by $H,S,CX$ conjugations are easy to compute (classically) and record once \& for all. [Indeed, $H,S,CX$ are only $1,2$-qubit gates, so only constant size calculation is required.]
+
+	Finally we use $\ket{\psi_{\textrm{in}}} = \ket{a_1}\dots\ket{a_n}$ is \it{product} state, so $$p_0 - p_ = \prod_{i=1}^{n}\langle a_i | \tilde{P}_i | a_i\rangle$$ [$(\ast)$ is a \underline{product} operator wedged between \underline{product} states.] So $p_0 - p_1$ is a product of $n$ $2\times 2$ matrix calculations, so this is a poly-time (in fact, linear time) calculation and is efficiently computable.
+
+	Then since $p_0 + p_1 = 1$, we get $p_0$ and $p_1$ with efficient classical computation.
+\end{proof}
+
+Now let's extend (unitary) Clifford circuits to allow inclusion of intermediate measurement ($1$-qubit) and carry on using post measurement state. We distinguish two scenarios:
+
+\begin{itemize}
+	\item \undf{Adaptive}: Choice of later gates \it{can} depend on the outcome of earlier measurements
+	\item \undf{Non-adaptive}: Choice of later gates \it{cannot} depend on the outcome of earlier measurements.
+\end{itemize}
+
+\begin{theorem*}
+	Let $C$ be any Clifford circuit with intermediate measurements, arbitrary product state inputs, and single line outputs.
+	\begin{enumerate}[label=(\alph*)]
+		\item if $C$ is \emph{non-adpative} then the output is classically efficiently strongly simulatable
+		\item if $C$ is \emph{adaptive} then full universal quantum computation is possible
+	\end{enumerate}
+\end{theorem*}
+\begin{remark*}
+	Can show as well that if the input is only \it{computatinal basis} states, then (b) remains classically efficiently simultable but only weakly (and strongly if P = NP, but we won't worry about that).
+
+	For this and more variants: R. Jozsa \& M. van der Nest arxiv: 1305.6190.
+\end{remark*}
+
+\begin{proof}
+	[Ideas.] For (a), just note that in fact non-adaptive Clifford circuits are easily reducible to the fully unitary case (\& then use GK Thm). In fact (ES3) the following can be seen to be equivalent:
+
+	Scenario A: $C_1$, then intermediate measurement, then $C_2$, where $C_2$ is independent of measurement outcome.
+
+	Scenario B: $C_1$ then $C_2$, but introduce extra line with input $\ket{0}$ ancilla, and instead of measurement do a Clifford CX with the ancilla and then discard the ancilla.
+	
+	The reason for the equivalence is that the CX separates the $\ket{0}$ and $\ket{1}$ that would be measured in Scenario A into $\ket{0}\ket{0}$ and $\ket{1}\ket{1}$ orthogonal states, with the same probabilistic weightings. Then they are completely separated and it is as though they have been measured.
+
+	Note this is only requires us to add in a polynomial amount of stuff, so the computation remains efficient.
+
+	For (b): Use Bravyi-Kitaev idea of so-called \undf{magic states}, together with the following preliminary fact:
+
+	\underline{Fact}: Clifford gates with the $1$-qubit (non-Clifford) $T$ gate, $T = \left(\begin{array}{cc}1 & 0\\0 & \e^{i\pi/4}\end{array}\right) = \sqrt{S} = $ Phase($\pi/4$) gate, is universal for quantum computing.
+
+	The magic states are going to be used to implement a $T$-gate, but without actually using a $T$-gate.
+
+	let $\ket{A}$ denote the $1$-qubit state $$\ket{A} = \frac{1}{\sqrt{2}}\left(\ket{0} + \e^{i\pi/4}\ket{1}\right)$$ a so-called magic state. We will implement a $T$ gate (on any line $k$) using a $1$-qubit ancilla $\ket{A}$ and an adaptive Clifford circuit, known as the \undf{T-gadget}:
+
+	We have $\ket{\psi}$ as our input state across $n$ lines, and we focus on line $k$ and add ancilla $\ket{A}$. Perform a controlled not on line $k$ with $\ket{A}$, and measure the ancilla to obtain result $m = 0$ or $1$. Then on line $k$ apply $S^m$, which is either $I$ or $S$ depending on the outcome $m$, and then discard the ancilla.
+
+	The claim here is that we then always get $T_k\ket{\psi}$, a $T$ gate acting on $\ket{\psi}$ on line $k$, as the outcome of this process. Note also that the probabilities for $m =0,1$ are always $1/2,1/2$. See ES3 for further details.
+
+	So we can make $T$-gates, and hence generate full universal quantum computing by the Fact.
+\end{proof}
+
+\textbf{Finale.}
+
+We thus have: for Clifford circuits with product state inputs, single line outputs and intermediate measurements:
+\begin{enumerate}[label=(\alph*)]
+	\item non-adaptive - classically (strongly) efficiently simulatable
+	\item adaptive - has full universal quantum computing power
+\end{enumerate}
+\it{i.e.} for Cliffords $C_k$, $M(i,y) \equiv$ ``measurement of line $i$, get result $y = 0$ or $1$'' we have:
+\begin{enumerate}[label=(\alph*)]
+	\item $C_0 M(i,y_1)C_1M(i_2,y_2)C_2\dots$
+	\item $C_0M(i,y_1)C_1(y_1)M(i_2,y_2)C_2(y_1,y_2)\dots$
+\end{enumerate}
+Therefore a purely classical ingredient, \it{adaptive choices of gate} (note: measurements are done in \underline{both} scenarios) is a resource that elevates classically limited power to full quantum power.
+
+Furthermore, experimentally there is ``no difference'' between (a) \& (b), in the sense that there are no new quantum processes in (b) that do not already occur in (a); a run of an adaptive circuit could have occurred as a run of a non-adaptive circuit with the same outcomes.
+
 \end{document}

@@ -1,10 +1,10 @@
 \babel@toc {english}{}
-\contentsline {section}{\numberline {1}Review of Shor's Algorithm}{2}{}%
-\contentsline {subsection}{\numberline {1.1}Factoring Problem}{2}{}%
-\contentsline {subsection}{\numberline {1.2}Quantum Factoring Algorithm Summary}{2}{}%
-\contentsline {subsection}{\numberline {1.3}Quantum Algorithm for Periodicity Determination}{3}{}%
-\contentsline {section}{\numberline {2}The Hidden Subgroup Problem (HSP)}{5}{}%
-\contentsline {section}{\numberline {3}Quantum Phase Estimation (PE) Algorithm}{12}{}%
-\contentsline {section}{\numberline {4}Amplitude Amplification}{15}{}%
-\contentsline {section}{\numberline {5}Hamiltonian Simulation}{20}{}%
-\contentsline {subsection}{\numberline {5.1}Hamiltonian Simulation for local Hamiltonians}{22}{}%
+\contentsline {section}{\numberline {0}Review of Shor's Algorithm}{2}{}%
+\contentsline {subsection}{\numberline {0.1}Factoring Problem}{2}{}%
+\contentsline {subsection}{\numberline {0.2}Quantum Factoring Algorithm Summary}{2}{}%
+\contentsline {subsection}{\numberline {0.3}Quantum Algorithm for Periodicity Determination}{3}{}%
+\contentsline {section}{\numberline {1}The Hidden Subgroup Problem (HSP)}{5}{}%
+\contentsline {section}{\numberline {2}Quantum Phase Estimation (PE) Algorithm}{12}{}%
+\contentsline {section}{\numberline {3}Amplitude Amplification}{15}{}%
+\contentsline {section}{\numberline {4}Hamiltonian Simulation}{19}{}%
+\contentsline {subsection}{\numberline {4.1}Hamiltonian Simulation for local Hamiltonians}{21}{}%
