@@ -197,6 +197,8 @@
 \newcommand{\sman}{S_n^\M(A)}
 \newcommand{\gp}{\textrm{gp}}
 
+\newcommand{\liff}{\longleftrightarrow}
+
 \renewcommand{\subset}{\subseteq}
 
 \title{Model Theory}
@@ -2022,6 +2024,162 @@ To work towards this goal, we will look at a more general notion of being a cose
 
 	Check $H^p_K = K$.
 \end{proof}
+
+\section{Lecture}
+
+\begin{lemma}
+	There aer only finitely many bi-generic types in $S_1(G)$ modulo $\sim$.
+\end{lemma}
+\begin{proof}
+	Non-examinable.
+	
+	Let $\theta(x)$ be a formula defining $X$. WLOG $\theta(x)$ is an $\L$-formula (add constants). Let $\phi(x;y,z)$ be $\theta(y^{-1}\cdot x\cdot z^{-1})$. Note $\phi(x;a,b)$ defines $aXb$.
+
+	Given $M\models T$ and $p,q \in S_1(M)$, write $p\sim q$ if $\forall a,b\in M$, $\phi(x;a,b)\in p$ iff $\phi(x;a,b)\in q$. Given a set of $q$ of $\L_M$-formulae in free variable $x$, we define $R(q)\in\mathbb{N}\cup\{-1,\infty\}$:
+	\begin{itemize}
+		\item $R(q)\ge 0$ iff $q$ is a type w.r.t. $M$
+		\item $R(q)\ge n+1$ iff $\exists \N \succeq \M$ and $p_i \in S_1(N)$ for $i\ge 1$, such that $p_i\supseteq q$, $R(p_i) \ge n$, and $p_i \not\sim p_j$ for all $i\ne j$.
+	\end{itemize}
+
+
+\underline{Note}: If $p\subset q$ then $R(q)\le R(p)$.
+
+\underline{Strategy}:\ 
+\begin{enumerate}
+	\item $R(x=x) < \infty$
+	\item $\#\{\max\textrm{ rank }p\in S_1(G)\}/\sim$ is finite
+	\item Any bi-generic $p \in S_1(G)$ has maximum rank
+\end{enumerate}
+Write $\phi(x;y,z)$ as $\phi(x;v)$ (where $v = (y,z)$ is a notational convenience). Given $\M\models T$ and $q(x)$ and a cardinal $\lambda$ (possibly finite), define:
+\begin{align*}
+	\Gamma(q,\lambda) &= \bigcup_{\sigma\in\mathbb{N}^\lambda}q(x_\sigma)\\
+	&\cup\left\lbrace \phi(x_\sigma,v_{s,i,j})\liff \neg\phi(x_\tau,v_{s,i,j}): \sigma,\tau\in\mathbb{N}^\lambda,s\in\mathbb{N}^{<\lambda},i,j\in\mathbb{N},i\ne j, si\le \sigma, sj\le \tau\right\rbrace
+\end{align*}
+
+\underline{Claim 1}: $R(q)\ge n$ iff $\Gamma(q,n)$ is consistent.
+
+\underline{Proof of Claim 1}: See notes [long and technical]. $\qedsymbol$
+
+\underline{Claim 2}: $R(x=x) = n < \infty$ (for some $n$).
+
+\underline{Proof of Claim 2}: Suppose $R(x=x) = \infty$. By Claim 1, $\Gamma(x=x,n)$ is consistent for all $n\ge1$. Then by Compactness, $\Gamma(x=x,\lambda)$ is consistent for any $\lambda$. Fix $n\ge |\L| + \aleph_0$. WTS: $T$ is not $\kappa$-stable. Indeed, choose minimal $\lambda$ such that $\kappa < 2^\lambda$. Let $(a_\sigma,b_{s,i,j})\models \Gamma(x=x,\lambda)$ in some $\N\models T$. Choose $\M\preceq \N$ such that $b_{s,i,j}\in M$ for all $s,i,j$, and $|M| \le |\mathbb{N}^{<\lambda}| + \aleph_0 \le \kappa$. Let $p_\sigma = \tp(a_\sigma/M)$. If $\sigma\ne \tau$ then $\exists s,i,j$ such that $i\ne j$, $si\le \sigma, sj\le \tau$ and so $\phi(x,b_{s,i,j}) \in p_\sigma$ iff $\neg \phi(x,b_{s,i,j})\not\in p_\tau$. So $|S_1(M)| \ge |\mathbb{N}^\lambda| = 2^{\lambda} > \kappa$. $\qedsymbol$
+
+\underline{Claim 3}: There are only finitely many rank $n$ types in $S_1(G)$, modulo $\sim$.
+
+\underline{Proof of Claim 3}: Otherwise $R(x=x) \ge n+1$. $\qedsymbol$
+
+\underline{Claim 4}: any $\M\models T$ and any $p(x)$ over $M$, there exists finite $q\subset p$ such that $R(p) = R(q)$.
+
+\underline{Proof of Claim 4}: Suppose $R(p) = n$. Then $\Gamma(p,n+1)$ is inconsistent by Claim 3. So there exists some finite $q\subset p$ such that $\Gamma(q,n+1)$ is inconsistent. So $R(q)\le n$. So $n = R(p) \le R(q) \le n$. \qedsymbol
+
+\underline{Claim 5}: Given a $\M \models T$ and $\L_M$-formulas $\psi_1(x),\psi_2(x)$, we have $R(\psi_1(x)\land\psi_2(x)) = \max\{R(\psi_1(x)),R(\psi_2(x))\}$.
+
+\underline{Proof of Claim 5}: ``$\ge$'' is obvious from the definition; it is enough to show $\le$. By pigeonhole and since the types $p_i$ in the definition of the rank are complete. $\qedsymbol$
+
+Note that up to this point we have in fact not used the group structure of $G$.
+
+\underline{Claim 6}: Given $\M\models T$, $a,b\in M$, and $q(x)$, we have $R(aqb) = R(q)$.
+
+\underline{Proof of Claim 6}: ETS $\ge$ (can then get the other direction by multiplying by inverses). We proceed by induction.
+
+Suppose $R(q)\ge n+1$. Fix $\N\succeq \M$ and $p_i \in S_1(N)$ witnessing it. Let $q_i = ap_i b$. Then $q_i\supseteq aqb$ and $R(q_i) \ge n$ by induction.
+
+Fix $i\ne j$. There exists $c,d \in N$ such that $\phi(x;c,d) \in p_i$ iff $\neg \phi(x,c,d) \in p_j$. So $\phi(x;ac,db)\in q_i$ iff $\neg\phi(x,ac,db)\in q_j$. So $q_i\not\sim q_j$. So $R(aqb) \ge n+1$. $\qedsymbol$
+
+\underline{Claim 7}: If $p \in S_1(G)$ is bi-generic, then $R(p) = n$.
+
+\underline{Proof of Claim 7}: By Claim 4, there exists $Y \in p$ such that $R(Y) = R(p)$. So $Y$ is bi-generic. Since $R(G) = R(x=x) = n$, there exists $a,b\in G$ such that $R(aYb) = n$ by Claim 5. So $R(Y) = n$ by Claim 6. So $R(p) = n$. $\qedsymbol$
+
+Claims 3 and 7 yield the result.
+\end{proof}
+
+There is more to say about the ``structure'' of the collection of bi-generic types in $S_1(G)$.
+
+\section{Lecture}
+
+\begin{defin*}[Amenable Group]
+	A group $G$ is \undf{amenable} if there is a left-invariant, finitely additive probability measure on the subsets of $G$.
+\end{defin*}
+\begin{remark*}[Examples]
+	Some examples of amenable groups are:
+	\begin{itemize}
+		\item finite groups
+		\item solvable groups
+		\item finitely generated groups of ``subexponential growth''
+	\end{itemize}
+	Some examples of \it{non}-amenable groups are:
+	\begin{itemize}
+		\item nonabelian free groups
+		\item $\textrm{SL}_3(\R)$ (\it{c.f.} Banach-Tarski)
+	\end{itemize}
+\end{remark*}
+
+Let $\L$ be a language and let $G$ be an $\L$-structure expanding a group.
+
+\begin{defin*}[Definably Amenable]
+	$G$ is \undf{definably amenable} if there is a left-invariant, finitely additive probability measure on the definable subsets of $G$.
+\end{defin*}
+
+The study of amenable groups has really taken off in Model Theory in the last 15 or so years.
+
+\begin{theorem}[Newelski-Petrykowski, 2006]
+	If $\Th(G)$ is stable then $G$ is definably amenable.
+\end{theorem}
+\begin{proof}
+	By Prop 21.9, there is a bi-generic type $p \in S_1(G)$. Given a definable set $X$, let $$H_X = H^p_X = \{g \in G :\ \forall a \in G (aX \in p \liff aX \in gp)\}$$ and let $$D_X = \{g \in G : X \in gp\}$$
+	By Theorem 21.12, $H_X$ is a definable finite-index subgroup of $G$.
+
+	\underline{Claim}: $D_X$ is a union of left cosets of $H_X$.
+
+	\underline{Proof of Claim}: Fix $a \in D_X$. Fix $g \in aH_X$. WTS $g \in D_x$, \it{i.e.} $X \in gp$. We have $X \in ap$ and $a^{-1}g \in H_X$. So $a^{-1}X \in p$, so $a^{-1}X \in a^{-1}gp$ and hence $X \in gp$. $\qedsymbol$
+
+	\underline{Notation}: Given $H\le G$ and $D\subset G$ a union of left cosets of $H$, let $| D/H |$ be the number of left cosets of $H$ contained in $D$ (the index).
+
+	Given a definable set $X\subset G$, let $$\mu(X) = \frac{|D_X/H_X|}{|G/H_X|} \in [0,1]$$ which can be thought of as just the proportion of cosets of $H_X$ that are in the set $D_X$. This in fact works as a measure, so all that remains is to check this is the case.
+
+	\underline{$\mu$ is left-invariant}: Fix definable $X$ and $c \in G$. Then $H_{cX} = \{g \in G : \ \forall a \in G (acX \in p \liff acX \in gp)\} = H_X$. Also, $g \in D_{cX} \iff cX \in gp \iff X \in c^{-1}gp \iff c^{-1}g \in D_X \iff g \in cD_{X}$. So $D_{cX} = cD_X$. Thus $\mu(cX) = |D_{cX}/H_{cX}|/|G/H_{cX}| = |cD_X/H_X|/|G/H_X| = |D_X/H_X|/|G/H_X| = \mu(X)$. $\qedsymbol$
+
+	\underline{$\mu(G) = 1$}: $H_G = G = D_G$. $\qedsymbol$
+
+	\underline{$\mu$ is finitely additive}: Fix disjoint, definable subsets $X,Y \subset G$. WTS $\mu(X\cup Y) = \mu (X) + \mu(Y)$.
+
+	\underline{Claim}: $D_{X\cup Y} = D_X \cup D_Y$
+
+	\underline{Proof of Claim}: $X\cup Y \in gp \iff X \in gp$ or $Y \in gp$. $\qedsymbol$
+
+	\underline{Claim}: $D_X \cap D_Y = D_{X\cap Y} = D_\emptyset = \emptyset$.
+
+	\underline{Claim}: $H_X \cap H_Y \le H_{X\cup Y}$.
+
+	\underline{Proof of Claim}: Fix $g \in H_X \cap H_Y$. Fix any $a \in G$. $a(X\cup Y) \in p \iff aX\in p$ or $Y \in p \iff aX \in gp$ or $aY \in gp \iff a(X\cup Y) \in gp$. $\qedsymbol$
+
+	\underline{Note}: Suppose $K \le H \le G$ and $[G : H] = n$, $[H: K] = m$. Suppose $D \subset G$ is a union of $\ell$ cosets of $H$. Then $D$ is a union of $\ell m$ cosets of $K$, and $|D/K|/|G/K| = \ell m / nm = \ell / n = |D/H|/|G/H|$.
+
+	Now let $K = H_X \cap H_Y$. Then:
+	\begin{align*}
+		\mu(X\cup Y) &= \frac{|X_{X\cup Y}/H_{X\cup Y}|}{|G/H_{X\cup Y}|} = \frac{|D_{X\cup Y}/K|}{|G/K|}\\
+		&= \frac{|D_X\cup D_Y / K|}{|G/K|} =\frac{|D_X/K| + |D_Y/K|}{|G/K|}\\
+		&= \frac{|D_X/K|}{|G/K|} + \frac{|D_Y/K|}{|G/K|} = \frac{|D_X/H_X|}{|G/H_X|} + \frac{|D_Y/H_Y|}{|G/H_Y|}\\
+		&= \mu(X) + \mu(Y)
+	\end{align*}
+	and this concludes the proof.
+\end{proof}
+
+\begin{remark}\ 
+	\begin{enumerate}
+		\item $\mu(X) = \mu(D_X)$. In fact, one can show that $\mu(X\Delta D_X) = 0$, which is a stronger statement. Moreover, $\mu$ is the unique left-invariant, finitely additive probability measure on definable subsets of $G$.
+		
+		\it{E.g.} $(\Z,+,<,0)$, an unstable group. For all $r \in [0,1]$ there exists $\mu$ such that $\mu(\mathbb{N}) = r$. On the other hand, if $X\subset \Z$ is definable in a stable expansion of $(\Z,+)$, then there is a set $D$ which is a union of cosets of a nontrivial subgroup of $\Z$, such that $X \triangle D$ has upper Banach density $0$.
+
+		\item $G$ stable group. Let $\Gamma = \{p \in S_1(G): p\textrm{ is bi-generic}\}$. Then $\Gamma$ is closed. Fix $p,q \in \Gamma$. Let $G_1\succeq G$ and $b \in G_1$, $b\models q$. Let $p_1 \in S_1(G_1)$ be the ``definable extension'' of $p$, \it{i.e.} $\phi(x,c) \in p$, iff $G_1 \in \psi(c)$ where $\psi(y)$ is the $\phi$-definition of $p$.
+		
+		Now repeat. Let $G_2 \succeq G_1$ and $a \in G_2$, $a\models p_1$. Then let $p \ast q = \tp(ab/G) \in S_1(G)$.
+
+		\underline{Fact}: $(\Gamma,\ast)$ is a compact Hausdorff group.
+
+		If $G$ is sufficiently saturated, then $\Gamma \cong G / G^0$. Fix $p \in \Gamma$.  For $X \subset G$ definable, $\mu(X) = \textrm{Haar}(\{aG^0: X \in ap\})$. This is well-defined, since $G^0 = \textrm{Stab}(p)$.
+	\end{enumerate}
+\end{remark}
 
 \end{document}  
 
