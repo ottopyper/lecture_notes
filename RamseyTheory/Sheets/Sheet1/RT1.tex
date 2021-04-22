@@ -27,6 +27,8 @@ Moreover, $\hj(2,k) > k-1$; we can $k$-colour $[2]^{k-1}$ by $c(x_1,\dots,x_{k-1
 
 Then by Ramsey's Theorem there exists a monochromatic set $C$ of size $k = 2021$. $C$ is then clearly convex, but this is surprisingly difficult to actually prove.
 
+[from class: consider convex hull, take point in hull not on boundary from set, triangulate]
+
 4. Suppose that this is true, and let $c_n : \N^{(n)}\ra [2]$ be the $2$-colouring whereby $A$ is red if $n \in A$, and blue otherwise. If $M \subset \N$ is infinite and monochromatic under $c_n$, then it cannot contain $n$ since then its colour must be red, but there of course exists $A\subset M\backslash \{n\}$ with $|A| = n$, and then $c_n(A)$ is blue.
 
 So let $c = \bigcup c_n$ be the $2$-colouring of $\bigcup \N^{(n)}$. Then there exists an infinite $M\subset \N$ such that, for each $r$, $c$ is constant on $M^{(r)}$. But for each $r$, $c\restriction M^{(r)} = c_r$, and since $c_r$ is constant on $M$ we conclude that $r \not \in M$. But $r$ was arbitrary, so $M$ is empty, contradiction.
@@ -36,6 +38,14 @@ So let $c = \bigcup c_n$ be the $2$-colouring of $\bigcup \N^{(n)}$. Then there 
 Let $(x_n)_{n\in\N}$ be a sequence of points in $\{0,1\}^\N$. There must be some $a_1 \in \{0,1\}$ such that $x_n\restriction 1 = a_1$ for infinitely many $n$. Call this set $A_1$. Repeat within $A_1$ to find $a_2$ and hence $A_2$, and continue ad infinitum.
 
 We obtain a sequence $(a_k)_{k\ge 1}$ whose concatenation $a$ is an element of $\{0,1\}^\N$. Then for all $m\in \N$, there exists an $n(m)\in\N$ with $x_n\restriction m = a\restriction m$. So these $x_n$ converge to $a$; hence the space is sequentially compact, and hence is compact.
+
+6. Pretty mechanical, standard stuff. Need to get the hang of the bound though.
+
+7. Just two-colour $\N^{(2)}$ and find an infinite mono subset; this obviously has such a finite set $M$ within it. Then use product argument to show this is all we need.
+
+8. Hales-Jewett clumps for each number of colours $k$; so the answer is no.
+
+9. No, by that stupid colouring (pick irrational in $[0,1]$, keep adding it or something).
 
 10. With choice: false. Wellorder $\R$ ($<_\alpha$) and colour $\{a,b\}$ red if their order in the wellorder agrees with their natural order in $\R$. A monochromatic subset is then $M = \{a_i : i \in I\}$ with $a_i < a_j$ for $i < j$ such that either of the following holds:
 \begin{itemize}

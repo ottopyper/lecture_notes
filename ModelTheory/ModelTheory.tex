@@ -310,7 +310,7 @@ Similarly, $\exists x(x=x)$ (``The Axiom of Non-Triviality'') is always satisfie
 
 A consequence of \undf{G{\"o}del's Completeness Theorem} is that a theory is satisfiable iff it is consistent. This is a very important theorem, though we will mostly be focussing on the model theoretic aspect (satisfiability).
 
-\section{Lecture 2}
+\section{Lecture}
 
 We now consider a fixed language $\L$.
 
@@ -421,7 +421,7 @@ By (a), these theories have infinite models. By Lowenheim-Skolem, these theories
 
 Showing that two structures are elementarily equivalent is often difficult to do directly, so we need to find other ways around it.
 
-\section{Homomorphisms}
+\section{Lecture}
 
 Let $\L$ be a language.
 
@@ -538,7 +538,7 @@ So the inclusion map might be an embedding, but it is not necessarily elementary
 \end{ex}
 
 
-\section{Categoricity}
+\section{Lecture}
 
 \underline{Q}: Suppose $\M\equiv\N$. Then is it true that $\M \cong \N$?
 
@@ -640,7 +640,10 @@ If $(M_i)_{i<\alpha}$ is a chain then we have a well-defined structure $\bigcup_
 \end{defin}
 
 
-\section{Algebraically Closed Fields}
+\section{..}
+\section{Lecture}
+
+\marginpar{Lecture naming got messed up here}
 
 \begin{remark*}[Recall]
 $(K,+,\cdot,0,1)$ is a \undf{field} if $(K,+,0)$ and $(K\backslash\{0\},\cdot,1)$ are abelian groups and $\forall x\forall y\forall z((x\cdot(y+z) = x\cdot y + x\cdot z))$.
@@ -745,16 +748,16 @@ Let $\phi$ be an $\L$-sentence. TFAE
 \end{theorem}
 
 
-\section{Diagrams \& Extensions}
+\textbf{Diagrams \& Extensions}
 
 Let $\M$ be an $\L$-structure.
 
-\begin{theorem}[Remark!]
+\begin{numremark}
 %CHANGE THIS TO A NUMBERED REMARK!
 If $h:\M\ra\N$ is an $\L$-embedding then after identifying $a\in M$ with $h(a) \in N$, we can view $\M$ as a substructure of $\N$.
 
 Similarly, if $h$ is an elementary embedding then $\M$ can be viewed as an elementary substructure of $\N$.
-\end{theorem}
+\end{numremark}
 
 Given $A\subset M$, let $\L_A = \L\cup\{\underline{a}:a\in A\}$, where $\underline{a}$ is a new constant symbol. We underline it to differentiate it from the element in $A$.
 
@@ -798,11 +801,11 @@ Define the $\L_G$-theory
 T = \underbrace{\D(G)}_{\L_G^0\textrm{-theory}}\cup\{\textrm{axioms for linear order \& abelian groups}\}\cup\{\sigma\}
 \end{align*}
 
-Suppose $T$ has a model $\M$. Then $(M,+^\M,0^\M,<^\M)$ is an ordered abelian group, and $G\subset (M,+^\M,0^\M)$ by Prop 6.3. So $G$ is a subgroup of an ordered abelian group, which is thus orderable.
-
+Suppose $T$ has a model $\M$. Then $(M,+^\M,0^\M,<^\M)$ is an ordered abelian group, and $G\subset (M,+^\M,0^\M)$ by Prop 5.10. So $G$ is a subgroup of an ordered abelian group, which is thus orderable.
+s
 So all that remains is to show that $T$ has a model.
 
-Fix $\Sigma \subset T$ finite. Let $A = \{a\in G: \underline{a}\textrm{ appears in some }\L_G^0\textrm{-sentence in }\Sigma\}$, and let $H = \langle A\rangle \le G$. Then $H\cong \Z^n$ for some $n\ge 0$ by the structure theorem for (torsion-free) finitely generated abelian groups. View $H$ as an $\L_A$-structure such that $\underline{a}^H = a$ and $<^H$ is the lexicographic ordering. Then $H\subset_{\L_A^0} G$, and so $H\models \phi$ for any $\phi \in \D(G)$, using only extra constants from $A$ by Corollary 3.4.
+Fix $\Sigma \subset T$ finite. Let $A = \{a\in G: \underline{a}\textrm{ appears in some }\L_G^0\textrm{-sentence in }\Sigma\}$, and let $H = \langle A\rangle \le G$. Then $H\cong \Z^n$ for some $n\ge 0$ by the structure theorem for (torsion-free) finitely generated abelian groups. View $H$ as an $\L_A$-structure such that $\underline{a}^H = a$ and $<^H$ is the lexicographic ordering. Then $H\subset_{\L_A^0} G$, and so $H\models \phi$ for any $\phi \in \D(G)$, using only extra constants from $A$ by Corollary 2.4.
 
 So $H\models \Sigma$. So done by Compactness.
 \end{proof}
@@ -830,7 +833,7 @@ That is to say, $\phi$ and $\psi$ define the same set in any $\M\models T$.
 
 Then $T\models \forall w\forall x\forall y\forall z\big(\phi(w,x,y,z)\leftrightarrow wz-xy\ne 0\big)$.
 
-\section{Lecture 7}
+\section{Lecture}
 
 \item $T = \Th(\R,+,\cdot,0,1)$. $\phi(x)$ is $\exists y(x = y^2)$. Note that $\phi$ defines $\R^{\ge 0}$. We can in fact not write this quantifier-free:
 
@@ -888,7 +891,7 @@ So it suffices to show $\Sigma$ has a model, which we will do by compactness. Su
 \end{proof}
 
 
-\section{Lecture 8}
+\section{Lecture}
 
 \begin{remark*}
 Recall Theorem 6.2 (QE test)
@@ -983,7 +986,7 @@ The proof of Theorem 7.6 shows this when $\M$ is countable. Then for any $\M\mod
 \begin{remark*}[Exercise]
 	Suppose $\M,\N\models\rg$ countable and $f: X\ra Y$ is a graph isomorphism for some finite $X\subset \M$ and $Y\subset \N$. Then $f$ extends to an isomorphism from $\M$ to $\N$.
 \end{remark*}
-\section{Lecture 9}
+\section{Lecture}
 
 \begin{theorem}
 RG has QE
@@ -1039,17 +1042,21 @@ Fix $\Sigma \subset p \cup \Th_M(\M)$ finite. So $\Sigma \subset p \cup \{\phi_1
 Since $\N\models \exists \bar{v}\phi(\bar{v})$, there is $\bar{c} \in N^m$ such that $\N\models \phi(\bar{c})$. Expand $\N$ to an $\L_M$-structure such that $\underline{b}_i^\N = c_i$ and $\underline{b}^\N$ is arbitrary for $b\in M\backslash (A\cup \{b_1,\dots,b_m\})$. Then $\N\models \phi(\underline{b}_1,\dots,\underline{b}_m)$, \it{i.e.} $\N\models \phi^\ast$. So $\N\models \Sigma$.
 \end{proof}
 
-\section{Lecture 10}
 
-\begin{remark}
+\section{Lecture}
+
+\begin{numremark}
 If $\M\le \N$ and $A \subset M$, then $S_n^\M(A) = S_n^\N(A)$.
-\end{remark}
+\end{numremark}
 \begin{proof}
 It is enough to show that $\Th_A(\M) = \Th_A(\N)$. If $\phi(x_1,\dots,x_m)$ is an $\L$-formula $a_1,\dots,a_m\in A$, then $\M\models \phi(\bar{a})$ iff $\N\models \phi(\bar{a})$ since $\M\preceq \N$.
 \end{proof}
-\begin{remark}
+
+
+
+\begin{numremark}
 	$p$ is an $n$-type over $A$ wrt $\M$ iff for any finite $q \subset p$, $\exists \bar{a}\in \M^n$ such that $\bar{a}\models q$.
-\end{remark}
+\end{numremark}
 \begin{proof}
 ($\implies$): Choose $\N\succeq \M$ realising $p$. Fix finite $a \subset p$. Let $\phi(\bar{x})$ be the conjunction of all $\L_A$-formulae in $q$. $\N\models \exists \bar{x}\phi(\bar{x})$, the $\L_A$-sentence. So $\M\models \exists \bar{x}\phi(\bar{x})$ since $\N\succeq \M$.
 \end{proof}
@@ -1083,7 +1090,7 @@ Then $p_V$ is a $1$-type wrt $\M$, and by QE this determines a unique, complete 
 \end{ex}
 \underline{Note}: In general, $|S_n^\M(A)| \le 2^{|A| + |\L| + \aleph_0}$
 
-\subsection{Type Spaces}
+\subsection*{Type Spaces}
 
 Let $\M$ be an $\L$-structure, $A\subset M$. Given $\L_A$-formula $\phi(x_1,\dots,d_n)$, define $[\phi(\bar{x})] = \{p \in S_n^\M(A):\phi(\bar{x}) \in p\}$.
 
@@ -1117,6 +1124,8 @@ We show $\sman = \bigcup_{i\in I_0}[\phi_i(\bar{x})]$. Fix $p \in \sman$. Choose
 We now have a long-term goal: to analyse countable models of complete theories.
 
 For example, DLO and RG are $\aleph_0$-categorical. For ACF$_p$, the countable models are $K_\alpha$ for $\alpha \in \N\cup\{\aleph_0\}$ where $K_\alpha$ has transcendence degree $\alpha$.
+
+\section{Lecture}
 
 \subsection*{Saturated Models}
 
@@ -1182,7 +1191,7 @@ We now build $\M = \N_0 \le \N_1\le \N_2\le \dots$ such that $|N_i| \le |M|+|\L|
 $\N$ is $\aleph_0$-homogeneous: any $\bar{a},\bar{b},c$ from $\N$ all lie in $N_i$ for some $i$, so we find a solution in $\N_{i+1}$.
 \end{proof}
 
-\section{Lecture 12}
+\section{Lecture}
 %fine, I'll start using his system...
 \underline{Recall}: $\M$ is $\kappa$-saturated $\implies |\M| \ge \kappa$.
 
@@ -1253,7 +1262,7 @@ If $a\in A\subset M$, then $\tp^\M(a/A)$ is isolated since $\{\tp^\M(a/A)\} = [x
 
 (iii)$\implies$(ii). Assume (iii). Then for all $\L_A$-formulae $\psi(\bar{x})\in p$, we have $\phi(\bar{x})\subset[\psi(\bar{x})]$ since any $q \in [\phi(\bar{x})]$ is realised by $\bar{a} \in N^n$ in some $\N\models \Th_A(\M)$. So $\N\models \psi(\bar{a})$. So $q \in [\psi(\bar{x})]$. If $q \in [\phi(\bar{x})]$ then $p\subset q$. So $[\phi(\bar{x})] = \{p\}$.
 \end{proof} 
-\section{dummy}
+
 \section{Lecture}
 
 Let $T$ be a complete, consistent theory.

@@ -1,0 +1,71 @@
+\documentclass[10pt]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+\usepackage{graphicx}
+
+\newcommand{\hj}{\textrm{HJ}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\V}{\mathcal{V}}
+
+\title{Ramsey Theory: Example Sheet 2}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+\maketitle
+
+1. Just work it through.
+
+2. Given a finite colouring $c$ on $\N$, induce a finite colouring $d$ on $\N^{(2)}$ by $d(ij) = c(j-i)$ for $i < j$. Then use Ramsey to find big (infinite) set on which $d$ is constant. Then find $i,j,k,\ell$ with $d$ constant, so $c(j-i) = c(k-j) = c(k - i) = c(\ell - i) = c(\ell - j) = c(\ell - k)$ \it{etc.}, so done.
+
+3. You can try pretty much anything and it'll work, can be written out precisely using careful notation.
+
+4. PR over $\N$ obviously implies PR over $\Z$. For the other direction, suppose we're PR over $\Z$ but there's a bad colouring $c$ for $\N$. Construct a bad colouring $c'$ for $\Z$ by $c'(m) = (c(m),1)$ for $m \in \N$ and $c'(-m) = (c(m),2)$ for $m \in \N$, where the colours are ordered pairs. Then by PRness find a mono solution, but this must all have the same sign, so its also solved in $c$.
+
+5. aaaaaaaaaaaaaaah
+
+6. Hindman: Find $x_1,x_2,\dots$ with finite sums monochromatic. Let $f_1 = x_1$, and define $f_n$ inductively such that the least non-zero term in the binary expansion of $f_{n+1}$ occurs later than the last non-zero term in the binary expansion of $f_n$. We achieve this by looking at the infinite set of things other than the $f_i$s, and looking at their ends. If infinitely many end in $0$, move on to the next entry, if only finitely many do then get a new infinite set of things ending in $0$ by pairing up things ending in 1 and adding them. Keeping repeating this process, killing off all the terms in the binary expansion until we're clear of all previous $f_i$s. Everything is a finite sum, so we're good.
+
+Then go back to the original colouring of finite subsets; we've been identifying finite subsets of $\N$ with elements of $\N$ by looking at binary expansion; finite sums is nearly what we want, and indeed with disjointness in the above sense we get disjointness in exactly the way we want it.
+
+Without Hindman: [from class:
+
+If we can give them all different sizes $a_1,\dots,a_m$, and then finite sums on the sizes ensures we don't run into any problems with unions; then use Ramsey to find a nice subset where things are actually coloured by size.]
+
+
+7. No; can have $A,A^c$ both PR. For instance, we can let $A$ and $A^c$ contain copies of $\lambda [n]$ for arbitrarily large $n$ (something like $1,[2,4],5,10,15,[16,32,48,64],\dots$); then both clearly PR, and obviously the intersection is not PR.
+
+8. Suppose $x_1,x_2,\dots$ is a convergent subsequence, converging to $\mathcal{U}$. Let $A\subset \{x_1,x_2,\dots\}$ as numbers, say $A = \{x_{n_1},x_{n_2},\dots\}$. This is also a convergent subsequence, converging to $\mathcal{U}$. Then $A \in \mathcal{U}$, since if $A^c \in \mathcal{U}$ then $\mathcal{U} \in C_{A^c}$, so by definition of convergence there exists $x_{n_i} \in A$ also in $C_{A^c}$, so $A^c \in \tilde{x}_{n_i}$, and in particular, $x_{n_i} \in A^c$. But then $A = \{x_1,x_3,x_5,\dots\}$ and $B = \{x_2,x_4,x_6,\dots\}$ are both in $\mathcal{U}$, so $\emptyset \in \mathcal{U}$, contradiction.
+
+This then means the topology cannot be induced by a metric; if it were, say $d$, then pick some non-principal $\mathcal{U}$, and consider $B_{1/n}(\mathcal{U})$ for each $n \in \N$. By density, we can always find some $\tilde{m}$ in this open ball, larger and larger $m$, creating a convergent subsequence of $1,2,3,\dots$.
+
+9. Suppose $S = \{s_1,s_2,\dots\}$ is a countable dense subset.
+
+First note that for $A\subset \N$ finite, $\U$ ultrafilter, $A \in \U \implies \U$ principal, since $A$ is the countable union of singletons, and if none of the singletons is in $\U$ then the intersection of their complements is, so $A$ itself isnt; contradiction.
+
+Now we find $A\subset \N$ infinite with infinite complement, such that $A \not\in s_i$ for any $i$. Then $C_A \cap S = \emptyset$.
+
+To find this set, start with any such $A_1 \not\in s_1$, which exists by non-principality. Then look at $s_2$ and snip $A_1$ in half (each half infinite with infinite complement); we can't have both halves in $s_2$, since then their intersection is in $s_2$ and is empty. Call one of the halves that's not there $A_2$. So we have $A_1\supseteq A_2$.
+
+Continue, get $A_1\supseteq A_2\supseteq A_3\dots$ all infinite with infinite complement such that $A_i\not\in s_i$. Then define $A = \{a_1,a_2,\dots\}$ with $a_i \in A_i\backslash A_{i+1}$. Now claim $A$ is what we want.
+
+Indeed, $A \not \in s_n$; if it were, then since $B_n = \{a_n,a_{n+1},\dots\} \subset A_n$ we have that $B_n \not \in s_n$, hence $B_n^c \in s_n$, hence $B_n^c \cap A \in s_n$. But $B_n^c \cap A = \{a_1,a_2,\dots,a_{n-1}\}$, which is finite so $s_n$ principal. Contradiction.
+
+So $A$ lies in no $s_i$, $A$ is clearly infinite, and $A\subset A_1$ so $A^c$ infintie also. So done.
+
+10. If two ultrafilters $\U$ and $\V$ are distinct then we can separate them with open neighbourhoods $C_A$ and $C_B$.
+
+So Let $\U \in C_{A_i}$ and $\U_i \in C_{B_i}$ such that $\U$ and $\U_i$ are separated. Then $\bigcap C_{A_i} = C_{\bigcap A_i} = C_A$ is disjoint from $\bigcup C_{B_i}$, and in particular $\U_i \not\in C_A$ for all $i$, but $\U \in C_A$. Hence we have found $A \in \U$ such that $A\not\in \U_i$ for all $i$.
+
+If we have infinitely many $\U_i$, then just take $\U_i = \tilde{i}$; any $A \in \U$ is also in any $\U_i$ for which $i \in A$.
+
+If instead each $\U_i$ is non-principal, we have seen already that the $\U_i$s do not form a dense subset and as such there is some $C_A$ disjoint from the set of $\U_i$, so it's certainly possible for there to be $A \in \U$ with $A\not\in \U_i$ for all $i$, and indeed it seems likely that this is always the case.
+
+We are looking for an open set containing $\U$ that contains no $\U_i$; if no such set exists then we must have $\U_i \ra \U$, and indeed in this case no such set will exist since there is some $\U_i$ in every open set containing $\U$.
+
+Suppose the $\U_i$ have a subsequence converging to $\U$. Then for any $A \in \U$, there exists some $\U_i \in C_A$ by the definition of convergence, hence $A \in \U_i$ for some $i$. So in this case the claim fails.
+
+If the $\U_i$ do not have a subsequence converging to $\U$, 
+
+\end{document}
