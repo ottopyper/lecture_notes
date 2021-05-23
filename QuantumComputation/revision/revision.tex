@@ -1,0 +1,169 @@
+\documentclass[]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+
+
+\date{}
+\author{Otto Pyper}
+\title{QC revision questions}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item What is the time complexity of the fastest classical factoring algorithm?
+    \item What is the time complexity of Shor's algorithm?
+    \item Describe the Quantum Periodicity Determination Problem.
+    \item How is the quantum orcale represented as a gate?
+    \item What is the query complexity of an algorithm?
+    \item Fastest possible classical periodicity algorithm?
+    \item Describe the Quantum Period Finding Algorithm.
+    \item How does QFT act on a state $\ket{x}$?
+    \item State the Coprimality Theorem.
+    \item State the `Probability Lemma'.
+    \item QFT maps which basis to the standard basis? Describe the states.
+    \item Describe the eigenvalues of the above basis states.
+    \item What is $[QFT]_{k\ell}$?
+    \item Describe the Hidden Subgroup Problem.
+    \item What time complexity do we aim for in the HSP?
+    \item What form of a solution do is acceptable for HSP?
+    \item Express periodicity as an HSP.
+    \item Express the Discrete Logarithm Problem as an HSP.
+    \item Describe the Graph Isomorphism Problem.
+    \item Express the Graph Isomorphism Problem as a non-Abelian HSP.
+    \item Who found a quasi-polynomial time classical algorithm for GI, when, and what is its runtime?
+    \item Describe another problem that can be rephrased as an HSP.
+    \item What is a representation of $G$? What property does a represenation have when $G$ is abelian?
+    \item Prove that any value $\chi(g)$ is a $|G|^{\textrm{th}}$ root of unity.
+    \item State (and prove *) Schur's Lemma (Orthogonality).
+    \item Enumerate the different representations of $G$.
+    \item What is the trivial irrep?
+    \item What are the shift operators?
+    \item What is the state $\ket{\chi_k}$?
+    \item How are these states acted on by shift operators? Prove this.
+    \item What is QFT? [Again.]
+    \item What is $[QFT^{-1}]_{gk}$?
+    \item What is $[QFT]_{kg}$?
+    \item What is $QFT \ket{G}$?
+    \item What is QFT on $G = \Z_M$?
+    \item Describe the Quantum Algorithm for Finite Abelian HSP.
+    \item What is the output for the above algorithm?
+    \item How do we use said output to determine the hidden subgroup?
+    \item For non-abelian $G$, what is the problem with the QFT construction?
+    \item What is an irreducible representation for a non-abelian group $G$?
+    \item What is a complete set of irreps?
+    \item State the generalisation of the previous representation theorem for non-abelian groups.
+    \item How is QFT defined on such a $G$?
+    \item Why does the same algorithm not work for non-abelian HSP?
+    \item How can we modify it to obtain \textit{some} information about $K$?
+    \item How efficiently must we be able to implement QFT to use it here?
+    \item Under what circumstances does efficient implementation of QFT suffice to solve HSP?
+    \item For general non-abelian HSP, how many random coset states suffice to determine $K$?
+    \item Why is this not enough to solve HSP?
+    \item What is the Phase Estimation problem?
+    \item What extra gates do we need for PE? How do they act?
+    \item Given $U$ as a formula or circuit distribution, how can we implement C-$U$?
+    \item What further information do we need to control $U$ if it is given as a black box?
+    \item Why is this further information necessary?
+    \item Given this information, draw a diagram to implement C-$U$.
+    \item Now what gate do we actually need?
+    \item Construct this gate with a diagram.
+    \item How does this gate act on $\ket{\xi} = \ket{v_\phi}$?
+    \item Describe (with the aid of a diagram) the Quantum Phase Estimation Algorithm.
+    \item State and prove Theorem (PE).
+    \item How many lines do we need to calculate $\phi$ to accuracy $m$ bits with probability $1-\eta$?
+    \item How does implementing $C-U^{2^k}$ impact the algorithm?
+    \item What happens if you do PE to an arbitrary state $\ket{\xi}$?
+    \item What is the precision issue in the above process?
+    \item What is the reflection operator $I_{\ket{\alpha}}$?
+    \item How does $I_{\ket{\alpha}}$ interact with unitaries?
+    \item How does this generalise to a $k$-dimensional subspace $A\subset \mathcal{H}_d$ with onb $\ket{a_i}:i\le k$?
+    \item That is, define $P_A$ and $I_A$.
+    \item Describe the context for using Grover's Algorithm. Which problems are these closely related to?
+    \item Write down the Grover iteration operator and describe its terms.
+    \item State Grover's Theorem (1996).
+    \item Describe Grover's Algorithm.
+    \item Approximately how many iterations are required in the algorithm?
+    \item What sort of speed-up does Grover's Algorithm give on the classical case?
+    \item Write down the generalisation of the Grover operator used in AA.
+    \item State and prove the Amplitude Amplification Theorem.
+    \item Describe the Amplitude Amplification Algorithm, including the number of iterations required.
+    \item What is the approximate accuracy of the AA process?
+    \item Implementation of which gates are sufficient for AA?
+    \item What conditions are sufficient to be able to compute $I_G$? Prove this.
+    \item How is $I_{\ket{\psi}}$ implemented?
+    \item How does AA affect the distribution of $\ket{\psi}$ restricted to the good subspace?
+    \item What is the above particularly useful for?
+    \item How can AA be made exact?
+    \item Describe how AA solves Grover search with one or more `good' items.
+    \item Describe how AA gives a square-root speedup of general quantum algorithms.
+    \item Describe the use of both AA \& PE in Quantum Counting.
+    \item Write down the time-independent Schrodinger equation (in units where $\bar{h} =1 $) and its solution.
+    \item What is the Hamiltonian Simulation problem?
+    \item What the the operator norm/spectral norm of operator $A$?
+    \item What properties does it have?
+    \item What is meant by `$\tilde{U}$ approxiamtes $U$ to within $\eps$'?
+    \item What constraints are we aiming for in HamSim?
+    \item Define a $k$-local (Hamiltonian) operator.
+    \item Why are we able to work better with $k$-local Hamiltonians?
+    \item Write down the Ising Model operator.
+    \item Write down the Heisenberg Model operator.
+    \item State the Solovay-Kitaev Theorem.
+    \item State and prove the lemma describing error accumulation under the operator norm.
+    \item Prove that for any $k$-local $H$ with commuting $H_j$s, $\e^{-iHt}$ can be efficiently approximated.
+    \item State and prove the Lie-Trotter Product Formula.
+    \item What is the overall circuit size for $k$-local HamSim?
+    \item How is this changed if we instead want to use a standard universal set?
+    \item What levels of complexity in $t$ can be achieved by refining Lie-Trotter?
+    \item What is HHL used for?
+    \item What type of solution do we aim to output?
+    \item What are some common applications of HHL?
+    \item What is the best known classical runtime for solving systems of linear equations?
+    \item What is the condition number of a matrix?
+    \item State an intermediate issue immediately faced by trying to compute properties of large systems.
+    \item State three conditions on a matrix $A$ necessary for applying HHL, defining any terms.
+    \item Define `row-sparse' and `row-$s$-sparse'.
+    \item Define `row-computable'.
+    \item State the Hamiltonian Simulation Property.
+    \item Give an example of a class of matrices which are row-sparse \& row-computable.
+    \item State the conditions on $b$ required for HHL.
+    \item State the conditions required on $M$ for efficient computation of $x^\dagger Mx$.
+    \item How do you get around one of the above conditions failing?
+    \item What is the best-known classical runtime achieving the same output as HHL?
+    \item What is the runtime of HHL to produce output state within $\eps$ of $\ket{\hat{x}}$?
+    \item In the regime with $\eps = 1/(\textrm{poly}(\log N))$, how does HHL compare to classical runtime?
+    \item Describe the HHL algorithm, including how AA can be used to improve runtime.
+    \item State the Chernoff-Hoeffding bound.
+    \item How can PE be modified to give improved accuracy?
+    \item What is the worst source of accuracy in HHL?
+    \item Which method can be used to replace this? What else can this method be used for?
+    \item Define weak simulation of QC.
+    \item Define strong simulation of QC.
+    \item Demonstrate that efficient simulation is possible if we have a product state promise.
+    \item Define the $n$-qubit Pauli group, $\mathcal{P}_n$.
+    \item Define a Clifford operation, and the Clifford group.
+    \item How does the Clifford group relate to the Pauli group?
+    \item State some important applications of the Pauli group \& Clifford group.
+    \item Give five examples of Clifford operators.
+    \item State a theorem characterising all Clifford circuits.
+    \item Define `Clifford computation'.
+    \item State the Gottesman-Knill Theorem (variant).
+    \item An alternative proof of GK uses which formalism? What was it introduced for?
+    \item Prove the GK Theorem.
+    \item Define Adaptive and Non-adaptive Clifford circuits.
+    \item State a theorem about adaptive/non-adaptive Clifford circuits.
+    \item Prove (roughly) the non-adaptive case (demonstrate the critical idea).
+    \item Define the $T$-gate.
+    \item State a fact about $T$-gates and Clifford circuits.
+    \item Define a `magic state' $\ket{A}$.
+    \item Implement a $T$-gate using an adaptive Clifford circuit and $\ket{A}$.
+    \item Explain how this proves the seconnd part of the theorem.
+    \item Give a full characterisation of adaptive/non-adaptive Clifford circuits.
+    \item State an ingredient that elevates classically limited power to full quantum power.
+    \item Why is this potentially alarming?
+\end{enumerate}
+
+
+\end{document}

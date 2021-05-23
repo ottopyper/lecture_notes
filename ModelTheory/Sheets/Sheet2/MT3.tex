@@ -1,0 +1,80 @@
+\documentclass[10pt]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+\usepackage{graphicx}
+
+\renewcommand{\N}{\mathcal{N}}
+\newcommand{\hj}{\textrm{HJ}}
+\newcommand{\wnfc}{\textrm{W}\N\textrm{FC}}
+\newcommand{\fs}{\textrm{FS}}
+\newcommand{\fp}{\textrm{FP}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\fu}{\forall_\U}
+\newcommand{\for}[1]{\forall_{#1}}
+\newcommand{\om}{\omega}
+\newcommand{\bom}{{(\omega)}}
+\newcommand{\blom}{{(<\omega)}}
+\newcommand{\lom}{{<\om}}
+\newcommand{\tp}{\textrm{tp}}
+%\usepackage[lite]{mtpro2}
+
+\title{Model Theory: Example Sheet 3}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+\begin{enumerate}
+    \item $T$ is a complete theory in a countabel language $\L$.
+    \begin{enumerate}[label = (\alph*)]
+        \item Let $\M\models T$ be atomic and let $f : A \ra M$ be partial elementary, $A$ finite, and let $c \in M$.
+        
+        $\M$ is atomic, so every realised type in $\M$ is isolated. Let $p = \tp^\M(a_1,\dots,a_n,c)$. Then $(\bar{a},c)\models p$, so $p$ is isolated. Hence there exists some $\phi$ such that $\M\models \forall \bar{x},y (\phi(\bar{x},y)\ra \psi(\bar{x},y))$.
+
+        But also $\M\models \phi(\bar{a},c)$, so in particular $\M\models \exists y\phi(\bar{a},y)$, so $\M\models \exists y\phi(f(\bar{a}),y)$ by partial elementaryness of $f$. So there is some $d$ such that $\M \models \phi(f(\bar{a},d))$.
+
+        Now take any $\psi(\bar{x},y)$ with $\M\models \psi(\bar{a},c)$. We have that $\M\models \phi(f(\bar{a}),d)$ and so $\M\models \psi(f(\bar{a}),d)$. So done.
+
+        \item Enumerate $\M = \{a_1,a_2,\dots\}$ and $\N = \{b_1,b_2,\dots\}$. We build a bunch of partial elementary functions and then take their union.
+        
+        Idea: $a_1\models \tp(a_1)$, so there is some $b \in N$ such that $b\models \tp(a_1) = \tp(b)$. Then take $b_i$ where $i$ is least, and consider $(b,b_i)\models \tp(b,b_i)$. There must then exist $c,d \in M$ such that $(c,d)\models \tp(b,b_i)$. But note that for $\phi(X) \in \tp(b)$, we have $(\phi(x) \land y = y) \in \tp(b,b_i)$, hence $\M\models \phi(c)$, so $c\models \tp(b) = \tp(a_1)$, and $c\equiv_{\tp}a$, so there is $a'$ such that $(c,d)\equiv_\tp a_1,a'$.
+
+        Keeping going, using back and forth argument to ensure that $a_n \in \textrm{dom} f_n$, $b_n \in \textrm{Im}f_n$, $f_n$ partial elementary. Then take $f = \bigcup f_n$. This is elementary, since any counterexample must be a counterexample on some finite $f_n$, which was partial elementary. Moreover, it is surjective and injective (check). So isomorphism.
+
+        Indeed, suppose we have $f_n : \{a_1,\dots,a_{2n}\} \ra \{b_1,\dots,b_{2n}\}$ partial elementary, such that $\tp(\bar{a}) = \tp(\bar{b})$ and the $a_i$s (respectively $b_i$s) are pairwise distinct.
+
+        Pick $a_{2n+1} \in A$. Then there exists $\bar{c}\in M$ such that $\tp(a_1,\dots,a_{2n+1}) = \tp(c_1,\dots,c_{2n+1})$. Moreover, must have $\tp(a_1,\dots,a_{2n}) = \tp(b_1\dots,b_{2n}) = \tp(c_1,\dots,c_{2n})$ so by $\aleph_0$ homogeneity can find $b_{2n+1}$ such that $\tp(b_1,\dots,b_{2n+1}) = \tp (c_1,\dots,c_{2n+1}) = \tp(a_1,\dots,a_{2n+1})$. Then send $a_{2n+1}$ to $b_{2n+1}$. Keep going.
+
+        \item prime iff countable and atomic, implies countable and $\aleph_0$-homogeneous. So just need to show the type realising thing.
+        
+        Let $p \in S_n(T)$. Then if $\M$ realises $p$, $p$ must be isolated (since $\M$ atomic) and so $p$ is realised in all structures, including $\N$. Similarly the other way. So $\M\cong\N$.
+    \end{enumerate}
+
+    \item If models $\M,\N$ disagree on some $\L$-sentence, $\phi$, then they disagree on some $\L^0$-sentence $\phi$ where $\L^0$ finite. They both still model $T_k^0$, so we need only show $T_k^0$ complete.
+    
+    But this is the theory of DLO plus partition into dense subsets (plus identifying finitely many points in one class), and this is $\aleph_0$-categorical; given two countable models, first identify the $c_i$s. Then each section between some $c_i$s (or on either side) is just a copy of DLO plus partition into dense subsets (without any identified points), and this theory is complete by a back and forth argument.
+
+    Then it is clear to see that $I(T,\aleph_0) =k + 2$, since we have $k+2$ options for the limit properties of the $c_n$s. Either they are unbounded above, or bounded but with no limit, or they have a limit $c \in U_i$, where $1\le i \le k$. Any two models with different limit properties can clearly not be isomorphic, and any two models with the same limit properties are isomorphic since after identifying the $c_i$s and the limits (if they exist) we can just do another back-and-forth type argument on the remaining sections of $\Q$.
+
+    \item Let $B\subset M$, $|B| <\kappa$ and let $p$ be a complete $n$-type in the language $\L_A$ with respect to the $\L_A$-structure $\M^\ast$ with parameters from $B$. Then $p \cup \textrm{Th}_B(\M^\ast)$ is consistent, \it{i.e.} $p$ is a collection of $\L_{A\cup B}$ sentences consistent with all $\L_{A\cup B}$ sentences modelled by $\M$. In particular, $p \cup \textrm{Th}_{A\cup B}(\M)$ is consistent, so $p \in S^\M_n(A\cup B)$, and $|A\cup B| < \kappa$ (as long as $\kappa \ge \aleph_0$) so this type is realised by $\kappa$-saturation.
+    
+    \item Similar to 1(b). Let $\kappa = |M| = |N|$, $M = \{a_\alpha : \alpha < \kappa\}$ and $\N = \{b_\alpha : \alpha < \kappa\}$ and define nested $f_\alpha: \alpha < \kappa$ such that $a_\alpha \in \textrm{dom} f_\alpha$, $b_\alpha \in \textrm{Im} f_\alpha$.
+    
+    Indeed, given $f_\alpha : \alpha < \gamma < \kappa$ a limit, define $f_\gamma = \bigcup f_\alpha$, whose domain still has cardinality less than $\kappa$ because $\kappa$ is uncountable and initial.
+
+    Given $f_\alpha$, write $A_\alpha = \textrm{dom}f_\alpha$, $B_\alpha = \textrm{Im}f_\alpha$ and consider $p = \tp^\M(a_\alpha /A_\alpha)$. Let $q$ be the set of formulae obtained by applying $f$ to every parameter in the formulae in $p$. This gives a set of formulae with parameters from $B_\alpha$, and is complete and consistent since $f_\alpha$ is partial elementary. Then by saturation, and the fact that $|B_\alpha| < \kappa$, $q$ is realised by some $b$. So $(a_\alpha,b)$ is our new point.
+
+    Same again backwards, pick $b_\alpha$ and consider $\tp^\N(b_\alpha/B_\alpha\cup\{b\})$. This is a set of formulae with parameters in the range of $f_\alpha\cup \{(a_\alpha,b)\}$, so undo the function on the formulae to obtain a new consistent type, which is thus realised in $\M$.
+
+    Repeat, then union all the $f_\alpha$s together.
+
+    \item 
+\end{enumerate}
+
+
+\end{document}

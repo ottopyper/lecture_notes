@@ -1157,7 +1157,7 @@ $S_n(T) \coloneqq S_n^\M(\emptyset)$ for some (equivalently, any) $\M\models T$.
 $\M\models T$ is $\aleph_0$-saturated iff $\M$ is $\aleph_0$-homogeneous and $\M$ realises all types in $S_n(T)$ for all $n\ge 1$.
 \end{prop}
 \begin{proof}
-($\implies$) Assume $\M\models T$ is $\aleph_0$-saturated. Then $\M$ realises all types in $S_n(T)$ sicne $\emptyset$ is finite. Fix finite $A\subset M$, partial elementary $f:A\ra M$, and $c\in M$. Define $p\in S_1(f(A))$ such that $\phi(x,f(\bar{a}))\in p$ iff $\M\models \phi(c,\bar{a})$.
+($\implies$) Assume $\M\models T$ is $\aleph_0$-saturated. Then $\M$ realises all types in $S_n(T)$ sicne $\emptyset$ is finite. Fix finite $A\subset M$, partial elementary $f:A\ra M$, and $c\in M$. Define $p\in S_1^\M(f(A))$ such that $\phi(x,f(\bar{a}))\in p$ iff $\M\models \phi(c,\bar{a})$.
 
 \underline{Notation}: $f(\tp^\M(c/A)) = p$. $p \in S_1(f(A))$, \it{e.g.} $p$ is finitely satisfiable in $\M$: if $\phi(x,f(\bar{a}))\in p$ then $\M\models \exists x \phi(x,\bar{a})$, so $\M\models \exists x \phi(x,f(\bar{a}))$.
 
@@ -1184,7 +1184,7 @@ For any $\M\models T$, there is $\N\succeq\M$ such that $|N|\le |M| + |\L|$ and 
 
 For $\alpha$ a limit, let $\M_\alpha = \bigcup_{i<\alpha}M_i$. Then $|M_\alpha| \le |\alpha|(|M|+|\L|) = |M| + |\L|$.
 
-Given $M_\alpha$, look at $(\bar{a}_\alpha,\bar{b}_\alpha,c_\alpha)$. We have $\bar{a}_\alpha \equiv^\M\bar{b}_\alpha$. Let $f_\alpha : \bar{a}_\alpha \ra \bar{b}_\alpha$ be partial elementary. Apply Prop to find $\M_{\alpha+1} \ge \M_\alpha$ such that $|M_{\alpha+1}|\le |M_\alpha| + |\L| \le |M| + |\L|$, and there exists $d \in M_{\alpha+1}$ realising $f_\alpha(\tp(c_\alpha/\bar{a}_\alpha))$. Then $(\bar{a}_\alpha,c_\alpha) \equiv^\M(\bar{b}_\alpha,d)$. Let $\N = \bigcup_{\alpha < |M|}M_\alpha$. Then $|N| \le |M|(|M|+|\L|) = |M| + |\L|$.\qed
+Given $M_\alpha$, look at $(\bar{a}_\alpha,\bar{b}_\alpha,c_\alpha)$. We have $\bar{a}_\alpha \equiv^\M\bar{b}_\alpha$. Let $f_\alpha : \bar{a}_\alpha \ra \bar{b}_\alpha$ be partial elementary. Apply Prop 8.4 to find $\M_{\alpha+1} \ge \M_\alpha$ such that $|M_{\alpha+1}|\le |M_\alpha| + |\L| \le |M| + |\L|$, and there exists $d \in M_{\alpha+1}$ realising $f_\alpha(\tp(c_\alpha/\bar{a}_\alpha))$. Then $(\bar{a}_\alpha,c_\alpha) \equiv^\M(\bar{b}_\alpha,d)$. Let $\N = \bigcup_{\alpha < |M|}M_\alpha$. Then $|N| \le |M|(|M|+|\L|) = |M| + |\L|$.\qed
 
 We now build $\M = \N_0 \le \N_1\le \N_2\le \dots$ such that $|N_i| \le |M|+|\L|$, and $\forall \bar{a},\bar{b},c$ from $\N_i$ if $\bar{a}\equiv \bar{b}$ then there exists $d\in N_{i+1}$ such that $(\bar{a},c) \equiv (\bar{b},d)$. We do this by iterating the claim. Then let $\N = \bigcup_{i<\aleph_0}\N_i$. Then $|N|\le |M| + |\L|$.
 
