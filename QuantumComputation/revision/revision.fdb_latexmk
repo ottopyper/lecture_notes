@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1621779128 "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumComputation/revision/revision.tex" "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumComputation/revision/revision.pdf" "revision" 1621779128
+["pdflatex"] 1621779128 "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumComputation/revision/revision.tex" "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumComputation/revision/revision.pdf" "revision" 1622849804
   "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumComputation/revision/revision.aux" 1621779128 112 c869e8664d73af3174a90402c189606e ""
-  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumComputation/revision/revision.tex" 1621779128 10030 4f760224003b7c797c85ec368e1ff015 ""
+  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumComputation/revision/revision.tex" 1622849802 10030 4f760224003b7c797c85ec368e1ff015 ""
   "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex" 1618462689 4266 aef6ce966500cc2ead6fbc374379506f ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1616952564 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1616952564 1004 54797486969f23fa377b128694d548df ""
@@ -147,10 +147,10 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1620831030 4885835 225b430335ea75120e4d14f95280dfb9 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1620831015 2635859 209fcc33ab4a756b271d2f394c4320f2 ""
   "revision.aux" 1621779128 112 c869e8664d73af3174a90402c189606e "pdflatex"
-  "revision.tex" 1621779128 10030 4f760224003b7c797c85ec368e1ff015 ""
+  "revision.tex" 1622849802 10030 4f760224003b7c797c85ec368e1ff015 ""
   (generated)
-  "revision.pdf"
-  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumComputation/revision/revision.pdf"
   "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumComputation/revision/revision.log"
   "revision.aux"
+  "/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/QuantumComputation/revision/revision.pdf"
   "revision.log"
+  "revision.pdf"

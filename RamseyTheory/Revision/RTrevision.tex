@@ -1,0 +1,179 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{parskip}
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+\renewcommand{\rm}[1]{\mathrm{#1}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\hj}{\textrm{HJ}}
+\newcommand{\vdw}{\textrm{VdW}}
+\newcommand{\wnfc}{\textrm{W}\N\textrm{FC}}
+\newcommand{\fs}{\textrm{FS}}
+\newcommand{\fp}{\textrm{FP}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\fu}{\forall_\U}
+\newcommand{\for}[1]{\forall_{#1}}
+\newcommand{\om}{\omega}
+\newcommand{\bom}{{(\omega)}}
+\newcommand{\blom}{{(<\omega)}}
+\newcommand{\lom}{{<\om}}
+\newcommand{\ra}{\to}
+%\usepackage[lite]{mtpro2}
+
+\title{Ramsey Theory revision questions}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+    \item What is Ramsey Theory all about?
+    \item State Ramsey's Theorem.
+    \item Prove Ramsey's Theorem.
+    \item What type of proof is this called?
+    \item Explain how the above generalises to $k$-colourings.
+    \item Show that any sequence in a totally ordered set has a monotone subsequence.
+    \item State Ramsey's Theorem for $r$-sets.
+    \item Prove Ramsey's Theorem for $r$-sets.
+    \item Prove that given a collection of points $(i,x_i)$ in the plane, the induced function on some subset of them is either concave or convex.
+    \item State Finite Ramsey.
+    \item Prove Finite RAmsey.
+    \item What type of argument is this called?
+    \item Let $c$ be a colouring of $\N^{(2)}$ with an arbitrary set of colours. Then there exists an infinite $M\subset \N$ such that one of which four conditions must hold?
+    \item Prove this.
+    \item What are the canonical colourings fo the $r$-sets?
+    \item Define focused/colour-focused APs.
+    \item Define $W(m,k)$.
+    \item State Van der Waerden's Theorem.
+    \item Prove Van der Waerden's Theorem for $m = 3$.
+    \item Prove Van der Waerden's Theorem.
+    \item Define the Ackermann/Grzegorcyzk Hierarchy.
+    \item Define what it means for a function $f : \N \ra \N$ to be of type $n$.
+    \item What is the type of our bound for $W(m,k)$ for fixed $m$?
+    \item What is the type of our bound for $W(m) = W(m,2)$?
+    \item What did Shelah improve this bound to, and when?
+    \item Who offered how much for an $f_3(m)$ bound?
+    \item Who found an `almost' type $2$ bound, what was it, and when?
+    \item State a lower bound on $W(m)$.
+    \item Give two arguments to show that we cannot guarantee infinitely long mono APs.
+    \item State the Strengthened Van der Waerden Theorem.
+    \item Prove the Strengthened Van der Waerden Theorem.
+    \item What kind of bounds do we get here?
+    \item What is the case $m = 2$ called?
+    \item Prove this directly from Ramsey.
+    \item Define the $n$-dimensional cube on alphabet $X$.
+    \item Define a combinatorial line.
+    \item Define active coordinates.
+    \item State the Hales-Jewett Theorem.
+    \item Define $\hj(m,k)$.
+    \item Show that $\hj \implies \vdw$.
+    \item Define what it means for lines to be focused/colour-focused.
+    \item Prove the Hales-Jewett Theorem.
+    \item Define a $d$-parameter set/$d$-dimensional subspace of $X^n$.
+    \item State the Extended Hales-Jewett Theorem.
+    \item Prove the Extended Hales-Jewett Theorem.
+    \item For $S\subset \N^d$ finite, define a homothetic copy of $S$.
+    \item State Gallai's Theorem.
+    \item Prove Gallai's Theorem.
+    \item Why didnt' we use extended HJ for this, when it might seem so natural?
+    \item Define a partition regular matrix $A$.
+    \item Express Schur's Theorem as a monochromatic solution to a linear equation.
+    \item Express Strengthened VdW similarly.
+    \item Define what it means for $A$ to have the columns property.
+    \item State Rado's Theorem.
+    \item State a handy $(p-1)$-colouring of $\N$, for $p$ prime.
+    \item Prove that if $(a_1 \ a_2 \ \dots \ a_n)$ is PR, then $\sum_{i\in I}a_i = 0$ for some $\emptyset\ne I \subset [n]$.
+    \item Prove that, for $\lambda \in \Q$, $\wnfc$ there exists mono $x,y,z$ with $x + \lambda y = z$.
+    \item Prove Rado's Theorem for a single equation.
+    \item State Rado's Boundedness Conjecture.
+    \item How many colours suffice for a $1\times 3$? Who proved this, and when?
+    \item Show that if $A$ ($m\times n$ rational matrix) is PR, then it has the columns property.
+    \item Define an $(m,p,c)$-set
+    \item Define a row of an $(m,p,c)$-set.
+    \item What is a $(2,p,1)$-set?
+    \item What is a $(2,p,3)$-set?
+    \item Let $m,p,c\in\N$. Prove that $\wnfc$ there exists a monochromatic $(m,p,c)$-set.
+    \item What does the $(m,1,1)$ case mean?
+    \item State the Finite Sums Theorem, and all of its other names.
+    \item What does this mean for $m = 2$?
+    \item Deduce the `Finite Products Theorem'.
+    \item What about FS \textit{and} FP?
+    \item Show that if matrix $A$ has CP, then there exists $m,p,c$ such that every $(m,p,c)$-set contains a solution of $Ax = 0$.
+    \item Prove Rado's Theorem, assuming any earlier results.
+    \item State and prove the Consistency Theorem.
+    \item Is this obvious?
+    \item Can this be proven directly?
+    \item Show that $\wnfc$ there exists a colour class containing a solution to every PR system of equations.
+    \item State Rado's Conjecture.
+    \item Who proved it, and when?
+    \item What, roughly speaking, was their method?
+    \item State Hindman's Theorem.
+    \item Define a filter on $\N$.
+    \item Give some examples.
+    \item Define an ultrafilter on $\N$.
+    \item Give an equivalent characterisation of ultrafilters.
+    \item Show that every filter can be extended to an ultrafilter.
+    \item An ultrafilter is non-principal iff it extends which filter?
+    \item What ingredient do we need in order to actually get an ultrafilter?
+    \item Define the topological space $\beta\N$.
+    \item How can we view $\N$ as a subset of $\beta\N$?
+    \item Show that $\N$ is dense in $\beta\N$.
+    \item Prove that $\beta\N$ is Hausdorff.
+    \item Prove that $\beta\N$ is compact.
+    \item Give an alternative proof of compactness, via Tychonoff.
+    \item Why is $\beta\N$ interesting?
+    \item Define $\fu x\ p(x)$.
+    \item Show that ultrafilter quantifiers play nicely with logical connectives.
+    \item Which logical property do ultrafilter quantifiers fail to uphold? Demonstrate this.
+    \item Define $\U + \V$, and show it is an ultrafilter.
+    \item Show that $+$ on $\beta\N$ is associative.
+    \item Show that $+$ is left-continuous.
+    \item Show that $+$ is not right-continuous.
+    \item Show that $+$ is not commutative.
+    \item State the Idempotent Lemma.
+    \item Prove the Idempotent Lemma.
+    \item Does $\beta\N$ contain any non-trivial finite subgroups?
+    \item Prove Hindman's Theorem.
+    \item Give a $2$-colouring of $\N^\bom$ for which no $M\subset \N^\bom$ is monochromatic.
+    \item Define what it means for $Y\in\N^\bom$ to be Ramsey.
+    \item Give a base of open sets for the product topology on $\N^\bom$.
+    \item Give two other names for this topology on $\N^\bom$.
+    \item Define $(A,M)^\bom$.
+    \item Define $M$ accepts $A$.
+    \item Define $M$ rejects $A$.
+    \item If $M$ accepts/rejects $A$, what can we say about any $L \in M^\bom$?
+    \item If $M$ accepts $A$, then $M$ accepts any $A\cup B$ where...?
+    \item Need $M$ either accept or reject $A$?
+    \item State the Galvin-Prikry Lemma.
+    \item Prove the Galvin-Prikry Lemma.
+    \item Prove that if $Y\subset \N^\bom$ is open, then it is Ramsey.
+    \item Show also that closed sets are Ramsey.
+    \item Define the $\ast$-topology on $\N^\bom$, and give two other names for it.
+    \item Demonstrate that this really is a base for a topology.
+    \item Show that if $Y$ is $\ast$-open, then it is Ramsey.
+    \item Hence show also that $\ast$-closed sets are Ramsey.
+    \item Define a completely Ramsey set.
+    \item Demonstrate that this is strictly stronger than being Ramsey.
+    \item Show that $\ast$-open/closed sets are completely Ramsey.
+    \item Define a nowhere dense subset of a general topological space.
+    \item Show that $\ast$-ND sets are CR.
+    \item Define a meagre set.
+    \item Show that $\ast$-meagre sets are ND.
+    \item Define a Baire set.
+    \item Show the Baire sets form a $\sigma$-algebra.
+    \item Show that $Y$ is $\ast$-Baire iff it is completely Ramsey.
+    \item Why do we bother with meagre sets, since they are just the same as nohwere dense here?
+    \item Show that all $\tau$-Borel sets are Ramsey.
+    \item Give a neat example of an applicaiton of this result.
+\end{enumerate}
+
+
+
+\end{document}

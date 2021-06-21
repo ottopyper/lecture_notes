@@ -1,0 +1,118 @@
+\documentclass{article}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{parskip}
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+\renewcommand{\rm}[1]{\mathrm{#1}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\e}{\rm{e}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\R}{\bb{R}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
+
+\title{Topics in Combinatorics Revision Questions}
+
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+    
+\maketitle
+
+\begin{enumerate}
+    \item \textbf{Prove that if $X$ is a random variable, then $\P[X\ge EX] > 0$ and $\P[X\le EX] > 0$}
+    \item State and prove a proposition about average degrees in bipartite graphs.
+    \item What is this method called, roughly speaking?
+    \item State and prove another proposition about average degrees, concerning an inequality instead of an equality.
+    \item Show that for a planar graph, $E\ge 3F/2$.
+    \item Define $\partial_s\mc{A}$, in context. What is this called?
+    \item State and prove a lower bound on $|\partial_S\mc{A}|$, representing it in two different ways.
+    \item State Sperner's Theorem.
+    \item \textbf{Prove Sperner's Theorem.}
+    \item State the Erdos-Ko-Rado Theorem.
+    \item \textbf{Prove the Erdos-Ko-Rado Theorem.}
+    \begin{enumerate}
+        \item Show that, for a random ordering, at most $k$ intervals can be part of an intersecting family.
+        \item What is the expected total number of such intervals belonging to the family?
+        \item In the equality case, how are we able to still have $k$ intervals?
+        \item Construct a helpful cylcic order to show any $A$ of size $k$ is contained in $\mc{A}$.
+    \end{enumerate}
+    \item Define the crossing number of $G$.
+    \item Show that a planar graph with $n$ vertices has at most $3n-6$ edges.
+    \item Prove that a graph with $n$ vertices and $m$ edges has crossing number at least $m - 3n$.
+    \item Let $G$ be a graph drawn in the plane with $n$ vertices and $m$ edges, with $m\ge 6n$. $G$ must have at least how many crossings?
+    \item \textbf{Prove this.}
+    \item State the Szemeredi-Trotter Theorem
+    \item \textbf{Prove the Szemeredi-Trotter Theorem.}
+    \begin{enumerate}
+        \item What is an appropriate way to convert the points/lines into a graph?
+        \item Put two different bounds on the number of crossings.
+    \end{enumerate}
+    \item Give three examples of graphs demonstrating the S-T bound (up to a constant).
+    \item State Stirling's Formula. [optional]
+    \item State a gentler upper/lower bound on $n!$.
+    \item Prove this.
+    \item State bounds on $2^{-n}{n\choose n/2}$.
+    \item Prove these bounds.
+    \item Give an example of an event that occurs with probability $2^{-n}{n\choose n/2}$.
+    \item Give a bound on ${n\choose m}$, useful for when $m \ll  n$.
+    \item Improve this bound slightly. In what scenario is this often useful?
+    \item State the quotient of consecutive binomial coefficients.
+    \item Bound $\sum_{k=0}^{m}{n\choose k}$ in the case $m =\alpha n$, $\alpha < 1/2$.
+    \item State an example of the \textit{concentration of measure phenomenon}.
+    \item Let $m = (1/2 - \theta)n$ with $0 < \theta \le 1/2$. Then $2^{-n}{n\choose m}\le \e^{-\theta^2n/2}$.
+    \item \textbf{Prove that if $X_1,\dots,X_n$ are independent random variables of mean zero taking values in $[-1,1]$, and $X = \sum X_i$, then $\P[X\ge \eps n] \le \e^{-\eps^2n/4}$.}
+    \begin{enumerate}
+        \item What is the exponential moment?
+        \item Markov\dots
+        \item Optimise over something?
+    \end{enumerate}
+    \item What similar result do we immediately get by switching signs?
+    \item Let $m = (1/2 - \eps)n$. Show that $2^{-n}\sum_{k=0}^{m}{n\choose k} \le \e^{-\eps^2n}$.
+    \item What is a general question regarding well-separated sets.
+    \item What is the critical threshold for changing behaviour at intersections of size $\alpha n$, and why?
+    \item \textbf{Prove that if $\alpha > 1/4$, there can be exponentially many subsets of $[n]$ of size $n/2$ intersecting in no more than $\alpha n$.}
+    \begin{enumerate}
+        \item Let $A$ be a random set of size $n/2$. What is a good probability to estimate?
+        \item Then how many bad intersections can we have?
+        \item How can we mitigate this?
+    \end{enumerate}
+    \item What is the characteristic function of a set?
+    \item What space does it live in?
+    \item What is an oftentimes more useful function with which to associate a set?
+    \item Why is it thusly named?
+    \item Prove that if $A,B\subset [n]$ have size $n/2$ and $f_A,f_B$ are their balanced functions, then $\langle f_A,f_B\rangle = |A\cap B| - n/4$.
+    \item Use this to prove that if $A_1,\dots,A_m\subset [n]$ intersect in at most $(1/4 - \delta)n$, then $m \le 1 + \delta/4$.
+    \item State and prove a more general theorem, of which the above is a special case.
+    \item \textbf{Prove that if $x_1,\dots,x_m$ are non-zero vectors in $\R^n$ such that $\langle x_i,x_j\rangle\le 0$ for every $i\ne j$ then $m\le 2n$.}
+    \begin{enumerate}
+        \item Induction on $n$.
+        \item How can we reduce to $n-1$-dimensional space?
+    \end{enumerate}
+    \item \textbf{Furthermore, prove that if $m = 2n$ then there is an orthonormal basis $a_1,\dots,a_n$ such that each $x_i$ is a multiple of some $a_j$ (so we have exactly one positive multiple and one negative multiple of each $a_i$).}
+    \item Relate the above back to the problem of finding families of sets with intersections in at most $n/4$.
+    \item Define a Hadamard matrix.
+    \item Define the Walsh matrices $W_m$.
+    \item State three basic facts about $W_m$.
+    \item How do we find the desired set system from the $W_m$?
+    \item Define the Paley matrix $P_n$.
+    \item Prove that for every prime $p$ and every $d\not\equiv 0 \mod p$ we have that $\sum_{x\in\Z_p} \left( \frac{x}{p}\right) \left(\frac{x+d}{p}\right) = -1$
+    \item Hence show $P_n$ has orthogonal rows.
+    \item What is the smallest $n$, a multiple of 4, for which no Hadamard matrix is known?
+    \item Prove that if $|A| = n$, then $|A+A| \ge 2n-1$. When do we have equality?
+    \item Demonstrate a similar result for $|A.A|$.
+    \item State a famous conjecture of Erdos and Szemeredi.
+    \item Define $\rho_A^+(x)$ and $\rho_A^\times(x)$.
+    \item Define the multiplicative energy and additive energy of $A$.
+    \item What is the quotient set of $A$?
+    \item State and prove a lemma about multliplicative energy.
+    \item Prove that $\sum_{i=1}^{n} |a_i|^2\ge n^{-1}(\sum_i|a_i|)^2$.
+    \item Prove it again, in a different way.
+    \item Show that the multiplicative energy of $A$ is at least $|A|^4/|A.A|$.
+\end{enumerate}
+\end{document}

@@ -1,0 +1,322 @@
+\documentclass[]{article}
+
+\input{/home/pyotopic/Documents/PartIII/lazyboi/lecture_notes/preamble.tex}
+
+\usepackage[cmtip,all]{xy}
+\newcommand{\longsquiggly}{\xymatrix{{}\ar@{<~>}[r]&{}}}
+
+\newcommand{\I}{\textrm{I}}
+\newcommand{\II}{\textrm{II}}
+\newcommand{\om}{\omega}
+\newcommand{\lom}{{<\omega}}
+\newcommand{\lh}{\ell h}
+\renewcommand{\ac}{\textrm{AC}}
+\newcommand{\bosig}{\bm{\Sigma}}
+\newcommand{\bopi}{\bm{\Pi}}
+\newcommand{\bodel}{\bm{\Delta}}
+\newcommand{\bg}{{\breve \Gamma}}
+\newcommand{\br}[1]{{\breve #1}}
+\newcommand{\Det}{\textrm{Det}}
+\newcommand{\eomg}{\exists^{\om^\om}\Gamma}
+\newcommand{\eom}{\exists^{\om^\om}}
+\newcommand{\psp}{\textrm{PSP}}
+\newcommand{\rk}{\textrm{rk}}
+\newcommand{\fld}{\textrm{fld}}
+\newcommand{\wf}{\textrm{WF}}
+\newcommand{\hit}{\textrm{ht}}
+\newcommand{\bij}[1]{\lceil #1 \rceil}
+\newcommand{\bog}{\bm{\Gamma}}
+\newcommand{\op}{\textrm{OP}}
+\newcommand{\zfc}{\textrm{ZFC}}
+\newcommand{\cons}{\textrm{Cons}}
+\newcommand{\ic}{\textrm{IC}}
+\newcommand{\ad}{\textrm{AD}}
+\newcommand{\zf}{\textrm{ZF}}
+\newcommand{\tri}{\mathop{\triangle}}
+\newcommand{\aux}{\textrm{aux}}
+\newcommand{\lkb}{<_{\textrm{KB}}}
+\newcommand{\dom}{\textrm{dom}}
+\newcommand{\led}{\le_{\mathrm{D}}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\cone}{\textrm{Cone}}
+\newcommand{\cd}{\textrm{code}}
+%\renewcommand{\ht}{\textrm{ht}}
+%\newcommand{\wf}{\textrm{WF}}
+\usepackage{bm}
+
+\newcommand{\game}{
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $m_0$ & & $m_2$ & & $m_4 $& & $\dots $\\ \hline
+            II & & $m_1$ & & $m_3 $& &$ m_5$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+}
+
+\newcommand{\gamec}[2]{
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $#1_0$ & & $#1_1$ & & $#1_2 $& & $\dots $\\ \hline
+            II & & $#2_0$ & & $#2_1 $& &$ #2_2$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+}
+
+\newcommand{\gamed}[1]{
+    \begin{center}
+        \begin{tabular}{c|ccccccc}
+            I & $#1_0$ & & $#1_2$ & & $#1_4 $& & $\dots $\\ \hline
+            II & & $#1_1$ & & $#1_3 $& &$ #1_5$ & $\dots$ 
+        \end{tabular}
+    \end{center}
+}
+
+\title{Infinite Games Revision Questions}
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item Which five properties do the games we consider have?
+    \item Define $M^\lom$, $M^\om$.
+    \item Given $x \in M^\om$, define $x_\I$ and $x_\II$.
+    \item Define the interleaving of $x,y\in M^\om$.
+    \item What is $A \subset M^\om$ called?
+    \item What is a strategy?
+    \item Given two strategies $\sigma, \tau$ define $\sigma \ast \tau$.
+    \item Define a winning strategy.
+    \item Define a determined set.
+    \item Define a tree on $M$.
+    \item Given a tree $T$, define a branch through $T$.
+    \item Define $[T]$. What is it called?
+    \item Define $G(A;T)$ and represent it as $G(B)$ for some $B$.
+    \item Define a I/II-strategic tree.
+    \item Define a strategic tree in general.
+    \item What is $[T^\I_\sigma]$?
+    \item $\sigma$ is a winning strategy for player I in $G(A)$ $\iff$...?
+    \item $A$ is determined iff...?
+    \item For $s \in M^\lom$, what is $\lh(s)$?
+    \item Define a splitting node.
+    \item Define a perfect tree.
+    \item Define a perfect set.
+    \item State Cantor's Theorem about perfect, non-empty subsets of $2^\om$.
+    \item Prove Cantor's Theorem.
+    \item State and prove two corollaries of Cantor's Theorem for $|M| \ge 2$.
+    \item Prove that if $A$ is countable then player II has a winning strategy in $G(A)$.
+    \item Prove that if $|A| < 2^{\aleph_0}$, then player II has a winning strategy in $G(A)$ (and a similar result for player I).
+    \item Define a blindfolded strategy.
+    \item Prove (in ZFC) that there is a non-determined subset $A\subset \om^\om$.
+    \item Define a quasistrategy.
+    \item Define a (winning) quasistrategic tree.
+    \item Define a quasidetermined set.
+    \item What condition on $M$ allows the construction of strategies from quasistrategies?
+    \item Define a closed set.
+    \item Represent Zermelo's finite games with closed payoff sets.
+    \item State the Gale-Stewart Theorem.
+    \item Prove the Gale-Stewart Theorem.
+    \item Define Baire space.
+    \item What are the open balls in this metric?
+    \item Define Cantor space.
+    \item What is alternative characterisation of these topologies?
+    \item Show that Cantor space is compact, but that Baire space is (very) disconnected.
+    \item Given $A$ in Baire space, define $T_A$.
+    \item Prove that $[T_A]$ is the closure of $A$.
+    \item State and prove the tree representation theorem for closed sets.
+    \item Basic open sets are...? Spaces with this property are called...?
+    \item Singletons are...?
+    \item Prove that these spaces are Hausdorff.
+    \item A function $f$ on $\om^\om$ is continuous iff what?
+    \item Prove this.
+    \item What is the general rule of thumb for determining whether or not $f$ is continuous?
+    \item Show that $(\om^\om)^2$ and $\om^\om$ are homeomorphic.
+    \item Baire space is homeomorphic to...? How do we thus sometimes refer to elements of Baire space?
+    \item What is $\ac_X(Y)$?
+    \item Define the Borel Hierarchy.
+    \item Define a $G_\delta$ space.
+    \item Give some spaces that are $G_\delta$.
+    \item Prove that if $X$ has a countable, clopen topology base then $X$ is $G_\delta$.
+    \item When does the Borel Hierarchy terminate if:
+    \begin{enumerate}
+        \item $X$ is discrete?
+        \item singletons are closed and $X$ is countable?
+    \end{enumerate}
+    \item Prove that for arbitrary $X$, $\bodel_{\aleph_1} = \bosig_{\aleph_1} = \bopi_{\aleph_1}$
+    \item (In ZFC) what is the height of the Borel Hierarchy for Cantor space/Baire space/$\R$?
+    \item What technique does the proof of the above use?
+    \item Define a pointclass.
+    \item Define the dual pointclass, and the ambiguous pointclass.
+    \item What does it mean for a pointclass to be boldface? [Why is this silly?]
+    \item What does it mean for $\Gamma$ to be closed under continuous images?
+    \item Define what it means for a set $U$ to be $X$-universal for $\Gamma(Y)$.
+    \item Prove that if $U$ is $X$-universal for $\Gamma(X)$ and $\Gamma$ is boldface, then $\Gamma(X) \ne \breve{\Gamma}(X)$.
+    \item Prove that for every $\alpha < \aleph_1$, $\bosig^0_\alpha$ has an $\om^\om$-universal set.
+    \item Prove that if $U\subset X\times X$ is $X$-universal for $\Gamma(X)$, then $X\times X\backslash U$ is $X$-universal for $\bg(X)$.
+    \item Let $\lambda < \om_1$. Suppose that for each $\alpha < \lambda$ there is an $\om^\om$-universal set $U_\alpha$ for $\bopi^0_\alpha(\om^\om)$. Then there is an $\om^\om$-universal set for $\bosig^0_\lambda$.
+    \item Deduce the Borel Hierarchy Theorem.
+    \item Where did we use/need AC in the above proof?
+    \item What does $\Det(\Gamma)$ mean?
+    \item Show that in general the class of determined sets is not closed under complementation.
+    \item Who proved the following, and when?
+    \begin{enumerate}
+        \item $\Det(\bosig^0_2)$
+        \item $\Det(\bosig^0_3)$
+        \item $\Det(\bosig^0_4)$
+    \end{enumerate}
+    \item What did who prove about $\Det(\bosig^0_5)$?
+    \item This paved the way for who to prove what, and when?
+    \item Prove (in ZFC) that $|\mathcal{B}| = 2^{\aleph_0} < 2^{2^{\aleph_0}}$.
+    \item What is the Feferman-Levy Model $\mathcal{M}$?
+    \item Use it show that we need choice in the above proof.
+    \item What is the famous mistake of Henri Lebesgue?
+    \item Define a projection.
+    \item Define $\eom\Gamma$.
+    \item Define what it means for $\Gamma$ to be closed under projections.
+    \item Define the projective hierarchy.
+    \item Prove that the projective hierarchy does not collapse.
+    \item Prove that every Borel set is $\bosig^1_1$.
+    \item Deduce Suslin's Theorem.
+    \item State the Continuum Hypothesis, and an equivalent formulation of it under ZFC.
+    \item Define what it means for $A\subset \om^\om$ to have the perfect set property.
+    \item State the Cantor-Bendixson Theorem.
+    \item Sketch a proof.
+    \item Why was this proof important?
+    \item Define $\psp(\Gamma)$, and re-state Cantor-Bendixson with this notation.
+    \item Define $\psp$ and state an observation involving it.
+    \item State a theorem of Bernstein.
+    \item How can it be proven?
+    \item State a theorem of Haudorff. How will we prove this?
+    \item Prove that if $\Gamma$ is boldface, then $\Det(\Gamma)\implies \psp(\Gamma)$.
+    \begin{enumerate}
+        \item Define the asymmetric game $G^\ast(A)$.
+        \item If $A \in \Gamma$ and $\Det(\Gamma)$ then $G^\ast(A)$ is determined.
+        \item If player I was a winning strategy in $G^\ast(A)$ then $A$ contains a perfect subset.
+        \item If player II has a winning strategy, then $A$ is countable.
+        \begin{enumerate}
+            \item Define a $\tau$-decisive for $x$ position.
+            \item If $\tau$ is winning for II, then for each $x \in A$ ther is a $\tau$-decisive position $p$ for $x$
+            \item Every position $p$ is $\tau$-decisive for at most one $x \in 2^\om$.
+        \end{enumerate}
+    \end{enumerate}
+    \item Deduce $\psp(\textrm{Borel})$, and some further corollaries.
+    \item State a theorem of Godel and Addison.
+    \item What is Godel's Constructible Universe? How is it denoted? Why?
+    \item State explicitly the definition of $\bosig^1_1$, and reformulate it in terms of $T_x$ (giving the definition).
+    \item Define an illfounded/wellfounded tree. With a bit of AC, what is this equivalent to?
+    \item Hence state the tree representation of analytic and co-analytic sets.
+    \item Describe how to code a tree on $\om$ or $\om\times\om$ as elements of Baire space.
+    \item Define WF.
+    \item Define the rank function, and the height function.
+    \item Prove that $||\cdot||:\wf \ra \om_1$ is a surjection.
+    \item Define $\wf_\alpha$, $\wf_{<\alpha}$, $\wf_{\le \alpha}$.
+    \item WF can be thought of as [...] in [...] many levels.
+    \item Prove that $\wf$ is $\bopi^1_1$.
+    \item What is the general proof technique here?
+    \item Show that $\wf_{<\alpha},\wf_{\le \alpha},\wf_{\alpha}$ are $\bopi^1_1$.
+    \item Show further that $\wf_{\le\alpha}$ is also $\bosig^1_1$.
+    \item Deduce that $\wf_\alpha,\wf_{\le\alpha},\wf_{<\alpha}$ are all $\bodel^1_1$.
+    \item Prove that $\bodel^1_1 = $Borel.
+    \item Write $\wf$ as a union of [...].
+    \item Let $\Gamma$ be boldface. Define what it means for $A$ to be $\Gamma$-hard, and $\Gamma$-complete.
+    \item Prove that $\wf$ is $\bopi^1_1$-complete.
+    \item Show that $\wf$ is not $\bosig^1_1$.
+    \item Deduce that every $\bopi^1_1$ set is an $\om_1$-union of Borel sets.
+    \item State the Weak CH for $\bopi^1_1$ sets.
+    \item Prove the Weak CH for $\bopi^1_1$ sets.
+    \item State the Boundedness Lemma.
+    \item Prove the Boundedness Lemma.
+    \item Define a set of unique codes.
+    \item Prove that if $C$ is an SUC it cannot have PSP.
+    \item Prove that if there is a $\bodel^1_n$ wellorder of $\om^\om$, then there is a $\bopi^1_n$ set without PSP.
+    \item Give an outline of the corresponding notions between large cardinals, determinacy, and definable wellorders.
+    \item Roughly describe what it means if $\Phi$ is an LCP.
+    \item Use two of Godel's theorems to contextuatlise this notion.
+    \item Define what it means if $\Phi C < \Psi C$ and if $\Phi C$, $\Psi C$ are equiconsistent.
+    \item Define a (strong) limit.
+    \item Define regular.
+    \item Define an inaccessible cardinal.
+    \item State the GCH.
+    \item Show that IC is a large cardinal axiom.
+    \item Prove that if $\kappa$ is inaccessible, then $V_\kappa \models \zfc$.
+    \item Define an inner model.
+    \begin{enumerate}
+        \item Define an inner model.
+        \item What does it mean for $\phi$ to define an inner model?
+        \item Define a canonical model family.
+        \item Define what it means for a canonical model family to be $\bodel^1_n$-wellordered.
+    \end{enumerate}
+    \item State and prove some (basic) correspondences between models and inner models of ZFC.
+    \item State (and prove?) another two transfers between $M$ and $V$.
+    \item So what is $\aleph_1^M$?
+    \item for $\mu$ a canonical model family, we have that [...].
+    \item Suppose there is a $\bodel^1_n$-wellordered canonical model family and $\Det(\bopi^1_n)$. Then there is an inner model of ZFC + IC.
+    \begin{enumerate}
+        \item Define a weak set of unique codes.
+        \item Show $M\models \aleph_1^V$ inaccessible.
+    \end{enumerate}
+    \item Define a filter on $\kappa$.
+    \item Define an ultrafilter.
+    \item Define $\lambda$-complete.
+    \item If $\lambda = \aleph_1$, what is this completness often called?
+    \item Define principal/non-principal ultrafilters.
+    \item How many ultrafilters are there on $\kappa$ (in ZFC)? How many of these are principal?
+    \item Define a measurable cardinal.
+    \item Prove (in ZFC) that every measurable cardinal is inaccessible. [Why do we need AC here?]
+    \item Define Erdos-Rado Arrow Notation, and all the terms associated with it.
+    \item Define a weakly compact cardinal.
+    \item State two facts about weak compactness of cardinals.
+    \item Prove that every weakly compact cardinal is inaccessible.
+    \item Define $n-c-$homogeneity and some more arrow notation.
+    \item State Rowbottom's Theorem.
+    \item Prove Rowbottom's Theorem.
+    \item Prove (in ZFC) that $\aleph_1$ is not weakly compact.
+    \item Define the diagonal intersection of a family of subsets of $\kappa$.
+    \item Define a normal ultrafilter.
+    \item Prove that if $U$ is an ultrafilter on $\kappa$ such that all elements of $U$ have size $\kappa$ and $U$ is normal, then $U$ is $\kappa$-complete.
+    \item Fact (ZFC): If $\kappa$ is measurable, then there is a [...] on $\kappa$.
+    \item Prove (hence) that measurable cardinals are weakly compact.
+    \item Define $p[T]$ for $T$ a tree on $\kappa\times\om$.
+    \item Define a $\kappa$-Suslin set $A\subset\om^\om$.
+    \item So being $\aleph_0$-Suslin is equivalent to...?
+    \item Define the Auxiliary Game.
+    \item State Schoenfield's Theorem.
+    \item Prove Schoenfield's Theorem.
+    \begin{enumerate}
+        \item Define the Kleene-Brouwer order.
+        \item Define the Schoenfield tree.
+    \end{enumerate}
+    \item State a 1969/70 theorem of Martin.
+    \item Define what it means for $\kappa$ to satisfy Rowbottom's Theorem.
+    \item State Martin's Theorem.
+    \item Prove Martin's Theorem.
+    \item What aspect of $H$ did we fail to use in this proof? We don't need the full strength of what?
+    \item State a ZFC Theorem: $\Det(\bosig^1_1) \iff $...?
+    \item Which fragment of AC have we used liberally so far? In particular...?
+    \item Prove that $\ad\implies\ac_{\om}(\om^\om)$.
+    \item How does this proof generalise?
+    \item State the uniformisation principle.
+    \item $U$ is a non-principal ultrafilter iff it extends which filter?
+    \item Define the image filter.
+    \item Shwo that if there is an ultrafilter $U$ on $X$ that is not $\aleph_1$-complete, then there is a non-principal ultrafilter on $\N$.
+    \item Corollary: ZF + there is no non-principal ultrafilter on $\N$ $\implies$...?
+    \item Prove that $\ad\implies$ there is no non-principal ultrafilter on $\N$.
+    \begin{enumerate}
+        \item What is the technique here called?
+    \end{enumerate}
+    \item What does it mean if $x$ is definable from $y$?
+    \item State six properties of $\le_D$.
+    \item Define a preorder.
+    \item Prove that if $x,y\in\om^\om$ and $z$ is such that $x\le_Dz$ and $y\le_D z$ then $x\ast y \le_Dz$.
+    \item Define the Turing Join of $x$ and $y$.
+    \item Define the cone of $x$.
+    \item Define the cone filter $F_D$.
+    \item Define $\equiv_D$-invariant.
+    \item Describe the relationship between strategies and $\mathcal{D}_D$.
+    \item State Martin's Lemma.
+    \item State a corollary of Martin's Lemma (involving the Martin Measure).
+    \item State Solovay's Theorem.
+    \item Prove Solovay's Theorem.
+\end{enumerate}
+
+
+\end{document}

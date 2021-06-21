@@ -1,0 +1,272 @@
+\documentclass[10pt]{article}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{parskip}
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+\renewcommand{\rm}[1]{\mathrm{#1}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\e}{\rm{e}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\R}{\bb{R}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\ra}{\to}
+
+\title{Topics in Combinatorics Revision Questions}
+
+\author{Otto Pyper}
+\date{}
+
+\begin{document}
+    
+\maketitle
+
+\begin{enumerate}
+    \item State Jensen's inequality.
+    \item \textbf{Prove that if $X$ is a random variable, then $\P[X\ge EX] > 0$ and $\P[X\le EX] > 0$}
+    \item State and prove a proposition about average degrees in bipartite graphs.
+    \item What is this method called, roughly speaking?
+    \item State and prove another proposition about average degrees, concerning an inequality instead of an equality.
+    \item Show that for a planar graph, $E\ge 3F/2$.
+    \item Define $\partial_s\mc{A}$, in context. What is this called?
+    \item State and prove a lower bound on $|\partial_S\mc{A}|$, representing it in two different ways.
+    \item State Sperner's Theorem.
+    \item \textbf{Prove Sperner's Theorem.}
+    \item State the Erdos-Ko-Rado Theorem.
+    \item \textbf{Prove the Erdos-Ko-Rado Theorem.}
+    \begin{enumerate}
+        \item Show that, for a random ordering, at most $k$ intervals can be part of an intersecting family.
+        \item What is the expected total number of such intervals belonging to the family?
+        \item In the equality case, how are we able to still have $k$ intervals?
+        \item Construct a helpful cylcic order to show any $A$ of size $k$ is contained in $\mc{A}$.
+    \end{enumerate}
+    \item Define the crossing number of $G$.
+    \item Show that a planar graph with $n$ vertices has at most $3n-6$ edges.
+    \item Prove that a graph with $n$ vertices and $m$ edges has crossing number at least $m - 3n$.
+    \item Let $G$ be a graph drawn in the plane with $n$ vertices and $m$ edges, with $m\ge 6n$. $G$ must have at least how many crossings?
+    \item \textbf{Prove this.}
+    \item State the Szemeredi-Trotter Theorem
+    \item \textbf{Prove the Szemeredi-Trotter Theorem.}
+    \begin{enumerate}
+        \item What is an appropriate way to convert the points/lines into a graph?
+        \item Put two different bounds on the number of crossings.
+    \end{enumerate}
+    \item Give three examples of graphs demonstrating the S-T bound (up to a constant).
+    \item State Stirling's Formula. [optional]
+    \item State a gentler upper/lower bound on $n!$.
+    \item Prove this.
+    \item State bounds on $2^{-n}{n\choose n/2}$.
+    \item Prove these bounds.
+    \item Give an example of an event that occurs with probability $2^{-n}{n\choose n/2}$.
+    \item Give a bound on ${n\choose m}$, useful for when $m \ll  n$.
+    \item Improve this bound slightly. In what scenario is this often useful?
+    \item State the quotient of consecutive binomial coefficients.
+    \item Bound $\sum_{k=0}^{m}{n\choose k}$ in the case $m =\alpha n$, $\alpha < 1/2$.
+    \item State an example of the \textit{concentration of measure phenomenon}.
+    \item Let $m = (1/2 - \theta)n$ with $0 < \theta \le 1/2$. Then $2^{-n}{n\choose m}\le \e^{-\theta^2n/2}$.
+    \item \textbf{Prove that if $X_1,\dots,X_n$ are independent random variables of mean zero taking values in $[-1,1]$, and $X = \sum X_i$, then $\P[X\ge \eps n] \le \e^{-\eps^2n/4}$.}
+    \begin{enumerate}
+        \item What is the exponential moment?
+        \item Markov\dots
+        \item Optimise over something?
+    \end{enumerate}
+    \item What similar result do we immediately get by switching signs?
+    \item Let $m = (1/2 - \eps)n$. Show that $2^{-n}\sum_{k=0}^{m}{n\choose k} \le \e^{-\eps^2n}$.
+    \item What is a general question regarding well-separated sets.
+    \item What is the critical threshold for changing behaviour at intersections of size $\alpha n$, and why?
+    \item \textbf{Prove that if $\alpha > 1/4$, there can be exponentially many subsets of $[n]$ of size $n/2$ intersecting in no more than $\alpha n$.}
+    \begin{enumerate}
+        \item Let $A$ be a random set of size $n/2$. What is a good probability to estimate?
+        \item Then how many bad intersections can we have?
+        \item How can we mitigate this?
+    \end{enumerate}
+    \item What is the characteristic function of a set?
+    \item What space does it live in?
+    \item What is an oftentimes more useful function with which to associate a set?
+    \item Why is it thusly named?
+    \item Prove that if $A,B\subset [n]$ have size $n/2$ and $f_A,f_B$ are their balanced functions, then $\langle f_A,f_B\rangle = |A\cap B| - n/4$.
+    \item Use this to prove that if $A_1,\dots,A_m\subset [n]$ intersect in at most $(1/4 - \delta)n$, then $m \le 1 + \delta/4$.
+    \item State and prove a more general theorem, of which the above is a special case.
+    \item \textbf{Prove that if $x_1,\dots,x_m$ are non-zero vectors in $\R^n$ such that $\langle x_i,x_j\rangle\le 0$ for every $i\ne j$ then $m\le 2n$.}
+    \begin{enumerate}
+        \item Induction on $n$.
+        \item How can we reduce to $n-1$-dimensional space?
+    \end{enumerate}
+    \item \textbf{Furthermore, prove that if $m = 2n$ then there is an orthonormal basis $a_1,\dots,a_n$ such that each $x_i$ is a multiple of some $a_j$ (so we have exactly one positive multiple and one negative multiple of each $a_i$).}
+    \item Relate the above back to the problem of finding families of sets with intersections in at most $n/4$.
+    \item Define a Hadamard matrix.
+    \item Define the Walsh matrices $W_m$.
+    \item State three basic facts about $W_m$.
+    \item How do we find the desired set system from the $W_m$?
+    \item Define the Paley matrix $P_n$.
+    \item Prove that for every prime $p$ and every $d\not\equiv 0 \mod p$ we have that $\sum_{x\in\Z_p} \left( \frac{x}{p}\right) \left(\frac{x+d}{p}\right) = -1$
+    \item Hence show $P_n$ has orthogonal rows.
+    \item What is the smallest $n$, a multiple of 4, for which no Hadamard matrix is known?
+    \item Prove that if $|A| = n$, then $|A+A| \ge 2n-1$. When do we have equality?
+    \item Demonstrate a similar result for $|A.A|$.
+    \item State a famous conjecture of Erdos and Szemeredi.
+    \item Define $\rho_A^+(x)$ and $\rho_A^\times(x)$.
+    \item Define the multiplicative energy and additive energy of $A$.
+    \item What is the quotient set of $A$?
+    \item State and prove a lemma about multliplicative energy (a reformulation).
+    \item Prove that $\sum_{i=1}^{n} |a_i|^2\ge n^{-1}(\sum_i|a_i|)^2$.
+    \item Prove it again, in a different way.
+    \item Show that the multiplicative energy of $A$ is at least $|A|^4/|A.A|$.
+    \item \textbf{Prove that $\sum_{m\in A/A}\rho^\div_A(m^{-1})^2 \le 2|A+A|^2 \lceil \log |A| \rceil$.}
+    \begin{enumerate}
+        \item What is dyadic decomposition?
+        \item Think a bit about what $\rho^\div_A(m^{-1})^2$ means.
+    \end{enumerate}
+    \item Hence, prove Solymosi's Theorem.
+    \item Define the Kneser Graph $G_{n,k}$.
+    \item Give a $k+2$-colouring of $G_{n,k}$.
+    \item State the Borsuk-Ulam Theorem.
+    \item State an equivalent formulation of the Borsuk-Ulam Theorem.
+    \item Prove this equivalence.
+    \item State yet another variant of Borsuk-Ulam.
+    \item Show that it is implied by the above.
+    \item State the mixed version.
+    \item Show that the open sets version implies the mixed version.
+    \item \textbf{Let $\delta > 0$. Prove that the graph on $S^d$ defined by joining $u,v$ iff $\langle u,v\rangle < -1 + \delta$ has chromatic number at least $d + 2$.}
+    \item Show that this bound is sharp for sufficiently small $\delta$.
+    \item If $\delta$ is small, what does this say about where a vertex is located relative to its neighbourhood? What can we conclude about odd cycles in this graph?
+    \item \textbf{Prove that the chromatic number of the Kneser Graph $G_{n,k}$ is $k + 2$.}
+    \begin{enumerate}
+        \item How might we represent this graph on the sphere?
+        \item What is a good choice of a base set of $2n+k$ points? What key property should they have?
+        \item Find a good choice of $k + 2$ open/closed sets to apply B-U to.
+    \end{enumerate}
+    \item Define what it means for permutation $\sigma$ to contain permutation $\pi$.
+    \item Give a construction of a general 2413-avoiding permutaiton.
+    \item Define what it means in terms of adjacency matrices of bipartite graphs for one to contain/avoid another.
+    \item State the conjecture solved by Marcus \& Tardos.
+    \item Define an ordered quotient of an $n\times n$ $01$-matrix.
+    \item Let $P$ be a permutation matrix and let $A$ be a $P$-avoiding $01$-matrix. Show that every ordered quotient of $A$ avoids $P$.
+    \item Suppose $k^2 | n$. Define a block of $A$.
+    \item What does it mean for a block to be wide?
+    \item What does it mean for a block to be tall?
+    \item Roughly speaking, what is the structure of the following proof?
+    \item Show that if $A$ does not contain the $k\times k$ $P$, then for each $j$ the number of wide blocks with columns in $C_j$ is at most $(k-1){k^2\choose k}$ and similarly for each $i$ the number of tall blocks with rows in $R_i$ is at most $(k-1){k^2\choose k}$.
+    \item Prove that, for $P$ a $k\times k$ permutation matrix, and $k^2 | n$, then $f(n)$, the largest number of non-zero entires in any $01$-matrix avoiding $P$, satisfies \[f(n) \le 2k^2 n(k-1){k^2\choose k}+(k-1)^2f(n/k^2)\]
+    \begin{enumerate}
+        \item How many $1$s can we see in wide blocks or tall blocks?
+        \item Where does the $f(n/k^2)$ term come from?
+    \end{enumerate}
+    \item Now prove the theorem of Marcus \& Tardos.
+    \item For the $C$ in question, how does it vary with $k$?
+    \item State the Stanley-Wilf conjecture.
+    \item Prove it, using M-T.
+    \item State the Khinchin axioms for entropy.
+    \begin{enumerate}
+        \item State axiom 0.
+        \item State axiom 1.
+        \item State axiom 2.
+        \item State axiom 3.
+        \item State axiom 4.
+        \item State axiom 5.
+    \end{enumerate}
+    \item Prove that if $X,Y$ are independent, then $H[Y|X] = H[Y]$ and $H[X,Y] = H[X] + H[Y]$.
+    \item Prove that if $X$ takes just one value, then $H[X] = 0$.
+    \item Let $A\subset B$, $X$ uniform on $A$, $Y$ uniform on $B$. Then $H[X]\le H[Y]$, with equality iff $A = B$.
+    \item Let $X$ be a random variable and $Y = f(X)$, some function $X$. Then $H[Y] \le H[X]$.
+    \item Prove that $H[X] \ge 0$ for every discrete random variable $X$ taking values on a finite set $A$.
+    \item Prove that if $X$ takes at least two values with non-zero probability, then $H[X] > 0$.
+    \item State and prove the chain rule for entropy.
+    \item Describe the process of expressing the P3 bound using entropy.
+    \item Show that, in the distribution defined in lectures, the individual edges of the random P3 are uniformly distributed.
+    \item Show that a bipartite graph with density $\alpha$ must contain at least $\alpha^3 |A|^2|B|^2$ labelled P3s, and show this is sharp.
+    \item State Sidorenko's Conjecture.
+    \item Write down the formula for entropy.
+    \item What is the entropy of a uniformly random variable?
+    \item Prove that the formula for entropy satisfies the Khinchin axioms (in particular, maximality and additivity).
+    \item Prove that the Khinchin axioms uniquely determine the formula.
+    \begin{enumerate}
+        \item Prove that if $X$ is uniform on a set of size $2^k$, then $H[X] = k$.
+        \item Prove that if $X$ is uniformly distributed on a set of size $n$, then $H[X] = \log n$.
+        \item Now show that $H[X] = \sum_{x\in A} p_a\log(1/p_a)$.
+    \end{enumerate}
+    \item Define the permanent of a square matrix $A$.
+    \item What is the complexity class of the problem of calculating the permanent?
+    \item If $A$ is a bipartite adjacency matrix, what does $\rm{per}(A)$ represent?
+    \item State Bregman's Theorem.
+    \item Demonstrate that the bound given is sharp.
+    \item \textbf{Prove the theorem.}
+    \begin{enumerate}
+        \item Define a random variable whose entropy we aim to bound.
+        \item Write down the upper bound that we are aiming for.
+        \item Bound $H[\sigma(x_1)]$.
+        \item Bound $H[\sigma(x_k)|\sigma(x_1),\dots,\sigma(x_{k-1})]$.
+        \item For any fixed $\sigma$, find the distribution of $d^\sigma_{k-1}(x)$.
+        \item Take expectations and complete the proof.
+    \end{enumerate}
+    \item Let $X,Y$ be discrete random variables. Prove that $H[X,Y] \le H[X] + H[Y]$.
+    \begin{enumerate}
+        \item Prove this using the formula.
+        \item Prove this using the axioms.
+        \begin{enumerate}
+            \item First uniform.
+            \item Then rational.
+            \item Then real.
+        \end{enumerate}
+    \end{enumerate}
+    \item Deduce a more general subadditivity formula.
+    \item State Shearer's Lemma.
+    \item Prove Shearer's Lemma.
+    \item Let $G$ be a graph with $m$ edges and $t$ triangles. Prove that $t\le (2m)^{3/2}/6$.
+    \item Prove that a $\triangle$-intersecting family $\mc{G}$ of graphs on vertex set $[n]$ has size at most $2^{n\choose k}/4$.
+    \item State the theorem arising from Dvir's solution to the Kakeya problem for finite fields.
+    \item Let $A\subset \bb{F}_p^n$ be a set of size ${n+d\choose d}$. Then there exists a non-zero polynomial $P(x_1,\dots,x_n)$ of degree $d$ that vanishes on $A$.
+    \begin{enumerate}
+        \item What is another way of representing a polynomial of degree $d$ in variables $x_1,\dots,x_n$?
+        \item What is an equivalent notion now to vanishing on $A$?
+    \end{enumerate}
+    \item In particular this is true when?
+    \item State three sufficient conditions (involving a set $A$, a degree $d$, and a polynomial $f$) for the existence of a non-zero degree $d$ polynomial that vanishes everywhere on $\bb{F}_p^n$.
+    \item Let $f$ be a non-zero polynomial on $\bb{F}_p^n$ of degree less than $p$. Show that $f$ is not identically zero.
+    \item Now prove Dvir's result.
+    \item Let $f$ be a non-zero polynomial of degree at most $d$ on $\bb{F}_p^n$. Prove that $f$ has at most $dp^{n-1}$ roots. [Schwarz-Zippel Lemma.]
+    \item Name a real-world application of the Schwarz-Zippel Lemma.
+    \item State Alon's combinatorial Nullstellensatz.
+    \item Prove Alon's combinatorial Nullstellensatz.
+    \item State the Cauchy-Davenport Theorem.
+    \item Prove the Cauchy-Davenport Theorem.
+    \item Define $A\dot{+}B$.
+    \item State a result of da Silva and Hamidoune, which is a variant of C-D T.
+    \item Prove this.
+    \item Show that for when $|A| =|B|$ this result is sharp.
+    \item State a theorem due to Roy Meshulam.
+    \item State a closely related theorem due to Roth.
+    \item Define the rank of $f:X\times Y \ra \bb{F}$.
+    \item Define the slice rank of $f : X\times Y\times Z \ra \bb{F}$.
+    \item Let $X$ be a finite set, let $A\subset X$, $\bb{F}$ a field, $f:X^3 \ra \bb{F}$ a function such that $f(x,y,z)\ne 0$ iff $x = y = z$ and $x \in A$. Show that the slice rank of $f$ is $A$.
+    \item Connect the slice rank to the cap-set problem.
+    \item Show that the slice rank of the polynomial $P(x,y,z) = \prod_{i=1}^{n}(1-(x_i+y_i+z_i)^2)$ is at most $3M$, where $M$ is the number of $012$-sequences of length $n$ that sum to at most $2n/3$.
+    \item Obtain an upper bound on the above $M$.
+    \item Define the Hamming cube $Q^n$.
+    \item State the sensitivty conjecture (-adjacent problem) that Hao Huang proved.
+    \item Define a helpful class of matrices $A_n$: $n\in\N$.
+    \item Show that $A_n$ is symmetric.
+    \item Show that the rows of $A_n$ are orthogonal.
+    \item What are the possible entries of $A_n$?
+    \item How many non-zero entries are there in each row/column of $A_n$?
+    \item If the entries are indexed with $01$ sequences, what is the value of $(A_n)_{xy}$ in terms of $x$ and $y$?
+    \item How does $A_n$ then relate to $Q^n$?
+    \item Describe the assignment of signs to the adjacency matrix of $Q^n$ inductively.
+    \item What is $A_n^2$? Prove this.
+    \item Prove Huang's Theorem.
+    \item Suppose $X\subset \R^n$ and the members of $X$ are all pairwise the same distance. How large can $X$ be?
+    \item Let $a_1,\dots,a_m \in \R^n$ be such that the number of distinct distances $d(a_i,a_j)$ with $i\ne j$ is at most $2$. Then $m \le (n+1)(n+4)/2$.
+    \item Suppose $\mc{A}$ is a family of subsets of $[n]$, all of even size, all with even intersections. How big can $|\mc{A}|$ be?
+    \item Now what happens if we demand the intersections to be of odd size instead?
+    \item In particular, let $\mc{A}$ be a family of subsets of $[n]$ all of even size, such that any two distinct sets have odd intersection. Prove that $|\mc{A}| \le n$ if $n$ odd, and $|\mc{A}| \le n-1$ if $n$ is even.
+    \item Now prove the even-even case is $|\mc{A}| \le 2^{\lfloor n/2\rfloor}$.
+    \item Let $\mc{A}$ be a family of subsets of $[n]$ such that the size of every $A \in \mc{A}$ is a multiple of $p$, but no two distinct sets in $\mc{A}$ have intersection of size a multiple of $p$. Show that $|\mc{A}| \le {n\choose 0} + {n\choose 1} + \dots + {n\choose p-1}$.
+    \item Let $p$ be an odd prime and let $n = 4p$. Show that the largest measure of a set $X$ of unit vectors in $\R^{n}$ that contains no pair of orthogonal vectors is exponentially small.
+    \item State Borsuk's (disproved) conjecture.
+    \item Let $n = 4p$ for a prime $p$. Show that $\R^{n^2}$ contains a set $X$ of size ${n\choose 2p}$ such that every subset of $X$ of smaller diameter has size at most $\sum_{m=0}^{p-1}{n\choose m}$.
+\end{enumerate}
+\end{document}

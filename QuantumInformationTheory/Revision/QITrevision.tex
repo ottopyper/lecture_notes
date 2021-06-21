@@ -1,0 +1,357 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{parskip}
+
+\renewcommand{\rm}[1]{\mathrm{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\C}{\mc{C}}
+\newcommand{\D}{\mc{D}}
+\newcommand{\T}{\mc{T}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\ra}{\rightarrow}
+
+\title{Quantum Information Theory Revision Questions}
+
+\author{Otto Pyper}
+
+\date{}
+
+\begin{document}
+    
+\maketitle
+
+
+
+\begin{enumerate}
+    \item Define the surprisial of a random variable.
+    \item Define the Shanon entropy of a discrete random variable $X$.
+    \item Define binary entropy.
+    \item Define a source alphabet.
+    \item Define a memoryless source, and characterise it with random variables.
+    \item Define the Shannon entropy of a memoryless source.
+    \item Generally speaking, why is data compression possible?
+    \item Give two methods of data encoding and describe their differences.
+    \item Defina a typical/atypical signal.
+    \item Define a compression map $C^n$, and its rate.
+    \item Define a corresponding decompression map $D^n$.
+    \item The triple $\mathcal{C}_n$...?
+    \item Write down the average probability of error of $\mathcal{C}_n$.
+    \item Define what it means for $\mathcal{C}_n$ to be reliable.
+    \item Define the data compression limit for a source.
+    \item Define the $\eps$-typical set $T_\eps^{(n)}$, and the typical sequences.
+    \item What is the approximate probability of a typical sequence?
+    \item Demonstrate that this definition agrees with our intuitive notion of what a typical sequence should be.
+    \item State the Typical Sequence Theorem.
+    \item Prove (some bits of) the Typical Sequence Theorem.
+    \item State a corollary of the TST.
+    \item State Shannon's Source Coding Theorem.
+    \item State a lemma bounding the probability of a sufficiently small set of sequences.
+    \item Sketch a proof.
+    \item Explain how this implies the converse of Shannon.
+    \item Define joint entropy.
+    \item Define conditional entropy.
+    \item State and prove the chain rule identity relating joint and conditional entropy.
+    \item Define the relative entropy/Kullback Leibler divergence.
+    \item State Jensen's inequality.
+    \item Show that $D(p||q)\ge 0$. When does equality hold?
+    \item Define the mutual information $I(X:Y)$.
+    \item \textbf{LECTURE 3 DIAGRAM}
+    \item Define $D(P||Q)$ for a pairt of functions (instead of random variables).
+    \item Express $H(X), I(X:Y), H(X|Y)$ in terms of the relative entropy.
+    \item State the chain rule for entropies.
+    \item Define the conditional mutual information $I(X:Y|Z)$.
+    \item State the data-processing inequality.
+    \item Prove the data-processing inequality.
+    \item Show that $D(p||q) \ge 0 $, with equality iff $p = q$.
+    \item Show that $H(X) \ge 0$, with equality iff $X$ is deterministic.
+    \item Show that $H(X|Y) \ge 0$, or equivalently that $H(X,Y)\ge H(Y)$.
+    \item Show that if $X$ takes values in $J$, then $H(X) \le \log |J|$
+    \item Show that $H(X,Y) \le H(X) + H(Y)$ (subadditivity).
+    \item Show that the Shannon entropy is concave.
+    \item Show that $I(X:Y) \ge 0$, with equality iff $X$ and $Y$ are independent.
+    \item Define a discrete channel.
+    \item Define a memoryless (discrete) channel.
+    \item Define a symmetric memoryless channel.
+    \item Define the memoryless, binary, symmetric channel.
+    \item What is majority voting?
+    \item What is the probability of error in this scheme?
+    \item How much has this scheme improved the reliability of transmission?
+    \item What is this type of error-correcting code called?
+    \item \textbf{LECTURE 4 DIAGRAM.}
+    \item Define $\mc{C}_n$, an error-correcting code.
+    \item Define the probability of error $p(\mc{C}_n)$.
+    \item Define an achievable rate for a channel.
+    \item Define the capacity $C(\mc{N})$ of a memoryless channel.
+    \item State Shannon's Noisy Channel Coding Theorem.
+    \item State three properties of $C(\mc{N})$.
+    \item Give some intuition behind the proof of SNCCT.
+    \item Use SNCCT to calculate the capacity of the binary memoryless symmetric channel.
+    \item Give two examples of physical realisations of qubit.s
+    \item What are reliably distinguishable states?
+    \item What is the Hamming space?
+    \item Define $\mc{B}(\mc{H})$.
+    \item Define the Hilbert-Schmidt inner product.
+    \item Define the Pauli matrices.
+    \item What is an open system?
+    \item What is decoherence?
+    \item State the four postulates of quantum mechanics.
+    \item What postulates are no longer valid in open systems?
+    \item How can we view open systems to get around this issue?
+    \item Describe the density matrix formalism.
+    \item State and prove two properties of density matrices.
+    \item What can we conclude from these properties?
+    \item Give an equivalent, but more abstract, definition of a density matrix.
+    \item Give an important property of $\mc{D}(\mc{H})$.
+    \item Define a pure state.
+    \item Define a mixed state.
+    \item Give an equivalent characterisation of pure/mixed states.
+    \item What is the purity of a state? What range of values can this take?
+    \item \textbf{LECTURE 6 FIGURE AND DISCUSSION.}
+    \item Show that $\mc{D}(\mc{H})$ is convex. Show that pure states are extremal points.
+    \item Define the expectation of an observable $A$.
+    \item Show that this is linear, positive and normal.
+    \item Define the reduced density operator/matrix of a bipartite state $\rho_{AB}$.
+    \item Define the partial trace.
+    \item \textbf{LECTURE 6 DETAILED EXPRESSIONS AND DERIVATIONS.}
+    \item Showt that a reduced density matrix is a valid density matrix.
+    \item Let $M_{AB} = M_A\otimes I_B$. Show that $\langle M_{AB}\rangle = \textrm{Tr}(M_A\rho_A)$.
+    \item Define a separable bipartite pure state, and write down its reduced density operators.
+    \item Define an entangled bipartite pure state. What form do its reduced density operators have?
+    \item Define maximally entangeled states.
+    \item Write down the Bell/EPR states. Who are they named after?
+    \item What does it mean for a bipartite \textbf{mixed} state $\rho_{AB}$ to be separable?
+    \item What does it mean for a bipartite mixed state to be entangled?
+    \item Show that separable bipartite states can always be expressed as a convex combination of pure product states.
+    \item State the Schmidt Decomposition Theorem.
+    \item Prove the Schmidt Decomposition Theorem.
+    \item Given an immediate consequence of this theorem for the reduced density matrices of a pure state $\Psi_{AB}$.
+    \item Under what condition is the Schmdit decomposition of $\ket{\Psi_{AB}}$ uniquely determined by $\rho_A$ and $\rho_B$?
+    \item Define the Schmidt rank of a bipartite pure state $\ket{\Psi_{AB}}$. How is it denoted?
+    \item A bipartite pure state is entangled iff...?
+    \item Prove that a BPS is a product state iff its Schimdt number is equal to one.
+    \item Prove that a BPS is a product state iff its reduced density matrices are pure states.
+    \item When can we apply Schmidt, more generally?
+    \item Define the purification of a state $\rho_A$.
+    \item Define a reference system for a state $\rho_A$.
+    \item Prove that any state $\rho_A$ can be purified.
+    \item Give a more general purification of $\rho_A$.
+    \item How can we express $\ket{\Psi_{AR}}$ with reduced state $\rho_A$ having eigenvectors $\{\ket{i}\}$.
+    \item State the No-Cloning Theorem.
+    \item Prove the No-Cloning Theorem.
+    \item Why does this extend to full generality?
+    \item Why is the No-Cloning Theorem a Big Problem?
+    \item Who (independently) devised the first quantum error-correcting codes, and when?
+    \item Demonstrate how No-Cloning prevents superluminal communication.
+    \item Define a quantum operation, and give a simple example.
+    \item Define a linear CPTP map.
+    \item Why are quantum operations given by linear CPTPs?
+    \item Define $\mc{M}_n^+$.
+    \item Why is complete positivity a physically reasonable condition? \textbf{LECTURE 8/9 DISCUSSION.}
+    \item Give a map that is positive but not completely positive.
+    \item State a theorem that describes when a linear operator map is completely positive.
+    \item Prove this theorem.
+    \item Define the Choi matrix/state $J(\Lambda)$ for a quantum operation $\Lambda$.
+    \item State (a simplified version of) Stinespring's Dilation Theorem.
+    \item Therefore, any quantum operation can be composed of which three building blocks?
+    \item What does ``going to the church of the larger Hilbert space'' mean? \textbf{SCHEMATIC IN LECTURES.}
+    \item State the Kraus Representation Theorem.
+    \item Prove one direction of the Kraus Representation Theorem.
+    \item Show that it is essentially a restatement of Stinespring.
+    \item Is Kraus decomposition unique?
+    \item State the Choi-Jamilkowski Isomorphism (Theorem).
+    \item Define the adjoint $\Lambda^\ast$ to $\Lambda$.
+    \item \textbf{LECTURE 9/10 VERIFY ONE C-J PART.}
+    \item What suffices to prove that the C-J maps are mutual inverses?
+    \item Prove this.
+    \item Prove the other direction of Kraus.
+    \item State Stinespring's Dilation Theorem (in full generality).
+    \item Prove Stinespring's Dilation Theorem.
+    \item Why are standard projective measurements insufficient for us?
+    \item Describe the Generalised Measurement Postulate.
+    \item What does POVM stand for, and why?
+    \item How can projective measurements be viewed as a special case of a generalised measurement?
+    \item What is the POVM formalism? When is it used?
+    \item What does a POVM not do?
+    \item Define a POVM.
+    \item What is a pure POVM?
+    \item State Neumark's Theorem.
+    \item Show that a projective measurement is a special case of a POVM.
+    \item Give an example (/case study?) of a POVM being useful.
+    \item Describe how to implement a generalised measurement using an ancilla, unitary dynamics and projective measurements.
+    \item Define the trace distance $D(\rho,\sigma)$ of two states $\rho,\sigma\in \mc{D}(\mc{H})$.
+    \item Define $||A||_1$.
+    \item Give a helpful decomposition of the difference operator.
+    \item State and prove an identity relating $D$ and this decomposition.
+    \item Prove that $D(\rho,\sigma) = \max_{0\le P\le I}\textrm{Tr}(P(\rho-\sigma))$.
+    \item Prove that $D$ is a metric on the space of density operators.
+    \item Prove the monotonicity of $D$ under quantum operations.
+    \item Relate the trace distance to quantum hypothesis testing with binary POVMs.
+    \item Which measurement maximises $p^\ast_{\textrm{success}}$?
+    \item The trace distance is the...?
+    \item Define the fidelity $F(\rho,\sigma)$ for $\rho,\sigma \in \mc{B}(\mc{H})$.
+    \item What form does $F$ take when $[\rho,\sigma] = 0$?
+    \item What form does $F$ take when one of $\rho,\sigma$ is pure? What about both states pure?
+    \item Prove that fidelity is invariant under unitary transformation.
+    \item State Uhlmann's Theorem.
+    \item Prove that $||A||_1 = \sup_{U}|\textrm{Tr}(UA)|$, $U$ unitary.
+    \item Prove Uhlmann's Theorem.
+    \item Show that $0\le F(\rho,\sigma) \le 1$, with $=1$ iff $\rho = \sigma$.
+    \item Show that $F(\rho,\sigma) = F(\sigma,\rho)$.
+    \item Prove that $F(\rho_{AB},\sigma_{AB})\le F(\rho_A,\sigma_A)$.
+    \item Define the entanglement fidelity $F_\rm{e}(\rho,\Lambda)$.
+    \item Express $F_\rm{e}(\rho,\Lambda)$ in terms of fidelity $F$.
+    \item Prove that $F_\rm{e}(\rho,\Lambda) = \sum_{k}|\rm{Tr}(A_k\rho)|^2$, for $A_k$ Kraus operators of $\Lambda$.
+    \item Show that $F_\rm{e}(\rho,\Lambda)\le F(\rho,\Lambda(\rho))^2$.
+    \item Define the von Neumann entropy of a density matrix $\rho$.
+    \item What is its classical analogue?
+    \item State four properties of the von Neumann entropy.
+    \item Prove concavity.
+    \item For $\rho \in \mc{D}(\mc{H})$ and $\sigma \in \mc{B}(\mc{H})$, define the quantum relative entropy $D(\rho||\sigma)$.
+    \item State Klein's inequality.
+    \item Prove Klein's inequality.
+    \item Now prove $S(\rho)\le \log d$.
+    \item State the data-processing inequality.
+    \item State joint convexity of quantum relative entropy.
+    \item \textbf{LIEB'S CONCAVITY THEOREM DISCUSSION LECTURE 14.}
+    \item State two properties of $D(\rho||\sigma)$ involving products and unitaries.
+    \item Define the Heisenberg-Weyl operators.
+    \item Prove that $$\frac{1}{d^2}\sum_{k,m=0}^{d-1}W_{k,m}AW^\dagger_{k,m} = (\rm{Tr}A)I/d$$
+    \item Define the quantum joint entropy.
+    \item Define the quantum conditional entropy.
+    \item Define the quantum mutual information.
+    \item Express all of the above quantities in terms of the relative entropy.
+    \item What property of classical entropy is not upheld in the quantum case?
+    \item Demonstrate the above through an example.
+    \item Prove additivity of $S$.
+    \item State subadditivity of $S$.
+    \item Prove subadditivity of $S$. [or outline a proof] To what classical property is this analogous?
+    \item Prove equality of entropies of subsystems of a bipartite pure state.
+    \item State and prove the triangle inequality for $S$.
+    \item Prove that $S(\sum_i p_i \rho_i) = H(p) + \sum_i p_i S(\rho_i)$.
+    \item State strong subadditivity. How is it proved?
+    \item \textbf{LECTURE 15 CHECK FOR PROOF OF SSA.}
+    \item State three consequences of SSA. [prove them?]
+    \item Prove the last of these.
+    \item Define a quantum information source.
+    \item Given an equivalent formulation of the above.
+    \item What is a (quantum) compression scheme?
+    \item What is a corresponding (quantum) decompression scheme?
+    \item What property must both $\mc{C}^{(n)}$ and $\mc{D}^{(n)}$ have?
+    \item Define the \textit{rate} of a compression-decompression scheme.
+    \item What does it mean for a compression scheme $(\C^{(n)},\D^{(n)})$ to have rate $R$?
+    \item What quantity is being compressed in a quantum compression scheme?
+    \item What key difference between classical and quantum compression makes state reconstruction difficult?
+    \item Define the ensemble average fidelity.
+    \item Define what it means for a compression-decompression scheme to be \textit{reliable}.
+    \item What is a typical subspace?
+    \item Give an expression for the density matrix of a memoryless/iid quantum channel.
+    \item Write down the spectral decomposition for the density matrix $\rho^{(n)}$ of a memoryless source.
+    \item What is the von Neumann entropy of such a source?
+    \item Define $T_\eps^(n)$.
+    \item Give a bound on the probability of a (classical) typical sequence $(i_1\dots i_n)$.
+    \item Define $\T^{(n)}$. What is it called?
+    \item State the Typical Subspace Theorem.
+    \item What is the probability of the typical subspace $\T_\eps^{(n)}$?
+    \item State Schumacher's Theorem.
+    \item \textbf{Prove Schumacher's Theorem.} [This might be asking a bit much lmao.]
+    \item What is a quantum channel?
+    \item Describe the Bloch sphere representation of a qubit.
+    \item Give four examples of single qubit channels.
+    \item Write down the Bit-flip channel and its Kraus operators.
+    \item How does it act on the Bloch sphere?
+    \item Describe the class or random unitary channels/mixing-enhancing channels.
+    \item Describe the Phase flip channel and its Kraus operators.
+    \item How does it act on the Bloch sphere?
+    \item Describe the Depolarising channel and its Kraus operators.
+    \item How does it act on the Bloch sphere?
+    \item Give an alternative characterisation of the Depoloarising channel.
+    \item Prove this equivalence.
+    \item Generalise the depolarising channel to $d > 2$ dimensions.
+    \item Describe the context of an amplitude damping channel.
+    \item Write down the unitary transformation describing the evolution of a $2$-level atom.
+    \item Write down the Kraus operators for the channel.
+    \item Now write down the CPTP map. Is it unital?
+    \item Describe the evolution of the atom over time (repeated applications of the channel). What is its limiting state?
+    \item How then does this map change the input state? Why is this surprising?
+    \item But why is the above not as surprising as it initially seems?
+    \item \textbf{LECTURE 18 DIAGRAM}
+    \item Define the accessible information of an ensemble $\{p_x,\rho_x\}$.
+    \item \textbf{State the Holevo Bound.}
+    \item Define the Holveo $\chi$ quantity.
+    \item For an ensemble $\mc{E}$ of pure states, what does $\chi(\mc{E})$ reduce to? Why?
+    \item \textbf{Prove the Holveo Bound.}
+    \begin{enumerate}
+        \item Define the enlarged Hilbert space representation.
+        \item What is the initial state of the quantum system $AQB$?
+        \item Define the action $\Lambda$ of the quantum operation of measuring and recording.
+        \item Show that $\Lambda$ is indeed a quantum operation.
+        \item Express the state $\rho_{A'Q'B'}$ after application of $\Lambda$.
+        \item Prove the Holveo bound in terms of mutual information.
+        \item Demonstrate that this is in fact the Holevo bound.
+    \end{enumerate}
+    \item Show that the Holevo $\chi$ quantity is non-negative.
+    \item Express $\chi(\mc{E})$ using the relative entropy.
+    \item Can a quantum operation increase $\chi$?
+    \item Show that the von Neumann entropy is not monotonic under quantum operations.
+    \item Define a memoryless quantum channel.
+    \item Describe four conditions affecting the type of relevant capactiy of a quantum channel.
+    \item \textbf{LECTURE 19 DIAGRAM}
+    \item Define the rate of information transmission (for classical info through a quantum channel).
+    \item Define what it means for the transmission of classical information through $\Lambda$ to be reliable.
+    \item Define an achievable rate.
+    \item Define the capacity of a quantum channel (in this context).
+    \item Define the product-state classical capacity of a quantum channel.
+    \item State the Holevo-Schumacher-Westmoreland (HSW) Theorem.
+    \item Define a classical-quantum (c-q) state.
+    \item Prove that the maximisation in the Holveo capacity can be restricted to pure state ensembles.
+    \item Prove that the Holveo capacity is superadditive.
+    \item Use the HSW theorem to find the product state capacity of the qubit depolarising channel.
+    \item Prove that an arbitrary quantum channel $\Lambda$ can be used to transmit classical information, provided the channel is not simply a constant \textit{i.e.} $\Lambda(\rho)$ is not identical for all $\rho$.
+    \item Show in a separate way that it suffices to consider pure state ensembles.
+    \item Use the Holevo bound to justify that by transmitting $n$ qubits to Bob, Alice can send at most $n$ bits of classical information to him.
+    \item Prove the converse of the HSW theorem.
+    \item What question does the HSW theorem naturally lead to?
+    \item State the additivity conjecture of the Holveo capacity.
+    \item Define $C_{\textrm{classical}}(\Lambda)$, and give an expression for it.
+    \item Explain how the additivity conjecture relates to this capacity.
+    \item Who gave a counterexample to the additivity conjecture, and when? What is the consequence of this?
+    \item Define the coherent information of a bipartite quantum state.
+    \item Express this in terms of conditional von Neumann entropy.
+    \item In some sense, what is this analgous to in the classical case?
+    \item Let $\rho_{RQ} = \frac{1}{2}\sum_{i=0}^{1}\ket{i}\bra{i}_R\otimes\ket{i}\bra{i}_Q$. Evaluate $I(R\rangle Q))_\rho$ and $I(R:Q)_\rho$.
+    \item Now let $\ket{\psi}_{RQE}$ be a purification of $\rho_{RQ}$.
+    \begin{enumerate}
+        \item Show that $I(R\rangle Q) = S(Q)_\psi - S(E)_\psi$.
+        \item Show that $-S(R|Q)_\rho = I(R\rangle Q)_\rho = S(R|E)_\psi$.
+    \end{enumerate}
+    \item Show that $|S(R\rangle Q)_\rho|\le \log\dim(\mc{H}_R)$. When do we have equality?
+    \item Define the coherent information of a quantum channel $\Lambda$ with respect to the input state $\rho = \rho_Q$.
+    \item Show that $I_c(\Lambda,\rho)\le S(\rho_Q)$. When do we have equality, and why?
+    \item When do we have $I_c(\lambda,\rho) = S(\rho)$, in general?
+    \item State the quantum data processing inequality.
+    \item Prove the quantum data processing inequality.
+    \begin{enumerate}
+        \item What are the two key tools in this proof?
+    \end{enumerate}
+    \item Define $Q^{(1)}(\Lambda)$.
+    \item Define $Q^{(n)}(\Lambda)$.
+    \item State a theorem of Lloyd, Shor and Devetak.
+    \item What does LOCC stand for?
+    \item Define what LOCC is.
+    \item Describe a LOCC transformation.
+    \item Define $\rm{LOCC}^{\ra}$, $\rm{LOCC}^{\leftarrow}$, and $\rm{LOCC}^\leftrightarrow$.
+    \item Define what it means for a state $\rho_{AB}$ to be distillable.
+    \item Define what it means to be LOCC-distillable.
+    \item $\rho_{AB}$ is distillable iff...?
+    \item Or equivalently...?
+    \item Describe the superactivation phenomenon.
+    \item  q[Unsure if this business is really examinable, on the whole.]
+\end{enumerate}
+
+
+\end{document}
